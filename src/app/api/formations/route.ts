@@ -1,5 +1,12 @@
 import { NextResponse } from 'next/server';
-import { connectDB } from '../../../lib/mongodb.ts';
+import { connectDB } from '../../../lib/mongodb';
+
+interface Student {
+  id: string;
+  name: string;
+  email: string;
+  enrolledAt: Date;
+}
 
 interface Formation {
   title: string;
@@ -14,7 +21,7 @@ interface Formation {
   maxStudents?: number | null;
   syllabus?: string[];
   imageUrl?: string;
-  students: any[];
+  students: Student[];
   createdAt: Date;
   updatedAt: Date;
 }

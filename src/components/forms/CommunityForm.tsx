@@ -103,7 +103,12 @@ const CommunityForm: React.FC = () => {
 
       // Upload de l'image si un fichier est sélectionné
       if (imageFile) {
-        imageUrl = await uploadImage();
+        const uploadedUrl = await uploadImage();
+        if (uploadedUrl) {
+          imageUrl = uploadedUrl;
+        } else {
+          throw new Error('Erreur lors de l\'upload de l\'image');
+        }
       }
 
       const submissionData = {

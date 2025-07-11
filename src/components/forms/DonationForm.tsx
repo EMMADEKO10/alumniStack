@@ -19,7 +19,7 @@ interface FormData {
 }
 
 interface Errors {
-  [key: string]: string;
+  [key: string]: string | undefined;
   general?: string;
 }
 
@@ -156,7 +156,12 @@ const DonationForm: React.FC<DonationFormProps> = ({ onSubmit, loading = false, 
 
       // Upload de l'image si un fichier est sélectionné
       if (imageFile) {
-        imageUrl = await uploadImage();
+        const uploadedUrl = await uploadImage();
+        if (uploadedUrl) {
+          imageUrl = uploadedUrl;
+        } else {
+          throw new Error('Erreur lors de l\'upload de l\'image');
+        }
       }
 
       const submissionData: FormData = {

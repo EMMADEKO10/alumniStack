@@ -14,7 +14,7 @@ interface NavItem {
   icon: React.ReactNode;
 }
 
-const Header = (): JSX.Element => {
+const Header = () => {
   const [isScrolled, setIsScrolled] = useState<boolean>(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
   const pathname = usePathname();

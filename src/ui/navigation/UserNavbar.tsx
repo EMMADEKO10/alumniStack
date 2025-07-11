@@ -9,7 +9,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 export default function UserNavbar() {
   const { data: session, status } = useSession();
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
-  const [notifications, setNotifications] = useState<number>(2); // Exemple de notifications
+  const [notifications] = useState<number>(2); // Exemple de notifications
   const [isClient, setIsClient] = useState<boolean>(false);
 
   // S'assurer que le composant s'affiche seulement côté client
@@ -74,12 +74,12 @@ export default function UserNavbar() {
           >
             <div className="relative">
               <div className="w-8 h-8 bg-gradient-to-br from-red-500 to-red-700 rounded-full flex items-center justify-center text-white shadow-md">
-                {session.user.firstName ? session.user.firstName.charAt(0).toUpperCase() : session.user.email.charAt(0).toUpperCase()}
+                {session.user?.name ? session.user.name.charAt(0).toUpperCase() : session.user?.email?.charAt(0).toUpperCase()}
               </div>
               <div className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-500 border-2 border-white rounded-full"></div>
             </div>
             <span className="hidden md:block text-sm font-medium truncate max-w-[100px]">
-              {session.user.firstName || session.user.email.split('@')[0]}
+              {session.user?.name || session.user?.email?.split('@')[0]}
             </span>
           </button>
           
@@ -95,18 +95,18 @@ export default function UserNavbar() {
                 <div className="px-4 py-3 border-b border-gray-100">
                   <div className="flex items-center space-x-3">
                     <div className="w-10 h-10 bg-gradient-to-br from-red-500 to-red-700 rounded-full flex items-center justify-center text-white shadow-md">
-                      {session.user.firstName ? session.user.firstName.charAt(0).toUpperCase() : session.user.email.charAt(0).toUpperCase()}
+                      {session.user?.name ? session.user.name.charAt(0).toUpperCase() : session.user?.email?.charAt(0).toUpperCase()}
                     </div>
                     <div>
-                      <p className="text-sm font-medium text-gray-900">{session.user.firstName} {session.user.lastName}</p>
-                      <p className="text-xs text-gray-500 truncate">{session.user.email}</p>
+                      <p className="text-sm font-medium text-gray-900">{session.user?.name} {session.user?.name}</p>
+                      <p className="text-xs text-gray-500 truncate">{session.user?.email}</p>
                     </div>
                   </div>
                   <div className="mt-3 flex items-center justify-between">
                     <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-red-100 text-red-800">
-                      {session.user.role || 'Utilisateur'}
+                      {session.user?.name || 'Utilisateur'}
                     </span>
-                    <span className="text-xs text-gray-500">ID: {session.user.id?.substring(0, 8)}</span>
+                    <span className="text-xs text-gray-500">ID: {session.user?.email}</span>
                   </div>
                 </div>
                 

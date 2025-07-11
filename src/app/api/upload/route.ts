@@ -57,7 +57,11 @@ export async function POST(request: NextRequest) {
         },
         (error, result) => {
           if (error) reject(error);
-          else resolve(result);
+          else if (result && result.secure_url && result.public_id) {
+            resolve({ secure_url: result.secure_url, public_id: result.public_id });
+          } else {
+            reject(new Error('Upload failed: Invalid result'));
+          }
         }
       ).end(buffer);
     });

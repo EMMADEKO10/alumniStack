@@ -98,7 +98,12 @@ export default function OpportunityForm() {
 
       // Upload de l'image si un fichier est sélectionné
       if (imageFile) {
-        imageUrl = await uploadImage();
+        const uploadedUrl = await uploadImage();
+        if (uploadedUrl) {
+          imageUrl = uploadedUrl;
+        } else {
+          throw new Error('Erreur lors de l\'upload de l\'image');
+        }
       }
 
       const submissionData = {
@@ -322,7 +327,7 @@ export default function OpportunityForm() {
             disabled={loading || uploadingImage}
             className="flex-1 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400 text-white font-medium py-2 px-4 rounded-md transition-colors"
           >
-            {loading ? 'Création en cours...' : 'Créer l\'opportunité'}
+            {loading ? "Création en cours..." : "Créer l&apos;opportunité"}
           </button>
           
           <button
