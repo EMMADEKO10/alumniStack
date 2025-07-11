@@ -1,0 +1,36 @@
+@import "tailwindcss";
+
+/* @tailwind base;
+@tailwind components; */
+@tailwind utilities;
+
+.bg-blur { 
+  backdrop-blur: 10px;
+}
+
+/* Styles personnalisés pour l'interface */
+@layer components {
+  /* Animation de transition pour les éléments du header */
+  .nav-link-transition {
+    @apply transition-all duration-200 ease-in-out;
+  }
+
+  /* Effet de survol pour les liens de navigation */
+  .nav-link-hover {
+    @apply relative overflow-hidden;
+  }
+
+  .nav-link-hover::after {
+    @apply content-[''] absolute bottom-0 left-0 w-0 h-0.5 bg-red-600 transition-all duration-300;
+  }
+
+  .nav-link-hover:hover::after {
+    @apply w-full;
+  }
+
+  /* Style pour le header avec effet de verre */
+  .glass-effect {
+    @apply bg-white/80 backdrop-blur-md;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+  }
+}

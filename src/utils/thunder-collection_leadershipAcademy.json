@@ -1,0 +1,539 @@
+{
+    "clientName": "Thunder Client",
+    "collectionName": "leadershipAcademy",
+    "collectionId": "15fed039-3d95-4057-9bec-ad479f6da3bf",
+    "dateExported": "2024-08-02T10:24:17.365Z",
+    "version": "1.2",
+    "folders": [
+        {
+            "_id": "a6122a93-20d8-4c26-9801-a8a38ea3a751",
+            "name": "POST",
+            "containerId": "",
+            "created": "2024-07-15T10:33:11.592Z",
+            "sortNum": 10000
+        },
+        {
+            "_id": "0a48dd41-f29d-4d5c-ad65-7f3ebd1fe59b",
+            "name": "GET",
+            "containerId": "",
+            "created": "2024-07-15T10:36:49.598Z",
+            "sortNum": 20000
+        },
+        {
+            "_id": "6cc79fc4-e998-4c89-a7a0-f7c4cba61b50",
+            "name": "ALL",
+            "containerId": "0a48dd41-f29d-4d5c-ad65-7f3ebd1fe59b",
+            "created": "2024-07-15T10:37:02.561Z",
+            "sortNum": 30000
+        },
+        {
+            "_id": "4f78b73d-9380-4af6-bee2-5ff43a70d1d5",
+            "name": "All Imbriqué",
+            "containerId": "0a48dd41-f29d-4d5c-ad65-7f3ebd1fe59b",
+            "created": "2024-07-15T10:40:32.045Z",
+            "sortNum": 50000
+        },
+        {
+            "_id": "459c68d9-0741-44e0-add8-413156df38a3",
+            "name": "DELETE",
+            "containerId": "",
+            "created": "2024-07-15T10:40:55.149Z",
+            "sortNum": 60000
+        },
+        {
+            "_id": "ce6aeed2-5271-4c16-bde0-3bd8344057ef",
+            "name": "ALL",
+            "containerId": "459c68d9-0741-44e0-add8-413156df38a3",
+            "created": "2024-07-15T10:41:19.039Z",
+            "sortNum": 70000
+        },
+        {
+            "_id": "1287b97a-db93-4174-9d07-cb31bcceed8d",
+            "name": "ONE",
+            "containerId": "459c68d9-0741-44e0-add8-413156df38a3",
+            "created": "2024-07-15T10:41:29.603Z",
+            "sortNum": 80000
+        },
+        {
+            "_id": "32180ed6-92cf-4f1d-acb0-d05455c4b29b",
+            "name": "IMBRIQUE",
+            "containerId": "459c68d9-0741-44e0-add8-413156df38a3",
+            "created": "2024-07-15T10:41:44.096Z",
+            "sortNum": 90000
+        },
+        {
+            "_id": "3c09f45f-1042-4201-975a-52ab18d5077e",
+            "name": "ONE",
+            "containerId": "0a48dd41-f29d-4d5c-ad65-7f3ebd1fe59b",
+            "created": "2024-07-15T14:54:21.302Z",
+            "sortNum": 100000
+        },
+        {
+            "_id": "8e35e23e-6322-4594-8351-3e658205dbbf",
+            "name": "UPDATE",
+            "containerId": "",
+            "created": "2024-07-15T15:13:16.307Z",
+            "sortNum": 110000
+        }
+    ],
+    "requests": [
+        {
+            "_id": "baa84f29-56f8-4f6e-b5e9-d46602cb8782",
+            "colId": "15fed039-3d95-4057-9bec-ad479f6da3bf",
+            "containerId": "3c09f45f-1042-4201-975a-52ab18d5077e",
+            "name": "Opportunitie ",
+            "url": "http://localhost:3800/api/opportinity/66964250994f562a7b5ab18f",
+            "method": "GET",
+            "sortNum": 5000,
+            "created": "2024-07-16T10:27:18.831Z",
+            "modified": "2024-07-16T10:27:39.901Z",
+            "headers": []
+        },
+        {
+            "_id": "e7311c08-794d-4ca8-969b-05651ade353b",
+            "colId": "15fed039-3d95-4057-9bec-ad479f6da3bf",
+            "containerId": "a6122a93-20d8-4c26-9801-a8a38ea3a751",
+            "name": "Register Admin",
+            "url": "http://localhost:3800/api/users/login",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2024-07-15T10:33:37.460Z",
+            "modified": "2024-07-15T13:32:53.851Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\r\n  \"name\": \"Johndfdf Doe\",\r\n  \"email\": \"johndoevcvc@example.com\",\r\n  \"password\": \"passwxcxcxcxco\",\r\n  \"passwordConfirm\": \"passwxcxcxcxco\"\r\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "2d6a6c98-108d-4154-8098-668daf36b7ad",
+            "colId": "15fed039-3d95-4057-9bec-ad479f6da3bf",
+            "containerId": "3c09f45f-1042-4201-975a-52ab18d5077e",
+            "name": "User",
+            "url": "http://localhost:3800/api/user/6696710550dabbd9150f6675",
+            "method": "GET",
+            "sortNum": 10000,
+            "created": "2024-07-15T14:54:29.860Z",
+            "modified": "2024-07-16T14:54:59.892Z",
+            "headers": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2OTY4OWFhOTZjYzU1MzI2MWFiMWRjMCIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzIxMTQxNjgxLCJleHAiOjE3MjExODQ4ODF9.9HTsPXtCTNETCUja5Scl6psMDBGu5zNS1Zm3vv_mnAI",
+                "bearerPrefix": "Bea"
+            }
+        },
+        {
+            "_id": "dd84d8c3-6017-4f4d-85b9-069abaef1934",
+            "colId": "15fed039-3d95-4057-9bec-ad479f6da3bf",
+            "containerId": "a6122a93-20d8-4c26-9801-a8a38ea3a751",
+            "name": "Ajouter un Events",
+            "url": "http://localhost:3800/api/event",
+            "method": "POST",
+            "sortNum": 20000,
+            "created": "2024-07-15T10:34:12.053Z",
+            "modified": "2024-07-17T10:55:53.095Z",
+            "headers": [],
+            "body": {
+                "type": "formdata",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "title",
+                        "value": "evenement_Un"
+                    },
+                    {
+                        "name": "description",
+                        "value": "description intemporelle"
+                    },
+                    {
+                        "name": "date",
+                        "value": "2024-07-17T09:07:48.257+00:00"
+                    },
+                    {
+                        "name": "location",
+                        "value": "Kinshasa, Bandal"
+                    }
+                ],
+                "files": [
+                    {
+                        "name": "image",
+                        "value": "c:\\Users\\zevar\\Downloads\\blank-phone-screen-purple-background.jpg"
+                    }
+                ]
+            }
+        },
+        {
+            "_id": "fc51d5cd-6c0d-4988-9415-ecdc958040c5",
+            "colId": "15fed039-3d95-4057-9bec-ad479f6da3bf",
+            "containerId": "a6122a93-20d8-4c26-9801-a8a38ea3a751",
+            "name": "Login",
+            "url": "http://localhost:3800/api/auth/login",
+            "method": "POST",
+            "sortNum": 20000,
+            "created": "2024-07-15T13:33:32.116Z",
+            "modified": "2024-07-16T13:09:55.141Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n\n  \"email\": \"emmanuedeko64@gmail.com\",\n  \"password\": \"emmanuedeko64@gmail.com\"\n  \n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "9625d2b3-0940-4381-b7f7-0511e150df71",
+            "colId": "15fed039-3d95-4057-9bec-ad479f6da3bf",
+            "containerId": "a6122a93-20d8-4c26-9801-a8a38ea3a751",
+            "name": "Register",
+            "url": "http://localhost:3800/api/auth/signup",
+            "method": "POST",
+            "sortNum": 20000,
+            "created": "2024-07-15T13:33:57.005Z",
+            "modified": "2024-07-16T13:09:23.271Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\": \"deko emmanuel\",\n  \"email\": \"emmanuedeko64@gmail.com\",\n  \"password\": \"emmanuedeko64@gmail.com\",\n  \"passwordConfirm\": \"emmanuedeko64@gmail.com\"\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "6cc34bf6-2a72-4a3c-a302-9dd3605a60f1",
+            "colId": "15fed039-3d95-4057-9bec-ad479f6da3bf",
+            "containerId": "a6122a93-20d8-4c26-9801-a8a38ea3a751",
+            "name": "Ajouter un story",
+            "url": "http://localhost:3800/api/story",
+            "method": "POST",
+            "sortNum": 30000,
+            "created": "2024-07-15T10:34:27.148Z",
+            "modified": "2024-07-17T10:10:21.300Z",
+            "headers": [],
+            "body": {
+                "type": "formdata",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "title",
+                        "value": "An inspiring story"
+                    },
+                    {
+                        "name": "content",
+                        "value": "vente des telephones en 1992"
+                    },
+                    {
+                        "name": "tags",
+                        "value": "[\"inspiration\", \"life\", \"journey\"] }"
+                    }
+                ],
+                "files": [
+                    {
+                        "name": "image",
+                        "value": "c:\\Users\\zevar\\Downloads\\blank-phone-screen-purple-background.jpg"
+                    }
+                ]
+            }
+        },
+        {
+            "_id": "aea87b2b-ab98-40cd-8a60-28df67e739d3",
+            "colId": "15fed039-3d95-4057-9bec-ad479f6da3bf",
+            "containerId": "a6122a93-20d8-4c26-9801-a8a38ea3a751",
+            "name": "Ajouter un cours",
+            "url": "http://localhost:3800/api/courses",
+            "method": "POST",
+            "sortNum": 40000,
+            "created": "2024-07-15T10:34:44.044Z",
+            "modified": "2024-07-17T09:43:22.091Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"title\": \"Introduction to Node.js\",\n  \"description\": \"Learn the basics of Node.js, a popular JavaScript runtime.\"\n}\n",
+                "form": []
+            }
+        },
+        {
+            "_id": "05123606-e72d-4425-8805-8876094462b0",
+            "colId": "15fed039-3d95-4057-9bec-ad479f6da3bf",
+            "containerId": "a6122a93-20d8-4c26-9801-a8a38ea3a751",
+            "name": "Ajouter un Amin",
+            "url": "",
+            "method": "POST",
+            "sortNum": 50000,
+            "created": "2024-07-15T10:35:13.037Z",
+            "modified": "2024-07-15T10:35:34.619Z",
+            "headers": []
+        },
+        {
+            "_id": "b89b57a4-5b7b-45f0-a314-84bd0d64c71f",
+            "colId": "15fed039-3d95-4057-9bec-ad479f6da3bf",
+            "containerId": "6cc79fc4-e998-4c89-a7a0-f7c4cba61b50",
+            "name": "Users",
+            "url": "http://localhost:3800/api/user",
+            "method": "GET",
+            "sortNum": 70000,
+            "created": "2024-07-15T10:37:34.599Z",
+            "modified": "2024-07-15T14:51:09.813Z",
+            "headers": []
+        },
+        {
+            "_id": "1b4994b2-3435-46a8-891c-b1a2a3cda239",
+            "colId": "15fed039-3d95-4057-9bec-ad479f6da3bf",
+            "containerId": "6cc79fc4-e998-4c89-a7a0-f7c4cba61b50",
+            "name": "Events",
+            "url": "",
+            "method": "GET",
+            "sortNum": 80000,
+            "created": "2024-07-15T10:37:52.910Z",
+            "modified": "2024-07-15T10:37:52.910Z",
+            "headers": []
+        },
+        {
+            "_id": "b64a4b9b-9bd7-4d60-b645-adbedc50b0de",
+            "colId": "15fed039-3d95-4057-9bec-ad479f6da3bf",
+            "containerId": "6cc79fc4-e998-4c89-a7a0-f7c4cba61b50",
+            "name": "Stories",
+            "url": "",
+            "method": "GET",
+            "sortNum": 90000,
+            "created": "2024-07-15T10:38:02.772Z",
+            "modified": "2024-07-15T10:38:02.772Z",
+            "headers": []
+        },
+        {
+            "_id": "490b9c58-7707-41b5-8caa-7a7dc8dc11dd",
+            "colId": "15fed039-3d95-4057-9bec-ad479f6da3bf",
+            "containerId": "6cc79fc4-e998-4c89-a7a0-f7c4cba61b50",
+            "name": "Cours",
+            "url": "",
+            "method": "GET",
+            "sortNum": 100000,
+            "created": "2024-07-15T10:38:40.738Z",
+            "modified": "2024-07-15T10:38:40.738Z",
+            "headers": []
+        },
+        {
+            "_id": "5674f15b-216b-4416-88f8-a92b4f8b5512",
+            "colId": "15fed039-3d95-4057-9bec-ad479f6da3bf",
+            "containerId": "a6122a93-20d8-4c26-9801-a8a38ea3a751",
+            "name": "Ajouter une Opportunitie",
+            "url": "http://localhost:3800/api/opportinity",
+            "method": "POST",
+            "sortNum": 110000,
+            "created": "2024-07-15T10:39:27.035Z",
+            "modified": "2024-07-17T10:34:35.246Z",
+            "headers": [],
+            "body": {
+                "type": "formdata",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "title",
+                        "value": "Frontend Developer"
+                    },
+                    {
+                        "name": "description",
+                        "value": "We are looking for a skilled frontend developer with experience in React."
+                    },
+                    {
+                        "name": "company",
+                        "value": "Tech Corp"
+                    },
+                    {
+                        "name": "location",
+                        "value": "Paris, France"
+                    },
+                    {
+                        "name": "type",
+                        "value": "Full-time"
+                    }
+                ],
+                "files": [
+                    {
+                        "name": "image",
+                        "value": "c:\\Users\\zevar\\Downloads\\1084052347.png"
+                    }
+                ]
+            }
+        },
+        {
+            "_id": "77e1e820-7f00-4b7a-9b0f-02a43d2da0e0",
+            "colId": "15fed039-3d95-4057-9bec-ad479f6da3bf",
+            "containerId": "6cc79fc4-e998-4c89-a7a0-f7c4cba61b50",
+            "name": "Opportunitie",
+            "url": "http://localhost:3800/api/opportinity",
+            "method": "GET",
+            "sortNum": 120000,
+            "created": "2024-07-15T10:39:50.546Z",
+            "modified": "2024-07-16T09:51:54.430Z",
+            "headers": []
+        },
+        {
+            "_id": "f2cd20e9-925a-4846-97c6-7e89720c2516",
+            "colId": "15fed039-3d95-4057-9bec-ad479f6da3bf",
+            "containerId": "ce6aeed2-5271-4c16-bde0-3bd8344057ef",
+            "name": "users",
+            "url": "",
+            "method": "DELETE",
+            "sortNum": 140000,
+            "created": "2024-07-15T10:41:57.020Z",
+            "modified": "2024-07-15T10:43:02.903Z",
+            "headers": []
+        },
+        {
+            "_id": "7bef7f21-7e13-4a8a-aaf8-d017e7eb0840",
+            "colId": "15fed039-3d95-4057-9bec-ad479f6da3bf",
+            "containerId": "ce6aeed2-5271-4c16-bde0-3bd8344057ef",
+            "name": "stories",
+            "url": "",
+            "method": "DELETE",
+            "sortNum": 150000,
+            "created": "2024-07-15T10:42:07.058Z",
+            "modified": "2024-07-15T10:43:19.988Z",
+            "headers": []
+        },
+        {
+            "_id": "98917b9e-d64d-4513-b41a-37d955c4613b",
+            "colId": "15fed039-3d95-4057-9bec-ad479f6da3bf",
+            "containerId": "ce6aeed2-5271-4c16-bde0-3bd8344057ef",
+            "name": "Events",
+            "url": "",
+            "method": "DELETE",
+            "sortNum": 160000,
+            "created": "2024-07-15T10:42:16.501Z",
+            "modified": "2024-07-15T10:43:31.424Z",
+            "headers": []
+        },
+        {
+            "_id": "70754703-7d68-44f5-9a60-7712b3bda627",
+            "colId": "15fed039-3d95-4057-9bec-ad479f6da3bf",
+            "containerId": "ce6aeed2-5271-4c16-bde0-3bd8344057ef",
+            "name": "Cours",
+            "url": "",
+            "method": "DELETE",
+            "sortNum": 170000,
+            "created": "2024-07-15T10:42:25.724Z",
+            "modified": "2024-07-15T10:43:45.034Z",
+            "headers": []
+        },
+        {
+            "_id": "6dab0938-2907-4760-8848-d2c5c911cc6c",
+            "colId": "15fed039-3d95-4057-9bec-ad479f6da3bf",
+            "containerId": "ce6aeed2-5271-4c16-bde0-3bd8344057ef",
+            "name": "Opportunities",
+            "url": "",
+            "method": "DELETE",
+            "sortNum": 180000,
+            "created": "2024-07-15T10:42:49.991Z",
+            "modified": "2024-07-15T10:43:58.131Z",
+            "headers": []
+        },
+        {
+            "_id": "275d36c8-443e-4cc4-a941-9d37abbe59db",
+            "colId": "15fed039-3d95-4057-9bec-ad479f6da3bf",
+            "containerId": "1287b97a-db93-4174-9d07-cb31bcceed8d",
+            "name": "user",
+            "url": "",
+            "method": "GET",
+            "sortNum": 190000,
+            "created": "2024-07-15T10:44:33.150Z",
+            "modified": "2024-07-15T10:44:33.150Z",
+            "headers": []
+        },
+        {
+            "_id": "446f8e47-cda9-4302-b253-2abe29aee6c4",
+            "colId": "15fed039-3d95-4057-9bec-ad479f6da3bf",
+            "containerId": "459c68d9-0741-44e0-add8-413156df38a3",
+            "name": "Delete One user",
+            "url": "http://localhost:3800/api/user/669529b77ab5608572032fcc",
+            "method": "DELETE",
+            "sortNum": 200000,
+            "created": "2024-07-15T14:56:17.486Z",
+            "modified": "2024-07-15T14:56:44.800Z",
+            "headers": []
+        },
+        {
+            "_id": "c707f705-b015-4538-8c32-4f59d6bf885d",
+            "colId": "15fed039-3d95-4057-9bec-ad479f6da3bf",
+            "containerId": "8e35e23e-6322-4594-8351-3e658205dbbf",
+            "name": "mettre à jour :",
+            "url": "",
+            "method": "PUT",
+            "sortNum": 210000,
+            "created": "2024-07-15T15:13:38.033Z",
+            "modified": "2024-07-15T15:13:53.216Z",
+            "headers": []
+        },
+        {
+            "_id": "6b5048d0-a98f-4a5f-9797-921be838150c",
+            "colId": "15fed039-3d95-4057-9bec-ad479f6da3bf",
+            "containerId": "a6122a93-20d8-4c26-9801-a8a38ea3a751",
+            "name": "Ajouter Project",
+            "url": "http://localhost:3800/api/project/s",
+            "method": "POST",
+            "sortNum": 220000,
+            "created": "2024-07-16T11:14:27.848Z",
+            "modified": "2024-07-17T16:01:24.326Z",
+            "headers": [],
+            "body": {
+                "type": "formdata",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "title",
+                        "value": "Newdf Projectsxwxxw vcvcv"
+                    },
+                    {
+                        "name": "description",
+                        "value": "This is a description of the new project.xwxwx sdqsqs"
+                    },
+                    {
+                        "name": "amountNeeded",
+                        "value": "5000"
+                    }
+                ],
+                "files": [
+                    {
+                        "name": "image",
+                        "value": "c:\\Users\\zevar\\Pictures\\Capture d’écran 2024-07-03 163849.png"
+                    }
+                ]
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2OTY4OWFhOTZjYzU1MzI2MWFiMWRjMCIsImVtYWlsIjoiZW1tYW51ZWRla282NEBnbWFpbC5jb20iLCJyb2xlIjoidXNlciIsImlhdCI6MTcyMTIyOTI5NCwiZXhwIjoxNzIxMjcyNDk0fQ.d8R1Kh7y8xMuNGx7DfzsvvGtchMd9E8WHr-mDblrHmQ"
+            }
+        },
+        {
+            "_id": "b4d09571-4b4b-4bb2-9902-5676ce849137",
+            "colId": "15fed039-3d95-4057-9bec-ad479f6da3bf",
+            "containerId": "a6122a93-20d8-4c26-9801-a8a38ea3a751",
+            "name": "Ajouter un Course",
+            "url": "http://localhost:3800/api/courses",
+            "method": "POST",
+            "sortNum": 230000,
+            "created": "2024-07-17T09:38:04.787Z",
+            "modified": "2024-07-17T09:39:44.189Z",
+            "headers": [],
+            "body": {
+                "type": "formdata",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "title",
+                        "value": "Newdf Projectsxwxxw"
+                    },
+                    {
+                        "name": "description",
+                        "value": "This is a description of the new project.xwxwx"
+                    }
+                ],
+                "files": [
+                    {
+                        "name": "image",
+                        "value": "c:\\Users\\zevar\\Pictures\\Capture d’écran 2024-07-03 163849.png"
+                    }
+                ]
+            }
+        }
+    ],
+    "ref": "rg2J26ELbjMOaVSkggIy0CGN4qcbDYlwzTP0NVKW7UEXyWWxR_4XGE_S0g91epRHFumugG9sgJqjlD_2aaQXow"
+}
