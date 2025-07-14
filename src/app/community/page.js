@@ -1,6 +1,5 @@
 import React from "react";
 import PageTitle from "../../ui/navigation/PageTitle";
-import EventCard from "../../components/cards/EventCard";
 import CommunityCard from "../../components/cards/CommunityCard";
 
 const events = [

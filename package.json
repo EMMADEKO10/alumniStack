@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc --noEmit",
+    "init-communities": "tsx src/scripts/initializeCommunities.ts",
+    "reset-communities": "tsx src/scripts/initializeCommunities.ts --reset"
   },
   "dependencies": {
     "@babel/runtime": "^7.24.0",
@@ -33,6 +35,7 @@
     "eslint": "^9",
     "eslint-config-next": "15.3.5",
     "tailwindcss": "^4",
+    "tsx": "^4.7.0",
     "typescript": "^5"
   },
   "engines": {
