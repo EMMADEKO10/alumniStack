@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import UserNavbar from "./UserNavbar";
 import Container from "./container";
-import { FaGraduationCap, FaUsers, FaHandHoldingHeart, FaBookOpen, FaCalendarAlt, FaBriefcase, FaGraduationCap as FaGraduation } from "react-icons/fa";
+import { FaGraduationCap, FaUsers, FaHandHoldingHeart, FaBookOpen, FaCalendarAlt, FaBriefcase } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
 
 interface NavItem {
@@ -17,152 +17,262 @@ interface NavItem {
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState<boolean>(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
+  const [isHeroSection, setIsHeroSection] = useState<boolean>(true);
   const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 10) {
-        setIsScrolled(true);
+      const scrollPosition = window.scrollY;
+      setIsScrolled(scrollPosition > 20);
+      
+      // Détecter si on est sur la section hero (première section de la page d'accueil)
+      if (pathname === '/') {
+        const heroHeight = window.innerHeight * 0.9; // Approximation de la hauteur du hero
+        setIsHeroSection(scrollPosition < heroHeight);
       } else {
-        setIsScrolled(false);
+        setIsHeroSection(false);
       }
     };
 
+    handleScroll(); // Appel initial
     window.addEventListener("scroll", handleScroll);
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, []);
+  }, [pathname]);
 
   const navItems: NavItem[] = [
-    { name: "Communauté", href: "/community", icon: <FaUsers className="mr-2" /> },
-    { name: "Dons", href: "/donations", icon: <FaHandHoldingHeart className="mr-2" /> },
-    { name: "Histoires", href: "/stories", icon: <FaBookOpen className="mr-2" /> },
-    { name: "Evènements", href: "/events", icon: <FaCalendarAlt className="mr-2" /> },
-    { name: "Opportunités", href: "/opportunities", icon: <FaBriefcase className="mr-2" /> },
-    { name: "Formations", href: "/formations", icon: <FaGraduation className="mr-2" /> },
+    { name: "Communauté", href: "/community", icon: <FaUsers className="mr-2 text-sm" /> },
+    { name: "Dons", href: "/donations", icon: <FaHandHoldingHeart className="mr-2 text-sm" /> },
+    { name: "Histoires", href: "/stories", icon: <FaBookOpen className="mr-2 text-sm" /> },
+    { name: "Évènements", href: "/events", icon: <FaCalendarAlt className="mr-2 text-sm" /> },
+    { name: "Opportunités", href: "/opportunities", icon: <FaBriefcase className="mr-2 text-sm" /> },
+    { name: "Formations", href: "/formations", icon: <FaGraduationCap className="mr-2 text-sm" /> },
   ];
 
   const isActive = (path: string): boolean => {
     return pathname === path;
   };
 
+  // Classes dynamiques pour le header
+  const headerClasses = `
+    fixed top-0 left-0 right-0 z-50 w-full transition-all duration-500 ease-out
+    ${isHeroSection && !isScrolled 
+      ? "bg-transparent backdrop-blur-sm py-6" 
+      : isScrolled 
+        ? "bg-white/95 backdrop-blur-md shadow-xl border-b border-gray-100 py-3" 
+        : "bg-white/90 backdrop-blur-md py-4"
+    }
+  `;
+
+  // Classes pour le texte selon le contexte
+  const logoTextClasses = isHeroSection && !isScrolled ? "text-white" : "text-red-600";
+  const logoSubtextClasses = isHeroSection && !isScrolled ? "text-gray-200" : "text-gray-500";
+
   return (
-    <header 
-      className={`sticky top-0 z-50 w-full transition-all duration-300 ${
-        isScrolled 
-          ? "bg-white shadow-md py-2" 
-          : "bg-white/80 backdrop-blur-md py-4"
-      }`}
-    >
+    <header className={headerClasses}>
       <Container>
-        <div className="flex items-center justify-between">
-          {/* Logo */}
-          <Link href="/" className="flex items-center space-x-2 group">
-            <div className="relative w-10 h-10 overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-br from-red-500 to-red-700 rounded-lg transform group-hover:scale-105 transition-transform duration-300"></div>
-              <div className="absolute inset-0 flex items-center justify-center text-white">
-                <FaGraduationCap className="text-2xl" />
+        <div className="flex items-center justify-between relative">
+          
+          {/* Logo amélioré */}
+          <Link href="/" className="flex items-center space-x-3 group relative z-10">
+            <motion.div 
+              className="relative w-12 h-12 overflow-hidden"
+              whileHover={{ scale: 1.05 }}
+              transition={{ type: "spring", stiffness: 400, damping: 10 }}
+            >
+              <div className={`
+                absolute inset-0 rounded-xl transform transition-all duration-300
+                ${isHeroSection && !isScrolled 
+                  ? "bg-gradient-to-br from-white/20 to-white/10 border border-white/30" 
+                  : "bg-gradient-to-br from-red-500 to-red-700 group-hover:from-red-600 group-hover:to-red-800"
+                }
+              `}></div>
+              <div className="absolute inset-0 flex items-center justify-center">
+                <FaGraduationCap className={`text-2xl transition-colors ${isHeroSection && !isScrolled ? "text-white" : "text-white"}`} />
               </div>
-            </div>
+            </motion.div>
+            
             <div className="flex flex-col">
-              <span className="text-red-600 font-bold text-xl tracking-tight group-hover:text-red-700 transition-colors">LEGACY ALUMNI</span>
-              <span className="text-gray-500 text-xs font-medium -mt-1">Réseau des anciens</span>
+              <motion.span 
+                className={`font-bold text-xl tracking-tight transition-all duration-300 ${logoTextClasses} group-hover:opacity-80`}
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5 }}
+              >
+                LEGACY ALUMNI
+              </motion.span>
+              <motion.span 
+                className={`text-xs font-medium -mt-1 transition-all duration-300 ${logoSubtextClasses}`}
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5, delay: 0.1 }}
+              >
+                Réseau des anciens
+              </motion.span>
             </div>
           </Link>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-1">
-            {navItems.map((item) => (
-              <Link
+          {/* Navigation Desktop améliorée */}
+          <nav className="hidden xl:flex items-center gap-2">
+            {navItems.map((item, index) => (
+              <motion.div
                 key={item.name}
-                href={item.href}
-                className={`relative px-3 py-2 rounded-md text-sm font-medium transition-all duration-200 flex items-center ${
-                  isActive(item.href)
-                    ? "text-red-600 bg-red-50"
-                    : "text-gray-600 hover:text-red-600 hover:bg-gray-50"
-                }`}
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
               >
-                {item.icon}
-                {item.name}
-                {isActive(item.href) && (
+                <Link
+                  href={item.href}
+                  className={`
+                    relative px-4 py-2.5 rounded-lg text-sm font-medium transition-all duration-300 
+                    flex items-center group overflow-hidden
+                    ${isActive(item.href)
+                      ? isHeroSection && !isScrolled
+                        ? "text-white bg-white/20 border border-white/30"
+                        : "text-red-600 bg-red-50 border border-red-100"
+                      : isHeroSection && !isScrolled
+                        ? "text-white/90 hover:text-white hover:bg-white/10 border border-transparent hover:border-white/20"
+                        : "text-gray-600 hover:text-red-600 hover:bg-red-50 border border-transparent hover:border-red-100"
+                    }
+                  `}
+                >
                   <motion.div
-                    layoutId="activeIndicator"
-                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-red-600"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 0.3 }}
-                  />
-                )}
-              </Link>
+                    className="flex items-center relative z-10"
+                    whileHover={{ x: 2 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                  >
+                    {item.icon}
+                    {item.name}
+                  </motion.div>
+                  
+                  {isActive(item.href) && (
+                    <motion.div
+                      layoutId="activeIndicator"
+                      className={`absolute bottom-0 left-0 right-0 h-0.5 ${isHeroSection && !isScrolled ? "bg-white" : "bg-red-600"}`}
+                      initial={{ opacity: 0, scaleX: 0 }}
+                      animate={{ opacity: 1, scaleX: 1 }}
+                      transition={{ duration: 0.3 }}
+                    />
+                  )}
+                </Link>
+              </motion.div>
             ))}
           </nav>
 
-          {/* Mobile Menu Button */}
-          <div className="flex items-center gap-4">
-            <UserNavbar />
-            <button
-              className="lg:hidden p-2 rounded-md text-gray-600 hover:text-red-600 hover:bg-gray-100 focus:outline-none"
+          {/* Partie droite avec UserNavbar et menu mobile */}
+          <div className="flex items-center gap-3">
+            <div className="hidden sm:block">
+              <UserNavbar />
+            </div>
+            
+            {/* Bouton menu mobile amélioré */}
+            <motion.button
+              className={`
+                xl:hidden p-3 rounded-xl transition-all duration-300 relative overflow-hidden
+                ${isHeroSection && !isScrolled 
+                  ? "text-white hover:bg-white/10 border border-white/20 hover:border-white/40" 
+                  : "text-gray-600 hover:text-red-600 hover:bg-red-50 border border-gray-200 hover:border-red-200"
+                }
+              `}
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              whileTap={{ scale: 0.95 }}
+              whileHover={{ scale: 1.05 }}
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
+              <motion.div
+                animate={isMobileMenuOpen ? "open" : "closed"}
+                className="w-6 h-6 relative"
               >
-                {isMobileMenuOpen ? (
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                ) : (
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M4 6h16M4 12h16M4 18h16"
-                  />
-                )}
-              </svg>
-            </button>
+                <motion.span
+                  variants={{
+                    closed: { rotate: 0, y: 0 },
+                    open: { rotate: 45, y: 6 }
+                  }}
+                  className="absolute h-0.5 w-6 bg-current transform transition-all duration-300 top-1"
+                />
+                <motion.span
+                  variants={{
+                    closed: { opacity: 1 },
+                    open: { opacity: 0 }
+                  }}
+                  className="absolute h-0.5 w-6 bg-current transform transition-all duration-300 top-3"
+                />
+                <motion.span
+                  variants={{
+                    closed: { rotate: 0, y: 0 },
+                    open: { rotate: -45, y: -6 }
+                  }}
+                  className="absolute h-0.5 w-6 bg-current transform transition-all duration-300 top-5"
+                />
+              </motion.div>
+            </motion.button>
           </div>
         </div>
       </Container>
 
-      {/* Mobile Navigation */}
+      {/* Menu Mobile amélioré */}
       <AnimatePresence>
         {isMobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3 }}
-            className="lg:hidden bg-white border-t border-gray-100 shadow-lg"
-          >
-            <Container>
-              <nav className="flex flex-col py-3 space-y-1">
-                {navItems.map((item) => (
-                  <Link
-                    key={item.name}
-                    href={item.href}
-                    className={`px-4 py-3 rounded-md text-sm font-medium flex items-center ${
-                      isActive(item.href)
-                        ? "text-red-600 bg-red-50"
-                        : "text-gray-600 hover:text-red-600 hover:bg-gray-50"
-                    }`}
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    {item.icon}
-                    {item.name}
-                  </Link>
-                ))}
-              </nav>
-            </Container>
-          </motion.div>
+          <>
+            {/* Overlay */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 bg-black/20 backdrop-blur-sm z-40"
+              onClick={() => setIsMobileMenuOpen(false)}
+            />
+            
+            {/* Menu Content */}
+            <motion.div
+              initial={{ opacity: 0, y: -20, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: -20, scale: 0.95 }}
+              transition={{ type: "spring", stiffness: 400, damping: 25 }}
+              className="absolute top-full left-0 right-0 bg-white/95 backdrop-blur-xl border-b border-gray-100 shadow-2xl z-50"
+            >
+              <Container>
+                <div className="py-6 space-y-2">
+                  
+                  {/* UserNavbar pour mobile */}
+                  <div className="sm:hidden pb-4 mb-4 border-b border-gray-100">
+                    <UserNavbar />
+                  </div>
+                  
+                  {/* Navigation Links */}
+                  {navItems.map((item, index) => (
+                    <motion.div
+                      key={item.name}
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.3, delay: index * 0.05 }}
+                    >
+                      <Link
+                        href={item.href}
+                        className={`
+                          flex items-center px-4 py-4 rounded-xl text-base font-medium transition-all duration-300
+                          ${isActive(item.href)
+                            ? "text-red-600 bg-red-50 border-l-4 border-red-500"
+                            : "text-gray-700 hover:text-red-600 hover:bg-red-50 hover:translate-x-1"
+                          }
+                        `}
+                        onClick={() => setIsMobileMenuOpen(false)}
+                      >
+                        <motion.div
+                          className="flex items-center"
+                          whileHover={{ x: 4 }}
+                          transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                        >
+                          {item.icon}
+                          {item.name}
+                        </motion.div>
+                      </Link>
+                    </motion.div>
+                  ))}
+                </div>
+              </Container>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
     </header>

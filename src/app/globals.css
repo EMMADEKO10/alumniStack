@@ -33,4 +33,46 @@
     @apply bg-white/80 backdrop-blur-md;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
   }
+
+  /* Améliorations pour le nouveau header */
+  .header-backdrop {
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+  
+  /* Animation pour les éléments du menu mobile */
+  .mobile-menu-item {
+    @apply transform transition-all duration-300 ease-out;
+  }
+  
+  .mobile-menu-item:hover {
+    @apply translate-x-1;
+  }
+  
+  /* Effet de focus accessible */
+  .focus-visible-ring {
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2;
+  }
+}
+
+@layer utilities {
+  /* Utilités pour le spacing responsive */
+  .safe-top {
+    padding-top: env(safe-area-inset-top);
+  }
+  
+  /* Masquer le scrollbar mais garder la fonctionnalité */
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* Amélioration de la lisibilité du texte */
+  .text-shadow {
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  }
 }

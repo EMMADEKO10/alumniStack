@@ -7,7 +7,7 @@ import { FaGraduationCap, FaUsers, FaCalendarAlt, FaBriefcase, FaArrowRight, FaP
 
 const Hero: React.FC = () => {
   return (
-    <div className="relative min-h-screen flex items-center overflow-hidden">
+    <div className="relative min-h-screen flex items-center overflow-hidden pt-20 lg:pt-24">
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0">
         <Image
@@ -17,7 +17,9 @@ const Hero: React.FC = () => {
           className="object-cover"
           priority
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-red-900/40"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/65 to-red-900/45"></div>
+        {/* Overlay supplémentaire pour le header transparent */}
+        <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-black/30 to-transparent"></div>
       </div>
 
       {/* Floating Elements */}
