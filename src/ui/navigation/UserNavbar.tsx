@@ -3,11 +3,13 @@
 import Link from "next/link";
 import { useState, useEffect } from 'react';
 import { useSession, signOut } from 'next-auth/react';
-import { FaUserCircle, FaSignOutAlt, FaSignInAlt, FaUserPlus, FaCog, FaBell } from 'react-icons/fa';
+import { FaUserCircle, FaSignOutAlt, FaSignInAlt, FaUserPlus, FaCog, FaBell, FaShieldAlt, FaUserGraduate } from 'react-icons/fa';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useUserRole } from '../../hooks/useUserRole';
 
 export default function UserNavbar() {
   const { data: session, status } = useSession();
+  const { userRole, loading, getRoleDisplayName, getRoleColor } = useUserRole();
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
   const [notifications] = useState<number>(2); // Exemple de notifications
   const [isClient, setIsClient] = useState<boolean>(false);
@@ -41,6 +43,18 @@ export default function UserNavbar() {
     };
   }, [isMenuOpen]);
 
+  // Obtenir l'icône du rôle
+  const getRoleIcon = (role: string) => {
+    switch (role) {
+      case 'admin':
+        return <FaShieldAlt className="text-purple-600" />;
+      case 'alumni':
+        return <FaUserGraduate className="text-blue-600" />;
+      default:
+        return <FaUserCircle className="text-gray-600" />;
+    }
+  };
+
   // Éviter l'hydration mismatch en attendant que le composant soit côté client
   if (!isClient || status === 'loading') {
     return (
@@ -66,6 +80,19 @@ export default function UserNavbar() {
               )}
             </button>
           </div>
+
+          {/* Badge de rôle visible sur desktop */}
+          {!loading && userRole && (
+            <div className="hidden lg:flex items-center mr-3">
+              <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${getRoleColor(userRole.role)}`}>
+                <span className="mr-1">{getRoleIcon(userRole.role)}</span>
+                {getRoleDisplayName(userRole.role)}
+                {userRole.role === 'alumni' && userRole.isVerified && (
+                  <FaShieldAlt className="ml-1 text-green-600" size={10} />
+                )}
+              </span>
+            </div>
+          )}
           
           {/* Avatar et menu utilisateur */}
           <button
@@ -90,23 +117,47 @@ export default function UserNavbar() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.2 }}
-                className="absolute right-0 mt-2 w-64 bg-white rounded-lg shadow-lg py-1 z-20 top-full border border-gray-100"
+                className="absolute right-0 mt-2 w-80 bg-white rounded-lg shadow-lg py-1 z-20 top-full border border-gray-100"
               >
                 <div className="px-4 py-3 border-b border-gray-100">
                   <div className="flex items-center space-x-3">
                     <div className="w-10 h-10 bg-gradient-to-br from-red-500 to-red-700 rounded-full flex items-center justify-center text-white shadow-md">
                       {session.user?.name ? session.user.name.charAt(0).toUpperCase() : session.user?.email?.charAt(0).toUpperCase()}
                     </div>
-                    <div>
-                      <p className="text-sm font-medium text-gray-900">{session.user?.name} {session.user?.name}</p>
+                    <div className="flex-1">
+                      <p className="text-sm font-medium text-gray-900">{session.user?.name}</p>
                       <p className="text-xs text-gray-500 truncate">{session.user?.email}</p>
                     </div>
                   </div>
-                  <div className="mt-3 flex items-center justify-between">
-                    <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-red-100 text-red-800">
-                      {session.user?.name || 'Utilisateur'}
-                    </span>
-                    <span className="text-xs text-gray-500">ID: {session.user?.email}</span>
+                  
+                  {/* Informations de rôle détaillées */}
+                  <div className="mt-3 space-y-2">
+                    <div className="flex items-center justify-between">
+                      {!loading && userRole ? (
+                        <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${getRoleColor(userRole.role)}`}>
+                          <span className="mr-1">{getRoleIcon(userRole.role)}</span>
+                          {getRoleDisplayName(userRole.role)}
+                          {userRole.role === 'alumni' && userRole.isVerified && (
+                            <FaShieldAlt className="ml-1 text-green-600" size={10} />
+                          )}
+                        </span>
+                      ) : (
+                        <div className="w-20 h-5 bg-gray-200 rounded animate-pulse"></div>
+                      )}
+                      <span className="text-xs text-gray-500">ID: {session.user?.id?.slice(-8)}</span>
+                    </div>
+                    
+                    {/* Statut spécifique aux alumni */}
+                    {!loading && userRole?.role === 'alumni' && (
+                      <div className="flex items-center space-x-2 text-xs">
+                        <span className={`inline-flex items-center px-2 py-0.5 rounded text-xs ${userRole.isVerified ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'}`}>
+                          {userRole.isVerified ? 'Vérifié' : 'En attente'}
+                        </span>
+                        <span className={`inline-flex items-center px-2 py-0.5 rounded text-xs ${userRole.isComplete ? 'bg-blue-100 text-blue-800' : 'bg-gray-100 text-gray-800'}`}>
+                          {userRole.isComplete ? 'Profil complet' : 'Profil incomplet'}
+                        </span>
+                      </div>
+                    )}
                   </div>
                 </div>
                 
@@ -118,6 +169,29 @@ export default function UserNavbar() {
                   >
                     <FaUserCircle className="mr-3 text-gray-500" /> Mon profil
                   </Link>
+                  
+                  {/* Lien spécifique pour les alumni */}
+                  {userRole?.role === 'alumni' && (
+                    <Link
+                      href="/profile/complete"
+                      className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-colors"
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      <FaUserGraduate className="mr-3 text-blue-500" /> Profil Alumni
+                    </Link>
+                  )}
+                  
+                  {/* Lien admin */}
+                  {userRole?.role === 'admin' && (
+                    <Link
+                      href="/admin"
+                      className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-colors"
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      <FaShieldAlt className="mr-3 text-purple-500" /> Administration
+                    </Link>
+                  )}
+                  
                   <Link
                     href="#settings"
                     className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-colors"

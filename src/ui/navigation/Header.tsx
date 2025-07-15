@@ -42,7 +42,7 @@ const Header = () => {
   }, [pathname]);
 
   const navItems: NavItem[] = [
-    { name: "Communauté", href: "/community", icon: <FaUsers className="mr-2 text-sm" /> },
+    { name: "Communauté", href: "/communities", icon: <FaUsers className="mr-2 text-sm" /> },
     { name: "Dons", href: "/donations", icon: <FaHandHoldingHeart className="mr-2 text-sm" /> },
     { name: "Histoires", href: "/stories", icon: <FaBookOpen className="mr-2 text-sm" /> },
     { name: "Évènements", href: "/events", icon: <FaCalendarAlt className="mr-2 text-sm" /> },
