@@ -2,12 +2,12 @@ import { NextResponse } from 'next/server';
 import { connectDB } from '../../../lib/mongodb';
 import { 
   AlumniProfile, 
-  AlumniProfileUpdate, 
   PublicAlumniProfile,
   calculateProfileCompletion,
   isProfileComplete 
 } from '../../../types/alumni';
 import { getServerSession } from 'next-auth';
+import { authOptions } from '../../../lib/auth';
 
 // GET - Récupérer le profil alumni de l'utilisateur connecté ou rechercher des profils
 export async function GET(request: Request) {
@@ -32,7 +32,7 @@ export async function GET(request: Request) {
 
       // Si demande publique, filtrer les informations selon les préférences
       if (public_only === 'true') {
-        const publicProfile = await filterPublicProfile(profile);
+        const publicProfile = await filterPublicProfile(profile as AlumniProfile);
         return NextResponse.json(publicProfile);
       }
 
@@ -40,7 +40,7 @@ export async function GET(request: Request) {
     }
 
     // Recherche de profils avec filtres
-    const filter: any = {};
+    const filter: Record<string, unknown> = {};
     
     if (search) {
       filter.$or = [
@@ -67,7 +67,7 @@ export async function GET(request: Request) {
 
     // Filtrer les informations selon les préférences de confidentialité
     const publicProfiles = await Promise.all(
-      profiles.map(profile => filterPublicProfile(profile))
+      profiles.map(profile => filterPublicProfile(profile as AlumniProfile))
     );
 
     return NextResponse.json({
@@ -84,7 +84,7 @@ export async function GET(request: Request) {
 // POST - Créer un nouveau profil alumni
 export async function POST(request: Request) {
   try {
-    const session = await getServerSession();
+    const session = await getServerSession(authOptions);
     if (!session?.user?.id) {
       return NextResponse.json({ error: 'Authentification requise' }, { status: 401 });
     }
@@ -156,13 +156,13 @@ export async function POST(request: Request) {
           ...body.professionalInfo.currentPosition,
           startDate: new Date(body.professionalInfo.currentPosition.startDate)
         } : undefined,
-        experience: body.professionalInfo?.experience?.map((exp: any) => ({
+        experience: body.professionalInfo?.experience?.map((exp: { startDate: string; endDate?: string }) => ({
           ...exp,
           startDate: new Date(exp.startDate),
           endDate: exp.endDate ? new Date(exp.endDate) : undefined
         })) || [],
         skills: body.professionalInfo?.skills || [],
-        certifications: body.professionalInfo?.certifications?.map((cert: any) => ({
+        certifications: body.professionalInfo?.certifications?.map((cert: { issueDate: string; expirationDate?: string }) => ({
           ...cert,
           issueDate: new Date(cert.issueDate),
           expirationDate: cert.expirationDate ? new Date(cert.expirationDate) : undefined
@@ -217,7 +217,7 @@ export async function POST(request: Request) {
 // PUT - Mettre à jour le profil alumni
 export async function PUT(request: Request) {
   try {
-    const session = await getServerSession();
+    const session = await getServerSession(authOptions);
     if (!session?.user?.id) {
       return NextResponse.json({ error: 'Authentification requise' }, { status: 401 });
     }
@@ -237,7 +237,7 @@ export async function PUT(request: Request) {
     }
 
     // Préparer la mise à jour
-    const updateData: any = {
+    const updateData: Record<string, unknown> = {
       ...body,
       updatedAt: new Date(),
       lastProfileUpdate: new Date(),
@@ -245,17 +245,17 @@ export async function PUT(request: Request) {
 
     // Traitement des dates
     if (body.personalInfo?.dateOfBirth) {
-      updateData.personalInfo.dateOfBirth = new Date(body.personalInfo.dateOfBirth);
+      (updateData as any).personalInfo.dateOfBirth = new Date(body.personalInfo.dateOfBirth);
     }
     if (body.academicInfo?.graduationDate) {
-      updateData.academicInfo.graduationDate = new Date(body.academicInfo.graduationDate);
+      (updateData as any).academicInfo.graduationDate = new Date(body.academicInfo.graduationDate);
     }
     if (body.professionalInfo?.currentPosition?.startDate) {
-      updateData.professionalInfo.currentPosition.startDate = new Date(body.professionalInfo.currentPosition.startDate);
+      (updateData as any).professionalInfo.currentPosition.startDate = new Date(body.professionalInfo.currentPosition.startDate);
     }
 
     // Fusionner avec le profil existant
-    const updatedProfile = { ...existingProfile, ...updateData };
+    const updatedProfile = { ...existingProfile, ...updateData } as AlumniProfile;
 
     // Recalculer le pourcentage de complétion
     updatedProfile.status.completionPercentage = calculateProfileCompletion(updatedProfile);
@@ -277,9 +277,9 @@ export async function PUT(request: Request) {
 }
 
 // Fonction helper pour filtrer les informations publiques selon les préférences
-async function filterPublicProfile(profile: any): Promise<PublicAlumniProfile> {
+async function filterPublicProfile(profile: AlumniProfile): Promise<PublicAlumniProfile> {
   const publicProfile: PublicAlumniProfile = {
-    _id: profile._id,
+    _id: profile._id!,
     personalInfo: {
       firstName: profile.personalInfo.firstName,
       lastName: profile.personalInfo.lastName,
@@ -311,7 +311,7 @@ async function filterPublicProfile(profile: any): Promise<PublicAlumniProfile> {
   }
 
   // Ajouter l'adresse si autorisée
-  if (profile.privacySettings.showAddress && profile.contactInfo.currentAddress) {
+  if (profile.privacySettings.showAddress && profile.contactInfo?.currentAddress) {
     publicProfile.contactInfo = {
       currentAddress: {
         city: profile.contactInfo.currentAddress.city,

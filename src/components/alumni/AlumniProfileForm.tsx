@@ -542,13 +542,13 @@ const AlumniProfileForm: React.FC<AlumniProfileFormProps> = ({
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   Titre du poste *
                 </label>
-                <input
-                  type="text"
-                  value={currentPosition?.title || ''}
-                  onChange={(e) => updateFormData('professionalInfo', 'currentPosition', {
-                    ...currentPosition,
-                    title: e.target.value
-                  })}
+                                 <input
+                   type="text"
+                   value={currentPosition?.jobTitle || ''}
+                   onChange={(e) => updateFormData('professionalInfo', 'currentPosition', {
+                     ...currentPosition,
+                     jobTitle: e.target.value
+                   })}
                   placeholder="Ex: Développeur Full-Stack, Médecin..."
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                   required

@@ -39,7 +39,7 @@ const CompleteProfilePage = () => {
     }
   };
 
-  const handleProfileSubmit = (profileData: Partial<AlumniProfile>) => {
+  const handleProfileSubmit = () => {
     // Rediriger vers le profil après création/mise à jour
     router.push('/profile');
   };

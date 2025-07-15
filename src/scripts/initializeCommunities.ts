@@ -12,9 +12,7 @@ import { connectDB } from '../lib/mongodb';
 import { 
   Community, 
   CommunityType, 
-  LEGACY_FACULTIES, 
-  REGIONS, 
-  PROFESSIONAL_SECTORS 
+  LEGACY_FACULTIES 
 } from '../types/community';
 
 interface CommunityTemplate {
@@ -23,6 +21,7 @@ interface CommunityTemplate {
   type: CommunityType;
   promotionYear?: number;
   facultyId?: string;
+  departmentId?: string;
   region?: string;
   profession?: string;
   privacy: 'public' | 'private' | 'restricted';

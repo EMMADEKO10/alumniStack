@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test API Alumni</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 10px 5px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .log {
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 4px;
+            white-space: pre-wrap;
+            font-family: monospace;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        .success {
+            color: #28a745;
+        }
+        .error {
+            color: #dc3545;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Test API Alumni</h1>
+        <p>Cette page permet de tester l'API alumni directement dans le navigateur.</p>
+        
+        <div>
+            <button onclick="testSession()">Tester la Session</button>
+            <button onclick="testCreateProfile()">Créer un Profil</button>
+            <button onclick="testGetProfile()">Récupérer le Profil</button>
+            <button onclick="clearLog()">Effacer le Log</button>
+        </div>
+
+        <div id="log" class="log">Cliquez sur un bouton pour commencer les tests...</div>
+    </div>
+
+    <script>
+        const baseURL = 'http://localhost:3000';
+        const log = document.getElementById('log');
+
+        function logMessage(message, type = 'info') {
+            const timestamp = new Date().toLocaleTimeString();
+            const className = type === 'error' ? 'error' : (type === 'success' ? 'success' : '');
+            log.innerHTML += `<span class="${className}">[${timestamp}] ${message}</span>\n`;
+            log.scrollTop = log.scrollHeight;
+        }
+
+        function clearLog() {
+            log.innerHTML = '';
+        }
+
+        async function testSession() {
+            logMessage('=== Test de la Session ===');
+            try {
+                const response = await fetch(`${baseURL}/api/auth/session`);
+                const data = await response.json();
+                
+                if (data.user) {
+                    logMessage(`✅ Session trouvée: ${data.user.name} (${data.user.email})`, 'success');
+                    window.currentUser = data.user;
+                } else {
+                    logMessage('❌ Aucune session trouvée. Veuillez vous connecter d\'abord.', 'error');
+                }
+            } catch (error) {
+                logMessage(`❌ Erreur: ${error.message}`, 'error');
+            }
+        }
+
+        async function testCreateProfile() {
+            logMessage('=== Test de Création de Profil ===');
+            
+            if (!window.currentUser) {
+                logMessage('❌ Veuillez d\'abord tester la session', 'error');
+                return;
+            }
+
+            const testProfileData = {
+                personalInfo: {
+                    firstName: "Jean",
+                    lastName: "Dupont",
+                    email: "jean.dupont@test.com",
+                    phone: "+33123456789",
+                    bio: "Diplômé en informatique, passionné par les nouvelles technologies",
+                    linkedinUrl: "https://linkedin.com/in/jean-dupont",
+                },
+                academicInfo: {
+                    facultyId: "FACULTE_INFORMATIQUE",
+                    departmentName: "Informatique",
+                    specializationField: "Développement Web",
+                    degreeLevel: "Master",
+                    degreeTitle: "Master en Informatique",
+                    graduationYear: 2022,
+                },
+                contactInfo: {
+                    currentAddress: {
+                        street: "123 Rue de Test",
+                        city: "Paris",
+                        province: "Île-de-France",
+                        country: "France",
+                        postalCode: "75001"
+                    }
+                },
+                professionalInfo: {
+                    currentPosition: {
+                        jobTitle: "Développeur Full Stack",
+                        company: "Tech Corp",
+                        industry: "Technologie",
+                        startDate: "2022-06-01",
+                        description: "Développement d'applications web modernes"
+                    },
+                    skills: ["JavaScript", "React", "Node.js", "Python"]
+                }
+            };
+
+            try {
+                logMessage('Envoi des données...');
+                const response = await fetch(`${baseURL}/api/alumni`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(testProfileData),
+                });
+
+                logMessage(`Status: ${response.status} ${response.statusText}`);
+                
+                const result = await response.json();
+                
+                if (response.ok) {
+                    logMessage('✅ Profil créé avec succès!', 'success');
+                    logMessage(`Profil ID: ${result._id}`);
+                } else {
+                    logMessage(`❌ Erreur: ${result.error}`, 'error');
+                }
+            } catch (error) {
+                logMessage(`❌ Erreur: ${error.message}`, 'error');
+            }
+        }
+
+        async function testGetProfile() {
+            logMessage('=== Test de Récupération de Profil ===');
+            
+            if (!window.currentUser) {
+                logMessage('❌ Veuillez d\'abord tester la session', 'error');
+                return;
+            }
+
+            try {
+                const response = await fetch(`${baseURL}/api/alumni?userId=${window.currentUser.id}`);
+                const result = await response.json();
+                
+                if (response.ok) {
+                    logMessage('✅ Profil récupéré avec succès!', 'success');
+                    logMessage(`Nom: ${result.personalInfo?.firstName} ${result.personalInfo?.lastName}`);
+                    logMessage(`Email: ${result.personalInfo?.email}`);
+                    logMessage(`Faculté: ${result.academicInfo?.facultyId}`);
+                } else {
+                    logMessage(`❌ Erreur: ${result.error}`, 'error');
+                }
+            } catch (error) {
+                logMessage(`❌ Erreur: ${error.message}`, 'error');
+            }
+        }
+
+        // Tester automatiquement la session au chargement
+        window.onload = function() {
+            testSession();
+        };
+    </script>
+</body>
+</html> 

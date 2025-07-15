@@ -188,6 +188,7 @@ export interface PublicAlumniProfile {
       country: string;
     };
   };
+  createdAt?: Date; // Date de création du profil
 }
 
 // Statistiques du profil

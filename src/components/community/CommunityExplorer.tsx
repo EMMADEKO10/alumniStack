@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { CommunityType, Community, LEGACY_FACULTIES, REGIONS, PROFESSIONAL_SECTORS } from '../../types/community';
+import { CommunityType, Community, LEGACY_FACULTIES, REGIONS } from '../../types/community';
 
 interface CommunityExplorerProps {
   onCommunitySelect?: (community: Community) => void;
@@ -267,7 +267,7 @@ const CommunityExplorer: React.FC<CommunityExplorerProps> = ({ onCommunitySelect
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {communities.map((community) => (
               <CommunityCard
-                key={community._id}
+                key={community._id?.toString() || Math.random().toString()}
                 community={community}
                 onSelect={onCommunitySelect}
                 getFacultyName={getFacultyName}

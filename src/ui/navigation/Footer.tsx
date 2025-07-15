@@ -2,6 +2,20 @@ import React from "react";
 import Container from "./container";
 import Link from "next/link";
 import { FaGraduationCap, FaEnvelope, FaPhone, FaMapMarkerAlt, FaHeart } from "react-icons/fa";
+import dynamic from 'next/dynamic';
+
+const Newsletter = dynamic(() => import('../Newsletter'), {
+  ssr: false,
+  loading: () => (
+    <div className="space-y-3">
+      <p className="text-sm text-gray-400">Restez informé de nos actualités</p>
+      <div className="flex space-x-2">
+        <div className="flex-1 px-3 py-2 bg-white/10 border border-white/20 rounded-lg animate-pulse h-10"></div>
+        <div className="px-4 py-2 bg-white/10 border border-white/20 rounded-lg animate-pulse w-12 h-10"></div>
+      </div>
+    </div>
+  )
+});
 
 interface NavigationItem {
   name: string;
@@ -138,19 +152,7 @@ const Footer: React.FC = () => {
               </div>
 
               {/* Newsletter */}
-              <div className="space-y-3">
-                <p className="text-sm text-gray-400">Restez informé de nos actualités</p>
-                <div className="flex space-x-2">
-                  <input
-                    type="email"
-                    placeholder="Votre email"
-                    className="flex-1 px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent backdrop-blur-sm"
-                  />
-                  <button className="px-4 py-2 bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 rounded-lg transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-gray-900">
-                    <FaEnvelope className="w-4 h-4" />
-                  </button>
-                </div>
-              </div>
+              <Newsletter />
             </div>
           </div>
 
