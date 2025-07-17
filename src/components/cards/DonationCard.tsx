@@ -2,7 +2,25 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { FaHeart, FaUsers, FaCalendarAlt, FaBullseye, FaDollarSign } from "react-icons/fa";
+import { 
+  FaHeart, 
+  FaBullseye, 
+  FaCheckCircle,
+  FaExclamationCircle
+} from "react-icons/fa";
+import { 
+  UsersIcon, 
+  CalendarDaysIcon, 
+  MapPinIcon,
+  CurrencyDollarIcon,
+  ChartBarIcon
+} from "@heroicons/react/24/outline";
+import { Libre_Baskerville } from "next/font/google";
+
+const libreBaskerville = Libre_Baskerville({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+});
 
 interface DonationCardProps {
   _id?: string;
@@ -14,6 +32,9 @@ interface DonationCardProps {
   isActive: boolean;
   createdAt?: string;
   onDonate?: (id: string) => void;
+  category?: string;
+  location?: string;
+  donorCount?: number;
 }
 
 const DonationCard = ({ 
@@ -25,7 +46,10 @@ const DonationCard = ({
   currentAmount, 
   isActive, 
   createdAt,
-  onDonate 
+  onDonate,
+  category,
+  location,
+  donorCount
 }: DonationCardProps) => {
   const progressPercentage = targetAmount > 0 ? (currentAmount / targetAmount) * 100 : 0;
   const remainingAmount = Math.max(0, targetAmount - currentAmount);
@@ -34,14 +58,16 @@ const DonationCard = ({
   const formatAmount = (amount: number) => {
     return new Intl.NumberFormat('fr-FR', {
       style: 'currency',
-      currency: 'USD'
+      currency: 'USD',
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0
     }).format(amount);
   };
 
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString('fr-FR', {
-      day: 'numeric',
-      month: 'long',
+      day: '2-digit',
+      month: 'short',
       year: 'numeric'
     });
   };
@@ -52,78 +78,107 @@ const DonationCard = ({
     }
   };
 
-  const getStatusBadge = () => {
-    if (isCompleted) {
-      return (
-        <motion.div
-          initial={{ scale: 0, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          className="absolute top-4 right-4 bg-gradient-to-r from-green-500 to-green-600 text-white px-3 py-1 rounded-full text-xs font-bold shadow-lg"
-        >
-          ✓ Objectif atteint
-        </motion.div>
-      );
-    }
-    
-    return (
-      <div className="absolute top-4 left-4">
-        <span className={`px-3 py-1 rounded-full text-xs font-semibold shadow-sm ${
-          isActive 
-            ? 'bg-gradient-to-r from-green-400 to-green-500 text-white' 
-            : 'bg-gray-100 text-gray-600 border border-gray-200'
-        }`}>
-          {isActive ? 'Actif' : 'Inactif'}
-        </span>
-      </div>
-    );
-  };
-
   const getProgressColor = () => {
-    if (progressPercentage >= 100) return 'from-green-500 to-green-600';
+    if (progressPercentage >= 100) return 'from-emerald-500 to-emerald-600';
     if (progressPercentage >= 75) return 'from-blue-500 to-blue-600';
     if (progressPercentage >= 50) return 'from-yellow-500 to-orange-500';
     return 'from-red-500 to-red-600';
   };
 
+  const getCategoryColor = () => {
+    switch (category) {
+      case 'infrastructure': return 'bg-blue-100 text-blue-800';
+      case 'bourse': return 'bg-green-100 text-green-800';
+      case 'recherche': return 'bg-purple-100 text-purple-800';
+      case 'sport': return 'bg-orange-100 text-orange-800';
+      default: return 'bg-gray-100 text-gray-800';
+    }
+  };
+
   return (
     <motion.div 
-      className="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-gray-100"
+      className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-all duration-300 group"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      whileHover={{ y: -8, scale: 1.02 }}
+      whileHover={{ y: -4 }}
       transition={{ duration: 0.3 }}
     >
-      {/* Image avec superposition et badge */}
-      <div className="relative h-56 w-full overflow-hidden">
+      {/* Image avec overlay et badges */}
+      <div className="relative h-48 w-full overflow-hidden">
         <Image 
-          className="object-cover transition-transform duration-700 group-hover:scale-110" 
+          className="object-cover transition-transform duration-500 group-hover:scale-105" 
           fill 
           src={image || '/graduation.jpg'} 
           alt={title}
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          priority={false}
+          unoptimized={false}
         />
         
         {/* Overlay gradient */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
         
-        {getStatusBadge()}
-        
-        {/* Indicateur de progression sur l'image */}
-        <div className="absolute bottom-0 left-0 right-0 h-2 bg-black/20">
+        {/* Badge de statut */}
+        <div className="absolute top-4 left-4">
+          {isCompleted ? (
+            <div className="bg-emerald-500 text-white px-3 py-1 rounded-full text-xs font-medium flex items-center shadow-lg">
+              <FaCheckCircle className="mr-1" />
+              Objectif atteint
+            </div>
+          ) : (
+            <div className={`px-3 py-1 rounded-full text-xs font-medium flex items-center shadow-lg ${
+              isActive 
+                ? 'bg-green-500 text-white' 
+                : 'bg-gray-500 text-white'
+            }`}>
+              {isActive ? (
+                <>
+                  <FaHeart className="mr-1" />
+                  Actif
+                </>
+              ) : (
+                <>
+                  <FaExclamationCircle className="mr-1" />
+                  Fermé
+                </>
+              )}
+            </div>
+          )}
+        </div>
+
+        {/* Badge de catégorie */}
+        {category && (
+          <div className="absolute top-4 right-4">
+            <span className={`px-3 py-1 rounded-full text-xs font-medium ${getCategoryColor()}`}>
+              {category.charAt(0).toUpperCase() + category.slice(1)}
+            </span>
+          </div>
+        )}
+
+        {/* Barre de progression en bas de l'image */}
+        <div className="absolute bottom-0 left-0 right-0 h-1 bg-black/20">
           <motion.div
             className={`h-full bg-gradient-to-r ${getProgressColor()}`}
             initial={{ width: 0 }}
             animate={{ width: `${Math.min(100, progressPercentage)}%` }}
-            transition={{ duration: 1, delay: 0.5 }}
+            transition={{ duration: 1.5, delay: 0.5 }}
           />
+        </div>
+
+        {/* Pourcentage de progression */}
+        <div className="absolute bottom-4 right-4 bg-white/90 backdrop-blur-sm rounded-lg px-3 py-1">
+          <div className="flex items-center text-sm font-bold text-gray-900">
+            <ChartBarIcon className="h-4 w-4 mr-1" />
+            {Math.round(progressPercentage)}%
+          </div>
         </div>
       </div>
 
       {/* Contenu */}
       <div className="p-6">
         {/* Titre et description */}
-        <div className="mb-6">
-          <h3 className="font-bold text-xl mb-3 text-gray-900 line-clamp-2 group-hover:text-red-600 transition-colors duration-300">
+        <div className="mb-4">
+          <h3 className={`${libreBaskerville.className} text-lg font-semibold text-gray-900 mb-2 line-clamp-2 group-hover:text-red-600 transition-colors`}>
             {title}
           </h3>
           <p className="text-gray-600 text-sm line-clamp-3 leading-relaxed">
@@ -132,29 +187,24 @@ const DonationCard = ({
         </div>
 
         {/* Métriques principales */}
-        <div className="mb-6">
+        <div className="mb-4">
           <div className="flex justify-between items-center mb-3">
-                         <div className="flex items-center text-sm font-medium text-gray-700">
-               <FaBullseye className="mr-2 text-red-500" />
-               Progression
-             </div>
-            <motion.span 
-              className="text-lg font-bold text-red-600"
-              initial={{ scale: 0 }}
-              animate={{ scale: 1 }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-            >
-              {Math.min(100, Math.round(progressPercentage))}%
-            </motion.span>
+            <div className="flex items-center text-sm text-gray-600">
+              <FaBullseye className="mr-2 text-red-500" />
+              <span className="font-medium">Progression</span>
+            </div>
+            <span className="text-lg font-bold text-red-600">
+              {Math.round(progressPercentage)}%
+            </span>
           </div>
           
-          {/* Barre de progression améliorée */}
-          <div className="relative w-full bg-gray-200 rounded-full h-3 overflow-hidden">
+          {/* Barre de progression */}
+          <div className="relative w-full bg-gray-200 rounded-full h-2 overflow-hidden">
             <motion.div 
-              className={`h-full bg-gradient-to-r ${getProgressColor()} rounded-full relative overflow-hidden`}
+              className={`h-full bg-gradient-to-r ${getProgressColor()} relative`}
               initial={{ width: 0 }}
               animate={{ width: `${Math.min(100, progressPercentage)}%` }}
-              transition={{ duration: 1.2, delay: 0.5, ease: "easeOut" }}
+              transition={{ duration: 1.5, delay: 0.3 }}
             >
               {/* Effet de brillance */}
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent transform -skew-x-12 animate-pulse"></div>
@@ -162,61 +212,63 @@ const DonationCard = ({
           </div>
         </div>
 
-        {/* Montants avec icônes */}
-        <div className="grid grid-cols-2 gap-4 mb-6">
-          <motion.div 
-            className="text-center p-3 bg-green-50 rounded-xl border border-green-100"
-            whileHover={{ scale: 1.05 }}
-            transition={{ duration: 0.2 }}
-          >
+        {/* Montants et statistiques */}
+        <div className="grid grid-cols-2 gap-3 mb-4">
+          <div className="text-center p-3 bg-green-50 rounded-lg border border-green-100">
             <div className="flex items-center justify-center mb-1">
-              <FaDollarSign className="text-green-600 text-sm mr-1" />
+              <CurrencyDollarIcon className="h-4 w-4 text-green-600 mr-1" />
               <p className="text-xs text-green-700 font-medium">Collecté</p>
+            </div>
+            <p className="font-bold text-green-600">{formatAmount(currentAmount)}</p>
           </div>
-            <p className="font-bold text-green-600 text-lg">{formatAmount(currentAmount)}</p>
-          </motion.div>
           
-          <motion.div 
-            className="text-center p-3 bg-blue-50 rounded-xl border border-blue-100"
-            whileHover={{ scale: 1.05 }}
-            transition={{ duration: 0.2 }}
-          >
-                         <div className="flex items-center justify-center mb-1">
-               <FaBullseye className="text-blue-600 text-sm mr-1" />
-               <p className="text-xs text-blue-700 font-medium">Objectif</p>
+          <div className="text-center p-3 bg-blue-50 rounded-lg border border-blue-100">
+            <div className="flex items-center justify-center mb-1">
+              <FaBullseye className="text-blue-600 text-xs mr-1" />
+              <p className="text-xs text-blue-700 font-medium">Objectif</p>
+            </div>
+            <p className="font-bold text-blue-600">{formatAmount(targetAmount)}</p>
           </div>
-            <p className="font-bold text-blue-600 text-lg">{formatAmount(targetAmount)}</p>
-          </motion.div>
         </div>
 
-        {/* Métadonnées */}
-        <div className="flex items-center justify-between mb-6 text-xs text-gray-500">
-          <div className="flex items-center bg-gray-50 px-3 py-2 rounded-lg">
-            <FaUsers className="mr-2" />
-            <span className="font-medium">Contributeurs</span>
+        {/* Informations supplémentaires */}
+        <div className="space-y-2 mb-4 text-sm text-gray-600">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center">
+              <UsersIcon className="h-4 w-4 mr-2 text-gray-400" />
+              <span>{donorCount || 0} donateurs</span>
+            </div>
+            {location && (
+              <div className="flex items-center">
+                <MapPinIcon className="h-4 w-4 mr-2 text-gray-400" />
+                <span className="text-xs">{location}</span>
+              </div>
+            )}
           </div>
+          
           {createdAt && (
-            <div className="flex items-center bg-gray-50 px-3 py-2 rounded-lg">
-              <FaCalendarAlt className="mr-2" />
-              <span className="font-medium">{formatDate(createdAt)}</span>
+            <div className="flex items-center">
+              <CalendarDaysIcon className="h-4 w-4 mr-2 text-gray-400" />
+              <span>Créé le {formatDate(createdAt)}</span>
             </div>
           )}
         </div>
 
-        {/* Bouton d'action amélioré */}
+        {/* Bouton d'action */}
         <motion.button
           onClick={handleDonate}
           disabled={!isActive}
-          className={`w-full py-4 px-6 rounded-xl font-semibold text-lg transition-all duration-300 flex items-center justify-center relative overflow-hidden ${
-            isActive
-              ? 'bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white shadow-lg hover:shadow-xl'
-              : 'bg-gray-100 text-gray-400 cursor-not-allowed border-2 border-gray-200'
+          className={`w-full py-3 px-4 rounded-lg font-medium text-sm transition-all duration-300 flex items-center justify-center relative overflow-hidden ${
+            isActive && !isCompleted
+              ? 'bg-red-600 hover:bg-red-700 text-white shadow-md hover:shadow-lg'
+              : isCompleted
+              ? 'bg-emerald-600 hover:bg-emerald-700 text-white shadow-md hover:shadow-lg'
+              : 'bg-gray-200 text-gray-500 cursor-not-allowed'
           }`}
-          whileHover={isActive ? { scale: 1.02, y: -2 } : {}}
+          whileHover={isActive ? { y: -2 } : {}}
           whileTap={isActive ? { scale: 0.98 } : {}}
-          transition={{ duration: 0.2 }}
         >
-          {isActive && (
+          {isActive && !isCompleted && (
             <motion.div
               className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0"
               initial={{ x: '-100%' }}
@@ -224,14 +276,28 @@ const DonationCard = ({
               transition={{ duration: 0.6 }}
             />
           )}
-          <FaHeart className="mr-3 text-xl" />
-          <span className="relative z-10">
-            {isCompleted ? 'Objectif atteint' : isActive ? 'Faire un don' : 'Campagne fermée'}
-          </span>
+          <div className="flex items-center relative z-10">
+            {isCompleted ? (
+              <>
+                <FaCheckCircle className="mr-2" />
+                Objectif atteint
+              </>
+            ) : isActive ? (
+              <>
+                <FaHeart className="mr-2" />
+                Faire un don
+              </>
+            ) : (
+              <>
+                <FaExclamationCircle className="mr-2" />
+                Campagne fermée
+              </>
+            )}
+          </div>
         </motion.button>
 
-        {/* Message d'encouragement */}
-        {isActive && remainingAmount > 0 && (
+        {/* Message d'encouragement ou de félicitations */}
+        {isActive && !isCompleted && remainingAmount > 0 && (
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
@@ -242,22 +308,21 @@ const DonationCard = ({
               <span className="font-semibold">Plus que {formatAmount(remainingAmount)}</span>
               <br />
               <span className="text-xs">pour atteindre l&apos;objectif !</span>
-          </p>
+            </p>
           </motion.div>
         )}
 
-        {/* Message de félicitations pour objectif atteint */}
         {isCompleted && (
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5, delay: 0.8 }}
-            className="text-center mt-4 p-3 bg-gradient-to-r from-green-50 to-emerald-50 rounded-lg border border-green-200"
+            className="text-center mt-4 p-3 bg-gradient-to-r from-emerald-50 to-green-50 rounded-lg border border-emerald-200"
           >
-            <p className="text-sm text-green-700">
-              🎉 <span className="font-semibold">Félicitations !</span>
+            <p className="text-sm text-emerald-700">
+              🎉 <span className="font-semibold">Merci !</span>
               <br />
-              <span className="text-xs">Objectif atteint grâce à votre générosité</span>
+              <span className="text-xs">Objectif atteint grâce à votre soutien</span>
             </p>
           </motion.div>
         )}

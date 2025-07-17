@@ -15,7 +15,6 @@ interface FilterState {
   industry: string;
   sortBy: 'name' | 'graduation' | 'recent';
 }
-
 const AlumniDirectory: React.FC<AlumniDirectoryProps> = ({ onAlumniSelect }) => {
   const [alumni, setAlumni] = useState<PublicAlumniProfile[]>([]);
   const [filteredAlumni, setFilteredAlumni] = useState<PublicAlumniProfile[]>([]);
@@ -29,7 +28,6 @@ const AlumniDirectory: React.FC<AlumniDirectoryProps> = ({ onAlumniSelect }) => 
     industry: '',
     sortBy: 'name'
   });
-
   // Facultés disponibles
   const faculties = [
     { id: 'FACULTE_INFORMATIQUE', name: 'Informatique' },
@@ -41,7 +39,6 @@ const AlumniDirectory: React.FC<AlumniDirectoryProps> = ({ onAlumniSelect }) => 
     { id: 'FACULTE_ARTS', name: 'Arts et Lettres' },
     { id: 'FACULTE_ECONOMIE', name: 'Économie' },
   ];
-
   // Années de graduation disponibles
   const currentYear = new Date().getFullYear();
   const graduationYears = Array.from({ length: currentYear - 2011 }, (_, i) => currentYear - i);
@@ -293,7 +290,7 @@ const AlumniDirectory: React.FC<AlumniDirectoryProps> = ({ onAlumniSelect }) => 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100">
       {/* Espacement pour le header fixe */}
-      <div className="pt-20">
+      <div className="pt-28">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           
           {/* Header avec titre et stats */}
