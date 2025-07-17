@@ -4,6 +4,9 @@ import { authOptions } from '../../../../lib/auth';
 import { connectDB } from '../../../../lib/mongodb';
 import { ObjectId } from 'mongodb';
 
+// Force la route à être dynamique
+export const dynamic = 'force-dynamic';
+
 export async function GET() {
   try {
     const session = await getServerSession(authOptions);
