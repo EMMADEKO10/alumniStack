@@ -357,35 +357,35 @@ const AlumniCard: React.FC<AlumniCardProps> = ({ alumni, onClick }) => {
         <div className={`absolute top-0 right-0 w-20 h-20 bg-gradient-to-br ${getFacultyColor(alumni.academicInfo.facultyId)} rounded-bl-full opacity-10 group-hover:opacity-20 transition-opacity`}></div>
         
         <div className="p-6 relative">
-          {/* Header avec photo et nom */}
+        {/* Header avec photo et nom */}
           <div className="flex items-start space-x-4 mb-4">
             <div className={`w-16 h-16 bg-gradient-to-br ${getFacultyColor(alumni.academicInfo.facultyId)} rounded-2xl flex items-center justify-center text-white font-bold text-lg shadow-lg group-hover:shadow-xl transition-shadow`}>
-              {alumni.personalInfo.profilePicture ? (
-                <img 
-                  src={alumni.personalInfo.profilePicture} 
-                  alt={`${alumni.personalInfo.firstName} ${alumni.personalInfo.lastName}`}
+            {alumni.personalInfo.profilePicture ? (
+              <img 
+                src={alumni.personalInfo.profilePicture} 
+                alt={`${alumni.personalInfo.firstName} ${alumni.personalInfo.lastName}`}
                   className="w-full h-full rounded-2xl object-cover"
-                />
-              ) : (
-                getInitials(alumni.personalInfo.firstName, alumni.personalInfo.lastName)
-              )}
-            </div>
-            <div className="flex-1 min-w-0">
+              />
+            ) : (
+              getInitials(alumni.personalInfo.firstName, alumni.personalInfo.lastName)
+            )}
+          </div>
+          <div className="flex-1 min-w-0">
               <h3 className="text-xl font-bold text-gray-900 mb-1 leading-tight group-hover:text-red-600 transition-colors">
-                {alumni.personalInfo.firstName} {alumni.personalInfo.lastName}
-              </h3>
+              {alumni.personalInfo.firstName} {alumni.personalInfo.lastName}
+            </h3>
               <div className="flex items-center text-gray-600 mb-2">
                 <FaUserTie className="w-3 h-3 mr-2" />
                 <span className="text-sm font-medium truncate">
-                  {alumni.professionalInfo.currentPosition?.jobTitle || 'Diplômé'}
+              {alumni.professionalInfo.currentPosition?.jobTitle || 'Diplômé'}
                 </span>
-              </div>
+          </div>
               <div className="flex items-center text-gray-500">
                 <FaBuilding className="w-3 h-3 mr-2" />
                 <span className="text-sm truncate">
                   {alumni.professionalInfo.currentPosition?.company || 'Non spécifié'}
-                </span>
-              </div>
+            </span>
+          </div>
             </div>
           </div>
 
@@ -404,46 +404,46 @@ const AlumniCard: React.FC<AlumniCardProps> = ({ alumni, onClick }) => {
               <div className="flex items-center text-gray-600">
                 <FaCalendarAlt className="w-4 h-4 mr-2" />
                 <span className="text-sm font-medium">Promotion</span>
-              </div>
+        </div>
               <span className="text-sm font-semibold text-gray-900">
                 {alumni.academicInfo.graduationYear}
               </span>
             </div>
           </div>
 
-          {/* Compétences */}
-          {alumni.professionalInfo.skills && alumni.professionalInfo.skills.length > 0 && (
-            <div className="mb-4">
+        {/* Compétences */}
+        {alumni.professionalInfo.skills && alumni.professionalInfo.skills.length > 0 && (
+          <div className="mb-4">
               <div className="flex items-center mb-2">
                 <FaTools className="w-4 h-4 mr-2 text-gray-600" />
                 <span className="text-sm font-medium text-gray-600">Compétences</span>
               </div>
-              <div className="flex flex-wrap gap-1">
+            <div className="flex flex-wrap gap-1">
                 {alumni.professionalInfo.skills.slice(0, 2).map((skill, index) => (
-                  <span 
-                    key={index}
+                <span 
+                  key={index}
                     className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-gradient-to-r ${getFacultyColor(alumni.academicInfo.facultyId)} text-white shadow-sm`}
-                  >
-                    {skill}
-                  </span>
-                ))}
+                >
+                  {skill}
+                </span>
+              ))}
                 {alumni.professionalInfo.skills.length > 2 && (
                   <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-gray-200 text-gray-700">
                     +{alumni.professionalInfo.skills.length - 2}
-                  </span>
-                )}
-              </div>
+                </span>
+              )}
             </div>
-          )}
+          </div>
+        )}
 
           {/* Bio courte */}
-          {alumni.personalInfo.bio && (
-            <div className="mb-4">
+        {alumni.personalInfo.bio && (
+          <div className="mb-4">
               <p className="text-sm text-gray-600 leading-relaxed">
                 {truncateText(alumni.personalInfo.bio, 80)}
-              </p>
-            </div>
-          )}
+            </p>
+          </div>
+        )}
 
           {/* Localisation */}
           {alumni.contactInfo?.currentAddress && (
@@ -456,40 +456,40 @@ const AlumniCard: React.FC<AlumniCardProps> = ({ alumni, onClick }) => {
           )}
 
           {/* Actions */}
-          <div className="flex items-center justify-between pt-4 border-t border-gray-200">
-            <div className="flex space-x-3">
-              {alumni.personalInfo.linkedinUrl && (
-                <a 
-                  href={alumni.personalInfo.linkedinUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
+        <div className="flex items-center justify-between pt-4 border-t border-gray-200">
+          <div className="flex space-x-3">
+            {alumni.personalInfo.linkedinUrl && (
+              <a 
+                href={alumni.personalInfo.linkedinUrl}
+                target="_blank"
+                rel="noopener noreferrer"
                   className="text-blue-600 hover:text-blue-800 transition-colors hover:scale-110 transform"
-                  onClick={(e) => e.stopPropagation()}
-                >
+                onClick={(e) => e.stopPropagation()}
+              >
                   <FaLinkedin className="w-4 h-4" />
-                </a>
-              )}
-              {alumni.personalInfo.websiteUrl && (
-                <a 
-                  href={alumni.personalInfo.websiteUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
+              </a>
+            )}
+            {alumni.personalInfo.websiteUrl && (
+              <a 
+                href={alumni.personalInfo.websiteUrl}
+                target="_blank"
+                rel="noopener noreferrer"
                   className="text-gray-600 hover:text-gray-800 transition-colors hover:scale-110 transform"
-                  onClick={(e) => e.stopPropagation()}
-                >
+                onClick={(e) => e.stopPropagation()}
+              >
                   <FaGlobe className="w-4 h-4" />
-                </a>
-              )}
-              {alumni.personalInfo.email && (
-                <a 
-                  href={`mailto:${alumni.personalInfo.email}`}
+              </a>
+            )}
+            {alumni.personalInfo.email && (
+              <a 
+                href={`mailto:${alumni.personalInfo.email}`}
                   className="text-gray-600 hover:text-gray-800 transition-colors hover:scale-110 transform"
-                  onClick={(e) => e.stopPropagation()}
-                >
+                onClick={(e) => e.stopPropagation()}
+              >
                   <FaEnvelope className="w-4 h-4" />
-                </a>
-              )}
-            </div>
+              </a>
+            )}
+          </div>
             <button
               onClick={handleViewDetails}
               className="flex items-center space-x-2 text-red-600 hover:text-red-700 font-medium text-sm transition-all duration-200 hover:scale-105 transform"

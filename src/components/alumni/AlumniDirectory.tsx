@@ -175,24 +175,24 @@ const AlumniDirectory: React.FC<AlumniDirectoryProps> = ({ onAlumniSelect }) => 
 
     // Tri avec gestion d'erreurs
     try {
-      switch (filters.sortBy) {
-        case 'name':
+    switch (filters.sortBy) {
+      case 'name':
           filtered.sort((a, b) => {
             const nameA = `${a.personalInfo?.firstName || ''} ${a.personalInfo?.lastName || ''}`.trim();
             const nameB = `${b.personalInfo?.firstName || ''} ${b.personalInfo?.lastName || ''}`.trim();
             return nameA.localeCompare(nameB);
           });
-          break;
-        case 'graduation':
+        break;
+      case 'graduation':
           filtered.sort((a, b) => (b.academicInfo?.graduationYear || 0) - (a.academicInfo?.graduationYear || 0));
-          break;
-        case 'recent':
-          filtered.sort((a, b) => {
-            const aDate = new Date(a.createdAt || 0);
-            const bDate = new Date(b.createdAt || 0);
-            return bDate.getTime() - aDate.getTime();
-          });
-          break;
+        break;
+      case 'recent':
+        filtered.sort((a, b) => {
+          const aDate = new Date(a.createdAt || 0);
+          const bDate = new Date(b.createdAt || 0);
+          return bDate.getTime() - aDate.getTime();
+        });
+        break;
       }
     } catch (error) {
       console.warn('Error sorting alumni:', error);
@@ -250,7 +250,7 @@ const AlumniDirectory: React.FC<AlumniDirectoryProps> = ({ onAlumniSelect }) => 
             <div className="absolute inset-0 flex items-center justify-center">
               <FaUsers className="text-red-600 text-lg animate-pulse" />
             </div>
-          </div>
+        </div>
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -304,11 +304,11 @@ const AlumniDirectory: React.FC<AlumniDirectoryProps> = ({ onAlumniSelect }) => 
             className="text-center mb-12"
           >
             <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-4">
-              Annuaire des Alumni
-            </h1>
+            Annuaire des Alumni
+          </h1>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-              Découvrez et connectez-vous avec les diplômés de Legacy University
-            </p>
+            Découvrez et connectez-vous avec les diplômés de Legacy University
+          </p>
           </motion.div>
 
           {/* Statistiques améliorées */}
@@ -325,12 +325,12 @@ const AlumniDirectory: React.FC<AlumniDirectoryProps> = ({ onAlumniSelect }) => 
               <div className="flex items-center justify-between mb-4">
                 <div className="bg-gradient-to-r from-blue-500 to-blue-600 p-3 rounded-xl">
                   <FaUsers className="text-white text-xl" />
-                </div>
+        </div>
                 <div className="text-right">
                   <div className="text-3xl font-bold text-gray-900">{alumni.length}</div>
                   <div className="text-sm text-gray-500 font-medium">Alumni inscrits</div>
-                </div>
-              </div>
+            </div>
+          </div>
             </motion.div>
 
             <motion.div
@@ -344,8 +344,8 @@ const AlumniDirectory: React.FC<AlumniDirectoryProps> = ({ onAlumniSelect }) => 
                 <div className="text-right">
                   <div className="text-3xl font-bold text-gray-900">{filteredAlumni.length}</div>
                   <div className="text-sm text-gray-500 font-medium">Résultats trouvés</div>
-                </div>
-              </div>
+            </div>
+          </div>
             </motion.div>
 
             <motion.div
@@ -359,7 +359,7 @@ const AlumniDirectory: React.FC<AlumniDirectoryProps> = ({ onAlumniSelect }) => 
                 <div className="text-right">
                   <div className="text-3xl font-bold text-gray-900">{faculties.length}</div>
                   <div className="text-sm text-gray-500 font-medium">Facultés</div>
-                </div>
+            </div>
               </div>
             </motion.div>
 
@@ -374,8 +374,8 @@ const AlumniDirectory: React.FC<AlumniDirectoryProps> = ({ onAlumniSelect }) => 
                 <div className="text-right">
                   <div className="text-3xl font-bold text-gray-900">{industries.length}</div>
                   <div className="text-sm text-gray-500 font-medium">Secteurs</div>
-                </div>
-              </div>
+          </div>
+        </div>
             </motion.div>
           </motion.div>
 
@@ -393,11 +393,11 @@ const AlumniDirectory: React.FC<AlumniDirectoryProps> = ({ onAlumniSelect }) => 
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                   <FaSearch className="h-5 w-5 text-gray-400" />
                 </div>
-                <input
-                  type="text"
-                  placeholder="Rechercher par nom, entreprise, compétence..."
-                  value={filters.search}
-                  onChange={(e) => handleFilterChange('search', e.target.value)}
+              <input
+                type="text"
+                placeholder="Rechercher par nom, entreprise, compétence..."
+                value={filters.search}
+                onChange={(e) => handleFilterChange('search', e.target.value)}
                   className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-all duration-200"
                 />
               </div>
@@ -448,81 +448,81 @@ const AlumniDirectory: React.FC<AlumniDirectoryProps> = ({ onAlumniSelect }) => 
                   className="mt-6 pt-6 border-t border-gray-200"
                 >
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    
-                    {/* Faculté */}
+
+            {/* Faculté */}
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">
                         Faculté
                       </label>
-                      <select
-                        value={filters.facultyId}
-                        onChange={(e) => handleFilterChange('facultyId', e.target.value)}
+            <select
+              value={filters.facultyId}
+              onChange={(e) => handleFilterChange('facultyId', e.target.value)}
                         className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500"
-                      >
-                        <option value="">Toutes les facultés</option>
-                        {faculties.map(faculty => (
-                          <option key={faculty.id} value={faculty.id}>{faculty.name}</option>
-                        ))}
-                      </select>
+            >
+              <option value="">Toutes les facultés</option>
+              {faculties.map(faculty => (
+                <option key={faculty.id} value={faculty.id}>{faculty.name}</option>
+              ))}
+            </select>
                     </div>
 
-                    {/* Année de graduation */}
+            {/* Année de graduation */}
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">
                         Promotion
                       </label>
-                      <select
-                        value={filters.graduationYear}
-                        onChange={(e) => handleFilterChange('graduationYear', e.target.value)}
+            <select
+              value={filters.graduationYear}
+              onChange={(e) => handleFilterChange('graduationYear', e.target.value)}
                         className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500"
-                      >
-                        <option value="">Toutes les promotions</option>
-                        {graduationYears.map(year => (
-                          <option key={year} value={year}>{year}</option>
-                        ))}
-                      </select>
+            >
+              <option value="">Toutes les promotions</option>
+              {graduationYears.map(year => (
+                <option key={year} value={year}>{year}</option>
+              ))}
+            </select>
                     </div>
 
-                    {/* Secteur */}
+            {/* Secteur */}
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">
                         Secteur
                       </label>
-                      <select
-                        value={filters.industry}
-                        onChange={(e) => handleFilterChange('industry', e.target.value)}
+            <select
+              value={filters.industry}
+              onChange={(e) => handleFilterChange('industry', e.target.value)}
                         className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500"
-                      >
-                        <option value="">Tous les secteurs</option>
-                        {industries.map(industry => (
-                          <option key={industry} value={industry}>{industry}</option>
-                        ))}
-                      </select>
+            >
+              <option value="">Tous les secteurs</option>
+              {industries.map(industry => (
+                <option key={industry} value={industry}>{industry}</option>
+              ))}
+            </select>
                     </div>
                   </div>
 
                   {/* Bouton reset */}
                   <div className="mt-4 flex justify-end">
-                    <button
-                      onClick={resetFilters}
+            <button
+              onClick={resetFilters}
                       className="flex items-center gap-2 px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors"
-                    >
+            >
                       <FaTimes className="text-xs" />
-                      Réinitialiser
-                    </button>
-                  </div>
+              Réinitialiser
+            </button>
+          </div>
                 </motion.div>
               )}
             </AnimatePresence>
           </motion.div>
 
-          {/* Résultats */}
+        {/* Résultats */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.4 }}
           >
-            {filteredAlumni.length === 0 ? (
+        {filteredAlumni.length === 0 ? (
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -530,7 +530,7 @@ const AlumniDirectory: React.FC<AlumniDirectoryProps> = ({ onAlumniSelect }) => 
               >
                 <div className="bg-gray-100 rounded-full w-20 h-20 mx-auto mb-6 flex items-center justify-center">
                   <FaUsers className="text-gray-400 text-2xl" />
-                </div>
+            </div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-4">
                   {alumni.length === 0 ? 'Aucun alumni dans la base de données' : 'Aucun alumni trouvé avec ces filtres'}
                 </h3>
@@ -561,16 +561,16 @@ const AlumniDirectory: React.FC<AlumniDirectoryProps> = ({ onAlumniSelect }) => 
                     transition={{ delay: index * 0.05 }}
                     className="transform hover:scale-105 transition-transform duration-200"
                   >
-                    <AlumniCard
-                      alumni={alumni}
-                      onClick={handleAlumniClick}
-                    />
+              <AlumniCard
+                alumni={alumni}
+                onClick={handleAlumniClick}
+              />
                   </motion.div>
-                ))}
+            ))}
               </motion.div>
             )}
           </motion.div>
-        </div>
+          </div>
       </div>
     </div>
   );
