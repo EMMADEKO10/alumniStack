@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { CommunityType, Community, LEGACY_FACULTIES, REGIONS, PROFESSIONAL_SECTORS } from '../../types/community';
+import { CommunityType, Community, LEADERSHIP_ACADEMY_FACULTIES, REGIONS, PROFESSIONAL_SECTORS } from '../../types/community';
 
 const CommunityAdmin: React.FC = () => {
   const [communities, setCommunities] = useState<Community[]>([]);
@@ -137,7 +137,7 @@ const CommunityAdmin: React.FC = () => {
               required
             >
               <option value="">Sélectionner une faculté</option>
-              {LEGACY_FACULTIES.map(faculty => (
+              {LEADERSHIP_ACADEMY_FACULTIES.map(faculty => (
                 <option key={faculty.id} value={faculty.id}>
                   {faculty.code} - {faculty.name}
                 </option>
@@ -159,12 +159,12 @@ const CommunityAdmin: React.FC = () => {
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 required
               >
-                <option value="">Sélectionner une faculté</option>
-                {LEGACY_FACULTIES.map(faculty => (
-                  <option key={faculty.id} value={faculty.id}>
-                    {faculty.code} - {faculty.name}
-                  </option>
-                ))}
+                              <option value="">Sélectionner une faculté</option>
+              {LEADERSHIP_ACADEMY_FACULTIES.map(faculty => (
+                <option key={faculty.id} value={faculty.id}>
+                  {faculty.code} - {faculty.name}
+                </option>
+              ))}
               </select>
             </div>
             <div>

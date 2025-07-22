@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { CommunityType, Community, LEGACY_FACULTIES, REGIONS } from '../../types/community';
+import { CommunityType, Community, LEADERSHIP_ACADEMY_FACULTIES, REGIONS } from '../../types/community';
 
 interface CommunityExplorerProps {
   onCommunitySelect?: (community: Community) => void;

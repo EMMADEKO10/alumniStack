@@ -335,7 +335,7 @@ const DonationsPage = () => {
                 <option value="all">Toutes les catégories</option>
                 {getCategories().map((category) => (
                   <option key={category} value={category}>
-                    {category?.charAt(0).toUpperCase() + category?.slice(1)}
+                    {category.charAt(0).toUpperCase() + category.slice(1)}
                   </option>
                 ))}
               </select>
