@@ -16,12 +16,12 @@ const About: React.FC = () => {
             className={`text-4xl ${libreBaskerville.className} w-3/4`}
             style={{ lineHeight: "3rem" }}
           >
-            A propos des Alumni de Legacy University
+            A propos des Alumni de Leadership Academy University (LAU)
           </h2>
           <p>
-            La <span className="font-semibold">Legacy Alumni Association</span>{" "}
-            est l&apos;association officielle des anciens étudiants de la Legacy
-            University qui comprend près de{" "}
+            La <span className="font-semibold">Leadership Academy University Alumni Association</span>{" "}
+            est l&apos;association officielle des anciens étudiants de la Leadership Academy University (LAU)
+            qui comprend près de{" "}
             <span className="italic font-semibold">100000 membres</span> dans le
             monde entier
           </p>

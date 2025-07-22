@@ -184,7 +184,7 @@ const Features: React.FC = () => {
         >
           <div className="bg-gradient-to-r from-red-600 to-red-700 rounded-2xl p-8 text-white">
             <h3 className="text-2xl font-bold mb-4">
-              Prêt à rejoindre la communauté Legacy ?
+              Prêt à rejoindre la communauté LAU ?
             </h3>
             <p className="text-red-100 mb-6 max-w-2xl mx-auto">
               Inscrivez-vous aujourd&apos;hui et commencez à bénéficier de tous 

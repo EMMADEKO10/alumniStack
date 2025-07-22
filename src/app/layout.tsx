@@ -16,8 +16,8 @@ const firaCode = Fira_Code({
 });
 
 export const metadata: Metadata = {
-  title: "Legacy Alumni Platform",
-  description: "Plateforme des anciens élèves de Legacy",
+  title: "Leadership Academy Alumni Platform",
+  description: "Plateforme des anciens élèves de Leadership Academy",
 };
 
 export default function RootLayout({

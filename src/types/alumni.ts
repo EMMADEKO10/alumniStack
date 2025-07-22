@@ -1,4 +1,4 @@
-// Types pour les données Alumni - Legacy University
+// Types pour les données Alumni - Leadership Academy
 import { ObjectId } from 'mongodb';
 import { CommunityType } from './community';
 

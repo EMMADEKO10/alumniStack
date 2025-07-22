@@ -5,8 +5,9 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import UserNavbar from "./UserNavbar";
 import Container from "./container";
-import { FaGraduationCap, FaUsers, FaHandHoldingHeart, FaBookOpen, FaCalendarAlt, FaBriefcase } from "react-icons/fa";
+import { FaGraduationCap, FaUsers, FaHandHoldingHeart, FaBookOpen, FaCalendarAlt, FaBriefcase, FaCog } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
+import { useUserRole } from "../../hooks/useUserRole";
 
 interface NavItem {
   name: string;
@@ -19,6 +20,7 @@ const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
   const [isHeroSection, setIsHeroSection] = useState<boolean>(true);
   const pathname = usePathname();
+  const { userRole } = useUserRole();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -100,7 +102,7 @@ const Header = () => {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5 }}
               >
-                LEGACY ALUMNI
+                LAU - LEADERSHIP ACADEMY
               </motion.span>
               <motion.span 
                 className={`text-xs font-medium -mt-1 transition-all duration-300 ${logoSubtextClasses}`}
@@ -162,6 +164,30 @@ const Header = () => {
 
           {/* Partie droite avec UserNavbar et menu mobile */}
           <div className="flex items-center gap-3">
+            {/* Lien Admin - visible seulement pour les administrateurs */}
+            {userRole?.role === 'admin' && (
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.3 }}
+              >
+                <Link
+                  href="/admin"
+                  className={`
+                    flex items-center px-3 py-2 rounded-lg text-sm font-medium transition-all duration-300
+                    ${isHeroSection && !isScrolled
+                      ? "text-white bg-white/10 hover:bg-white/20 border border-white/30 hover:border-white/50"
+                      : "text-purple-600 bg-purple-50 hover:bg-purple-100 border border-purple-200 hover:border-purple-300"
+                    }
+                  `}
+                  title="Dashboard Administrateur"
+                >
+                  <FaCog className="mr-1.5 text-sm" />
+                  <span className="hidden md:inline">Admin</span>
+                </Link>
+              </motion.div>
+            )}
+            
             <div className="hidden sm:block">
               <UserNavbar />
             </div>
@@ -238,6 +264,31 @@ const Header = () => {
                   <div className="sm:hidden pb-4 mb-4 border-b border-gray-100">
                     <UserNavbar />
                   </div>
+
+                  {/* Lien Admin pour mobile - visible seulement pour les administrateurs */}
+                  {userRole?.role === 'admin' && (
+                    <motion.div
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.3 }}
+                      className="pb-4 mb-4 border-b border-gray-100"
+                    >
+                      <Link
+                        href="/admin"
+                        className="flex items-center px-4 py-4 rounded-xl text-base font-medium text-purple-600 bg-purple-50 border-l-4 border-purple-500 hover:bg-purple-100 transition-all duration-300"
+                        onClick={() => setIsMobileMenuOpen(false)}
+                      >
+                        <motion.div
+                          className="flex items-center"
+                          whileHover={{ x: 4 }}
+                          transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                        >
+                          <FaCog className="mr-2 text-sm" />
+                          Dashboard Admin
+                        </motion.div>
+                      </Link>
+                    </motion.div>
+                  )}
                   
                   {/* Navigation Links */}
                   {navItems.map((item, index) => (

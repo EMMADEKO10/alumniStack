@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { FaPlus, FaCalendarAlt, FaGraduationCap, FaBriefcase, FaUsers, FaChartBar, FaCog, FaHeart } from 'react-icons/fa';
 import Link from 'next/link';
+import AdminGuard from '../../components/admin/AdminGuard';
 
 export default function AdminDashboard() {
   const [activeSection, setActiveSection] = useState('overview');

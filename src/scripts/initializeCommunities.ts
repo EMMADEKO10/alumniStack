@@ -1,5 +1,5 @@
 /**
- * Script d'initialisation des communautés Legacy University
+ * Script d'initialisation des communautés Leadership Academy
  * 
  * Ce script crée automatiquement les communautés de base selon l'architecture définie :
  * - Une communauté par faculté (8 facultés)
@@ -9,10 +9,10 @@
  */
 
 import { connectDB } from '../lib/mongodb';
-import { 
-  Community, 
-  CommunityType, 
-  LEGACY_FACULTIES 
+import {
+  Community,
+  CommunityType,
+  LEADERSHIP_ACADEMY_FACULTIES 
 } from '../types/community';
 
 interface CommunityTemplate {
@@ -29,7 +29,7 @@ interface CommunityTemplate {
 
 async function initializeCommunities() {
   try {
-    console.log('🚀 Initialisation des communautés Legacy University...');
+    console.log('🚀 Initialisation des communautés Leadership Academy...');
     
     const { db } = await connectDB();
     
@@ -44,7 +44,7 @@ async function initializeCommunities() {
 
     // 1. Communautés par faculté (8 facultés)
     console.log('📚 Création des communautés de facultés...');
-    LEGACY_FACULTIES.forEach(faculty => {
+    LEADERSHIP_ACADEMY_FACULTIES.forEach(faculty => {
       communities.push({
         name: `Alumni ${faculty.name}`,
         description: `Communauté des anciens étudiants de la ${faculty.name}. Partagez vos expériences professionnelles, opportunités et restez connectés avec vos collègues de promotion.`,
@@ -60,7 +60,7 @@ async function initializeCommunities() {
     mainRegions.forEach(region => {
       communities.push({
         name: `Alumni ${region}`,
-        description: `Réseau des diplômés Legacy University basés à ${region}. Organisez des événements locaux, des rencontres professionnelles et maintenez le lien dans votre région.`,
+        description: `Réseau des diplômés Leadership Academy basés à ${region}. Organisez des événements locaux, des rencontres professionnelles et maintenez le lien dans votre région.`,
         type: CommunityType.REGION,
         region: region,
         privacy: 'public'
@@ -92,7 +92,7 @@ async function initializeCommunities() {
     mainProfessions.forEach(profession => {
       communities.push({
         name: `Professionnels - ${profession}`,
-        description: `Réseau professionnel des diplômés Legacy University dans le secteur ${profession}. Échangez sur les tendances du secteur, partagez des opportunités et développez votre réseau professionnel.`,
+        description: `Réseau professionnel des diplômés Leadership Academy dans le secteur ${profession}. Échangez sur les tendances du secteur, partagez des opportunités et développez votre réseau professionnel.`,
         type: CommunityType.PROFESSION,
         profession: profession,
         privacy: 'public'
@@ -103,13 +103,13 @@ async function initializeCommunities() {
     console.log('📖 Création des communautés de département...');
     const departmentCommunities = [
       {
-        name: 'Informaticiens Legacy University',
+        name: 'Informaticiens Leadership Academy',
         description: 'Communauté des diplômés en informatique. Partagez les dernières technologies, opportunités IT et projets innovants.',
         facultyId: 'fac_ingenierie',
         departmentId: 'Informatique'
       },
       {
-        name: 'Médecins Legacy University',
+        name: 'Médecins Leadership Academy',
         description: 'Réseau des diplômés en médecine. Échanges scientifiques, opportunités médicales et solidarité professionnelle.',
         facultyId: 'fac_medecine',
         departmentId: 'Médecine Générale'

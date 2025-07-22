@@ -1,6 +1,6 @@
-# alumniStack
+# Leadership Academy Alumni Platform
 
-Le frontend et backend du projet des alumnis.
+La plateforme frontend et backend des alumni de Leadership Academy.
 
 ## Commencer
 

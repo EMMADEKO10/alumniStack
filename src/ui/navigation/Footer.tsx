@@ -69,14 +69,14 @@ const Footer: React.FC = () => {
                 </div>
                 <div>
                   <h3 className="text-xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
-                    Legacy Alumni
+                    LAU Alumni
                   </h3>
                   <p className="text-sm text-gray-400">Platform</p>
                 </div>
               </Link>
               
               <p className="text-gray-300 leading-relaxed">
-                La plateforme officielle des anciens étudiants de Legacy University. 
+                La plateforme officielle des anciens étudiants de Leadership Academy University. 
                 Connectez-vous, grandissez et construisez ensemble l&apos;avenir.
               </p>
 
@@ -139,7 +139,7 @@ const Footer: React.FC = () => {
               <div className="space-y-3">
                 <div className="flex items-center space-x-3 text-gray-300">
                   <FaEnvelope className="w-4 h-4 text-red-400" />
-                  <span className="text-sm">contact@legacy-alumni.com</span>
+                  <span className="text-sm">contact@lau-alumni.com</span>
                 </div>
                 <div className="flex items-center space-x-3 text-gray-300">
                   <FaPhone className="w-4 h-4 text-blue-400" />
@@ -161,10 +161,10 @@ const Footer: React.FC = () => {
             <div className="mb-6 md:mb-0">
               <h5 className="text-sm font-medium text-gray-300 mb-3">Suivez-nous</h5>
               <div className="flex space-x-4">
-                <SocialLink href="https://twitter.com/legacy_alumni" icon={<Twitter />} />
-                <SocialLink href="https://facebook.com/legacy.alumni" icon={<Facebook />} />
-                <SocialLink href="https://instagram.com/legacy_alumni" icon={<Instagram />} />
-                <SocialLink href="https://linkedin.com/company/legacy-alumni" icon={<Linkedin />} />
+                <SocialLink href="https://twitter.com/lau_alumni" icon={<Twitter />} />
+                <SocialLink href="https://facebook.com/lau.alumni" icon={<Facebook />} />
+                <SocialLink href="https://instagram.com/lau_alumni" icon={<Instagram />} />
+                <SocialLink href="https://linkedin.com/company/lau-alumni" icon={<Linkedin />} />
               </div>
             </div>
 
@@ -185,7 +185,7 @@ const Footer: React.FC = () => {
           {/* Copyright */}
           <div className="mt-8 pt-8 border-t border-white/10 text-center">
             <p className="text-sm text-gray-400 flex items-center justify-center space-x-2">
-              <span>© {new Date().getFullYear()} Legacy Alumni Platform.</span>
+              <span>© {new Date().getFullYear()} LAU Alumni Platform.</span>
               <span>Fait avec</span>
               <FaHeart className="w-4 h-4 text-red-400 animate-pulse" />
               <span>par</span>
@@ -195,7 +195,7 @@ const Footer: React.FC = () => {
                 rel="noopener noreferrer"
                 className="font-semibold bg-gradient-to-r from-red-400 to-blue-400 bg-clip-text text-transparent hover:from-red-500 hover:to-blue-500 transition-all duration-200"
               >
-                Al & Legacy Team
+                Al & Leadership Team
               </a>
             </p>
           </div>
