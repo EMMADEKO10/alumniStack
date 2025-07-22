@@ -190,7 +190,7 @@ function validateCommunityData(type: CommunityType, data: CommunityData): string
 }
 
 // Fonction pour vérifier l'existence d'une communauté similaire
-async function findExistingCommunity(db: any, type: CommunityType, data: CommunityData) {
+async function findExistingCommunity(db: import('mongodb').Db, type: CommunityType, data: CommunityData) {
   const filter: Record<string, string | number | undefined> = { type };
   
   switch (type) {

@@ -13,8 +13,6 @@ import {
 import { 
   MagnifyingGlassIcon, 
   FunnelIcon, 
-  CalendarIcon, 
-  MapPinIcon, 
   UsersIcon,
   ChartBarIcon,
   CurrencyDollarIcon,
@@ -255,8 +253,8 @@ const DonationsPage = () => {
     };
   };
 
-  const getCategories = () => {
-    const categories = [...new Set(donations.map(d => d.category).filter(Boolean))];
+  const getCategories = (): string[] => {
+    const categories = [...new Set(donations.map(d => d.category).filter((category): category is string => Boolean(category)))];
     return categories;
   };
 
@@ -335,7 +333,7 @@ const DonationsPage = () => {
                 <option value="all">Toutes les catégories</option>
                 {getCategories().map((category) => (
                   <option key={category} value={category}>
-                    {category.charAt(0).toUpperCase() + category.slice(1)}
+                    {category ? category.charAt(0).toUpperCase() + category.slice(1) : ''}
                   </option>
                 ))}
               </select>
@@ -388,7 +386,7 @@ const DonationsPage = () => {
           ].map((filterOption) => (
             <button
               key={filterOption.key}
-              onClick={() => setFilter(filterOption.key as any)}
+              onClick={() => setFilter(filterOption.key as "all" | "active" | "completed")}
               className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
                 filter === filterOption.key
                   ? 'bg-red-600 text-white'
@@ -437,7 +435,7 @@ const DonationsPage = () => {
             bgColor: "bg-purple-50",
             iconColor: "text-purple-600"
           }
-        ].map((stat, index) => (
+        ].map((stat) => (
           <div key={stat.label} className={`${stat.bgColor} rounded-xl p-6 border border-gray-200`}>
             <div className="flex items-center">
               <stat.icon className={`h-8 w-8 ${stat.iconColor}`} />

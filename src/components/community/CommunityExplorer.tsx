@@ -98,7 +98,7 @@ const CommunityExplorer: React.FC<CommunityExplorerProps> = ({ onCommunitySelect
   };
 
   const getFacultyName = (facultyId: string) => {
-    const faculty = LEGACY_FACULTIES.find(f => f.id === facultyId);
+    const faculty = LEADERSHIP_ACADEMY_FACULTIES.find(f => f.id === facultyId);
     return faculty ? faculty.name : facultyId;
   };
 
@@ -168,7 +168,7 @@ const CommunityExplorer: React.FC<CommunityExplorerProps> = ({ onCommunitySelect
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
               <option value="">Toutes les facultés</option>
-              {LEGACY_FACULTIES.map(faculty => (
+                              {LEADERSHIP_ACADEMY_FACULTIES.map(faculty => (
                 <option key={faculty.id} value={faculty.id}>
                   {faculty.code} - {faculty.name}
                 </option>
