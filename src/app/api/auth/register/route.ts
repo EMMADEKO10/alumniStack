@@ -60,7 +60,18 @@ export async function POST(request: Request) {
       await client.connect();
       console.log('Connecté à MongoDB');
 
-      const db = client.db('alumni');
+      // Extraire le nom de la base de données de l'URI
+      let dbName = process.env.MONGODB_DB_NAME;
+      if (!dbName && uri!.includes('/')) {
+        const uriParts = uri!.split('/');
+        const lastPart = uriParts[uriParts.length - 1];
+        dbName = lastPart.split('?')[0];
+      }
+      if (!dbName || dbName === '') {
+        dbName = 'alumniprod';
+      }
+
+      const db = client.db(dbName);
       const usersCollection = db.collection('users');
 
       // Vérifier si l'utilisateur existe déjà
