@@ -34,7 +34,22 @@ if (process.env.NODE_ENV === 'development') {
 export async function connectDB(): Promise<{ client: MongoClient; db: Db }> {
   try {
     const client = await clientPromise;
-    const db = client.db('alumni'); // Spécifier explicitement le nom de la base de données
+    // Extraire le nom de la base de données de l'URI ou utiliser une variable d'environnement
+    let dbName = process.env.MONGODB_DB_NAME;
+    
+    if (!dbName && uri.includes('/')) {
+      // Extraire le nom de la base de données de l'URI MongoDB
+      const uriParts = uri.split('/');
+      const lastPart = uriParts[uriParts.length - 1];
+      dbName = lastPart.split('?')[0]; // Enlever les paramètres de requête
+    }
+    
+    // Fallback par défaut
+    if (!dbName || dbName === '') {
+      dbName = 'alumniprod';
+    }
+    
+    const db = client.db(dbName);
     return { client, db };
   } catch (error) {
     console.error('Erreur de connexion MongoDB:', error);

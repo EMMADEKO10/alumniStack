@@ -9,7 +9,7 @@ const Page: React.FC = () => {
       <PageTitle
         title={"Les formations"}
         content={
-          "Nous vous proposons plusieurs formations pour vous aider à vous améliorer"
+          "Nous vous proposons plusieurs formations pour vous aider à vous améliorer."
         }
       />
       <FormationSection />
