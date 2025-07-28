@@ -56,7 +56,7 @@ const stories = [
     description:
       "Marie Kasongo, diplômée en sciences sociales, a créé une ONG qui impact positivement des milliers de vies. Son approche innovante dans le développement communautaire lui a valu une reconnaissance internationale et plusieurs prix prestigieux.",
     date: "3 Novembre 2023",
-    image: "/graduation.jpg",
+    image: "/Marie Kasongo.jpg",
     category: "Social",
     featured: false,
     readTime: "4 min",
@@ -68,7 +68,7 @@ const stories = [
     description:
       "Le Dr. Paul Kabila a poursuivi sa passion pour la recherche médicale après avoir étudié au Leadership Academy University (LAU). Ses découvertes révolutionnaires dans le traitement des maladies tropicales ont été publiées dans les plus prestigieuses revues scientifiques mondiales.",
     date: "15 Décembre 2023",
-    image: "/graduation.jpg",
+    image: "/Dr. Paul Kabila.jpg",
     category: "Recherche",
     featured: true,
     readTime: "8 min",
