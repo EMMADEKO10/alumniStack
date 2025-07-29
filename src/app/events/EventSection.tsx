@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import EventCard from "../../components/cards/EventCard";
 import { CalendarIcon, MapPinIcon, UsersIcon, FunnelIcon, MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
@@ -21,6 +22,7 @@ interface Event {
 }
 
 const EventSection: React.FC = () => {
+  const router = useRouter();
   const [events, setEvents] = useState<Event[]>([]);
   const [filteredEvents, setFilteredEvents] = useState<Event[]>([]);
   const [loading, setLoading] = useState(true);
@@ -417,7 +419,10 @@ const EventSection: React.FC = () => {
                         )}
                       </div>
                       <div className="mt-4 pt-4 border-t border-gray-200">
-                        <button className="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors font-medium">
+                        <button 
+                          onClick={() => router.push(`/events/${event._id}`)}
+                          className="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors font-medium"
+                        >
                           Voir les détails
                         </button>
                       </div>

@@ -55,7 +55,7 @@ const FormationSection: React.FC = () => {
               endDate: new Date("2024-03-29"),
               location: "En ligne ou en presentiel",
               maxStudents: 25,
-              imageUrl: "/graduation.jpg",
+              imageUrl: "https://res.cloudinary.com/dzhpaf2vw/image/upload/v1747579799/_21bd88b7-e386-45d7-9db3-7ba43b135625_iokqbi.jpg",
               createdAt: new Date()
             },
             {
@@ -70,7 +70,7 @@ const FormationSection: React.FC = () => {
               endDate: new Date("2024-04-26"),
               location: "Paris, France",
               maxStudents: 20,
-              imageUrl: "/graduation.jpg",
+              imageUrl: "https://res.cloudinary.com/dzhpaf2vw/image/upload/c_fill,w_800,h_600/v1747579800/web-development-course_abc123.jpg",
               createdAt: new Date()
             },
             {
@@ -85,7 +85,7 @@ const FormationSection: React.FC = () => {
               endDate: new Date("2024-03-20"),
               location: "Lyon, France",
               maxStudents: 30,
-              imageUrl: "/graduation.jpg",
+              imageUrl: "https://res.cloudinary.com/dzhpaf2vw/image/upload/c_scale,w_800,h_600,q_auto,f_auto/v1747579801/digital-marketing-course_def456.jpg",
               createdAt: new Date()
             }
           ];

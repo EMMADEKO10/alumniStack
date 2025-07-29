@@ -24,7 +24,7 @@ let uri = process.env.MONGODB_URI;
 // Fallback pour le développement
 if (!uri && process.env.NODE_ENV === 'development') {
   console.warn('Variable MONGODB_URI non définie, utilisation de l\'URI par défaut pour le développement');
-  uri = 'mongodb+srv://admin:k8E3oyHBD8UgIRha@cluster0.bhckvli.mongodb.net/alumniprod?retryWrites=true&w=majority&appName=Cluster0';
+  uri =process.env.MONGODB_URI;
 } else if (!uri) {
   throw new Error('Veuillez définir la variable d\'environnement MONGODB_URI');
 }

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { MapPinIcon, CurrencyDollarIcon, CalendarIcon, BuildingOfficeIcon } from "@heroicons/react/24/outline";
 
 interface Opportunity {
@@ -25,6 +26,8 @@ interface OpportunityCardProps {
 }
 
 const OpportunityCard: React.FC<OpportunityCardProps> = ({ opportunity }) => {
+  const router = useRouter();
+  
   const formatSalary = (salary: string) => {
     if (!salary || salary === 'Non spécifié') return 'Salaire non spécifié';
     return salary;
@@ -106,7 +109,10 @@ const OpportunityCard: React.FC<OpportunityCardProps> = ({ opportunity }) => {
 
         {/* Bouton d'action */}
         <div className="flex justify-between items-center">
-          <button className="bg-red-800 hover:bg-red-900 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200">
+          <button 
+            onClick={() => router.push(`/opportunities/${opportunity._id}`)}
+            className="bg-red-800 hover:bg-red-900 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200"
+          >
             Voir les détails
           </button>
           

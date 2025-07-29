@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { 
   AcademicCapIcon, 
   MapPinIcon, 
@@ -28,6 +29,8 @@ interface FormationCardProps {
 }
 
 const FormationCard: React.FC<FormationCardProps> = ({ formation }) => {
+  const router = useRouter();
+  
   const formatPrice = (price: number) => {
     return new Intl.NumberFormat('fr-FR', {
       style: 'currency',
@@ -120,7 +123,10 @@ const FormationCard: React.FC<FormationCardProps> = ({ formation }) => {
 
         {/* Bouton d'action */}
         <div className="flex justify-between items-center">
-          <button className="bg-red-800 hover:bg-red-900 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200">
+          <button 
+            onClick={() => router.push(`/formations/${formation._id}`)}
+            className="bg-red-800 hover:bg-red-900 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200"
+          >
             Voir les détails
           </button>
           
