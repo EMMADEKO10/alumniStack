@@ -489,7 +489,7 @@ const FormationDetailPage: React.FC = () => {
                         
                         <button
                           onClick={handleEnroll}
-                          disabled={formation.maxStudents && currentStudents >= formation.maxStudents}
+                          disabled={!!(formation.maxStudents && currentStudents >= formation.maxStudents)}
                           className={`w-full py-3 px-4 rounded-lg font-semibold transition-colors ${
                             isEnrolled
                               ? "bg-green-600 text-white hover:bg-green-700"
