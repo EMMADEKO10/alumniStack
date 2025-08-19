@@ -578,7 +578,7 @@ const DonationsPage = () => {
                 <FaUniversity className="text-green-600 text-lg" />
               </div>
               <h3 className={`text-lg font-bold text-gray-900 ${libreBaskerville.className}`}>
-                Nos coordonnées
+                Nos coordonnées (Unikin)
               </h3>
             </div>
             
