@@ -89,7 +89,7 @@ const Stats: React.FC = () => {
           className="text-center mb-16"
         >
           <div className="inline-flex items-center px-4 py-2 bg-white/10 border border-white/20 rounded-full text-white text-sm font-medium mb-6">
-            📊 Impact LAU
+            📊 Impact Unikin
           </div>
           <h2 className="text-4xl lg:text-5xl font-bold mb-6">
             Notre impact en

@@ -8,7 +8,7 @@ const Page: React.FC = () => {
       <PageTitle
         title={"Les Evènements"}
         content={
-          "Rejoignez la communauté mondiale des anciens élèves de Leadership Academy, où que vous soyez (sur le campus, en ligne et dans votre région), à travers des programmes et des événements."
+          "Rejoignez la communauté mondiale des anciens élèves de l'Université de Kinshasa, où que vous soyez (sur le campus, en ligne et dans votre région), à travers des programmes et des événements."
         }
       />
       <EventSection />

@@ -11,7 +11,7 @@ import {
   NETWORKING_PREFERENCES,
   PROFILE_VISIBILITY 
 } from '../../types/alumni';
-import { LEADERSHIP_ACADEMY_FACULTIES, REGIONS, PROFESSIONAL_SECTORS } from '../../types/community';
+import { UNIKIN_FACULTIES, REGIONS, PROFESSIONAL_SECTORS } from '../../types/community';
 
 interface AlumniProfileFormProps {
   initialData?: Partial<AlumniProfile>;
@@ -325,7 +325,7 @@ const AlumniProfileForm: React.FC<AlumniProfileFormProps> = ({
             required
           >
             <option value="">Sélectionner une faculté</option>
-            {LEADERSHIP_ACADEMY_FACULTIES.map(faculty => (
+            {UNIKIN_FACULTIES.map(faculty => (
               <option key={faculty.id} value={faculty.id}>
                 {faculty.name} ({faculty.code})
               </option>

@@ -12,7 +12,7 @@ const Hero: React.FC = () => {
       <div className="absolute inset-0 z-0">
         <Image
           src="/graduation.jpg"
-          alt="Leadership Academy Alumni"
+          alt="Université de Kinshasa Alumni"
           fill
           className="object-cover"
           priority
@@ -64,7 +64,7 @@ const Hero: React.FC = () => {
             className="inline-flex items-center px-4 py-2 bg-red-600/20 border border-red-500/30 rounded-full text-red-200"
           >
             <FaGraduationCap className="mr-2" />
-            <span className="text-sm font-medium">Réseau Alumni Leadership Academy (LAU)</span>
+            <span className="text-sm font-medium">Réseau Alumni Université de Kinshasa (Unikin)</span>
           </motion.div>
 
           {/* Main Title */}
@@ -105,7 +105,7 @@ const Hero: React.FC = () => {
             
             <button className="group inline-flex items-center justify-center px-8 py-4 border-2 border-white/30 text-white font-semibold rounded-lg hover:bg-white/10 transition-all duration-300">
               <FaPlay className="mr-2 group-hover:scale-110 transition-transform" />
-              Découvrir LAU
+              Découvrir Unikin
             </button>
           </motion.div>
 
@@ -181,7 +181,7 @@ const Hero: React.FC = () => {
               </div>
               <div className="flex-1">
                                  <p className="text-gray-200 text-sm mb-2">
-                   &ldquo;Grâce au réseau LAU, j&apos;ai trouvé mon emploi de rêve et créé 
+                   &ldquo;Grâce au réseau Unikin, j&apos;ai trouvé mon emploi de rêve et créé 
                    des partenariats durables.&rdquo;
                  </p>
                 <div className="text-white font-semibold text-sm">Alice Martin</div>

@@ -57,7 +57,7 @@ const EventDetailPage: React.FC = () => {
               date: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString(),
               location: "Centre de Conférences Paris La Défense, 2 Place de la Défense, 92400 Courbevoie",
               type: "conférence",
-              organizer: "Leadership Academy",
+              organizer: "Université de Kinshasa",
               imageUrl: "/graduation.jpg",
               maxParticipants: 150,
               participants: new Array(87).fill({}),

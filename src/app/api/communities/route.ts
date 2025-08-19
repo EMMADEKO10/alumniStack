@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { connectDB } from '../../../lib/mongodb';
-import { Community, CommunityType, LEADERSHIP_ACADEMY_FACULTIES, REGIONS, PROFESSIONAL_SECTORS } from '../../../types/community';
+import { Community, CommunityType, UNIKIN_FACULTIES, REGIONS, PROFESSIONAL_SECTORS } from '../../../types/community';
 
 interface CommunityFilter {
   type?: CommunityType;
@@ -47,7 +47,7 @@ export async function GET(request: Request) {
     return NextResponse.json({
       communities,
       totalCount: communities.length,
-      faculties: LEADERSHIP_ACADEMY_FACULTIES,
+      faculties: UNIKIN_FACULTIES,
       regions: REGIONS,
       professionalSectors: PROFESSIONAL_SECTORS
     });
@@ -152,7 +152,7 @@ function validateCommunityData(type: CommunityType, data: CommunityData): string
       if (!data.facultyId) {
         return 'ID de faculté requis pour une communauté de faculté';
       }
-      const faculty = LEADERSHIP_ACADEMY_FACULTIES.find(f => f.id === data.facultyId);
+      const faculty = UNIKIN_FACULTIES.find(f => f.id === data.facultyId);
       if (!faculty) {
         return 'Faculté non trouvée';
       }

@@ -69,14 +69,14 @@ const Footer: React.FC = () => {
                 </div>
                 <div>
                   <h3 className="text-xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
-                    LAU Alumni
+                    Unikin Alumni
                   </h3>
                   <p className="text-sm text-gray-400">Platform</p>
                 </div>
               </Link>
               
               <p className="text-gray-300 leading-relaxed">
-                La plateforme officielle des anciens étudiants de Leadership Academy University. 
+                La plateforme officielle des anciens étudiants de Université de Kinshasa University. 
                 Connectez-vous, grandissez et construisez ensemble l&apos;avenir.
               </p>
 
@@ -185,7 +185,7 @@ const Footer: React.FC = () => {
           {/* Copyright */}
           <div className="mt-8 pt-8 border-t border-white/10 text-center">
             <p className="text-sm text-gray-400 flex items-center justify-center space-x-2">
-              <span>© {new Date().getFullYear()} LAU Alumni Platform.</span>
+              <span>© {new Date().getFullYear()} Unikin Alumni Platform.</span>
               <span>Fait avec</span>
               <FaHeart className="w-4 h-4 text-red-400 animate-pulse" />
               <span>par</span>

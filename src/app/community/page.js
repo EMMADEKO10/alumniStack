@@ -37,7 +37,7 @@ const events = [
     category: "Ingénieur",
     place: "RDC",
     time: "543",
-    event: "Les ingénieurs de Leadership Academy University (LAU)",
+    event: "Les ingénieurs de Université de Kinshasa (Unikin)",
   },
   {
     day: "15  ",
@@ -46,7 +46,7 @@ const events = [
     category: "Medecine",
     place: "Kikwit",
     time: "330",
-    event: "Les medecins de Leadership Academy University (LAU)",
+    event: "Les medecins de Université de Kinshasa (Unikin)",
   },
 ];
 
@@ -56,7 +56,7 @@ const Page = () => {
       <PageTitle
         title={"Notre communauté"}
         content={
-          "Alumni Leadership Academy University (LAU) est une très grande communauté regroupant tous les anciens de Leadership Academy University (LAU)"
+          "Alumni Université de Kinshasa (Unikin) est une très grande communauté regroupant tous les anciens de Université de Kinshasa (Unikin)"
         }
       />
       <div>

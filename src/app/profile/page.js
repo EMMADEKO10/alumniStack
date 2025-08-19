@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import PageTitle from '../../ui/navigation/PageTitle';
 import { FaUser, FaEnvelope, FaIdCard, FaUserTag, FaGraduationCap, FaBriefcase, FaMapMarkerAlt, FaEdit, FaUsers } from 'react-icons/fa';
-import { LEADERSHIP_ACADEMY_FACULTIES } from '../../types/community';
+import { UNIKIN_FACULTIES } from '../../types/community';
 
 export default function ProfilePage() {
   const { data: session, status } = useSession();
@@ -53,7 +53,7 @@ export default function ProfilePage() {
   }
 
   const getFacultyName = (facultyId) => {
-    const faculty = LEADERSHIP_ACADEMY_FACULTIES.find(f => f.id === facultyId);
+    const faculty = UNIKIN_FACULTIES.find(f => f.id === facultyId);
     return faculty ? faculty.name : facultyId;
   };
 

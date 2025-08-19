@@ -16,11 +16,11 @@ const About: React.FC = () => {
             className={`text-4xl ${libreBaskerville.className} w-3/4`}
             style={{ lineHeight: "3rem" }}
           >
-            A propos des Alumni de Leadership Academy University (LAU)
+            A propos des Alumni de Université de Kinshasa (Unikin)
           </h2>
           <p>
-            La <span className="font-semibold">Leadership Academy University Alumni Association</span>{" "}
-            est l&apos;association officielle des anciens étudiants de la Leadership Academy University (LAU)
+            La <span className="font-semibold">Université de Kinshasa Alumni Association</span>{" "}
+            est l&apos;association officielle des anciens étudiants de la Université de Kinshasa (Unikin)
             qui comprend près de{" "}
             <span className="italic font-semibold">100000 membres</span> dans le
             monde entier

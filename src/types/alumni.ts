@@ -1,4 +1,4 @@
-// Types pour les données Alumni - Leadership Academy
+// Types pour les données Alumni - Université de Kinshasa
 import { ObjectId } from 'mongodb';
 import { CommunityType } from './community';
 

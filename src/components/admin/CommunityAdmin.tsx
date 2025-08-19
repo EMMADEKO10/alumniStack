@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { CommunityType, Community, LEADERSHIP_ACADEMY_FACULTIES, REGIONS, PROFESSIONAL_SECTORS } from '../../types/community';
+import { CommunityType, Community, UNIKIN_FACULTIES, REGIONS, PROFESSIONAL_SECTORS } from '../../types/community';
 
 const CommunityAdmin: React.FC = () => {
   const [communities, setCommunities] = useState<Community[]>([]);
@@ -137,7 +137,7 @@ const CommunityAdmin: React.FC = () => {
               required
             >
               <option value="">Sélectionner une faculté</option>
-              {LEADERSHIP_ACADEMY_FACULTIES.map(faculty => (
+              {UNIKIN_FACULTIES.map(faculty => (
                 <option key={faculty.id} value={faculty.id}>
                   {faculty.code} - {faculty.name}
                 </option>
@@ -160,7 +160,7 @@ const CommunityAdmin: React.FC = () => {
                 required
               >
                               <option value="">Sélectionner une faculté</option>
-              {LEADERSHIP_ACADEMY_FACULTIES.map(faculty => (
+              {UNIKIN_FACULTIES.map(faculty => (
                 <option key={faculty.id} value={faculty.id}>
                   {faculty.code} - {faculty.name}
                 </option>

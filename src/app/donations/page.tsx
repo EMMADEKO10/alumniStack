@@ -301,7 +301,7 @@ const DonationsPage = () => {
       {/* Description */}
       <div className="bg-gradient-to-r from-red-50 to-pink-50 rounded-xl p-6 mb-8">
         <p className="text-gray-700 text-lg leading-relaxed">
-          Merci d&apos;avoir envisagé un don au Leadership Academy University (LAU). Votre générosité nous aide à bâtir l&apos;avenir de l&apos;éducation et à soutenir nos étudiants dans leur parcours académique.
+          Merci d&apos;avoir envisagé un don au Université de Kinshasa (Unikin). Votre générosité nous aide à bâtir l&apos;avenir de l&apos;éducation et à soutenir nos étudiants dans leur parcours académique.
         </p>
       </div>
 
@@ -608,7 +608,7 @@ const DonationsPage = () => {
 
             <div className="mt-4 p-3 bg-gradient-to-r from-green-50 to-blue-50 border border-green-200 rounded-lg">
               <p className="text-xs text-green-800">
-                📧 Confirmez votre don par email à <strong>dons@lau.org</strong>
+                📧 Confirmez votre don par email à <strong>dons@unikin.org</strong>
               </p>
             </div>
           </div>

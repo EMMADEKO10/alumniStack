@@ -1,6 +1,6 @@
-# Leadership Academy Alumni Platform
+# Université de Kinshasa Alumni Platform
 
-La plateforme frontend et backend des alumni de Leadership Academy.
+La plateforme frontend et backend des alumni de l'Université de Kinshasa.
 
 ## Commencer
 

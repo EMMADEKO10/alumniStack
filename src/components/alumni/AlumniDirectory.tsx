@@ -304,7 +304,7 @@ const AlumniDirectory: React.FC<AlumniDirectoryProps> = ({ onAlumniSelect }) => 
             Annuaire des Alumni
           </h1>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            Découvrez et connectez-vous avec les diplômés de Leadership Academy University (LAU)
+            Découvrez et connectez-vous avec les diplômés de Université de Kinshasa (Unikin)
           </p>
           </motion.div>
 

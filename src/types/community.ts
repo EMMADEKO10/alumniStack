@@ -1,4 +1,4 @@
-// Types pour l'architecture communautaire de Leadership Academy
+// Types pour l'architecture communautaire de l'Université de Kinshasa
 import { ObjectId } from 'mongodb';
 
 export interface Faculty {
@@ -100,8 +100,8 @@ export interface CommunityComment {
   createdAt: Date;
 }
 
-// Configuration des facultés de Leadership Academy (depuis 2012)
-export const LEADERSHIP_ACADEMY_FACULTIES: Omit<Faculty, '_id' | 'createdAt'>[] = [
+// Configuration des facultés de l'Université de Kinshasa (depuis 2012)
+export const UNIKIN_FACULTIES: Omit<Faculty, '_id' | 'createdAt'>[] = [
   {
     id: 'fac_medecine',
     name: 'Faculté de Médecine',

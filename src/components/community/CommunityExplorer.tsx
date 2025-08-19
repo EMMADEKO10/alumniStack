@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { CommunityType, Community, LEADERSHIP_ACADEMY_FACULTIES, REGIONS } from '../../types/community';
+import { CommunityType, Community, UNIKIN_FACULTIES, REGIONS } from '../../types/community';
 
 interface CommunityExplorerProps {
   onCommunitySelect?: (community: Community) => void;
@@ -98,7 +98,7 @@ const CommunityExplorer: React.FC<CommunityExplorerProps> = ({ onCommunitySelect
   };
 
   const getFacultyName = (facultyId: string) => {
-    const faculty = LEADERSHIP_ACADEMY_FACULTIES.find(f => f.id === facultyId);
+    const faculty = UNIKIN_FACULTIES.find(f => f.id === facultyId);
     return faculty ? faculty.name : facultyId;
   };
 
@@ -168,7 +168,7 @@ const CommunityExplorer: React.FC<CommunityExplorerProps> = ({ onCommunitySelect
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
               <option value="">Toutes les facultés</option>
-                              {LEADERSHIP_ACADEMY_FACULTIES.map(faculty => (
+                              {UNIKIN_FACULTIES.map(faculty => (
                 <option key={faculty.id} value={faculty.id}>
                   {faculty.code} - {faculty.name}
                 </option>

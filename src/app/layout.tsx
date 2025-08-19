@@ -16,8 +16,8 @@ const firaCode = Fira_Code({
 });
 
 export const metadata: Metadata = {
-  title: "Leadership Academy Alumni Platform",
-  description: "Plateforme des anciens élèves de Leadership Academy",
+  title: "Université de Kinshasa Alumni Platform",
+  description: "Plateforme des anciens élèves de l'Université de Kinshasa",
 };
 
 export default function RootLayout({

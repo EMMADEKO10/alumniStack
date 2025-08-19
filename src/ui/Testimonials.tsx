@@ -15,7 +15,7 @@ const Testimonials: React.FC = () => {
       company: "TechVenture Inc.",
       promo: "Promo 2015",
       avatar: "SJ",
-      quote: "Le réseau LAU a été déterminant dans le lancement de ma startup. J'ai trouvé mes premiers investisseurs et mes meilleurs talents grâce aux connexions que j'ai faites sur la plateforme.",
+      quote: "Le réseau Unikin a été déterminant dans le lancement de ma startup. J'ai trouvé mes premiers investisseurs et mes meilleurs talents grâce aux connexions que j'ai faites sur la plateforme.",
       rating: 5,
       social: {
         linkedin: "#",
@@ -60,7 +60,7 @@ const Testimonials: React.FC = () => {
       company: "Sequoia Capital",
       promo: "Promo 2010",
       avatar: "DC",
-              quote: "LAU m'a permis de donner en retour à ma communauté tout en identifiant les talents de demain. Un écosystème unique qui crée de la valeur pour tous.",
+              quote: "Unikin m'a permis de donner en retour à ma communauté tout en identifiant les talents de demain. Un écosystème unique qui crée de la valeur pour tous.",
       rating: 5,
       social: {
         linkedin: "#",
@@ -108,7 +108,7 @@ const Testimonials: React.FC = () => {
             </span>
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Découvrez comment le réseau LAU a transformé la carrière de milliers d&apos;anciens étudiants.
+            Découvrez comment le réseau Unikin a transformé la carrière de milliers d&apos;anciens étudiants.
           </p>
         </motion.div>
 

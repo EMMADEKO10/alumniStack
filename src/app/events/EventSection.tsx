@@ -48,7 +48,7 @@ const EventSection: React.FC = () => {
               date: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString(), // 7 jours
               location: "Paris, France",
               type: "conférence",
-              organizer: "Leadership Academy",
+              organizer: "Université de Kinshasa",
               imageUrl: "/graduation.jpg",
               maxParticipants: 150,
               createdAt: new Date()
@@ -97,7 +97,7 @@ const EventSection: React.FC = () => {
             date: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString(),
             location: "Paris, France",
             type: "conférence",
-            organizer: "Leadership Academy",
+            organizer: "Université de Kinshasa",
             imageUrl: "/graduation.jpg",
             maxParticipants: 150,
             createdAt: new Date()
