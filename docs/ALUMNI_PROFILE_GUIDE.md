@@ -1,8 +1,8 @@
-# Guide du Profil Alumni - Legacy University Platform
+# Guide du Profil Alumni - Unikin Platform
 
 ## 🎯 Vue d'ensemble
 
-Le système de profil Alumni permet aux diplômés de Legacy University de :
+Le système de profil Alumni permet aux diplômés de Unikin de :
 - **Compléter** leurs informations académiques et professionnelles
 - **Rejoindre automatiquement** les communautés appropriées
 - **Se connecter** avec d'autres alumni
@@ -233,5 +233,5 @@ Le profil Alumni s'intègre automatiquement avec le système de communautés :
 
 ---
 
-**🎓 Legacy University Alumni Platform**  
+**🎓 Unikin Alumni Platform**  
 *Connecter les diplômés, construire l'avenir* 

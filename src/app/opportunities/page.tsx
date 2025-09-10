@@ -9,7 +9,7 @@ const Page: React.FC = () => {
       <PageTitle
         title={"Les opportunités"}
         content={
-          "Quelle que soit l'étape de votre carrière dans laquelle vous vous trouvez, la Harvard Alumni Association a des ressources pour vous. Des services à l'échelle de l'université et spécifiques à l'école aux informations sur les événements de réseautage et les webinaires en ligne, nous avons compilé certaines des meilleures ressources et services liés à la carrière de Harvard, et tout est à portée de main."
+          "Quelle que soit l'étape de votre carrière dans laquelle vous vous trouvez, le leadership Academia Alumni Association a des ressources pour vous. Des services à l'échelle de l'université et spécifiques à l'école aux informations sur les événements de réseautage et les webinaires en ligne, nous avons compilé certaines des meilleures ressources et services liés à la carrière de leadership Academia, et tout est à portée de main."
         }
       />
       <div className="max-w-7xl mx-auto px-4 pt-8 pb-16">

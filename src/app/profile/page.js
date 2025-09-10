@@ -256,7 +256,7 @@ export default function ProfilePage() {
         /* Call-to-action pour compléter le profil */
         <div className="max-w-4xl mx-auto bg-gradient-to-r from-blue-600 to-blue-800 text-white rounded-lg p-8 text-center">
           <FaGraduationCap className="text-6xl mx-auto mb-4 opacity-80" />
-          <h3 className="text-2xl font-bold mb-4">Devenez un Alumni Legacy University !</h3>
+          <h3 className="text-2xl font-bold mb-4">Devenez un Alumni de l&apos;unikin !</h3>
           <p className="text-lg mb-6 opacity-90">
             Complétez votre profil pour rejoindre la communauté des diplômés et accéder à toutes les fonctionnalités.
           </p>
