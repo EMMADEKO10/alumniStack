@@ -16,7 +16,7 @@ const firaCode = Fira_Code({
 });
 
 export const metadata: Metadata = {
-  title: "Leadership Academy Alumni Platform",
+  title: "Leadership AcademiaAlumni Platform",
   description: "Plateforme des anciens élèves de Leadership Academy",
 };
 

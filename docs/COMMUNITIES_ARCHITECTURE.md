@@ -1,8 +1,8 @@
-# Architecture des Communautés - Legacy University Alumni Platform
+# Architecture des Communautés - LAU Alumni Platform
 
 ## Vue d'ensemble
 
-La plateforme Alumni Legacy University organise ses communautés selon **5 axes principaux** pour faciliter les connexions et le networking entre les diplômés de l'université, fondée en 2012.
+La plateforme Alumni LAU organise ses communautés selon **5 axes principaux** pour faciliter les connexions et le networking entre les diplômés de l'université, fondée en 2012.
 
 ## 🏗️ Architecture Communautaire
 
@@ -17,7 +17,7 @@ Groupes par année de diplôme pour maintenir les liens de cohorte
 ### 2. 🏛️ **Par Faculté**
 8 communautés principales correspondant aux facultés de l'université
 
-Les 8 facultés de Legacy University :
+Les 8 facultés de Leadership Academia Alumni :
 - **Médecine** (MED) - Formation en sciences médicales et santé
 - **Ingénierie** (ING) - Formation en sciences de l'ingénieur  
 - **Économie** (ECO) - Formation en sciences économiques et gestion
@@ -244,5 +244,5 @@ npm run init-communities
 
 ---
 
-**🎓 Legacy University Alumni Platform**  
+**🎓 Leadership Academia Université Alumni Platform**  
 *Connecter les diplômés, construire l'avenir* 

@@ -100,7 +100,7 @@ export interface CommunityComment {
   createdAt: Date;
 }
 
-// Configuration des facultés de Leadership Academy (depuis 2012)
+// Configuration des facultés de Leadership Academia(depuis 2012)
 export const LEADERSHIP_ACADEMY_FACULTIES: Omit<Faculty, '_id' | 'createdAt'>[] = [
   {
     id: 'fac_medecine',

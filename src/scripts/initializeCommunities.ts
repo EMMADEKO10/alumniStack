@@ -60,7 +60,7 @@ async function initializeCommunities() {
     mainRegions.forEach(region => {
       communities.push({
         name: `Alumni ${region}`,
-        description: `Réseau des diplômés Leadership Academy basés à ${region}. Organisez des événements locaux, des rencontres professionnelles et maintenez le lien dans votre région.`,
+        description: `Réseau des diplômés Leadership Academiabasés à ${region}. Organisez des événements locaux, des rencontres professionnelles et maintenez le lien dans votre région.`,
         type: CommunityType.REGION,
         region: region,
         privacy: 'public'
@@ -92,7 +92,7 @@ async function initializeCommunities() {
     mainProfessions.forEach(profession => {
       communities.push({
         name: `Professionnels - ${profession}`,
-        description: `Réseau professionnel des diplômés Leadership Academy dans le secteur ${profession}. Échangez sur les tendances du secteur, partagez des opportunités et développez votre réseau professionnel.`,
+        description: `Réseau professionnel des diplômés Leadership Academiadans le secteur ${profession}. Échangez sur les tendances du secteur, partagez des opportunités et développez votre réseau professionnel.`,
         type: CommunityType.PROFESSION,
         profession: profession,
         privacy: 'public'

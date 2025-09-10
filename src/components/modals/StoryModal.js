@@ -154,7 +154,7 @@ const StoryModal = ({ isOpen, onClose, story }) => {
                         
                         <h3 className="text-2xl font-bold text-gray-900 mb-4">Les Défis Surmontés</h3>
                         <p className="text-lg">
-                          Comme beaucoup d&apos;alumni de Leadership Academy University (LAU), {story.author} a dû faire face à de nombreux défis. 
+                          Comme beaucoup d&apos;alumni de Leadership AcademiaUniversity (LAU), {story.author} a dû faire face à de nombreux défis. 
                           Grâce à la formation solide reçue et à une détermination sans faille, chaque obstacle est devenu 
                           une opportunité d&apos;apprentissage et de croissance.
                         </p>
@@ -168,7 +168,7 @@ const StoryModal = ({ isOpen, onClose, story }) => {
                         
                         <h3 className="text-2xl font-bold text-gray-900 mb-4">Message aux Futurs Alumni</h3>
                         <blockquote className="border-l-4 border-blue-500 pl-6 italic text-xl text-blue-800 bg-blue-50 p-4 rounded-r-lg">
-                          &quot;N&apos;ayez pas peur de rêver grand. Leadership Academy University (LAU) vous donne les outils, 
+                          &quot;N&apos;ayez pas peur de rêver grand. Leadership AcademiaUniversity (LAU) vous donne les outils, 
                           mais c&apos;est votre détermination qui fera la différence. Chaque défi est une opportunité 
                           de grandir et d&apos;apprendre.&quot;
                         </blockquote>

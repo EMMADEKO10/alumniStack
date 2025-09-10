@@ -18,7 +18,7 @@ const stories = [
     id: 1,
     title: "Histoire de réussite : Jean Kazunga",
     description:
-     "Après avoir obtenu son diplôme en ingénierie informatique au Leadership Academy University (LAU), Jean Kazunga a fondé sa propre start-up technologique. Grâce aux compétences et aux connaissances acquises pendant ses études, il a réussi à développer une entreprise prospère qui révolutionne l'industrie de la technologie.",
+     "Après avoir obtenu son diplôme en ingénierie informatique au Leadership AcademiaUniversity (LAU), Jean Kazunga a fondé sa propre start-up technologique. Grâce aux compétences et aux connaissances acquises pendant ses études, il a réussi à développer une entreprise prospère qui révolutionne l'industrie de la technologie.",
     date: "5 mars 2023",
     image: "/graduation.jpg",
     category: "Entrepreneuriat",
@@ -30,7 +30,7 @@ const stories = [
     id: 2,
     title: "Une Histoire inspirante : Olga Mujinga",
     description:
-      "Olga Mujinga, diplômée en administration des affaires du Leadership Academy University (LAU), a surmonté de nombreux obstacles pour atteindre le succès. Malgré des débuts modestes, elle a utilisé les compétences en leadership et en gestion qu'elle a acquises à l'université pour gravir les échelons et devenir PDG d'une grande entreprise internationale.",
+      "Olga Mujinga, diplômée en administration des affaires du Leadership AcademiaUniversity (LAU), a surmonté de nombreux obstacles pour atteindre le succès. Malgré des débuts modestes, elle a utilisé les compétences en leadership et en gestion qu'elle a acquises à l'université pour gravir les échelons et devenir PDG d'une grande entreprise internationale.",
     date: "12 Avril 2023",
     image: "/graduation.jpg",
     category: "Leadership",
@@ -42,7 +42,7 @@ const stories = [
     id: 3,
     title: "Histoire de carrière internationale : David Muyumba",
     description:
-      "Après avoir obtenu son diplôme en commerce international au Leadership Academy University (LAU), David Muyumba a poursuivi une carrière internationale passionnante. Il a travaillé dans différentes entreprises multinationales, parcourant le monde et établissant des partenariats commerciaux fructueux dans divers pays.",
+      "Après avoir obtenu son diplôme en commerce international au Leadership AcademiaUniversity (LAU), David Muyumba a poursuivi une carrière internationale passionnante. Il a travaillé dans différentes entreprises multinationales, parcourant le monde et établissant des partenariats commerciaux fructueux dans divers pays.",
     date: "19 Septembre 2023",
     image: "/graduation.jpg",
     category: "International",
@@ -66,7 +66,7 @@ const stories = [
     id: 5,
     title: "Excellence académique : Dr. Paul Kabila",
     description:
-      "Le Dr. Paul Kabila a poursuivi sa passion pour la recherche médicale après avoir étudié au Leadership Academy University (LAU). Ses découvertes révolutionnaires dans le traitement des maladies tropicales ont été publiées dans les plus prestigieuses revues scientifiques mondiales.",
+      "Le Dr. Paul Kabila a poursuivi sa passion pour la recherche médicale après avoir étudié au Leadership AcademiaUniversity (LAU). Ses découvertes révolutionnaires dans le traitement des maladies tropicales ont été publiées dans les plus prestigieuses revues scientifiques mondiales.",
     date: "15 Décembre 2023",
     image: "/Dr. Paul Kabila.jpg",
     category: "Recherche",

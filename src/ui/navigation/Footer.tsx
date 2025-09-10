@@ -76,7 +76,7 @@ const Footer: React.FC = () => {
               </Link>
               
               <p className="text-gray-300 leading-relaxed">
-                La plateforme officielle des anciens étudiants de Leadership Academy University. 
+                La plateforme officielle des anciens étudiants de Leadership AcademiaUniversity. 
                 Connectez-vous, grandissez et construisez ensemble l&apos;avenir.
               </p>
 

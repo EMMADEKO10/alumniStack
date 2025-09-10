@@ -1,4 +1,4 @@
-# Leadership Academy Alumni Platform
+# Leadership AcademiaAlumni Platform
 
 La plateforme frontend et backend des alumni de Leadership Academy.
 

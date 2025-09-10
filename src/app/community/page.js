@@ -37,7 +37,7 @@ const events = [
     category: "Ingénieur",
     place: "RDC",
     time: "543",
-    event: "Les ingénieurs de Leadership Academy University (LAU)",
+    event: "Les ingénieurs de Leadership AcademiaUniversity (LAU)",
   },
   {
     day: "15  ",
@@ -46,7 +46,7 @@ const events = [
     category: "Medecine",
     place: "Kikwit",
     time: "330",
-    event: "Les medecins de Leadership Academy University (LAU)",
+    event: "Les medecins de Leadership AcademiaUniversity (LAU)",
   },
 ];
 
@@ -56,7 +56,7 @@ const Page = () => {
       <PageTitle
         title={"Notre communauté"}
         content={
-          "Alumni Leadership Academy University (LAU) est une très grande communauté regroupant tous les anciens de Leadership Academy University (LAU)"
+          "Alumni Leadership AcademiaUniversity (LAU) est une très grande communauté regroupant tous les anciens de Leadership AcademiaUniversity (LAU)"
         }
       />
       <div>

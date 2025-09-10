@@ -301,7 +301,7 @@ const DonationsPage = () => {
       {/* Description */}
       <div className="bg-gradient-to-r from-red-50 to-pink-50 rounded-xl p-6 mb-8">
         <p className="text-gray-700 text-lg leading-relaxed">
-          Merci d&apos;avoir envisagé un don au Leadership Academy University (LAU). Votre générosité nous aide à bâtir l&apos;avenir de l&apos;éducation et à soutenir nos étudiants dans leur parcours académique.
+          Merci d&apos;avoir envisagé un don au Leadership AcademiaUniversity (LAU). Votre générosité nous aide à bâtir l&apos;avenir de l&apos;éducation et à soutenir nos étudiants dans leur parcours académique.
         </p>
       </div>
 
