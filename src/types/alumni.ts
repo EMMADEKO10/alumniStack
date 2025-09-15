@@ -91,6 +91,7 @@ export interface AlumniProfile {
     preferredRegions: string[];
     mentorshipInterest: 'Mentor' | 'Mentee' | 'Both' | 'None';
     networkingPreference: 'Active' | 'Modéré' | 'Minimal';
+    mentorshipDescription?: string;
   };
 
   // Paramètres de confidentialité

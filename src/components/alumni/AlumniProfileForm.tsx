@@ -74,6 +74,7 @@ const AlumniProfileForm: React.FC<AlumniProfileFormProps> = ({
       preferredRegions: [],
       mentorshipInterest: 'None',
       networkingPreference: 'Modéré',
+      mentorshipDescription: '',
       ...initialData?.communityPreferences
     },
     privacySettings: {
@@ -132,6 +133,23 @@ const AlumniProfileForm: React.FC<AlumniProfileFormProps> = ({
         [field]: ((prev[section] as Record<string, unknown>)?.[field] as unknown[] || []).filter((_, i) => i !== index)
       }
     }));
+  };
+
+  const toggleSkill = (skill: string) => {
+    setFormData(prev => {
+      const currentSkills = (prev.professionalInfo?.skills || []) as string[];
+      const hasSkill = currentSkills.includes(skill);
+      const updatedSkills = hasSkill
+        ? currentSkills.filter(s => s !== skill)
+        : [...currentSkills, skill];
+      return {
+        ...prev,
+        professionalInfo: {
+          ...(prev.professionalInfo as Record<string, unknown>),
+          skills: updatedSkills
+        }
+      };
+    });
   };
 
   const handleSubmit = async () => {
@@ -559,6 +577,39 @@ const AlumniProfileForm: React.FC<AlumniProfileFormProps> = ({
             <h4 className="text-lg font-medium text-gray-900 mb-4">Compétences</h4>
             
             <div className="space-y-4">
+              {/* Checklist prédéfinie */}
+              <div>
+                <p className="text-sm text-gray-600 mb-2">Sélectionnez vos compétences</p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2">
+                  {[
+                    'Gestion de projet',
+                    'Communication',
+                    'Leadership',
+                    'Développement Web',
+                    'Analyse de données',
+                    'Marketing',
+                    'Finance',
+                    'Design',
+                    'DevOps',
+                    'IA/ML'
+                  ].map((skill) => {
+                    const selected = (skills as string[]).includes(skill);
+                    return (
+                      <label key={skill} className={`flex items-center gap-2 p-2 rounded border ${selected ? 'bg-blue-50 border-blue-300' : 'bg-white'}`}>
+                        <input
+                          type="checkbox"
+                          checked={selected}
+                          onChange={() => toggleSkill(skill)}
+                          className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                        />
+                        <span className="text-sm">{skill}</span>
+                      </label>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* Ajout libre */}
               <div className="flex gap-2">
                 <input
                   type="text"
@@ -567,8 +618,11 @@ const AlumniProfileForm: React.FC<AlumniProfileFormProps> = ({
                   onKeyPress={(e) => {
                     if (e.key === 'Enter') {
                       const input = e.target as HTMLInputElement;
-                      if (input.value.trim()) {
-                        addArrayItem('professionalInfo', 'skills', input.value.trim());
+                      const value = input.value.trim();
+                      if (value) {
+                        if (!(skills as string[]).includes(value)) {
+                          addArrayItem('professionalInfo', 'skills', value);
+                        }
                         input.value = '';
                       }
                     }
@@ -578,8 +632,11 @@ const AlumniProfileForm: React.FC<AlumniProfileFormProps> = ({
                   type="button"
                   onClick={(e) => {
                     const input = (e.target as HTMLElement).previousElementSibling as HTMLInputElement;
-                    if (input?.value.trim()) {
-                      addArrayItem('professionalInfo', 'skills', input.value.trim());
+                    const value = input?.value.trim();
+                    if (value) {
+                      if (!(skills as string[]).includes(value)) {
+                        addArrayItem('professionalInfo', 'skills', value);
+                      }
                       input.value = '';
                     }
                   }}
@@ -625,7 +682,7 @@ const AlumniProfileForm: React.FC<AlumniProfileFormProps> = ({
                   className="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                   id="newLanguageProficiency"
                 >
-                  {LANGUAGE_PROFICIENCY.map(level => (
+                  {['Débutant','Intermédiaire','Avancé'].map(level => (
                     <option key={level} value={level}>{level}</option>
                   ))}
                 </select>
@@ -749,6 +806,19 @@ const AlumniProfileForm: React.FC<AlumniProfileFormProps> = ({
                 <option key={type} value={type}>{type}</option>
               ))}
             </select>
+          </div>
+
+          <div className="mt-4">
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Mentorat (description)
+            </label>
+            <textarea
+              rows={3}
+              value={formData.communityPreferences?.mentorshipDescription || ''}
+              onChange={(e) => updateFormData('communityPreferences', 'mentorshipDescription', e.target.value)}
+              placeholder="Décrivez vos attentes ou votre offre de mentorat (domaines, disponibilité, objectifs...)"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
           </div>
         </div>
 
