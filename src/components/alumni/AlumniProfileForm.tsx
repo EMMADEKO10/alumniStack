@@ -5,7 +5,6 @@ import { useSession } from 'next-auth/react';
 import { 
   AlumniProfile, 
   DEGREE_LEVELS, 
-  HONORS_LEVELS, 
   LANGUAGE_PROFICIENCY, 
   MENTORSHIP_TYPES,
   NETWORKING_PREFERENCES,
@@ -44,17 +43,14 @@ const AlumniProfileForm: React.FC<AlumniProfileFormProps> = ({
       departmentName: '',
       specializationField: '',
       degreeLevel: 'Licence',
-      degreeTitle: '',
       graduationYear: new Date().getFullYear(),
       ...initialData?.academicInfo
     },
     contactInfo: {
       currentAddress: {
-        street: '',
         city: '',
         province: '',
-        country: 'République Démocratique du Congo',
-        postalCode: ''
+        country: 'République Démocratique du Congo'
       },
       ...initialData?.contactInfo
     },
@@ -148,6 +144,7 @@ const AlumniProfileForm: React.FC<AlumniProfileFormProps> = ({
         headers: {
           'Content-Type': 'application/json',
         },
+        credentials: 'include',
         body: JSON.stringify(formData),
       });
 
@@ -379,20 +376,6 @@ const AlumniProfileForm: React.FC<AlumniProfileFormProps> = ({
           </select>
         </div>
 
-        <div className="md:col-span-2">
-          <label className="block text-sm font-medium text-gray-700 mb-1">
-            Titre du diplôme *
-          </label>
-          <input
-            type="text"
-            value={formData.academicInfo?.degreeTitle || ''}
-            onChange={(e) => updateFormData('academicInfo', 'degreeTitle', e.target.value)}
-            placeholder="Ex: Licence en Informatique, Master en Médecine..."
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            required
-          />
-        </div>
-
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
             Spécialisation
@@ -402,35 +385,6 @@ const AlumniProfileForm: React.FC<AlumniProfileFormProps> = ({
             value={formData.academicInfo?.specializationField || ''}
             onChange={(e) => updateFormData('academicInfo', 'specializationField', e.target.value)}
             placeholder="Ex: Intelligence Artificielle, Cardiologie..."
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
-            Mentions
-          </label>
-          <select
-            value={formData.academicInfo?.honors || ''}
-            onChange={(e) => updateFormData('academicInfo', 'honors', e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-          >
-            <option value="">Aucune mention</option>
-            {HONORS_LEVELS.map(honor => (
-              <option key={honor} value={honor}>{honor}</option>
-            ))}
-          </select>
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
-            Numéro d&apos;étudiant
-          </label>
-          <input
-            type="text"
-            value={formData.academicInfo?.studentId || ''}
-            onChange={(e) => updateFormData('academicInfo', 'studentId', e.target.value)}
-            placeholder="Ex: 20XX-XXXX"
             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
         </div>
@@ -480,33 +434,7 @@ const AlumniProfileForm: React.FC<AlumniProfileFormProps> = ({
 
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
-            Adresse
-          </label>
-          <input
-            type="text"
-            value={formData.contactInfo?.currentAddress?.street || ''}
-            onChange={(e) => updateNestedFormData('contactInfo', 'currentAddress', 'street', e.target.value)}
-            placeholder="Rue et numéro"
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
-            Code postal
-          </label>
-          <input
-            type="text"
-            value={formData.contactInfo?.currentAddress?.postalCode || ''}
-            onChange={(e) => updateNestedFormData('contactInfo', 'currentAddress', 'postalCode', e.target.value)}
-            placeholder="Code postal"
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
-            Pays
+            Pays de résidence
           </label>
           <input
             type="text"

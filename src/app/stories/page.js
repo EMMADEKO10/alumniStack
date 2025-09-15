@@ -1,12 +1,10 @@
 'use client';
 
 import React, { useState } from "react";
-import PageTitle from "../../ui/navigation/PageTitle";
 import { Libre_Baskerville } from "next/font/google";
-import StoryCard from "../../components/cards/StoryCard";
 import StoryCardTwo from "../../components/cards/StoryCardTwo";
 import { motion, AnimatePresence } from "framer-motion";
-import { FaBookOpen, FaUsers, FaGraduationCap, FaBriefcase, FaHeart, FaSearch, FaFilter, FaStar, FaCalendarAlt, FaUser } from "react-icons/fa";
+import { FaBookOpen, FaUsers, FaGraduationCap, FaBriefcase, FaHeart, FaSearch, FaStar } from "react-icons/fa";
 
 const libreBaskerville = Libre_Baskerville({
   subsets: ["latin"],
@@ -88,7 +86,6 @@ const categories = [
 const Page = () => {
   const [selectedCategory, setSelectedCategory] = useState("Toutes");
   const [searchTerm, setSearchTerm] = useState("");
-  const [isFilterOpen, setIsFilterOpen] = useState(false);
 
   const filteredStories = stories.filter(story => {
     const matchesCategory = selectedCategory === "Toutes" || story.category === selectedCategory;
@@ -290,17 +287,17 @@ const Page = () => {
             className="text-center mb-12"
           >
             <h2 className={`text-4xl font-bold text-gray-800 mb-4 ${libreBaskerville.className}`}>
-              {selectedCategory === "Toutes" ? "Toutes les Histoires" : `Histoires - ${selectedCategory}`}
+              {selectedCategory === "Toutes" ? "Autres Histoires" : `Histoires - ${selectedCategory}`}
             </h2>
             <p className="text-lg text-gray-600">
-              {filteredStories.length} histoire{filteredStories.length > 1 ? "s" : ""} trouvée{filteredStories.length > 1 ? "s" : ""}
+              {regularStories.length} histoire{regularStories.length > 1 ? "s" : ""} {regularStories.length > 1 ? "trouvées" : "trouvée"}
             </p>
           </motion.div>
 
-          {filteredStories.length > 0 ? (
+          {regularStories.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               <AnimatePresence>
-                {filteredStories.map((story, index) => (
+                {regularStories.map((story, index) => (
                   <motion.div
                     key={story.id}
                     initial={{ opacity: 0, y: 30 }}
@@ -325,29 +322,32 @@ const Page = () => {
               </AnimatePresence>
             </div>
           ) : (
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5 }}
-              className="text-center py-16"
-            >
-              <div className="inline-flex items-center justify-center w-24 h-24 bg-gray-100 rounded-full mb-6">
-                <FaSearch className="text-3xl text-gray-400" />
-              </div>
-              <h3 className="text-2xl font-bold text-gray-600 mb-4">Aucune histoire trouvée</h3>
-              <p className="text-gray-500 mb-6">
-                Essayez de modifier vos critères de recherche ou explorez d'autres catégories.
-              </p>
-              <button
-                onClick={() => {
-                  setSearchTerm("");
-                  setSelectedCategory("Toutes");
-                }}
-                className="bg-blue-600 text-white px-6 py-3 rounded-xl hover:bg-blue-700 transition-colors duration-300"
+            // Afficher le message seulement s'il n'y a aucune histoire (ni featured ni regular)
+            filteredStories.length === 0 && (
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5 }}
+                className="text-center py-16"
               >
-                Réinitialiser les filtres
-              </button>
-            </motion.div>
+                <div className="inline-flex items-center justify-center w-24 h-24 bg-gray-100 rounded-full mb-6">
+                  <FaSearch className="text-3xl text-gray-400" />
+                </div>
+                <h3 className="text-2xl font-bold text-gray-600 mb-4">Aucune histoire trouvée</h3>
+                <p className="text-gray-500 mb-6">
+                  Essayez de modifier vos critères de recherche ou explorez d&apos;autres catégories.
+                </p>
+                <button
+                  onClick={() => {
+                    setSearchTerm("");
+                    setSelectedCategory("Toutes");
+                  }}
+                  className="bg-blue-600 text-white px-6 py-3 rounded-xl hover:bg-blue-700 transition-colors duration-300"
+                >
+                  Réinitialiser les filtres
+                </button>
+              </motion.div>
+            )
           )}
         </div>
       </motion.section>

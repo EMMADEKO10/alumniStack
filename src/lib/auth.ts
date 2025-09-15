@@ -13,30 +13,38 @@ export const authOptions: AuthOptions = {
       },
       async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) {
+          console.warn('Authorize: email ou mot de passe manquant');
           return null;
         }
 
         try {
           const { db } = await connectDB();
-          
-          const user = await db.collection('users').findOne({ 
-            email: credentials.email 
+
+          const normalizedEmail = String(credentials.email).trim();
+
+          const user = await db.collection('users').findOne({
+            email: { $regex: `^${normalizedEmail}$`, $options: 'i' }
           });
-          
+
           if (!user) {
+            console.warn('Authorize: utilisateur introuvable pour', normalizedEmail);
             return null;
           }
-          
+
           const isPasswordValid = await bcrypt.compare(credentials.password, user.password);
-          
+
           if (!isPasswordValid) {
+            console.warn('Authorize: mot de passe invalide pour', normalizedEmail);
             return null;
           }
-          
+
           return {
             id: user._id.toString(),
             email: user.email,
             name: `${user.firstName || ''} ${user.lastName || ''}`.trim(),
+            firstName: user.firstName || '',
+            lastName: user.lastName || '',
+            role: user.role || 'user',
           };
         } catch (error) {
           console.error('Erreur d\'authentification:', error);
@@ -49,12 +57,18 @@ export const authOptions: AuthOptions = {
     async jwt({ token, user }) {
       if (user) {
         token.id = user.id;
+        token.firstName = user.firstName;
+        token.lastName = user.lastName;
+        token.role = user.role;
       }
       return token;
     },
     async session({ session, token }) {
       if (token) {
         session.user.id = token.id as string;
+        session.user.firstName = token.firstName as string;
+        session.user.lastName = token.lastName as string;
+        session.user.role = token.role as string;
       }
       return session;
     },

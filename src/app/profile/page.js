@@ -13,6 +13,36 @@ export default function ProfilePage() {
   const [alumniProfile, setAlumniProfile] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  // Fonction utilitaire pour obtenir le prénom
+  const getFirstName = () => {
+    if (alumniProfile?.personalInfo?.firstName) {
+      return alumniProfile.personalInfo.firstName;
+    }
+    if (session?.user?.firstName) {
+      return session.user.firstName;
+    }
+    if (session?.user?.name) {
+      const nameParts = session.user.name.trim().split(' ');
+      return nameParts[0] || '';
+    }
+    return '';
+  };
+
+  // Fonction utilitaire pour obtenir le nom de famille
+  const getLastName = () => {
+    if (alumniProfile?.personalInfo?.lastName) {
+      return alumniProfile.personalInfo.lastName;
+    }
+    if (session?.user?.lastName) {
+      return session.user.lastName;
+    }
+    if (session?.user?.name) {
+      const nameParts = session.user.name.trim().split(' ');
+      return nameParts.slice(1).join(' ') || '';
+    }
+    return '';
+  };
+
   useEffect(() => {
     if (status === 'authenticated') {
       fetchAlumniProfile();
@@ -79,7 +109,9 @@ export default function ProfilePage() {
             <FaUser className="text-blue-500 mt-1" />
             <div>
               <p className="text-sm text-gray-500">Prénom</p>
-              <p className="font-medium">{alumniProfile?.personalInfo?.firstName || session.user.firstName || 'Non renseigné'}</p>
+              <p className="font-medium">
+                {getFirstName() || 'Non renseigné'}
+              </p>
             </div>
           </div>
           
@@ -87,7 +119,9 @@ export default function ProfilePage() {
             <FaIdCard className="text-blue-500 mt-1" />
             <div>
               <p className="text-sm text-gray-500">Nom</p>
-              <p className="font-medium">{alumniProfile?.personalInfo?.lastName || session.user.lastName || 'Non renseigné'}</p>
+              <p className="font-medium">
+                {getLastName() || 'Non renseigné'}
+              </p>
             </div>
           </div>
           
@@ -103,7 +137,11 @@ export default function ProfilePage() {
             <FaUserTag className="text-blue-500 mt-1" />
             <div>
               <p className="text-sm text-gray-500">Rôle</p>
-              <p className="font-medium capitalize">{session.user.role || 'Utilisateur'}</p>
+              <p className="font-medium capitalize">
+                {session?.user?.role === 'admin' ? 'Administrateur' : 
+                 session?.user?.role === 'user' ? 'Utilisateur' : 
+                 session?.user?.role || 'Utilisateur'}
+              </p>
             </div>
           </div>
         </div>

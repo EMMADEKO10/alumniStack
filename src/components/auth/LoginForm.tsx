@@ -21,9 +21,11 @@ export default function LoginForm({}: LoginFormProps) {
     setError('');
 
     try {
+      const normalizedEmail = email.trim().toLowerCase();
+
       const result = await signIn('credentials', {
         redirect: false,
-        email,
+        email: normalizedEmail,
         password,
         callbackUrl: '/'
       });
@@ -36,7 +38,7 @@ export default function LoginForm({}: LoginFormProps) {
       }
 
       if (result.error) {
-        setError('Identifiants incorrects. Veuillez réessayer.');
+        setError(result.error === 'CredentialsSignin' ? 'Email ou mot de passe incorrect.' : result.error);
       } else {
         setTimeout(() => {
           window.location.href = '/';

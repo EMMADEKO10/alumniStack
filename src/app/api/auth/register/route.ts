@@ -53,6 +53,8 @@ export async function POST(request: Request) {
       );
     }
 
+    const normalizedEmail = String(email).trim().toLowerCase();
+
     // Création d'une nouvelle instance pour chaque requête
     const client = new MongoClient(uri!);
 
@@ -74,10 +76,10 @@ export async function POST(request: Request) {
       const db = client.db(dbName);
       const usersCollection = db.collection('users');
 
-      // Vérifier si l'utilisateur existe déjà
-      const existingUser = await usersCollection.findOne({ email });
+      // Vérifier si l'utilisateur existe déjà (insensible à la casse)
+      const existingUser = await usersCollection.findOne({ email: { $regex: `^${normalizedEmail}$`, $options: 'i' } });
       if (existingUser) {
-        console.log(`L'utilisateur avec l'email ${email} existe déjà`);
+        console.log(`L'utilisateur avec l'email ${normalizedEmail} existe déjà`);
         return NextResponse.json(
           { error: 'Cet email est déjà utilisé' },
           { status: 409 }
@@ -89,7 +91,7 @@ export async function POST(request: Request) {
 
       // Création de l'utilisateur
       const user: User = {
-        email,
+        email: normalizedEmail,
         password: hashedPassword,
         firstName: firstName || '',
         lastName: lastName || '',
