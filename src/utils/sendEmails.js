@@ -1,6 +1,6 @@
 // utils/sendEmails.js
 
-const nodemailer = require('nodemailer');
+import nodemailer from 'nodemailer';
 
 // Créer un transporteur réutilisable en utilisant SMTP
 const transporter = nodemailer.createTransport({
@@ -35,4 +35,4 @@ const sendEmail = async (to, subject, text, html) => {
   }
 };
 
-module.exports = { sendEmail };
+export { sendEmail };

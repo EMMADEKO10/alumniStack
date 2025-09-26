@@ -11,6 +11,9 @@ import {
   PROFILE_VISIBILITY 
 } from '../../types/alumni';
 import { LEADERSHIP_ACADEMY_FACULTIES, REGIONS, PROFESSIONAL_SECTORS } from '../../types/community';
+import { NATIONALITIES } from '../../data/nationalities';
+import { PROFESSIONAL_SKILLS } from '../../data/skills';
+import SearchableSelect from '../ui/SearchableSelect';
 
 interface AlumniProfileFormProps {
   initialData?: Partial<AlumniProfile>;
@@ -286,11 +289,12 @@ const AlumniProfileForm: React.FC<AlumniProfileFormProps> = ({
           <label className="block text-sm font-medium text-gray-700 mb-1">
             Nationalité
           </label>
-          <input
-            type="text"
+          <SearchableSelect
+            options={NATIONALITIES}
             value={formData.personalInfo?.nationality || ''}
-            onChange={(e) => updateFormData('personalInfo', 'nationality', e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            onChange={(value) => updateFormData('personalInfo', 'nationality', value)}
+            placeholder="Sélectionner une nationalité"
+            maxHeight="200px"
           />
         </div>
       </div>
@@ -333,19 +337,19 @@ const AlumniProfileForm: React.FC<AlumniProfileFormProps> = ({
           <label className="block text-sm font-medium text-gray-700 mb-1">
             Faculté *
           </label>
-          <select
-            value={formData.academicInfo?.facultyId || ''}
-            onChange={(e) => updateFormData('academicInfo', 'facultyId', e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            required
-          >
-            <option value="">Sélectionner une faculté</option>
-            {LEADERSHIP_ACADEMY_FACULTIES.map(faculty => (
-              <option key={faculty.id} value={faculty.id}>
-                {faculty.name} ({faculty.code})
-              </option>
-            ))}
-          </select>
+          <SearchableSelect
+            options={LEADERSHIP_ACADEMY_FACULTIES.map(faculty => `${faculty.name} (${faculty.code})`)}
+            value={formData.academicInfo?.facultyId ? 
+              LEADERSHIP_ACADEMY_FACULTIES.find(f => f.id === formData.academicInfo?.facultyId)?.name + 
+              ' (' + LEADERSHIP_ACADEMY_FACULTIES.find(f => f.id === formData.academicInfo?.facultyId)?.code + ')' 
+              : ''}
+            onChange={(value) => {
+              const faculty = LEADERSHIP_ACADEMY_FACULTIES.find(f => `${f.name} (${f.code})` === value);
+              updateFormData('academicInfo', 'facultyId', faculty?.id || '');
+            }}
+            placeholder="Sélectionner une faculté"
+            maxHeight="200px"
+          />
         </div>
 
         <div>
@@ -381,17 +385,13 @@ const AlumniProfileForm: React.FC<AlumniProfileFormProps> = ({
           <label className="block text-sm font-medium text-gray-700 mb-1">
             Année de fin d&apos;études *
           </label>
-          <select
-            value={formData.academicInfo?.graduationYear || ''}
-            onChange={(e) => updateFormData('academicInfo', 'graduationYear', parseInt(e.target.value))}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            required
-          >
-            <option value="">Sélectionner une année</option>
-            {generateYearOptions().map(year => (
-              <option key={year} value={year}>{year}</option>
-            ))}
-          </select>
+          <SearchableSelect
+            options={generateYearOptions().map(year => year.toString())}
+            value={formData.academicInfo?.graduationYear?.toString() || ''}
+            onChange={(value) => updateFormData('academicInfo', 'graduationYear', parseInt(value))}
+            placeholder="Sélectionner une année"
+            maxHeight="200px"
+          />
         </div>
 
         <div>
@@ -423,30 +423,12 @@ const AlumniProfileForm: React.FC<AlumniProfileFormProps> = ({
           <label className="block text-sm font-medium text-gray-700 mb-1">
             Région actuelle *
           </label>
-          <select
+          <SearchableSelect
+            options={REGIONS}
             value={formData.contactInfo?.currentAddress?.province || ''}
-            onChange={(e) => updateNestedFormData('contactInfo', 'currentAddress', 'province', e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            required
-          >
-            <option value="">Sélectionner une région</option>
-            {REGIONS.map(region => (
-              <option key={region} value={region}>{region}</option>
-            ))}
-          </select>
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
-            Ville actuelle *
-          </label>
-          <input
-            type="text"
-            value={formData.contactInfo?.currentAddress?.city || ''}
-            onChange={(e) => updateNestedFormData('contactInfo', 'currentAddress', 'city', e.target.value)}
-            placeholder="Ex: Kinshasa, Lubumbashi..."
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            required
+            onChange={(value) => updateNestedFormData('contactInfo', 'currentAddress', 'province', value)}
+            placeholder="Sélectionner une région"
+            maxHeight="200px"
           />
         </div>
 
@@ -454,11 +436,12 @@ const AlumniProfileForm: React.FC<AlumniProfileFormProps> = ({
           <label className="block text-sm font-medium text-gray-700 mb-1">
             Pays de résidence
           </label>
-          <input
-            type="text"
+          <SearchableSelect
+            options={NATIONALITIES}
             value={formData.contactInfo?.currentAddress?.country || ''}
-            onChange={(e) => updateNestedFormData('contactInfo', 'currentAddress', 'country', e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            onChange={(value) => updateNestedFormData('contactInfo', 'currentAddress', 'country', value)}
+            placeholder="Sélectionner un pays"
+            maxHeight="200px"
           />
         </div>
       </div>
@@ -522,35 +505,15 @@ const AlumniProfileForm: React.FC<AlumniProfileFormProps> = ({
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   Secteur professionnel *
                 </label>
-                <select
+                <SearchableSelect
+                  options={PROFESSIONAL_SECTORS}
                   value={currentPosition?.industry || ''}
-                  onChange={(e) => updateFormData('professionalInfo', 'currentPosition', {
+                  onChange={(value) => updateFormData('professionalInfo', 'currentPosition', {
                     ...currentPosition,
-                    industry: e.target.value
+                    industry: value
                   })}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  required
-                >
-                  <option value="">Sélectionner un secteur</option>
-                  {PROFESSIONAL_SECTORS.map(sector => (
-                    <option key={sector} value={sector}>{sector}</option>
-                  ))}
-                </select>
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Localisation
-                </label>
-                <input
-                  type="text"
-                  value={currentPosition?.location || ''}
-                  onChange={(e) => updateFormData('professionalInfo', 'currentPosition', {
-                    ...currentPosition,
-                    location: e.target.value
-                  })}
-                  placeholder="Ville, Pays"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  placeholder="Sélectionner un secteur"
+                  maxHeight="200px"
                 />
               </div>
 
@@ -577,91 +540,55 @@ const AlumniProfileForm: React.FC<AlumniProfileFormProps> = ({
             <h4 className="text-lg font-medium text-gray-900 mb-4">Compétences</h4>
             
             <div className="space-y-4">
-              {/* Checklist prédéfinie */}
+              {/* Sélection de compétences */}
               <div>
-                <p className="text-sm text-gray-600 mb-2">Sélectionnez vos compétences</p>
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2">
-                  {[
-                    'Gestion de projet',
-                    'Communication',
-                    'Leadership',
-                    'Développement Web',
-                    'Analyse de données',
-                    'Marketing',
-                    'Finance',
-                    'Design',
-                    'DevOps',
-                    'IA/ML'
-                  ].map((skill) => {
-                    const selected = (skills as string[]).includes(skill);
-                    return (
-                      <label key={skill} className={`flex items-center gap-2 p-2 rounded border ${selected ? 'bg-blue-50 border-blue-300' : 'bg-white'}`}>
-                        <input
-                          type="checkbox"
-                          checked={selected}
-                          onChange={() => toggleSkill(skill)}
-                          className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
-                        />
-                        <span className="text-sm">{skill}</span>
-                      </label>
-                    );
-                  })}
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Ajouter une compétence
+                </label>
+                <div className="flex gap-2">
+                  <div className="flex-1">
+                    <SearchableSelect
+                      options={PROFESSIONAL_SKILLS}
+                      value=""
+                      onChange={(value) => {
+                        if (value && !(skills as string[]).includes(value)) {
+                          addArrayItem('professionalInfo', 'skills', value);
+                        }
+                      }}
+                      placeholder="Rechercher une compétence..."
+                      maxHeight="200px"
+                    />
+                  </div>
                 </div>
               </div>
 
-              {/* Ajout libre */}
-              <div className="flex gap-2">
-                <input
-                  type="text"
-                  placeholder="Ajouter une compétence..."
-                  className="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  onKeyPress={(e) => {
-                    if (e.key === 'Enter') {
-                      const input = e.target as HTMLInputElement;
-                      const value = input.value.trim();
-                      if (value) {
-                        if (!(skills as string[]).includes(value)) {
-                          addArrayItem('professionalInfo', 'skills', value);
-                        }
-                        input.value = '';
-                      }
-                    }
-                  }}
-                />
-                <button
-                  type="button"
-                  onClick={(e) => {
-                    const input = (e.target as HTMLElement).previousElementSibling as HTMLInputElement;
-                    const value = input?.value.trim();
-                    if (value) {
-                      if (!(skills as string[]).includes(value)) {
-                        addArrayItem('professionalInfo', 'skills', value);
-                      }
-                      input.value = '';
-                    }
-                  }}
-                  className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
-                >
-                  Ajouter
-                </button>
-              </div>
-
-              <div className="flex flex-wrap gap-2">
-                {skills.map((skill, index) => (
-                  <span
-                    key={index}
-                    className="inline-flex items-center px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm"
-                  >
-                    {skill}
-                    <button
-                      type="button"
-                      onClick={() => removeArrayItem('professionalInfo', 'skills', index)}
-                      className="ml-2 text-blue-600 hover:text-blue-800"
+              {/* Compétences sélectionnées */}
+              <div>
+                <p className="text-sm text-gray-600 mb-2">
+                  Compétences sélectionnées ({skills.length})
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {skills.map((skill, index) => (
+                    <span
+                      key={index}
+                      className="inline-flex items-center px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm"
                     >
-                      ×
-                    </button>
-                  </span>
-                ))}
+                      {skill}
+                      <button
+                        type="button"
+                        onClick={() => removeArrayItem('professionalInfo', 'skills', index)}
+                        className="ml-2 text-blue-600 hover:text-blue-800"
+                      >
+                        ×
+                      </button>
+                    </span>
+                  ))}
+                </div>
+                {skills.length === 0 && (
+                  <p className="text-sm text-gray-500 italic">
+                    Aucune compétence sélectionnée. Utilisez le champ ci-dessus pour en ajouter.
+                  </p>
+                )}
               </div>
             </div>
           </div>

@@ -74,8 +74,7 @@ const Header = () => {
   return (
     <header className={headerClasses}>
       <Container>
-        <div className="flex items-center justify-between relative">
-          
+        <div className="flex items-center justify-between relative">   
           {/* Logo amélioré */}
           <Link href="/" className="flex items-center space-x-3 group relative z-10">
             <motion.div 
@@ -102,7 +101,7 @@ const Header = () => {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5 }}
               >
-                LAU - LEADERSHIP ACADEMY
+                LAU - LEADERSHIP ACADEMIA
               </motion.span>
               <motion.span 
                 className={`text-xs font-medium -mt-1 transition-all duration-300 ${logoSubtextClasses}`}

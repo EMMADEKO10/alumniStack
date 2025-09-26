@@ -1,6 +1,7 @@
 import { MongoClient } from 'mongodb';
 import bcrypt from 'bcryptjs';
 import { NextResponse } from 'next/server';
+import crypto from 'crypto';
 
 interface RegisterData {
   email: string;
@@ -75,8 +76,9 @@ export async function POST(request: Request) {
 
       const db = client.db(dbName);
       const usersCollection = db.collection('users');
+      const pendingUsersCollection = db.collection('pendingUsers');
 
-      // Vérifier si l'utilisateur existe déjà (insensible à la casse)
+      // Vérifier si l'utilisateur existe déjà (insensible à la casse) dans users
       const existingUser = await usersCollection.findOne({ email: { $regex: `^${normalizedEmail}$`, $options: 'i' } });
       if (existingUser) {
         console.log(`L'utilisateur avec l'email ${normalizedEmail} existe déjà`);
@@ -86,27 +88,65 @@ export async function POST(request: Request) {
         );
       }
 
+      // Vérifier s'il y a déjà une inscription en attente
+      const existingPending = await pendingUsersCollection.findOne({ email: { $regex: `^${normalizedEmail}$`, $options: 'i' } });
+      if (existingPending) {
+        console.log(`Un compte en attente existe déjà pour ${normalizedEmail}`);
+        return NextResponse.json(
+          { error: 'Un compte en attente existe déjà pour cet email. Vérifiez votre boîte mail.' },
+          { status: 409 }
+        );
+      }
+
       // Hachage du mot de passe
       const hashedPassword = await bcrypt.hash(password, 10);
 
-      // Création de l'utilisateur
-      const user: User = {
+      // Générer un token de vérification
+      const verificationToken = crypto.randomBytes(32).toString('hex');
+      const verificationExpires = new Date(Date.now() + 1000 * 60 * 60 * 24); // 24h
+
+      // Création du document pending user
+      const pendingUser: User = {
         email: normalizedEmail,
         password: hashedPassword,
         firstName: firstName || '',
         lastName: lastName || '',
         role: 'user',
-        createdAt: new Date()
+        createdAt: new Date(),
+        // @ts-ignore - champs additionnels non typés dans l'interface User locale
+        isVerified: false,
+        // @ts-ignore
+        verificationToken,
+        // @ts-ignore
+        verificationExpires
       };
 
-      const result = await usersCollection.insertOne(user);
+      const result = await pendingUsersCollection.insertOne(pendingUser);
 
       console.log(`Utilisateur créé avec l'ID: ${result.insertedId}`);
 
+      // Construire le lien de vérification
+      const origin = request.headers.get('origin') || process.env.NEXT_PUBLIC_APP_URL || '';
+      const verifyUrl = `${origin}/api/auth/verify?token=${verificationToken}`;
+
+      try {
+        // Import dynamique pour compatibilité CJS
+        const { sendEmail } = await import('../../../../utils/sendEmails.js');
+        await sendEmail(
+          normalizedEmail,
+          'Vérifiez votre adresse e-mail',
+          `Bienvenue! Veuillez confirmer votre inscription en cliquant: ${verifyUrl}`,
+          `<p>Bienvenue!</p><p>Veuillez confirmer votre inscription en cliquant sur le lien ci-dessous:</p><p><a href="${verifyUrl}">Confirmer mon inscription</a></p><p>Ce lien expire dans 24 heures.</p>`
+        );
+      } catch (emailError) {
+        console.error('Erreur lors de l\'envoi de l\'email de vérification:', emailError);
+        // Ne pas échouer l'inscription si l'envoi d'email échoue
+      }
+
       return NextResponse.json(
-        { 
-          message: 'Inscription réussie',
-          userId: result.insertedId.toString()
+        {
+          message: 'Inscription reçue. Vérifiez votre e-mail pour activer votre compte.',
+          pendingId: result.insertedId.toString()
         },
         { status: 201 }
       );

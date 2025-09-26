@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import AlumniProfileForm from '../../../components/alumni/AlumniProfileForm';
@@ -12,21 +12,10 @@ const CompleteProfilePage = () => {
   const [existingProfile, setExistingProfile] = useState<AlumniProfile | null>(null);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    if (status === 'unauthenticated') {
-      router.push('/login');
-      return;
-    }
-
-    if (status === 'authenticated') {
-      checkExistingProfile();
-    }
-  }, [status, router]);
-
-  const checkExistingProfile = async () => {
+  const checkExistingProfile = useCallback(async () => {
     try {
       const response = await fetch(`/api/alumni?userId=${session?.user?.email}`);
-      if (response.ok) {
+      if (response.ok){
         const data = await response.json();
         if (data.profiles && data.profiles.length > 0) {
           setExistingProfile(data.profiles[0]);
@@ -37,7 +26,18 @@ const CompleteProfilePage = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [session?.user?.email]);
+
+  useEffect(() => {
+    if (status === 'unauthenticated') {
+      router.push('/login');
+      return;
+    }
+
+    if (status === 'authenticated') {
+      checkExistingProfile();
+    }
+  }, [status, router, checkExistingProfile]);
 
   const handleProfileSubmit = () => {
     // Rediriger vers le profil après création/mise à jour

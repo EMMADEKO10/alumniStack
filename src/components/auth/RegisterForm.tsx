@@ -54,13 +54,7 @@ export default function RegisterForm({}: RegisterFormProps) {
       
       console.log('Réponse d\'inscription:', response.data);
       
-      setSuccess("Inscription réussie! Redirection vers la page de connexion...");
-      
-      // Rediriger vers la page de connexion après 2 secondes
-      setTimeout(() => {
-        // Utiliser window.location.href au lieu de router.push pour une redirection complète
-        window.location.href = '/login';
-      }, 2000);
+      setSuccess("Inscription réussie! Vérifiez votre e-mail pour confirmer votre compte.");
     } catch (error: any) {
       console.error("Erreur d'inscription:", error);
       
