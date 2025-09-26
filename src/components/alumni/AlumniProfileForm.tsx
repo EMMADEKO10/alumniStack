@@ -140,7 +140,14 @@ const AlumniProfileForm: React.FC<AlumniProfileFormProps> = ({
 
   const toggleSkill = (skill: string) => {
     setFormData(prev => {
-      const currentSkills = (prev.professionalInfo?.skills || []) as string[];
+      const previousProfessionalInfo = prev.professionalInfo || {
+        currentPosition: undefined,
+        experience: [],
+        skills: [],
+        certifications: [],
+        languages: [],
+      };
+      const currentSkills = (previousProfessionalInfo.skills || []) as string[];
       const hasSkill = currentSkills.includes(skill);
       const updatedSkills = hasSkill
         ? currentSkills.filter(s => s !== skill)
@@ -148,8 +155,8 @@ const AlumniProfileForm: React.FC<AlumniProfileFormProps> = ({
       return {
         ...prev,
         professionalInfo: {
-          ...(prev.professionalInfo as Record<string, unknown>),
-          skills: updatedSkills
+          ...previousProfessionalInfo,
+          skills: updatedSkills,
         }
       };
     });

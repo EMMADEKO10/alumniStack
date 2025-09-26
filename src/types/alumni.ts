@@ -28,7 +28,7 @@ export interface AlumniProfile {
     departmentName?: string;
     specializationField?: string; // Spécialisation
     degreeLevel: 'Licence' | 'Master' | 'Doctorat' | 'Autre';
-    degreeTitle: string; // Titre du diplôme
+    degreeTitle?: string; // Titre du diplôme
     graduationYear: number; // Année de fin d'études
     graduationDate?: Date; // Date exacte de diplôme
     honors?: 'Summa Cum Laude' | 'Magna Cum Laude' | 'Cum Laude' | 'Mention Bien' | 'Mention Très Bien' | 'Aucune';
@@ -43,7 +43,7 @@ export interface AlumniProfile {
   contactInfo: {
     // Adresse actuelle
     currentAddress?: {
-      street: string;
+      street?: string;
       city: string;
       province: string;
       country: string;
@@ -170,7 +170,7 @@ export interface PublicAlumniProfile {
     facultyId: string;
     departmentName?: string;
     degreeLevel: string;
-    degreeTitle: string;
+    degreeTitle?: string;
     graduationYear: number;
   };
   professionalInfo: {
