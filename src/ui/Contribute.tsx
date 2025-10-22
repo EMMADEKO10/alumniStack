@@ -1,11 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Libre_Baskerville } from "next/font/google";
+// Removed Libre_Baskerville import - using default sans-serif fonts
 
-const libreBaskerville = Libre_Baskerville({
-  subsets: ["latin"],
-  weight: ["400", "700"],
-});
+// Removed Libre_Baskerville configuration
 
 const Contribute: React.FC = () => {
   return (
@@ -20,7 +17,7 @@ const Contribute: React.FC = () => {
           />
         </div>
         <div className="w-1/2 p-4 px-8 flex flex-col gap-8">
-          <h2 className={`text-4xl ${libreBaskerville.className} w-3/4`}>
+          <h2 className={`text-4xl font-sans w-3/4`}>
             Participer à l&apos;évolution de notre université
           </h2>
           <p>

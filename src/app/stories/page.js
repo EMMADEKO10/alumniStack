@@ -1,15 +1,9 @@
 'use client';
 
 import React, { useState } from "react";
-import { Libre_Baskerville } from "next/font/google";
 import StoryCardTwo from "../../components/cards/StoryCardTwo";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaBookOpen, FaUsers, FaGraduationCap, FaBriefcase, FaHeart, FaSearch, FaStar } from "react-icons/fa";
-
-const libreBaskerville = Libre_Baskerville({
-  subsets: ["latin"],
-  weight: ["400", "700"],
-});
 
 const stories = [
   {
@@ -129,7 +123,7 @@ const Page = () => {
               initial={{ y: 30, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.8, delay: 0.3 }}
-              className={`text-5xl md:text-6xl font-bold mb-6 ${libreBaskerville.className}`}
+              className="text-5xl md:text-6xl font-bold mb-6 font-sans"
             >
               Histoires <span className="text-blue-200">Inspirantes</span>
             </motion.h1>
@@ -234,7 +228,7 @@ const Page = () => {
               transition={{ duration: 0.6 }}
               className="text-center mb-12"
             >
-              <h2 className={`text-4xl font-bold text-gray-800 mb-4 ${libreBaskerville.className}`}>
+              <h2 className="text-4xl font-bold text-gray-800 mb-4 font-sans">
                 Histoires à la Une
               </h2>
               <p className="text-lg text-gray-600 max-w-2xl mx-auto">
@@ -286,7 +280,7 @@ const Page = () => {
             transition={{ duration: 0.6 }}
             className="text-center mb-12"
           >
-            <h2 className={`text-4xl font-bold text-gray-800 mb-4 ${libreBaskerville.className}`}>
+            <h2 className="text-4xl font-bold text-gray-800 mb-4 font-sans">
               {selectedCategory === "Toutes" ? "Autres Histoires" : `Histoires - ${selectedCategory}`}
             </h2>
             <p className="text-lg text-gray-600">
@@ -369,7 +363,7 @@ const Page = () => {
             <FaHeart className="text-2xl text-white" />
           </motion.div>
 
-          <h2 className={`text-4xl font-bold mb-6 ${libreBaskerville.className}`}>
+          <h2 className="text-4xl font-bold mb-6 font-sans">
             Votre Histoire Nous Inspire
           </h2>
           <p className="text-xl text-blue-100 mb-8 leading-relaxed">

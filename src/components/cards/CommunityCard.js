@@ -1,9 +1,4 @@
-import { Libre_Baskerville } from "next/font/google";
-
-const libreBaskerville = Libre_Baskerville({
-  subsets: ["latin"],
-  weight: ["400", "700"],
-});
+// Removed Libre_Baskerville import and configuration - using default sans-serif fonts
 
 const CommunityCard = ({ day, month, category, place, time, event }) => {
   return (
@@ -14,7 +9,7 @@ const CommunityCard = ({ day, month, category, place, time, event }) => {
       </div>
       <div className="flex flex-col gap-2">
         <p>{category}</p>
-        <p className={`${libreBaskerville.className} text-xl`}>
+        <p className="text-xl font-sans">
           {event} | de {time}
         </p>
         <p className="text-base mt-1">{place}</p>

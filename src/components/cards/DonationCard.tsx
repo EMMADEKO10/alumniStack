@@ -15,12 +15,9 @@ import {
   CurrencyDollarIcon,
   ChartBarIcon
 } from "@heroicons/react/24/outline";
-import { Libre_Baskerville } from "next/font/google";
+// Removed Libre_Baskerville import - using default sans-serif fonts
 
-const libreBaskerville = Libre_Baskerville({
-  subsets: ["latin"],
-  weight: ["400", "700"],
-});
+// Removed Libre_Baskerville configuration
 
 interface DonationCardProps {
   _id?: string;
@@ -178,7 +175,7 @@ const DonationCard = ({
       <div className="p-6">
         {/* Titre et description */}
         <div className="mb-4">
-          <h3 className={`${libreBaskerville.className} text-lg font-semibold text-gray-900 mb-2 line-clamp-2 group-hover:text-red-600 transition-colors`}>
+          <h3 className="text-lg font-semibold text-gray-900 mb-2 line-clamp-2 group-hover:text-red-600 transition-colors font-sans">
             {title}
           </h3>
           <p className="text-gray-600 text-sm line-clamp-3 leading-relaxed">

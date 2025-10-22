@@ -2,12 +2,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Libre_Baskerville } from 'next/font/google';
-
-const libreBaskerville = Libre_Baskerville({
-  subsets: ['latin'],
-  weight: ['400', '700'],
-});
+// Removed Libre_Baskerville import - using default sans-serif fonts
 
 interface PageTitleProps {
   title: string;
@@ -67,7 +62,7 @@ const PageTitle: React.FC<PageTitleProps> = ({
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className={`text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 ${libreBaskerville.className}`}
+            className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 font-sans"
           >
             <span className={`bg-gradient-to-r ${gradient} bg-clip-text text-transparent`}>
               {title}

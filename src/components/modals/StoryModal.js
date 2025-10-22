@@ -3,12 +3,9 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { FaTimes, FaUser, FaClock, FaCalendarAlt, FaShare, FaHeart, FaBookOpen } from "react-icons/fa";
 import Image from "next/image";
-import { Libre_Baskerville } from "next/font/google";
+// Removed Libre_Baskerville import - using default sans-serif fonts
 
-const libreBaskerville = Libre_Baskerville({
-  subsets: ["latin"],
-  weight: ["400", "700"],
-});
+// Removed Libre_Baskerville configuration
 
 const StoryModal = ({ isOpen, onClose, story }) => {
   if (!story) return null;
@@ -93,7 +90,7 @@ const StoryModal = ({ isOpen, onClose, story }) => {
                   initial={{ y: 20, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ delay: 0.2 }}
-                  className={`text-3xl md:text-4xl font-bold mb-4 leading-tight ${libreBaskerville.className}`}
+                  className="text-3xl md:text-4xl font-bold mb-4 leading-tight font-sans"
                 >
                   {story.title}
                 </motion.h1>

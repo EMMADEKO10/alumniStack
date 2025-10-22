@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useState, useEffect } from "react";
-import { Libre_Baskerville } from "next/font/google";
 import DonationCard from "../../components/cards/DonationCard";
 import { motion } from "framer-motion";
 import { 
@@ -18,11 +17,6 @@ import {
   CurrencyDollarIcon,
   HeartIcon
 } from "@heroicons/react/24/outline";
-
-const libreBaskerville = Libre_Baskerville({
-  subsets: ["latin"],
-  weight: ["400", "700"],
-});
 
 interface Donation {
   _id: string;
@@ -538,7 +532,7 @@ const DonationsPage = () => {
               <div className="bg-red-100 rounded-full p-3 mr-4">
                 <FaHeart className="text-red-600 text-xl" />
               </div>
-              <h2 className={`text-2xl font-bold text-gray-900 ${libreBaskerville.className}`}>
+              <h2 className="text-2xl font-bold text-gray-900 font-sans">
                 Comment faire un don
               </h2>
             </div>
@@ -577,7 +571,7 @@ const DonationsPage = () => {
               <div className="bg-green-100 rounded-full p-3 mr-4">
                 <FaUniversity className="text-green-600 text-lg" />
               </div>
-              <h3 className={`text-lg font-bold text-gray-900 ${libreBaskerville.className}`}>
+              <h3 className="text-lg font-bold text-gray-900 font-sans">
                 Nos coordonnées
               </h3>
             </div>

@@ -1,11 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Libre_Baskerville } from "next/font/google";
+// Removed Libre_Baskerville import - using default sans-serif fonts
 
-const libreBaskerville = Libre_Baskerville({
-  subsets: ["latin"],
-  weight: ["400", "700"],
-});
+// Removed Libre_Baskerville configuration
 
 const About: React.FC = () => {
   return (
@@ -13,7 +10,7 @@ const About: React.FC = () => {
       <div className="max-w-7xl h-[40vh] mx-auto grid grid-cols-1 lg:grid-cols-2">
         <div className="w-full p-4 px-8 flex flex-col gap-8">
           <h2
-            className={`text-4xl ${libreBaskerville.className} w-3/4`}
+            className={`text-4xl font-sans w-3/4`}
             style={{ lineHeight: "3rem" }}
           >
             A propos des Alumni de Leadership AcademiaUniversity (LAU)
