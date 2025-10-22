@@ -1,9 +1,6 @@
 @import "tailwindcss";
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
-@import "tailwindcss/preflight";
-@import "tailwindcss/utilities";
-
 /* Configuration globale des polices sans-serif */
 * {
   font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
@@ -18,70 +15,78 @@ body {
 }
 
 /* Styles personnalisés pour l'interface */
-@layer components {
-  /* Animation de transition pour les éléments du header */
-  .nav-link-transition {
-    @apply transition-all duration-200 ease-in-out;
-  }
-
-  /* Effet de survol pour les liens de navigation */
-  .nav-link-hover {
-    @apply relative overflow-hidden;
-  }
-
-  .nav-link-hover::after {
-    @apply content-[''] absolute bottom-0 left-0 w-0 h-0.5 bg-red-600 transition-all duration-300;
-  }
-
-  .nav-link-hover:hover::after {
-    @apply w-full;
-  }
-
-  /* Style pour le header avec effet de verre */
-  .glass-effect {
-    @apply bg-white/80 backdrop-blur-md;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
-  }
-
-  /* Améliorations pour le nouveau header */
-  .header-backdrop {
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-  }
-  
-  /* Animation pour les éléments du menu mobile */
-  .mobile-menu-item {
-    @apply transform transition-all duration-300 ease-out;
-  }
-  
-  .mobile-menu-item:hover {
-    @apply translate-x-1;
-  }
-  
-  /* Effet de focus accessible */
-  .focus-visible-ring {
-    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2;
-  }
+/* Animation de transition pour les éléments du header */
+.nav-link-transition {
+  transition: all 0.2s ease-in-out;
 }
 
-@layer utilities {
-  /* Utilités pour le spacing responsive */
-  .safe-top {
-    padding-top: env(safe-area-inset-top);
-  }
-  
-  /* Masquer le scrollbar mais garder la fonctionnalité */
-  .hide-scrollbar {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-  
-  .hide-scrollbar::-webkit-scrollbar {
-    display: none;
-  }
-  
-  /* Amélioration de la lisibilité du texte */
-  .text-shadow {
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-  }
+/* Effet de survol pour les liens de navigation */
+.nav-link-hover {
+  position: relative;
+  overflow: hidden;
+}
+
+.nav-link-hover::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 0.125rem;
+  background-color: #dc2626;
+  transition: all 0.3s;
+}
+
+.nav-link-hover:hover::after {
+  width: 100%;
+}
+
+/* Style pour le header avec effet de verre */
+.glass-effect {
+  background-color: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+}
+
+/* Améliorations pour le nouveau header */
+.header-backdrop {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* Animation pour les éléments du menu mobile */
+.mobile-menu-item {
+  transform: translateX(0);
+  transition: all 0.3s ease-out;
+}
+
+.mobile-menu-item:hover {
+  transform: translateX(0.25rem);
+}
+
+/* Effet de focus accessible */
+.focus-visible-ring:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px #ef4444, 0 0 0 4px rgba(239, 68, 68, 0.2);
+}
+
+/* Utilités pour le spacing responsive */
+.safe-top {
+  padding-top: env(safe-area-inset-top);
+}
+
+/* Masquer le scrollbar mais garder la fonctionnalité */
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Amélioration de la lisibilité du texte */
+.text-shadow {
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 }
