@@ -1,85 +1,63 @@
 'use client';
 
-import React, { useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import StoryCardTwo from "../../components/cards/StoryCardTwo";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaBookOpen, FaUsers, FaGraduationCap, FaBriefcase, FaHeart, FaSearch, FaStar } from "react-icons/fa";
 
-const stories = [
-  {
-    id: 1,
-    title: "Histoire de réussite : Jean Kazunga",
-    description:
-     "Après avoir obtenu son diplôme en ingénierie informatique au Leadership AcademiaUniversity (LAU), Jean Kazunga a fondé sa propre start-up technologique. Grâce aux compétences et aux connaissances acquises pendant ses études, il a réussi à développer une entreprise prospère qui révolutionne l'industrie de la technologie.",
-    date: "5 mars 2023",
-    image: "/graduation.jpg",
-    category: "Entrepreneuriat",
-    featured: true,
-    readTime: "5 min",
-    author: "Jean Kazunga"
-  },
-  {
-    id: 2,
-    title: "Une Histoire inspirante : Olga Mujinga",
-    description:
-      "Olga Mujinga, diplômée en administration des affaires du Leadership AcademiaUniversity (LAU), a surmonté de nombreux obstacles pour atteindre le succès. Malgré des débuts modestes, elle a utilisé les compétences en leadership et en gestion qu'elle a acquises à l'université pour gravir les échelons et devenir PDG d'une grande entreprise internationale.",
-    date: "12 Avril 2023",
-    image: "/graduation.jpg",
-    category: "Leadership",
-    featured: true,
-    readTime: "7 min",
-    author: "Olga Mujinga"
-  },
-  {
-    id: 3,
-    title: "Histoire de carrière internationale : David Muyumba",
-    description:
-      "Après avoir obtenu son diplôme en commerce international au Leadership AcademiaUniversity (LAU), David Muyumba a poursuivi une carrière internationale passionnante. Il a travaillé dans différentes entreprises multinationales, parcourant le monde et établissant des partenariats commerciaux fructueux dans divers pays.",
-    date: "19 Septembre 2023",
-    image: "/graduation.jpg",
-    category: "International",
-    featured: false,
-    readTime: "6 min",
-    author: "David Muyumba"
-  },
-  {
-    id: 4,
-    title: "Innovation sociale : Marie Kasongo",
-    description:
-      "Marie Kasongo, diplômée en sciences sociales, a créé une ONG qui impact positivement des milliers de vies. Son approche innovante dans le développement communautaire lui a valu une reconnaissance internationale et plusieurs prix prestigieux.",
-    date: "3 Novembre 2023",
-    image: "/Marie Kasongo.jpg",
-    category: "Social",
-    featured: false,
-    readTime: "4 min",
-    author: "Marie Kasongo"
-  },
-  {
-    id: 5,
-    title: "Excellence académique : Dr. Paul Kabila",
-    description:
-      "Le Dr. Paul Kabila a poursuivi sa passion pour la recherche médicale après avoir étudié au Leadership AcademiaUniversity (LAU). Ses découvertes révolutionnaires dans le traitement des maladies tropicales ont été publiées dans les plus prestigieuses revues scientifiques mondiales.",
-    date: "15 Décembre 2023",
-    image: "/Dr. Paul Kabila.jpg",
-    category: "Recherche",
-    featured: true,
-    readTime: "8 min",
-    author: "Dr. Paul Kabila"
-  },
-];
+// Les stories sont désormais chargées depuis l'API /api/stories
 
-const categories = [
-  { name: "Toutes", icon: <FaBookOpen />, count: stories.length },
-  { name: "Entrepreneuriat", icon: <FaBriefcase />, count: stories.filter(s => s.category === "Entrepreneuriat").length },
-  { name: "Leadership", icon: <FaUsers />, count: stories.filter(s => s.category === "Leadership").length },
-  { name: "International", icon: <FaGraduationCap />, count: stories.filter(s => s.category === "International").length },
-  { name: "Social", icon: <FaHeart />, count: stories.filter(s => s.category === "Social").length },
-  { name: "Recherche", icon: <FaStar />, count: stories.filter(s => s.category === "Recherche").length },
-];
+// Les catégories seront calculées dynamiquement dans le composant
 
 const Page = () => {
   const [selectedCategory, setSelectedCategory] = useState("Toutes");
   const [searchTerm, setSearchTerm] = useState("");
+  const [stories, setStories] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    const loadStories = async () => {
+      try {
+        setLoading(true);
+        setError("");
+        const res = await fetch('/api/stories', { cache: 'no-store' });
+        if (!res.ok) {
+          throw new Error('Échec du chargement des histoires');
+        }
+        const data = await res.json();
+        // Normalisation basique pour compatibilité avec StoryCardTwo
+        const normalized = (Array.isArray(data) ? data : []).map((s, idx) => ({
+          id: s._id || idx,
+          title: s.title || '',
+          description: s.description || '',
+          date: s.date || '',
+          image: s.image || '/graduation.jpg',
+          category: s.category || 'Autres',
+          featured: Boolean(s.featured),
+          readTime: s.readTime || '',
+          author: s.author || 'Anonyme',
+        }));
+        setStories(normalized);
+      } catch (e) {
+        setError(e.message || 'Erreur inconnue');
+      } finally {
+        setLoading(false);
+      }
+    };
+    loadStories();
+  }, []);
+
+  const categories = useMemo(() => {
+    return [
+      { name: "Toutes", icon: <FaBookOpen />, count: stories.length },
+      { name: "Entrepreneuriat", icon: <FaBriefcase />, count: stories.filter(s => s.category === "Entrepreneuriat").length },
+      { name: "Leadership", icon: <FaUsers />, count: stories.filter(s => s.category === "Leadership").length },
+      { name: "International", icon: <FaGraduationCap />, count: stories.filter(s => s.category === "International").length },
+      { name: "Social", icon: <FaHeart />, count: stories.filter(s => s.category === "Social").length },
+      { name: "Recherche", icon: <FaStar />, count: stories.filter(s => s.category === "Recherche").length },
+    ];
+  }, [stories]);
 
   const filteredStories = stories.filter(story => {
     const matchesCategory = selectedCategory === "Toutes" || story.category === selectedCategory;
@@ -145,11 +123,11 @@ const Page = () => {
             >
               <div className="flex items-center space-x-2">
                 <FaUsers className="text-lg" />
-                <span className="text-lg font-semibold">{stories.length}+ Histoires</span>
+                <span className="text-lg font-semibold">{loading ? '...' : stories.length}+ Histoires</span>
               </div>
               <div className="flex items-center space-x-2">
                 <FaStar className="text-lg" />
-                <span className="text-lg font-semibold">{featuredStories.length} À la Une</span>
+                <span className="text-lg font-semibold">{loading ? '...' : featuredStories.length} À la Une</span>
               </div>
               <div className="flex items-center space-x-2">
                 <FaGraduationCap className="text-lg" />
@@ -288,7 +266,13 @@ const Page = () => {
             </p>
           </motion.div>
 
-          {regularStories.length > 0 ? (
+          {error && (
+            <div className="text-center text-red-600 py-8">{error}</div>
+          )}
+
+          {loading ? (
+            <div className="text-center py-16 text-gray-500">Chargement des histoires...</div>
+          ) : regularStories.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               <AnimatePresence>
                 {regularStories.map((story, index) => (

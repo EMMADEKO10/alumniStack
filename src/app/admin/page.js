@@ -1,18 +1,16 @@
 'use client';
 
-import { useState } from 'react';
-import { FaPlus, FaCalendarAlt, FaGraduationCap, FaBriefcase, FaUsers, FaChartBar, FaCog, FaHeart } from 'react-icons/fa';
+import { FaCalendarAlt, FaGraduationCap, FaBriefcase, FaUsers, FaChartBar, FaCog, FaHeart } from 'react-icons/fa';
 import Link from 'next/link';
-import AdminGuard from '../../components/admin/AdminGuard';
 
 export default function AdminDashboard() {
-  const [activeSection, setActiveSection] = useState('overview');
 
   const menuItems = [
     { id: 'overview', label: 'Vue d\'ensemble', icon: FaChartBar, href: '/admin' },
     { id: 'events', label: 'Événements', icon: FaCalendarAlt, href: '/admin/events' },
     { id: 'formations', label: 'Formations', icon: FaGraduationCap, href: '/admin/formations' },
     { id: 'opportunities', label: 'Opportunités', icon: FaBriefcase, href: '/admin/opportunities' },
+    { id: 'stories', label: 'Stories', icon: FaUsers, href: '/admin/stories' },
     { id: 'community', label: 'Communauté', icon: FaUsers, href: '/admin/community' },
     { id: 'donations', label: 'Donations', icon: FaHeart, href: '/admin/donations' },
     { id: 'settings', label: 'Paramètres', icon: FaCog, href: '/admin/settings' },
@@ -46,6 +44,13 @@ export default function AdminDashboard() {
       href: '/admin/donations/add',
       icon: FaHeart,
       color: 'bg-red-500 hover:bg-red-600'
+    },
+    {
+      title: 'Nouveau Story',
+      description: 'Créer une histoire',
+      href: '/admin/stories/add',
+      icon: FaUsers,
+      color: 'bg-indigo-500 hover:bg-indigo-600'
     },
     {
       title: 'Nouveau Post',
