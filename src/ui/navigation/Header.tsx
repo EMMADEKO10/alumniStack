@@ -61,10 +61,10 @@ const Header = () => {
   const headerClasses = `
     fixed top-0 left-0 right-0 z-50 w-full transition-all duration-500 ease-out
     ${isHeroSection && !isScrolled 
-      ? "bg-transparent backdrop-blur-sm py-6" 
+      ? "bg-transparent backdrop-blur-sm py-4 sm:py-6" 
       : isScrolled 
-        ? "bg-white/95 backdrop-blur-md shadow-xl border-b border-gray-100 py-3" 
-        : "bg-white/90 backdrop-blur-md py-4"
+        ? "bg-white/95 backdrop-blur-md shadow-xl border-b border-gray-100 py-2 sm:py-3" 
+        : "bg-white/90 backdrop-blur-md py-3 sm:py-4"
     }
   `;
 
@@ -81,9 +81,9 @@ const Header = () => {
       <Container>
         <div className="flex items-center justify-between relative">   
           {/* Logo amélioré */}
-          <Link href="/" className="flex items-center space-x-3 group relative z-10">
+          <Link href="/" className="flex items-center space-x-2 sm:space-x-3 group relative z-10">
             <motion.div 
-              className="relative w-16 h-16 overflow-hidden rounded-xl"
+              className="relative w-12 h-12 sm:w-16 sm:h-16 overflow-hidden rounded-xl"
               whileHover={{ scale: 1.05 }}
               transition={{ type: "spring", stiffness: 400, damping: 10 }}
             >
@@ -100,7 +100,7 @@ const Header = () => {
             
             <div className="flex flex-col">
               <motion.span 
-                className={`font-bold text-xl tracking-tight transition-all duration-300 ${logoTextClasses} group-hover:opacity-80`}
+                className={`hidden sm:block font-bold text-xl tracking-tight transition-all duration-300 ${logoTextClasses} group-hover:opacity-80`}
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5 }}
@@ -108,7 +108,7 @@ const Header = () => {
               LEADERSHIP ACADEMIA UNIVERSITY
               </motion.span>
               <motion.span 
-                className={`text-xs font-medium -mt-1 transition-all duration-300 ${logoSubtextClasses}`}
+                className={`text-[10px] sm:text-xs font-medium sm:-mt-1 transition-all duration-300 ${logoSubtextClasses}`}
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5, delay: 0.1 }}
