@@ -114,7 +114,7 @@ const Hero: React.FC = () => {
               d&apos;exception
             </h1>
             <p className="text-lg md:text-xl lg:text-2xl text-gray-200 leading-relaxed max-w-2xl">
-              Connectez-vous avec plus de <strong className="text-white">100,000 alumni</strong> 
+              Connectez-vous avec plus de <strong className="text-white">20,000 alumni </strong> 
               à travers le monde. Développez votre carrière, créez des partenariats et 
               contribuez à l&apos;évolution de votre alma mater.
             </p>
