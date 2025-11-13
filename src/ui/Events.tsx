@@ -2,317 +2,332 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
+import { useEffect, useMemo, useState } from "react";
 import { FaCalendarAlt, FaMapMarkerAlt, FaClock, FaArrowRight, FaUsers, FaTicketAlt } from "react-icons/fa";
 
 interface Event {
-  id: number;
+  _id: string;
   title: string;
   description: string;
   date: string;
-  time: string;
   location: string;
-  category: string;
-  attendees: number;
-  maxAttendees: number;
-  price: string;
-  featured: boolean;
-  image: string;
+  type: string;
+  organizer?: string;
+  imageUrl?: string;
+  maxParticipants?: number | null;
+  participants?: unknown[];
+  createdAt?: string;
 }
 
-const Events: React.FC = () => {
-  const events: Event[] = [
-    {
-      id: 1,
-      title: "Networking Tech & Innovation",
-      description: "Rencontrez les leaders technologiques de notre réseau et découvrez les dernières innovations du secteur.",
-      date: "2024-02-15",
-      time: "18:30 - 22:00",
-      location: "Campus LAU - Amphithéâtre A",
-      category: "Networking",
-      attendees: 127,
-      maxAttendees: 200,
-      price: "Gratuit",
-      featured: true,
-      image: "/graduation.jpg"
-    },
-    {
-      id: 2,
-      title: "Salon de l'Emploi Alumni",
-              description: "Plus de 50 entreprises présentes pour recruter des profils LAU. CV drive, entretiens express et conférences.",
-      date: "2024-02-22",
-      time: "09:00 - 17:00",
-      location: "Centre de Congrès Downtown",
-      category: "Carrière",
-      attendees: 89,
-      maxAttendees: 500,
-      price: "Gratuit",
-      featured: true,
-      image: "/graduation.jpg"
-    },
-    {
-      id: 3,
-      title: "Conférence Entrepreneuriat",
-      description: "Table ronde avec 5 entrepreneurs alumni qui ont levé plus de 10M€. Retours d'expérience et conseils pratiques.",
-      date: "2024-03-05",
-      time: "14:00 - 18:00",
-              location: "LAU Innovation Hub",
-      category: "Entrepreneuriat",
-      attendees: 156,
-      maxAttendees: 150,
-      price: "25€",
-      featured: false,
-      image: "/graduation.jpg"
-    },
-    {
-      id: 4,
-      title: "Alumni Afterwork Paris",
-      description: "Retrouvailles informelles autour d'un verre dans un cadre convivial. Occasion parfaite pour élargir son réseau.",
-      date: "2024-03-12",
-      time: "19:00 - 23:00",
-      location: "Rooftop Montparnasse",
-      category: "Social",
-      attendees: 67,
-      maxAttendees: 100,
-      price: "20€",
-      featured: false,
-      image: "/graduation.jpg"
-    }
-  ];
+const placeholderImages = [
+  "/lau/hiro_leadership_academy.jpg",
+  "/lau/hiro-auditoire.jpg",
+  "/graduation.jpg",
+];
 
-  const getCategoryColor = (category: string) => {
-    const colors = {
-      "Networking": "from-blue-500 to-blue-600",
-      "Carrière": "from-green-500 to-green-600", 
-      "Entrepreneuriat": "from-purple-500 to-purple-600",
-      "Social": "from-orange-500 to-orange-600"
+const Events: React.FC = () => {
+  const [events, setEvents] = useState<Event[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchEvents = async () => {
+      try {
+        const response = await fetch("/api/events");
+        if (!response.ok) {
+          throw new Error("Impossible de charger les événements pour le moment.");
+        }
+        const data = await response.json();
+        setEvents(Array.isArray(data) ? data : []);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : "Une erreur est survenue.");
+      } finally {
+        setLoading(false);
+      }
     };
-    return colors[category as keyof typeof colors] || "from-gray-500 to-gray-600";
-  };
+
+    fetchEvents();
+  }, []);
+
+  const upcomingEvents = useMemo(() => {
+    return [...events]
+      .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
+      .filter((event) => !Number.isNaN(new Date(event.date).getTime()));
+  }, [events]);
+
+  const spotlightEvent = upcomingEvents[0];
+  const secondaryEvents = upcomingEvents.slice(1, 4);
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
+    return date.toLocaleDateString("fr-FR", {
+      weekday: "short",
+      day: "2-digit",
+      month: "long",
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+  };
+
+  const formatDayBadge = (dateString: string) => {
+    const date = new Date(dateString);
     return {
-      day: date.getDate().toString().padStart(2, '0'),
-      month: date.toLocaleDateString('fr-FR', { month: 'short' }),
-      year: date.getFullYear()
+      day: date.getDate().toString().padStart(2, "0"),
+      month: date.toLocaleDateString("fr-FR", { month: "short" }),
     };
   };
+
+  const getRandomPlaceholder = (index: number) =>
+    placeholderImages[index % placeholderImages.length];
 
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2
-      }
-    }
+        staggerChildren: 0.12,
+      },
+    },
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 50 },
+    hidden: { opacity: 0, y: 16 },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.6,
-        ease: [0.25, 0.1, 0.25, 1] as [number, number, number, number]
-      }
-    }
+        duration: 0.45,
+        ease: [0.25, 0.1, 0.25, 1] as [number, number, number, number],
+      },
+    },
   };
 
   return (
-    <section className="py-20 bg-gradient-to-br from-gray-50 to-white">
-      <div className="max-w-7xl mx-auto px-6">
-        
-        {/* Header */}
+    <section className="py-16 md:py-20 bg-gradient-to-br from-slate-50 via-white to-slate-100">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-16"
+          transition={{ duration: 0.6 }}
+          className="text-center mb-12 md:mb-16"
         >
-          <div className="inline-flex items-center px-4 py-2 bg-red-100 text-red-700 rounded-full text-sm font-medium mb-6">
+          <div className="inline-flex items-center px-3 py-1.5 bg-red-100 text-red-700 rounded-full text-xs font-semibold mb-5 uppercase tracking-wide">
             <FaCalendarAlt className="mr-2" />
             Événements à venir
           </div>
-          <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
-            Rejoignez nos
-            <span className="block bg-gradient-to-r from-red-600 to-red-700 bg-clip-text text-transparent">
-              événements exclusifs
-            </span>
+          <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4 leading-tight">
+            Explorez les prochains rendez-vous de la communauté
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Participez aux événements networking, conférences et retrouvailles 
-            organisés spécialement pour notre communauté alumni.
+          <p className="text-base md:text-lg text-slate-600 max-w-2xl mx-auto">
+            Des conférences inspirantes, des ateliers pratiques et des moments de networking exclusifs pour les alumni LAU.
           </p>
         </motion.div>
 
-        {/* Featured Events */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12"
-        >
-          {events.filter(event => event.featured).map((event) => (
+        {loading ? (
+          <div className="grid gap-6 md:grid-cols-2">
+            {[1, 2, 3, 4].map((skeleton) => (
+              <div
+                key={skeleton}
+                className="animate-pulse rounded-2xl bg-white/70 shadow-sm p-6 border border-slate-100"
+              >
+                <div className="h-40 w-full rounded-xl bg-slate-200 mb-5" />
+                <div className="h-4 w-24 bg-slate-200 rounded mb-3" />
+                <div className="h-6 w-3/4 bg-slate-200 rounded mb-3" />
+                <div className="h-6 w-1/2 bg-slate-200 rounded mb-6" />
+                <div className="h-10 w-full bg-slate-200 rounded-lg" />
+              </div>
+            ))}
+          </div>
+        ) : error ? (
+          <div className="max-w-3xl mx-auto text-center bg-white border border-red-100 text-red-600 rounded-2xl px-6 py-10 shadow-sm">
+            <h3 className="text-lg font-semibold mb-2">Oups…</h3>
+            <p>{error}</p>
+            <p className="text-sm text-red-500 mt-3">
+              Réessayez dans quelques instants ou contactez l&apos;équipe si le problème persiste.
+            </p>
+          </div>
+        ) : upcomingEvents.length === 0 ? (
+          <div className="max-w-3xl mx-auto text-center bg-white border border-slate-100 rounded-2xl px-6 py-12 shadow-sm">
+            <h3 className="text-lg font-semibold text-slate-900 mb-2">Aucun événement planifié pour le moment</h3>
+            <p className="text-slate-600">
+              Restez à l&apos;écoute, de nouveaux événements seront bientôt disponibles.
+            </p>
+          </div>
+        ) : (
+          <>
+            {spotlightEvent && (
+              <motion.div
+                variants={itemVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.2 }}
+                className="relative overflow-hidden rounded-3xl bg-slate-900 text-white mb-10 md:mb-14"
+              >
+                <div className="absolute inset-0 opacity-50">
+                  <Image
+                    src={spotlightEvent.imageUrl || getRandomPlaceholder(0)}
+                    alt={spotlightEvent.title}
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+                <div className="absolute inset-0 bg-gradient-to-r from-slate-900/90 via-slate-900/70 to-slate-900/40" />
+                <div className="relative px-6 py-10 md:px-10 md:py-12 lg:px-14">
+                  <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+                    <div className="flex items-start gap-4">
+                      <div className="flex flex-col items-center justify-center rounded-2xl bg-white/15 px-4 py-3 text-center">
+                        <span className="text-xs uppercase tracking-widest text-white/70">
+                          {formatDayBadge(spotlightEvent.date).month}
+                        </span>
+                        <span className="text-2xl font-bold">
+                          {formatDayBadge(spotlightEvent.date).day}
+                        </span>
+                      </div>
+                      <div>
+                        <div className="inline-flex items-center px-3 py-1 bg-white/10 rounded-full text-xs font-semibold mb-3 uppercase tracking-wide">
+                          {spotlightEvent.type}
+                        </div>
+                        <h3 className="text-2xl md:text-3xl font-bold leading-tight">
+                          {spotlightEvent.title}
+                        </h3>
+                        <p className="text-sm md:text-base text-white/80 mt-3 max-w-2xl">
+                          {spotlightEvent.description}
+                        </p>
+                        <div className="mt-4 flex flex-wrap items-center gap-4 text-sm text-white/80">
+                          <span className="inline-flex items-center">
+                            <FaCalendarAlt className="mr-2 text-red-300" />
+                            {formatDate(spotlightEvent.date)}
+                          </span>
+                          <span className="inline-flex items-center">
+                            <FaMapMarkerAlt className="mr-2 text-red-300" />
+                            {spotlightEvent.location}
+                          </span>
+                          {spotlightEvent.organizer && (
+                            <span className="inline-flex items-center">
+                              <FaUsers className="mr-2 text-red-300" />
+                              {spotlightEvent.organizer}
+                            </span>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                    <div className="flex flex-col items-stretch gap-3 min-w-[200px]">
+                      {spotlightEvent.maxParticipants && (
+                        <div className="rounded-xl bg-white/10 px-4 py-3 text-sm text-white/80 border border-white/10">
+                          <div className="font-semibold text-white">
+                            {spotlightEvent.maxParticipants} places disponibles
+                          </div>
+                          <div>
+                            {spotlightEvent.participants
+                              ? `${spotlightEvent.participants?.length} inscrits`
+                              : "Ouvert aux inscriptions"}
+                          </div>
+                        </div>
+                      )}
+                      <Link
+                        href={`/events/${spotlightEvent._id}`}
+                        className="inline-flex items-center justify-center gap-2 rounded-xl bg-white text-slate-900 font-semibold py-3 px-6 hover:bg-slate-100 transition-colors"
+                      >
+                        <FaTicketAlt />
+                        Découvrir l&apos;événement
+                        <FaArrowRight className="transition-transform group-hover:translate-x-1" />
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            )}
+
             <motion.div
-              key={event.id}
-              variants={itemVariants}
-              className="group relative bg-white rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-300"
+              variants={containerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.15 }}
+              className="grid gap-6 md:grid-cols-2"
             >
-              {/* Featured Badge */}
-              <div className="absolute top-4 left-4 z-10">
-                <span className="px-3 py-1 bg-gradient-to-r from-red-500 to-red-600 text-white text-xs font-bold rounded-full">
-                  ⭐ Événement Phare
-                </span>
-              </div>
-
-              {/* Image */}
-              <div className="relative h-48 bg-gradient-to-br from-red-500 to-red-600 overflow-hidden">
-                <div className="absolute inset-0 bg-black/20"></div>
-                <div className="absolute bottom-4 left-4 text-white">
-                  <div className={`inline-flex items-center px-3 py-1 bg-gradient-to-r ${getCategoryColor(event.category)} rounded-full text-sm font-medium`}>
-                    {event.category}
-                  </div>
-                </div>
-              </div>
-
-              {/* Content */}
-              <div className="p-6">
-                <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-red-600 transition-colors">
-                  {event.title}
-                </h3>
-                <p className="text-gray-600 mb-4 line-clamp-2">
-                  {event.description}
-                </p>
-
-                {/* Event Details */}
-                <div className="space-y-2 mb-6">
-                  <div className="flex items-center text-gray-500 text-sm">
-                    <FaCalendarAlt className="mr-2 text-red-500" />
-                    {formatDate(event.date).day} {formatDate(event.date).month} {formatDate(event.date).year}
-                  </div>
-                  <div className="flex items-center text-gray-500 text-sm">
-                    <FaClock className="mr-2 text-red-500" />
-                    {event.time}
-                  </div>
-                  <div className="flex items-center text-gray-500 text-sm">
-                    <FaMapMarkerAlt className="mr-2 text-red-500" />
-                    {event.location}
-                  </div>
-                </div>
-
-                {/* Stats */}
-                <div className="flex items-center justify-between mb-6">
-                  <div className="flex items-center text-sm text-gray-600">
-                    <FaUsers className="mr-2 text-gray-400" />
-                    {event.attendees}/{event.maxAttendees} participants
-                  </div>
-                  <div className="text-lg font-bold text-red-600">
-                    {event.price}
-                  </div>
-                </div>
-
-                {/* CTA */}
-                <Link 
-                  href={`/events/${event.id}`}
-                  className="group inline-flex items-center justify-center w-full px-6 py-3 bg-gradient-to-r from-red-600 to-red-700 text-white font-semibold rounded-lg hover:from-red-700 hover:to-red-800 transition-all duration-300"
+              {secondaryEvents.map((event, index) => (
+                <motion.div
+                  key={event._id}
+                  variants={itemVariants}
+                  className="group relative overflow-hidden rounded-2xl border border-slate-100 bg-white shadow-sm transition-shadow hover:shadow-lg"
                 >
-                  <FaTicketAlt className="mr-2" />
-                  S&apos;inscrire maintenant
-                  <FaArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
-                </Link>
-              </div>
+                  <div className="relative h-40 w-full">
+                    <Image
+                      src={event.imageUrl || getRandomPlaceholder(index + 1)}
+                      alt={event.title}
+                      fill
+                      className="object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-slate-900/10 to-transparent" />
+                    <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between">
+                      <span className="inline-flex items-center px-3 py-1 rounded-full bg-white/90 text-xs font-semibold uppercase tracking-wide text-slate-900">
+                        {event.type}
+                      </span>
+                      <div className="flex flex-col items-center justify-center rounded-lg bg-white/90 px-3 py-2 text-slate-900 text-xs font-semibold uppercase">
+                        <span>{formatDayBadge(event.date).day}</span>
+                        <span>{formatDayBadge(event.date).month}</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="p-6 space-y-4">
+                    <div>
+                      <h3 className="text-lg font-semibold text-slate-900 group-hover:text-red-600 transition-colors">
+                        {event.title}
+                      </h3>
+                      <p className="mt-2 text-sm text-slate-600 line-clamp-3">
+                        {event.description}
+                      </p>
+                    </div>
+                    <div className="flex flex-wrap gap-3 text-sm text-slate-500">
+                      <span className="inline-flex items-center">
+                        <FaClock className="mr-2 text-red-500/80" />
+                        {formatDate(event.date)}
+                      </span>
+                      <span className="inline-flex items-center">
+                        <FaMapMarkerAlt className="mr-2 text-red-500/80" />
+                        {event.location}
+                      </span>
+                    </div>
+                    {event.maxParticipants && (
+                      <div className="flex items-center justify-between rounded-xl bg-slate-50 px-4 py-3 text-sm text-slate-600">
+                        <span className="inline-flex items-center gap-2">
+                          <FaUsers className="text-red-400" />
+                          Capacité
+                        </span>
+                        <span className="font-semibold text-slate-900">
+                          {event.participants?.length || 0}/{event.maxParticipants}
+                        </span>
+                      </div>
+                    )}
+                    <Link
+                      href={`/events/${event._id}`}
+                      className="inline-flex items-center gap-2 text-sm font-semibold text-red-600 hover:text-red-700 transition-colors"
+                    >
+                      En savoir plus
+                      <FaArrowRight className="transition-transform group-hover:translate-x-1" />
+                    </Link>
+                  </div>
+                </motion.div>
+              ))}
             </motion.div>
-          ))}
-        </motion.div>
+          </>
+        )}
 
-        {/* Other Events */}
         <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12"
-        >
-          {events.filter(event => !event.featured).map((event) => (
-            <motion.div
-              key={event.id}
-              variants={itemVariants}
-              className="group bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden"
-            >
-              <div className="p-6">
-                <div className="flex items-start justify-between mb-4">
-                  <div>
-                    <div className={`inline-flex items-center px-3 py-1 bg-gradient-to-r ${getCategoryColor(event.category)} text-white rounded-full text-sm font-medium mb-3`}>
-                      {event.category}
-                    </div>
-                    <h3 className="text-lg font-bold text-gray-900 group-hover:text-red-600 transition-colors">
-                      {event.title}
-                    </h3>
-                  </div>
-                  <div className="text-center bg-red-50 rounded-lg p-2 min-w-[60px]">
-                    <div className="text-2xl font-bold text-red-600">
-                      {formatDate(event.date).day}
-                    </div>
-                    <div className="text-xs text-red-500 uppercase">
-                      {formatDate(event.date).month}
-                    </div>
-                  </div>
-                </div>
-
-                <p className="text-gray-600 text-sm mb-4 line-clamp-2">
-                  {event.description}
-                </p>
-
-                <div className="space-y-2 mb-4">
-                  <div className="flex items-center text-gray-500 text-sm">
-                    <FaClock className="mr-2 text-red-500" />
-                    {event.time}
-                  </div>
-                  <div className="flex items-center text-gray-500 text-sm">
-                    <FaMapMarkerAlt className="mr-2 text-red-500" />
-                    {event.location}
-                  </div>
-                </div>
-
-                <div className="flex items-center justify-between">
-                  <div className="text-sm text-gray-600">
-                    {event.attendees}/{event.maxAttendees} participants
-                  </div>
-                  <div className="font-bold text-red-600">
-                    {event.price}
-                  </div>
-                </div>
-
-                <Link 
-                  href={`/events/${event.id}`}
-                  className="mt-4 group inline-flex items-center text-red-600 font-semibold hover:text-red-700 transition-colors"
-                >
-                  En savoir plus
-                  <FaArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
-                </Link>
-              </div>
-            </motion.div>
-          ))}
-        </motion.div>
-
-        {/* Bottom CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="text-center"
+          transition={{ duration: 0.5 }}
+          className="mt-12 text-center"
         >
           <Link
             href="/events"
-            className="inline-flex items-center px-8 py-4 border-2 border-red-600 text-red-600 font-semibold rounded-lg hover:bg-red-600 hover:text-white transition-all duration-300"
+            className="inline-flex items-center gap-2 rounded-lg border border-red-500 px-6 py-3 text-sm md:text-base font-semibold text-red-600 hover:bg-red-500 hover:text-white transition-all duration-300"
           >
             Voir tous les événements
-            <FaArrowRight className="ml-2" />
+            <FaArrowRight />
           </Link>
         </motion.div>
       </div>
@@ -320,4 +335,4 @@ const Events: React.FC = () => {
   );
 };
 
-export default Events; 
+export default Events;
