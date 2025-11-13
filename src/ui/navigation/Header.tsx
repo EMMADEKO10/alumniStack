@@ -71,6 +71,10 @@ const Header = () => {
   // Classes pour le texte selon le contexte
   const logoTextClasses = isHeroSection && !isScrolled ? "text-white" : "text-red-600";
   const logoSubtextClasses = isHeroSection && !isScrolled ? "text-gray-200" : "text-gray-500";
+  const logoSrc = isHeroSection && !isScrolled ? "/Logo%20LAU%20.png" : "/lau/imgi_1_Logo%20LAU-03.png";
+  const logoAlt = isHeroSection && !isScrolled
+    ? "Leadership Academia University logo monochrome"
+    : "Leadership Academia University logo couleurs";
 
   return (
     <header className={headerClasses}>
@@ -84,8 +88,9 @@ const Header = () => {
               transition={{ type: "spring", stiffness: 400, damping: 10 }}
             >
               <Image
-                src="/Logo%20LAU%20.png" 
-                alt="Leadership Academia University logo"
+                key={logoSrc}
+                src={logoSrc} 
+                alt={logoAlt}
                 fill
                 sizes="64px"
                 className="object-contain"
