@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import UserNavbar from "./UserNavbar";
 import Container from "./container";
@@ -78,20 +79,18 @@ const Header = () => {
           {/* Logo amélioré */}
           <Link href="/" className="flex items-center space-x-3 group relative z-10">
             <motion.div 
-              className="relative w-12 h-12 overflow-hidden"
+              className="relative w-16 h-16 overflow-hidden rounded-xl"
               whileHover={{ scale: 1.05 }}
               transition={{ type: "spring", stiffness: 400, damping: 10 }}
             >
-              <div className={`
-                absolute inset-0 rounded-xl transform transition-all duration-300
-                ${isHeroSection && !isScrolled 
-                  ? "bg-gradient-to-br from-white/20 to-white/10 border border-white/30" 
-                  : "bg-gradient-to-br from-red-500 to-red-700 group-hover:from-red-600 group-hover:to-red-800"
-                }
-              `}></div>
-              <div className="absolute inset-0 flex items-center justify-center">
-                <FaGraduationCap className={`text-2xl transition-colors ${isHeroSection && !isScrolled ? "text-white" : "text-white"}`} />
-              </div>
+              <Image
+                src="/Logo%20LAU%20.png" 
+                alt="Leadership Academia University logo"
+                fill
+                sizes="64px"
+                className="object-contain"
+                priority
+              />
             </motion.div>
             
             <div className="flex flex-col">

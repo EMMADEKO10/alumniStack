@@ -2,21 +2,53 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { FaGraduationCap, FaUsers, FaCalendarAlt, FaBriefcase, FaArrowRight, FaPlay } from "react-icons/fa";
 
 const Hero: React.FC = () => {
+  const heroImages = [
+    {
+      src: "/lau/hiro-auditoire.jpg",
+      alt: "Leadership Academia University - Auditoire",
+    },
+    {
+      src: "/lau/hiro_leadership_academy.jpg",
+      alt: "Leadership Academia University - Leadership Academy",
+    },
+  ];
+
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % heroImages.length);
+    }, 7000);
+
+    return () => clearInterval(interval);
+  }, [heroImages.length]);
+
   return (
     <div className="relative min-h-screen flex items-center overflow-hidden pt-20 lg:pt-24">
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0">
-        <Image
-          src="/graduation.jpg"
-          alt="Leadership AcademiaAlumni"
-          fill
-          className="object-cover"
-          priority
-        />
+        {heroImages.map((image, index) => (
+          <motion.div
+            key={image.src}
+            className="absolute inset-0"
+            animate={{ opacity: currentImageIndex === index ? 1 : 0 }}
+            initial={false}
+            transition={{ duration: 1.2, ease: "easeInOut" }}
+          >
+            <Image
+              src={image.src}
+              alt={image.alt}
+              fill
+              className="object-cover"
+              priority={index === 0}
+            />
+          </motion.div>
+        ))}
         <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/65 to-red-900/45"></div>
         {/* Overlay supplémentaire pour le header transparent */}
         <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-black/30 to-transparent"></div>
