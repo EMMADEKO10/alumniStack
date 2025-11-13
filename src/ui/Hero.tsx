@@ -157,7 +157,7 @@ const Hero: React.FC = () => {
               ))}
             </div>
             <span className="text-sm">
-              <strong className="text-white">1,247+</strong> nouveaux membres ce mois
+              {/* <strong className="text-white"></strong> nouveaux membres ce mois */}
             </span>
           </motion.div>
         </div>
@@ -174,28 +174,28 @@ const Hero: React.FC = () => {
             {/* Alumni Count */}
             <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6 text-center">
               <FaUsers className="text-3xl text-red-400 mx-auto mb-3" />
-              <div className="text-3xl font-bold text-white">100K+</div>
+              <div className="text-3xl font-bold text-white"></div>
               <div className="text-sm text-gray-300">Alumni connectés</div>
             </div>
 
             {/* Countries */}
             <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6 text-center">
               <div className="text-2xl mb-3">🌍</div>
-              <div className="text-3xl font-bold text-white">150+</div>
+              <div className="text-3xl font-bold text-white"></div>
               <div className="text-sm text-gray-300">Pays représentés</div>
             </div>
 
             {/* Events */}
             <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6 text-center">
               <FaCalendarAlt className="text-3xl text-red-400 mx-auto mb-3" />
-              <div className="text-3xl font-bold text-white">500+</div>
+              <div className="text-3xl font-bold text-white"></div>
               <div className="text-sm text-gray-300">Événements/an</div>
             </div>
 
             {/* Job Opportunities */}
             <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6 text-center">
               <FaBriefcase className="text-3xl text-red-400 mx-auto mb-3" />
-              <div className="text-3xl font-bold text-white">2K+</div>
+              <div className="text-3xl font-bold text-white">.</div>
               <div className="text-sm text-gray-300">Opportunités</div>
             </div>
           </motion.div>
