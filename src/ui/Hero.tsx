@@ -146,7 +146,7 @@ const Hero: React.FC = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
-            className="flex items-center space-x-4 sm:space-x-6 text-gray-300 text-xs sm:text-sm"
+            className="hidden sm:flex items-center space-x-4 sm:space-x-6 text-gray-300 text-xs sm:text-sm"
           >
             <div className="flex -space-x-2">
               {[1, 2, 3, 4, 5].map((i) => (
@@ -163,7 +163,7 @@ const Hero: React.FC = () => {
         </div>
 
         {/* Right Stats Cards */}
-        <div className="lg:col-span-5 space-y-6">
+        <div className="hidden md:block md:col-span-5 space-y-6">
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
@@ -213,11 +213,11 @@ const Hero: React.FC = () => {
               </div>
               <div className="flex-1">
                                  <p className="text-gray-200 text-sm mb-2">
-                   &ldquo;Grâce au réseau LAU, j&apos;ai trouvé mon emploi de rêve et créé 
+                   &ldquo;Grâce au réseau LAU, j&apos;ai créé 
                    des partenariats durables.&rdquo;
                  </p>
-                <div className="text-white font-semibold text-sm">Alice Martin</div>
-                <div className="text-gray-400 text-xs">CEO, TechStart • Promo 2018</div>
+                <div className="text-white font-semibold text-sm">Stephane Kalenga</div>
+                <div className="text-gray-400 text-xs">CEO, Economie • Promo 2025</div>
               </div>
             </div>
           </motion.div>
