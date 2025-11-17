@@ -79,15 +79,15 @@ const Testimonials: React.FC = () => {
   };
 
   return (
-    <section className="py-20 bg-gradient-to-br from-red-50 to-white relative overflow-hidden">
+    <section className="py-12 sm:py-16 lg:py-20 bg-gradient-to-br from-red-50 via-white to-orange-50 relative overflow-hidden">
       
       {/* Background Decorations */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-red-100 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-pulse"></div>
-        <div className="absolute bottom-20 right-10 w-72 h-72 bg-orange-100 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-pulse" style={{ animationDelay: '2s' }}></div>
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-20 -left-20 w-40 h-40 sm:w-60 sm:h-60 lg:w-72 lg:h-72 bg-red-100 rounded-full mix-blend-multiply filter blur-xl opacity-50 animate-pulse"></div>
+        <div className="absolute bottom-20 -right-20 w-40 h-40 sm:w-60 sm:h-60 lg:w-72 lg:h-72 bg-orange-100 rounded-full mix-blend-multiply filter blur-xl opacity-50 animate-pulse" style={{ animationDelay: '2s' }}></div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Header */}
         <motion.div
@@ -95,19 +95,19 @@ const Testimonials: React.FC = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="text-center mb-16"
+          className="text-center mb-8 sm:mb-12 lg:mb-16"
         >
-          <div className="inline-flex items-center px-4 py-2 bg-red-100 text-red-700 rounded-full text-sm font-medium mb-6">
-            <FaQuoteLeft className="mr-2" />
+          <div className="inline-flex items-center px-3 py-1.5 sm:px-4 sm:py-2 bg-red-100 text-red-700 rounded-full text-xs sm:text-sm font-medium mb-3 sm:mb-4">
+            <FaQuoteLeft className="mr-1.5 sm:mr-2 text-xs sm:text-sm" />
             Témoignages
           </div>
-          <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-3 sm:mb-4 px-4">
             Ce que disent nos
-            <span className="block bg-gradient-to-r from-red-600 to-red-700 bg-clip-text text-transparent">
+            <span className="block bg-gradient-to-r from-red-600 to-red-700 bg-clip-text text-transparent mt-1">
               Alumni
             </span>
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-sm sm:text-base lg:text-lg text-gray-600 max-w-2xl mx-auto px-4">
             Découvrez comment le réseau LAU a transformé la carrière de milliers d&apos;anciens étudiants.
           </p>
         </motion.div>
@@ -118,100 +118,112 @@ const Testimonials: React.FC = () => {
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5 }}
-          className="max-w-4xl mx-auto mb-12"
+          className="max-w-4xl mx-auto mb-8 sm:mb-10 lg:mb-12"
         >
-          <div className="bg-white rounded-3xl shadow-2xl p-8 lg:p-12 relative">
+          <div className="bg-white rounded-2xl sm:rounded-3xl shadow-xl sm:shadow-2xl p-6 sm:p-8 lg:p-10 relative">
             
             {/* Quote Icon */}
-            <div className="absolute top-6 left-6 w-12 h-12 bg-gradient-to-br from-red-500 to-red-600 rounded-full flex items-center justify-center">
-              <FaQuoteLeft className="text-white text-xl" />
+            <div className="absolute top-4 left-4 sm:top-6 sm:left-6 w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-red-500 to-red-600 rounded-full flex items-center justify-center shadow-lg">
+              <FaQuoteLeft className="text-white text-sm sm:text-lg" />
             </div>
 
             {/* Rating */}
-            <div className="flex justify-center mb-6">
+            <div className="flex justify-center mb-4 sm:mb-6 pt-2">
               {[...Array(testimonials[activeTestimonial].rating)].map((_, i) => (
-                <FaStar key={i} className="text-yellow-400 text-xl mx-1" />
+                <FaStar key={i} className="text-yellow-400 text-sm sm:text-base lg:text-lg mx-0.5 sm:mx-1" />
               ))}
             </div>
 
             {/* Quote */}
-            <blockquote className="text-2xl lg:text-3xl text-gray-700 text-center leading-relaxed mb-8 font-light">
+            <blockquote className="text-base sm:text-lg lg:text-xl text-gray-700 text-center leading-relaxed mb-6 sm:mb-8 font-normal px-2 sm:px-4">
               &ldquo;{testimonials[activeTestimonial].quote}&rdquo;
             </blockquote>
 
             {/* Author Info */}
-            <div className="flex flex-col lg:flex-row items-center justify-center lg:justify-between">
-              <div className="flex items-center mb-4 lg:mb-0">
-                <div className="w-16 h-16 bg-gradient-to-br from-red-500 to-red-600 rounded-full flex items-center justify-center text-white font-bold text-xl mr-4">
+            <div className="flex flex-col items-center space-y-4 sm:space-y-0 sm:flex-row sm:justify-between sm:items-center">
+              <div className="flex items-center">
+                <div className="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 bg-gradient-to-br from-red-500 to-red-600 rounded-full flex items-center justify-center text-white font-bold text-base sm:text-lg lg:text-xl mr-3 sm:mr-4 shadow-md flex-shrink-0">
                   {testimonials[activeTestimonial].avatar}
                 </div>
-                <div className="text-center lg:text-left">
-                  <h4 className="text-xl font-bold text-gray-900">
+                <div className="text-left">
+                  <h4 className="text-base sm:text-lg font-bold text-gray-900">
                     {testimonials[activeTestimonial].name}
                   </h4>
-                  <p className="text-gray-600">
-                    {testimonials[activeTestimonial].role} chez {testimonials[activeTestimonial].company}
+                  <p className="text-xs sm:text-sm text-gray-600 leading-tight">
+                    {testimonials[activeTestimonial].role}
                   </p>
-                  <p className="text-sm text-red-600 font-medium">
+                  <p className="text-xs sm:text-sm text-gray-500 leading-tight">
+                    {testimonials[activeTestimonial].company}
+                  </p>
+                  <p className="text-xs sm:text-sm text-red-600 font-medium mt-0.5">
                     {testimonials[activeTestimonial].promo}
                   </p>
                 </div>
               </div>
 
               {/* Achievement Badge */}
-              <div className="bg-gradient-to-r from-red-500 to-red-600 text-white px-4 py-2 rounded-full text-sm font-medium">
+              <div className="bg-gradient-to-r from-red-500 to-red-600 text-white px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-xs sm:text-sm font-medium shadow-md whitespace-nowrap">
                 {testimonials[activeTestimonial].achievement}
               </div>
             </div>
 
             {/* Social Links */}
-            <div className="flex justify-center mt-6 space-x-4">
+            <div className="flex justify-center mt-4 sm:mt-6 space-x-3">
               <a 
                 href={testimonials[activeTestimonial].social.linkedin}
-                className="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center text-white hover:bg-blue-700 transition-colors"
+                className="w-8 h-8 sm:w-9 sm:h-9 bg-blue-600 rounded-full flex items-center justify-center text-white hover:bg-blue-700 transition-all duration-300 hover:scale-110 shadow-md"
+                aria-label="LinkedIn"
               >
-                <FaLinkedin />
+                <FaLinkedin className="text-sm sm:text-base" />
               </a>
               <a 
                 href={testimonials[activeTestimonial].social.twitter}
-                className="w-10 h-10 bg-blue-400 rounded-full flex items-center justify-center text-white hover:bg-blue-500 transition-colors"
+                className="w-8 h-8 sm:w-9 sm:h-9 bg-blue-400 rounded-full flex items-center justify-center text-white hover:bg-blue-500 transition-all duration-300 hover:scale-110 shadow-md"
+                aria-label="Twitter"
               >
-                <FaTwitter />
+                <FaTwitter className="text-sm sm:text-base" />
               </a>
             </div>
           </div>
         </motion.div>
 
         {/* Navigation */}
-        <div className="flex justify-center items-center space-x-6">
-          <button
+        <div className="flex justify-center items-center space-x-4 sm:space-x-6 mb-8 sm:mb-12 lg:mb-16">
+          <motion.button
             onClick={prevTestimonial}
-            className="w-12 h-12 rounded-full border-2 border-red-200 text-red-600 hover:bg-red-600 hover:text-white transition-all duration-300 flex items-center justify-center"
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.95 }}
+            className="w-10 h-10 sm:w-12 sm:h-12 rounded-full border-2 border-red-200 text-red-600 hover:bg-red-600 hover:text-white hover:border-red-600 transition-all duration-300 flex items-center justify-center font-bold shadow-md hover:shadow-lg"
+            aria-label="Témoignage précédent"
           >
             ←
-          </button>
+          </motion.button>
 
           {/* Dots Indicator */}
-          <div className="flex space-x-2">
+          <div className="flex space-x-1.5 sm:space-x-2">
             {testimonials.map((_, index) => (
               <button
                 key={index}
                 onClick={() => setActiveTestimonial(index)}
-                className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                className={`h-2 sm:h-2.5 rounded-full transition-all duration-300 ${
                   index === activeTestimonial 
-                    ? 'bg-red-600 w-8' 
-                    : 'bg-red-200 hover:bg-red-300'
+                    ? 'bg-red-600 w-6 sm:w-8' 
+                    : 'bg-red-200 hover:bg-red-300 w-2 sm:w-2.5'
                 }`}
+                aria-label={`Voir témoignage ${index + 1}`}
               />
             ))}
           </div>
 
-          <button
+          <motion.button
             onClick={nextTestimonial}
-            className="w-12 h-12 rounded-full border-2 border-red-200 text-red-600 hover:bg-red-600 hover:text-white transition-all duration-300 flex items-center justify-center"
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.95 }}
+            className="w-10 h-10 sm:w-12 sm:h-12 rounded-full border-2 border-red-200 text-red-600 hover:bg-red-600 hover:text-white hover:border-red-600 transition-all duration-300 flex items-center justify-center font-bold shadow-md hover:shadow-lg"
+            aria-label="Témoignage suivant"
           >
             →
-          </button>
+          </motion.button>
         </div>
 
         {/* Bottom Stats */}
@@ -220,24 +232,30 @@ const Testimonials: React.FC = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.3 }}
-          className="grid grid-cols-2 lg:grid-cols-4 gap-8 mt-16"
+          className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8"
         >
-          <div className="text-center">
-            <div className="text-3xl font-bold text-red-600">98%</div>
-            <div className="text-gray-600 text-sm">Taux de satisfaction</div>
-          </div>
-          <div className="text-center">
-            <div className="text-3xl font-bold text-red-600">15K+</div>
-            <div className="text-gray-600 text-sm">Connexions créées</div>
-          </div>
-          <div className="text-center">
-            <div className="text-3xl font-bold text-red-600">85%</div>
-            <div className="text-gray-600 text-sm">Trouvent un emploi via le réseau</div>
-          </div>
-          <div className="text-center">
-            <div className="text-3xl font-bold text-red-600">5K+</div>
-            <div className="text-gray-600 text-sm">Entreprises partenaires</div>
-          </div>
+          {[
+            { value: "98%", label: "Taux de satisfaction" },
+            { value: "15K+", label: "Connexions créées" },
+            { value: "85%", label: "Trouvent un emploi" },
+            { value: "5K+", label: "Entreprises partenaires" }
+          ].map((stat, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              className="text-center bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-md hover:shadow-lg transition-shadow duration-300"
+            >
+              <div className="text-2xl sm:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-red-600 to-red-700 bg-clip-text text-transparent mb-1 sm:mb-2">
+                {stat.value}
+              </div>
+              <div className="text-xs sm:text-sm text-gray-600 leading-tight">
+                {stat.label}
+              </div>
+            </motion.div>
+          ))}
         </motion.div>
       </div>
     </section>

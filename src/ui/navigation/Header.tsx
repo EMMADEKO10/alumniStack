@@ -44,6 +44,11 @@ const Header = () => {
     };
   }, [pathname]);
 
+  // Ferme le menu mobile automatiquement quand la route change (ex: login / signup)
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+  }, [pathname]);
+  
   const navItems: NavItem[] = [
     { name: "Communauté", href: "/communities", icon: <FaUsers className="mr-2 text-sm" /> },
     { name: "Dons", href: "/donations", icon: <FaHandHoldingHeart className="mr-2 text-sm" /> },
@@ -333,4 +338,4 @@ const Header = () => {
   );
 };
 
-export default Header; 
+export default Header;
