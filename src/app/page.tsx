@@ -2,7 +2,7 @@ import Hero from "../ui/Hero";
 import Features from "../ui/Features";
 import Testimonials from "../ui/Testimonials";
 import Events from "../ui/Events";
-import Newsletter from "../ui/Newsletter";
+// import Newsletter from "../ui/Newsletter";
 
 export default function Home() {
   return (
@@ -29,7 +29,7 @@ export default function Home() {
       {/* <Contribute /> */}
       
       {/* Newsletter Section - Capture d'audience */}
-      <Newsletter />
+      {/* <Newsletter /> */}
     </main>
   );
 }

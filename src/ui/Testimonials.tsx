@@ -1,8 +1,8 @@
 'use client';
 
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { FaQuoteLeft, FaStar, FaLinkedin, FaTwitter } from "react-icons/fa";
-import { useState } from "react";
 
 const Testimonials: React.FC = () => {
   const [activeTestimonial, setActiveTestimonial] = useState(0);
@@ -10,10 +10,10 @@ const Testimonials: React.FC = () => {
   const testimonials = [
     {
       id: 1,
-      name: "Sarah Johnson",
+      name: "Stephane Kalenga",
       role: "CEO & Founder",
       company: "TechVenture Inc.",
-      promo: "Promo 2015",
+      promo: "Promo 2024",
       avatar: "SJ",
       quote: "Le réseau LAU a été déterminant dans le lancement de ma startup. J'ai trouvé mes premiers investisseurs et mes meilleurs talents grâce aux connexions que j'ai faites sur la plateforme.",
       rating: 5,
@@ -22,52 +22,8 @@ const Testimonials: React.FC = () => {
         twitter: "#"
       },
       achievement: "Levée de fonds de 10M€"
-    },
-    {
-      id: 2,
-      name: "Michel Dubois",
-      role: "Directeur Innovation",
-      company: "AirFrance-KLM",
-      promo: "Promo 2012",
-      avatar: "MD",
-      quote: "Grâce aux événements networking Legacy, j'ai pu développer un réseau international qui m'a ouvert des portes incroyables. La qualité des échanges est exceptionnelle.",
-      rating: 5,
-      social: {
-        linkedin: "#",
-        twitter: "#"
-      },
-      achievement: "Prix Innovation 2023"
-    },
-    {
-      id: 3,
-      name: "Elena Rodriguez",
-      role: "Senior Data Scientist",
-      company: "Google",
-      promo: "Promo 2018",
-      avatar: "ER",
-      quote: "Les formations proposées par la communauté m'ont permis de rester à la pointe des dernières technologies. Un investissement qui a transformé ma carrière.",
-      rating: 5,
-      social: {
-        linkedin: "#",
-        twitter: "#"
-      },
-      achievement: "Top 30 under 30 - Forbes"
-    },
-    {
-      id: 4,
-      name: "David Chen",
-      role: "Investment Partner",
-      company: "Sequoia Capital",
-      promo: "Promo 2010",
-      avatar: "DC",
-              quote: "LAU m'a permis de donner en retour à ma communauté tout en identifiant les talents de demain. Un écosystème unique qui crée de la valeur pour tous.",
-      rating: 5,
-      social: {
-        linkedin: "#",
-        twitter: "#"
-      },
-      achievement: "100M€+ investis en startups"
     }
+    
   ];
 
   const nextTestimonial = () => {
@@ -130,7 +86,7 @@ const Testimonials: React.FC = () => {
             {/* Rating */}
             <div className="flex justify-center mb-4 sm:mb-6 pt-2">
               {[...Array(testimonials[activeTestimonial].rating)].map((_, i) => (
-                <FaStar key={i} className="text-yellow-400 text-sm sm:text-base lg:text-lg mx-0.5 sm:mx-1" />
+                <FaStar key={i} className="text-yellow-400 text-lg sm:text-xl mx-0.5" />
               ))}
             </div>
 
@@ -225,41 +181,11 @@ const Testimonials: React.FC = () => {
             →
           </motion.button>
         </div>
-
-        {/* Bottom Stats */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.3 }}
-          className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8"
-        >
-          {[
-            { value: "98%", label: "Taux de satisfaction" },
-            { value: "15K+", label: "Connexions créées" },
-            { value: "85%", label: "Trouvent un emploi" },
-            { value: "5K+", label: "Entreprises partenaires" }
-          ].map((stat, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="text-center bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-md hover:shadow-lg transition-shadow duration-300"
-            >
-              <div className="text-2xl sm:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-red-600 to-red-700 bg-clip-text text-transparent mb-1 sm:mb-2">
-                {stat.value}
-              </div>
-              <div className="text-xs sm:text-sm text-gray-600 leading-tight">
-                {stat.label}
-              </div>
-            </motion.div>
-          ))}
-        </motion.div>
+        
+        
       </div>
     </section>
   );
 };
 
-export default Testimonials; 
+export default Testimonials;

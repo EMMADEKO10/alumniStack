@@ -81,6 +81,11 @@ const Header = () => {
     ? "Leadership Academia University logo monochrome"
     : "Leadership Academia University logo couleurs";
 
+  // Gestion d'erreur pour les images
+  const handleImageError = (e: React.SyntheticEvent<HTMLImageElement>) => {
+    e.currentTarget.src = "/lau/imgi_1_Logo%20LAU-03.png"; // Fallback vers le logo par défaut
+  };
+
   return (
     <header className={headerClasses}>
       <Container>
@@ -100,6 +105,7 @@ const Header = () => {
                 sizes="64px"
                 className="object-contain"
                 priority
+                onError={handleImageError}
               />
             </motion.div>
             
