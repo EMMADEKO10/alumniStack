@@ -291,16 +291,105 @@ const DonationsPage = () => {
   }
 
   return (
-    <div className="max-w-7xl mx-auto px-4 pt-32 pb-16">
-      {/* Description */}
-      <div className="bg-gradient-to-r from-red-50 to-pink-50 rounded-xl p-6 mb-8">
-        <p className="text-gray-700 text-lg leading-relaxed">
-          Merci d&apos;avoir envisagé un don au Leadership AcademiaUniversity (LAU). Votre générosité nous aide à bâtir l&apos;avenir de l&apos;éducation et à soutenir nos étudiants dans leur parcours académique.
-        </p>
+    <div className="max-w-7xl mx-auto px-4 pt-32 pb-16 relative">
+      {/* Décorations de fond */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <motion.div
+          className="absolute -top-24 -left-24 w-96 h-96 bg-gradient-to-br from-red-200/20 to-pink-200/20 rounded-full blur-3xl"
+          animate={{
+            x: [0, 50, 0],
+            y: [0, 30, 0],
+          }}
+          transition={{
+            duration: 20,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        />
+        <motion.div
+          className="absolute top-1/2 -right-24 w-96 h-96 bg-gradient-to-br from-pink-200/20 to-red-200/20 rounded-full blur-3xl"
+          animate={{
+            x: [0, -30, 0],
+            y: [0, 50, 0],
+          }}
+          transition={{
+            duration: 15,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        />
       </div>
 
+      {/* Titre principal avec gradient */}
+      <motion.div 
+        className="text-center mb-12 mt-8 relative z-10"
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+      >
+        <h1 className="text-4xl md:text-5xl font-bold mb-4">
+          <span className="text-gray-900">Soutenez </span>
+          <span className="bg-gradient-to-r from-red-600 via-rose-600 to-red-500 bg-clip-text text-transparent">
+            Notre Mission
+          </span>
+        </h1>
+        <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
+          Merci d&apos;avoir envisagé un don au Leadership AcademiaUniversity (LAU). Votre générosité nous aide à bâtir l&apos;avenir de l&apos;éducation.
+        </p>
+      </motion.div>
+
+      {/* Grille de fonctionnalités */}
+      <motion.div 
+        className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 relative z-10"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.2 }}
+      >
+        {[
+          {
+            icon: FaHeart,
+            title: "Impact Direct",
+            description: "Votre don a un impact immédiat sur la vie de nos étudiants et la qualité de notre enseignement."
+          },
+          {
+            icon: FaUniversity,
+            title: "Projets Variés",
+            description: "Soutenez des projets d'infrastructure, de recherche, ou des programmes de bourses d'excellence."
+          },
+          {
+            icon: FaCheck,
+            title: "Transparence Totale",
+            description: "Suivez en temps réel la progression de chaque campagne et l'utilisation des fonds collectés."
+          }
+        ].map((feature, index) => (
+          <motion.div
+            key={index}
+            className="bg-white/80 backdrop-blur-sm rounded-xl p-6 border border-gray-200 hover:shadow-lg transition-all duration-300 group"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
+            whileHover={{ y: -8 }}
+          >
+            <div className="bg-gradient-to-br from-red-50 to-pink-50 w-14 h-14 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+              <feature.icon className="text-2xl text-red-600" />
+            </div>
+            <h3 className="text-lg font-semibold text-gray-900 mb-2">
+              {feature.title}
+            </h3>
+            <p className="text-gray-600 text-sm">
+              {feature.description}
+            </p>
+          </motion.div>
+        ))}
+      </motion.div>
+
       {/* Barre de recherche et filtres */}
-      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-8">
+      <motion.div 
+        className="bg-white/80 backdrop-blur-sm rounded-xl shadow-sm border border-gray-200 p-6 mb-8 relative z-10"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.6 }}
+      >
         <div className="flex flex-col lg:flex-row gap-4 items-center justify-between">
           {/* Recherche */}
           <div className="relative flex-1 max-w-md">
@@ -391,26 +480,33 @@ const DonationsPage = () => {
             </button>
           ))}
         </div>
-      </div>
+      </motion.div>
 
       {/* Statistiques */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+      <motion.div 
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8 relative z-10"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.4 }}
+      >
         {[
           {
             icon: HeartIcon,
             value: filteredDonations.length,
             label: "Campagnes trouvées",
             color: "red",
-            bgColor: "bg-red-50",
-            iconColor: "text-red-600"
+            bgColor: "bg-gradient-to-br from-red-50 to-pink-50",
+            iconColor: "text-red-600",
+            borderColor: "border-red-100"
           },
           {
             icon: CurrencyDollarIcon,
             value: stats.totalAmount,
             label: "Montant total collecté",
             color: "green",
-            bgColor: "bg-green-50",
+            bgColor: "bg-gradient-to-br from-green-50 to-emerald-50",
             iconColor: "text-green-600",
+            borderColor: "border-green-100",
             format: "currency"
           },
           {
@@ -418,35 +514,49 @@ const DonationsPage = () => {
             value: stats.totalDonors,
             label: "Donateurs",
             color: "blue",
-            bgColor: "bg-blue-50",
-            iconColor: "text-blue-600"
+            bgColor: "bg-gradient-to-br from-blue-50 to-indigo-50",
+            iconColor: "text-blue-600",
+            borderColor: "border-blue-100"
           },
           {
             icon: ChartBarIcon,
             value: stats.completedCampaigns,
             label: "Objectifs atteints",
             color: "purple",
-            bgColor: "bg-purple-50",
-            iconColor: "text-purple-600"
+            bgColor: "bg-gradient-to-br from-purple-50 to-pink-50",
+            iconColor: "text-purple-600",
+            borderColor: "border-purple-100"
           }
-        ].map((stat) => (
-          <div key={stat.label} className={`${stat.bgColor} rounded-xl p-6 border border-gray-200`}>
-            <div className="flex items-center">
-              <stat.icon className={`h-8 w-8 ${stat.iconColor}`} />
-              <div className="ml-4">
-                <p className="text-2xl font-bold text-gray-900">
-                  {stat.format === 'currency' ? formatAmount(stat.value) : stat.value}
-                </p>
-                <p className="text-gray-600">{stat.label}</p>
+        ].map((stat, index) => (
+          <motion.div 
+            key={stat.label} 
+            className={`${stat.bgColor} rounded-xl p-6 border ${stat.borderColor} shadow-sm hover:shadow-md transition-all duration-300`}
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5, delay: 0.5 + index * 0.1 }}
+            whileHover={{ y: -4 }}
+          >
+            <div className="flex items-center justify-between mb-3">
+              <div className={`${stat.bgColor} p-3 rounded-lg`}>
+                <stat.icon className={`h-6 w-6 ${stat.iconColor}`} />
               </div>
             </div>
-          </div>
+            <p className="text-2xl font-bold text-gray-900 mb-1">
+              {stat.format === 'currency' ? formatAmount(stat.value) : stat.value}
+            </p>
+            <p className="text-sm text-gray-600">{stat.label}</p>
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
 
       {/* Liste des donations */}
       {filteredDonations.length === 0 ? (
-        <div className="text-center py-12">
+        <motion.div 
+          className="text-center py-12 relative z-10"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
           <HeartIcon className="mx-auto h-12 w-12 text-gray-400" />
           <h3 className="mt-2 text-lg font-medium text-gray-900">
             Aucune campagne trouvée
@@ -454,9 +564,9 @@ const DonationsPage = () => {
           <p className="mt-1 text-gray-500">
             Essayez de modifier vos critères de recherche ou de filtrage.
           </p>
-        </div>
+        </motion.div>
       ) : (
-        <div className={`${
+        <div className={`relative z-10 ${
           viewMode === "grid" 
             ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" 
             : "space-y-4"
@@ -466,8 +576,8 @@ const DonationsPage = () => {
               key={donation._id}
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className={viewMode === "list" ? "bg-white rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition-shadow duration-200" : ""}
+              transition={{ duration: 0.5, delay: 0.7 + index * 0.05 }}
+              className={viewMode === "list" ? "bg-white/80 backdrop-blur-sm rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition-shadow duration-200" : ""}
             >
               {viewMode === "list" ? (
                 <div className="p-6">
@@ -519,9 +629,9 @@ const DonationsPage = () => {
 
       {/* Section d'informations sur les dons */}
       <motion.div 
-        className="bg-gradient-to-br from-red-50 via-white to-red-50 rounded-xl p-8 mt-12"
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
+        className="bg-gradient-to-br from-red-50 via-white to-red-50 rounded-xl p-8 mt-12 relative z-10 border border-red-100 shadow-lg"
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
         viewport={{ once: true }}
       >

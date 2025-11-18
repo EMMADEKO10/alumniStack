@@ -111,12 +111,12 @@ const Header = () => {
             
             <div className="flex flex-col">
               <motion.span 
-                className={`hidden sm:block font-bold text-xl tracking-tight transition-all duration-300 ${logoTextClasses} group-hover:opacity-80`}
+                className={`font-bold text-sm sm:text-base md:text-lg lg:text-xl tracking-tight transition-all duration-300 ${logoTextClasses} group-hover:opacity-80 whitespace-nowrap`}
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5 }}
               >
-              LEADERSHIP ACADEMIA UNIVERSITY
+                LEADERSHIP ACADEMIA UNIVERSITY
               </motion.span>
               <motion.span 
                 className={`text-[10px] sm:text-xs font-medium sm:-mt-1 transition-all duration-300 ${logoSubtextClasses}`}

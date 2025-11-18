@@ -288,24 +288,100 @@ const AlumniDirectory: React.FC<AlumniDirectoryProps> = ({ onAlumniSelect }) => 
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 relative">
+      {/* Décorations de fond */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <motion.div
+          className="absolute -top-24 -left-24 w-96 h-96 bg-gradient-to-br from-blue-200/20 to-purple-200/20 rounded-full blur-3xl"
+          animate={{
+            x: [0, 50, 0],
+            y: [0, 30, 0],
+          }}
+          transition={{
+            duration: 20,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        />
+        <motion.div
+          className="absolute top-1/2 -right-24 w-96 h-96 bg-gradient-to-br from-purple-200/20 to-blue-200/20 rounded-full blur-3xl"
+          animate={{
+            x: [0, -30, 0],
+            y: [0, 50, 0],
+          }}
+          transition={{
+            duration: 15,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        />
+      </div>
+
       {/* Espacement pour le header fixe */}
-      <div className="pt-28">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="pt-32">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 relative z-10">
           
-          {/* Header avec titre et stats */}
+          {/* Header avec titre harmonisé */}
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-center mb-12"
+            transition={{ duration: 0.6 }}
+            className="text-center mb-12 mt-8"
           >
-            <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-4">
-            Annuaire des Alumni
-          </h1>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            Découvrez et connectez-vous avec les diplômés de Leadership AcademiaUniversity (LAU)
-          </p>
+            <h1 className="text-4xl md:text-5xl font-bold mb-4">
+              <span className="text-gray-900">Découvrez </span>
+              <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">
+                Notre Communauté
+              </span>
+            </h1>
+            <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+              Connectez-vous avec les diplômés de Leadership AcademiaUniversity (LAU) à travers le monde
+            </p>
+          </motion.div>
+
+          {/* Grille de fonctionnalités */}
+          <motion.div 
+            className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
+            {[
+              {
+                icon: FaUsers,
+                title: "Réseau Alumni",
+                description: "Rejoignez une communauté mondiale d'anciens étudiants brillants et engagés."
+              },
+              {
+                icon: FaGraduationCap,
+                title: "Toutes Promotions",
+                description: "Explorez les profils d'alumni de toutes les facultés et années de graduation."
+              },
+              {
+                icon: FaBuilding,
+                title: "Secteurs Variés",
+                description: "Découvrez des professionnels actifs dans de nombreux domaines d'expertise."
+              }
+            ].map((feature, index) => (
+              <motion.div
+                key={index}
+                className="bg-white/80 backdrop-blur-sm rounded-xl p-6 border border-gray-200 hover:shadow-lg transition-all duration-300 group"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
+                whileHover={{ y: -8 }}
+              >
+                <div className="bg-gradient-to-br from-blue-50 to-purple-50 w-14 h-14 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                  <feature.icon className="text-2xl text-blue-600" />
+                </div>
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                  {feature.title}
+                </h3>
+                <p className="text-gray-600 text-sm">
+                  {feature.description}
+                </p>
+              </motion.div>
+            ))}
           </motion.div>
 
           {/* Statistiques améliorées */}
@@ -313,75 +389,65 @@ const AlumniDirectory: React.FC<AlumniDirectoryProps> = ({ onAlumniSelect }) => 
             variants={staggerChildren}
             initial="initial"
             animate="animate"
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12"
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8"
           >
-            <motion.div
-              variants={fadeInUp}
-              className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 p-6 border border-gray-100"
-            >
-              <div className="flex items-center justify-between mb-4">
-                <div className="bg-gradient-to-r from-blue-500 to-blue-600 p-3 rounded-xl">
-                  <FaUsers className="text-white text-xl" />
-        </div>
-                <div className="text-right">
-                  <div className="text-3xl font-bold text-gray-900">{alumni.length}</div>
-                  <div className="text-sm text-gray-500 font-medium">Alumni inscrits</div>
-            </div>
-          </div>
-            </motion.div>
-
-            <motion.div
-              variants={fadeInUp}
-              className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 p-6 border border-gray-100"
-            >
-              <div className="flex items-center justify-between mb-4">
-                <div className="bg-gradient-to-r from-green-500 to-green-600 p-3 rounded-xl">
-                  <FaSearch className="text-white text-xl" />
+            {[
+              {
+                icon: FaUsers,
+                value: alumni.length,
+                label: "Alumni inscrits",
+                bgColor: "bg-gradient-to-br from-blue-50 to-indigo-50",
+                iconColor: "text-blue-600",
+                borderColor: "border-blue-100"
+              },
+              {
+                icon: FaSearch,
+                value: filteredAlumni.length,
+                label: "Résultats trouvés",
+                bgColor: "bg-gradient-to-br from-green-50 to-emerald-50",
+                iconColor: "text-green-600",
+                borderColor: "border-green-100"
+              },
+              {
+                icon: FaGraduationCap,
+                value: faculties.length,
+                label: "Facultés",
+                bgColor: "bg-gradient-to-br from-purple-50 to-pink-50",
+                iconColor: "text-purple-600",
+                borderColor: "border-purple-100"
+              },
+              {
+                icon: FaBuilding,
+                value: industries.length,
+                label: "Secteurs",
+                bgColor: "bg-gradient-to-br from-orange-50 to-red-50",
+                iconColor: "text-orange-600",
+                borderColor: "border-orange-100"
+              }
+            ].map((stat) => (
+              <motion.div
+                key={stat.label}
+                variants={fadeInUp}
+                className={`${stat.bgColor} rounded-xl p-6 border ${stat.borderColor} shadow-sm hover:shadow-md transition-all duration-300`}
+                whileHover={{ y: -4 }}
+              >
+                <div className="flex items-center justify-between mb-3">
+                  <div className={`${stat.bgColor} p-3 rounded-lg`}>
+                    <stat.icon className={`h-6 w-6 ${stat.iconColor}`} />
+                  </div>
                 </div>
-                <div className="text-right">
-                  <div className="text-3xl font-bold text-gray-900">{filteredAlumni.length}</div>
-                  <div className="text-sm text-gray-500 font-medium">Résultats trouvés</div>
-            </div>
-          </div>
-            </motion.div>
-
-            <motion.div
-              variants={fadeInUp}
-              className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 p-6 border border-gray-100"
-            >
-              <div className="flex items-center justify-between mb-4">
-                <div className="bg-gradient-to-r from-purple-500 to-purple-600 p-3 rounded-xl">
-                  <FaGraduationCap className="text-white text-xl" />
-                </div>
-                <div className="text-right">
-                  <div className="text-3xl font-bold text-gray-900">{faculties.length}</div>
-                  <div className="text-sm text-gray-500 font-medium">Facultés</div>
-            </div>
-              </div>
-            </motion.div>
-
-            <motion.div
-              variants={fadeInUp}
-              className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 p-6 border border-gray-100"
-            >
-              <div className="flex items-center justify-between mb-4">
-                <div className="bg-gradient-to-r from-orange-500 to-orange-600 p-3 rounded-xl">
-                  <FaBuilding className="text-white text-xl" />
-                </div>
-                <div className="text-right">
-                  <div className="text-3xl font-bold text-gray-900">{industries.length}</div>
-                  <div className="text-sm text-gray-500 font-medium">Secteurs</div>
-          </div>
-        </div>
-            </motion.div>
+                <p className="text-2xl font-bold text-gray-900 mb-1">{stat.value}</p>
+                <p className="text-sm text-gray-600">{stat.label}</p>
+              </motion.div>
+            ))}
           </motion.div>
 
           {/* Barre de recherche et filtres */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="bg-white rounded-2xl shadow-lg p-6 mb-8 border border-gray-100"
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="bg-white/80 backdrop-blur-sm rounded-xl shadow-sm p-6 mb-8 border border-gray-200"
           >
             <div className="flex flex-col lg:flex-row gap-4 items-center">
               
@@ -523,13 +589,13 @@ const AlumniDirectory: React.FC<AlumniDirectoryProps> = ({ onAlumniSelect }) => 
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="text-center py-16"
+                className="text-center py-16 bg-white/80 backdrop-blur-sm rounded-xl border border-gray-200 shadow-sm"
               >
-                <div className="bg-gray-100 rounded-full w-20 h-20 mx-auto mb-6 flex items-center justify-center">
-                  <FaUsers className="text-gray-400 text-2xl" />
+                <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-full w-20 h-20 mx-auto mb-6 flex items-center justify-center">
+                  <FaUsers className="text-blue-600 text-2xl" />
             </div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-4">
-                  {alumni.length === 0 ? 'Aucun alumni dans la base de données' : 'Aucun alumni trouvé avec ces filtres'}
+                  {alumni.length === 0 ? 'Aucun alumni dans la base de données' : 'Aucun alumni trouvé'}
                 </h3>
                 <p className="text-gray-600 mb-6 max-w-md mx-auto">
                   {alumni.length === 0 
@@ -539,7 +605,7 @@ const AlumniDirectory: React.FC<AlumniDirectoryProps> = ({ onAlumniSelect }) => 
                 </p>
                 <button
                   onClick={resetFilters}
-                  className="bg-red-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-red-700 transition-colors"
+                  className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-6 py-3 rounded-lg font-semibold hover:from-blue-700 hover:to-indigo-700 transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-105"
                 >
                   Réinitialiser les filtres
                 </button>
@@ -554,9 +620,11 @@ const AlumniDirectory: React.FC<AlumniDirectoryProps> = ({ onAlumniSelect }) => 
                 {filteredAlumni.map((alumni, index) => (
                   <motion.div
                     key={alumni._id ? alumni._id.toString() : index}
-                    variants={fadeInUp}
-                    transition={{ delay: index * 0.05 }}
-                    className="transform hover:scale-105 transition-transform duration-200"
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: index * 0.05 }}
+                    whileHover={{ y: -8 }}
+                    className="transition-all duration-300"
                   >
               <AlumniCard
                 alumni={alumni}

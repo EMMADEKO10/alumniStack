@@ -1,18 +1,20 @@
 'use client';
 
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { FaUser, FaClock, FaCalendarAlt, FaStar, FaArrowRight, FaBookOpen } from "react-icons/fa";
 
-const StoryCardTwo = ({ title, description, image, category, date, featured, readTime, author }) => {
+const StoryCardTwo = ({ title, description, image, category, date, featured, readTime, author, id }) => {
+  const router = useRouter();
   const getCategoryColor = (category) => {
     const colors = {
-      "Entrepreneuriat": "bg-purple-500",
-      "Leadership": "bg-blue-500", 
-      "International": "bg-green-500",
-      "Social": "bg-pink-500",
-      "Recherche": "bg-orange-500",
-      "Default": "bg-gray-500"
+      "Entrepreneuriat": "from-purple-500 to-purple-600",
+      "Leadership": "from-blue-500 to-blue-600", 
+      "International": "from-green-500 to-green-600",
+      "Social": "from-pink-500 to-pink-600",
+      "Recherche": "from-orange-500 to-orange-600",
+      "Default": "from-gray-500 to-gray-600"
     };
     return colors[category] || colors["Default"];
   };
@@ -34,8 +36,9 @@ const StoryCardTwo = ({ title, description, image, category, date, featured, rea
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      whileHover={{ y: -8, scale: 1.02 }}
-      className="group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-gray-100"
+      whileHover={{ y: -8 }}
+      onClick={() => router.push(`/stories/${id}`)}
+      className="group relative bg-white rounded-2xl shadow-md hover:shadow-2xl transition-all duration-500 overflow-hidden border border-gray-100 cursor-pointer h-full flex flex-col"
     >
       {/* Badge Featured */}
       {featured && (
@@ -43,7 +46,7 @@ const StoryCardTwo = ({ title, description, image, category, date, featured, rea
           initial={{ scale: 0, rotate: -45 }}
           animate={{ scale: 1, rotate: 0 }}
           transition={{ type: "spring", stiffness: 300, delay: 0.3 }}
-          className="absolute top-4 right-4 z-10 bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-3 py-1 rounded-full text-xs font-bold flex items-center space-x-1 shadow-lg"
+          className="absolute top-4 right-4 z-20 bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-3 py-1.5 rounded-full text-xs font-bold flex items-center space-x-1 shadow-lg"
         >
           <FaStar className="text-xs" />
           <span>À la Une</span>
@@ -61,52 +64,61 @@ const StoryCardTwo = ({ title, description, image, category, date, featured, rea
         />
         
         {/* Overlay gradient */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-500" />
         
         {/* Category Badge */}
-        <div className="absolute top-4 left-4">
-          <div className={`${getCategoryColor(category)} text-white px-3 py-1 rounded-full text-sm font-medium flex items-center space-x-2 shadow-lg backdrop-blur-sm`}>
+        <div className="absolute top-4 left-4 z-10">
+          <div className={`bg-gradient-to-r ${getCategoryColor(category)} text-white px-3 py-1.5 rounded-full text-xs font-semibold flex items-center space-x-2 shadow-lg backdrop-blur-sm`}>
             <span>{getCategoryIcon(category)}</span>
             <span>{category}</span>
           </div>
         </div>
 
         {/* Read Time */}
-        <div className="absolute bottom-4 right-4 bg-white/90 backdrop-blur-sm text-gray-700 px-3 py-1 rounded-full text-sm font-medium flex items-center space-x-1">
-          <FaClock className="text-xs" />
-          <span>{readTime}</span>
-        </div>
+        {readTime && (
+          <div className="absolute bottom-4 right-4 z-10 bg-white/95 backdrop-blur-sm text-gray-800 px-3 py-1.5 rounded-full text-xs font-semibold flex items-center space-x-1.5 shadow-md">
+            <FaClock className="text-xs" />
+            <span>{readTime}</span>
+          </div>
+        )}
+
+        {/* Hover overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-red-600/0 to-red-600/0 group-hover:from-red-600/30 group-hover:to-transparent transition-all duration-500" />
       </div>
 
       {/* Content */}
-      <div className="p-6">
+      <div className="p-6 flex-1 flex flex-col">
         {/* Author & Date */}
-        <div className="flex items-center justify-between mb-4 text-sm text-gray-500">
+        <div className="flex items-center justify-between mb-4 text-sm text-gray-600">
           <div className="flex items-center space-x-2">
-            <FaUser className="text-xs" />
+            <div className="p-1.5 bg-gray-100 rounded-full">
+              <FaUser className="text-xs text-gray-600" />
+            </div>
             <span className="font-medium">{author}</span>
           </div>
-          <div className="flex items-center space-x-2">
-            <FaCalendarAlt className="text-xs" />
-            <span>{date}</span>
-          </div>
+          {date && (
+            <div className="flex items-center space-x-1.5 text-gray-500">
+              <FaCalendarAlt className="text-xs" />
+              <span className="text-xs">{date}</span>
+            </div>
+          )}
         </div>
 
         {/* Title */}
-        <h3 className="font-bold text-xl mb-3 text-gray-900 group-hover:text-blue-600 transition-colors duration-300 line-clamp-2">
+        <h3 className="font-bold text-xl mb-3 text-gray-900 group-hover:text-red-600 transition-colors duration-300 line-clamp-2 leading-tight">
           {title}
         </h3>
 
         {/* Description */}
-        <p className="text-gray-600 text-base leading-relaxed mb-6 line-clamp-3">
+        <p className="text-gray-600 text-sm leading-relaxed mb-6 line-clamp-3 flex-1">
           {description}
         </p>
 
         {/* Action Button */}
         <motion.button
-          whileHover={{ scale: 1.05, x: 4 }}
-          whileTap={{ scale: 0.95 }}
-          className="group/btn relative w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-bold py-3 px-6 rounded-xl transition-all duration-300 flex items-center justify-center space-x-2 overflow-hidden"
+          whileHover={{ scale: 1.02, x: 4 }}
+          whileTap={{ scale: 0.98 }}
+          className="group/btn relative w-full bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-semibold py-3.5 px-6 rounded-xl transition-all duration-300 flex items-center justify-center space-x-2 overflow-hidden shadow-md hover:shadow-lg"
         >
           {/* Shine effect */}
           <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] group-hover/btn:translate-x-[100%] transition-transform duration-700" />
@@ -118,10 +130,13 @@ const StoryCardTwo = ({ title, description, image, category, date, featured, rea
       </div>
 
       {/* Decorative Elements */}
-      <div className="absolute top-0 left-0 w-2 h-full bg-gradient-to-b from-blue-500 to-indigo-600 transform scale-y-0 group-hover:scale-y-100 transition-transform duration-500 origin-top" />
+      <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-red-500 via-rose-500 to-red-600 transform scale-y-0 group-hover:scale-y-100 transition-transform duration-500 origin-top" />
       
       {/* Bottom decorative line */}
-      <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
+      <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-red-500 via-rose-500 to-red-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
+      
+      {/* Corner accent */}
+      <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-red-500/0 to-red-500/10 rounded-bl-full transform scale-0 group-hover:scale-100 transition-transform duration-500" />
     </motion.div>
   );
 };
