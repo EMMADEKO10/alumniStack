@@ -34,7 +34,7 @@ const Page: React.FC = () => {
           </motion.div>
 
           {/* Title */}
-          {/* <motion.div
+          <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
@@ -49,7 +49,7 @@ const Page: React.FC = () => {
             <p className="text-base sm:text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed px-4">
               Rejoignez la communauté mondiale des anciens élèves de Leadership Academy, où que vous soyez (sur le campus, en ligne et dans votre région), à travers des programmes et des événements.
             </p>
-          </motion.div> */}
+          </motion.div>
         </div>
       </div>
 
