@@ -19,7 +19,6 @@ import {
   DocumentTextIcon,
   UserGroupIcon
 } from "@heroicons/react/24/outline";
-import { HeartIcon } from "@heroicons/react/24/solid";
 
 interface Opportunity {
   _id: string;
@@ -48,7 +47,6 @@ const OpportunityDetailPage: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [hasApplied, setHasApplied] = useState(false);
   const [showShareMenu, setShowShareMenu] = useState(false);
-  const [isFavorite, setIsFavorite] = useState(false);
 
   useEffect(() => {
     const fetchOpportunity = async () => {
@@ -224,10 +222,6 @@ const OpportunityDetailPage: React.FC = () => {
     setShowShareMenu(!showShareMenu);
   };
 
-  const handleFavorite = () => {
-    setIsFavorite(!isFavorite);
-  };
-
   const shareOnSocial = (platform: string) => {
     const url = window.location.href;
     const text = `Découvrez cette opportunité : ${opportunity?.title} chez ${opportunity?.company}`;
@@ -291,139 +285,162 @@ const OpportunityDetailPage: React.FC = () => {
   const applicantsCount = opportunity.applicants?.length || 0;
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="max-w-5xl mx-auto px-4 pt-8 pb-16">
-        {/* Bouton de retour */}
-        <button
-          onClick={() => router.back()}
-          className="flex items-center text-red-800 hover:text-red-900 mb-6 transition-colors"
-        >
-          <ArrowLeftIcon className="h-5 w-5 mr-2" />
-          Retour aux opportunités
-        </button>
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100">
+      {/* Espacement pour le header fixe */}
+      <div className="pt-32">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          {/* Bouton de retour */}
+          <button
+            onClick={() => router.back()}
+            className="flex items-center text-red-600 hover:text-red-700 mb-8 transition-colors font-medium group"
+          >
+            <ArrowLeftIcon className="h-5 w-5 mr-2 transform group-hover:-translate-x-1 transition-transform" />
+            Retour aux opportunités
+          </button>
 
-        {/* Image principale */}
-        <div className="relative h-80 w-full rounded-xl overflow-hidden mb-8 shadow-lg">
-          {opportunity.imageUrl ? (
-            <Image
-              src={opportunity.imageUrl}
-              alt={opportunity.title}
-              fill
-              className="object-cover"
-              sizes="(max-width: 1280px) 100vw, 1280px"
-              priority
-            />
-          ) : (
-            <div className="w-full h-full bg-gradient-to-br from-red-400 to-red-600 flex items-center justify-center">
-              <BriefcaseIcon className="h-24 w-24 text-white opacity-80" />
-            </div>
-          )}
-          <div className="absolute inset-0 bg-black bg-opacity-40"></div>
-          <div className="absolute bottom-6 left-6">
-            <div className={`inline-flex items-center px-4 py-2 rounded-full text-sm font-medium border ${getTypeColor(opportunity.type)}`}>
-              {opportunity.type}
-            </div>
-          </div>
-          <div className="absolute top-6 right-6 flex gap-2">
-            <button
-              onClick={handleFavorite}
-              className={`p-3 rounded-full shadow-lg transition-colors ${
-                isFavorite 
-                  ? "bg-red-500 text-white" 
-                  : "bg-white text-gray-600 hover:bg-gray-100"
-              }`}
-            >
-              <HeartIcon className="h-5 w-5" />
-            </button>
-            <div className="relative">
-              <button
-                onClick={handleShare}
-                className="p-3 bg-white text-gray-600 hover:bg-gray-100 rounded-full shadow-lg transition-colors"
-              >
-                <ShareIcon className="h-5 w-5" />
-              </button>
-              {showShareMenu && (
-                <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 z-10">
-                  <div className="py-1">
-                    <button
-                      onClick={() => shareOnSocial("facebook")}
-                      className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                    >
-                      Partager sur Facebook
-                    </button>
-                    <button
-                      onClick={() => shareOnSocial("twitter")}
-                      className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                    >
-                      Partager sur Twitter
-                    </button>
-                    <button
-                      onClick={() => shareOnSocial("linkedin")}
-                      className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                    >
-                      Partager sur LinkedIn
-                    </button>
-                    <button
-                      onClick={() => shareOnSocial("copy")}
-                      className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                    >
-                      Copier le lien
-                    </button>
-                  </div>
+          {/* Hero Section avec image */}
+          <div className="relative h-96 w-full rounded-2xl overflow-hidden mb-8 shadow-xl">
+            {opportunity.imageUrl ? (
+              <Image
+                src={opportunity.imageUrl}
+                alt={opportunity.title}
+                fill
+                className="object-cover"
+                sizes="(max-width: 1536px) 100vw, 1536px"
+                priority
+              />
+            ) : (
+              <div className="w-full h-full bg-gradient-to-br from-red-500 via-rose-500 to-red-600 flex items-center justify-center">
+                <BriefcaseIcon className="h-32 w-32 text-white opacity-50" />
+              </div>
+            )}
+            
+            {/* Overlay gradient */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
+            
+            {/* Contenu sur l'image */}
+            <div className="absolute inset-0 flex flex-col justify-end p-8">
+              <div className="mb-4">
+                <div className={`inline-flex items-center px-4 py-2 rounded-full text-sm font-semibold border-2 backdrop-blur-sm ${getTypeColor(opportunity.type)} bg-white/90`}>
+                  <BriefcaseIcon className="h-4 w-4 mr-2" />
+                  {opportunity.type}
                 </div>
-              )}
+              </div>
+              
+              <h1 className="text-4xl md:text-5xl font-bold text-white mb-3 drop-shadow-lg">
+                {opportunity.title}
+              </h1>
+              
+              <div className="flex flex-wrap items-center gap-4 text-white">
+                <div className="flex items-center gap-2 bg-white/20 backdrop-blur-sm px-4 py-2 rounded-lg">
+                  <BuildingOfficeIcon className="h-5 w-5" />
+                  <span className="font-semibold text-lg">{opportunity.company}</span>
+                </div>
+                <div className="flex items-center gap-2 bg-white/20 backdrop-blur-sm px-4 py-2 rounded-lg">
+                  <MapPinIcon className="h-5 w-5" />
+                  <span>{opportunity.location}</span>
+                </div>
+                <div className="flex items-center gap-2 bg-white/20 backdrop-blur-sm px-4 py-2 rounded-lg">
+                  <UserGroupIcon className="h-5 w-5" />
+                  <span>{applicantsCount} candidat{applicantsCount !== 1 ? 's' : ''}</span>
+                </div>
+              </div>
+            </div>
+            
+            {/* Boutons d'action */}
+            <div className="absolute top-6 right-6 flex gap-3">
+              <div className="relative">
+                <button
+                  onClick={handleShare}
+                  className="p-3 bg-white/90 backdrop-blur-sm text-gray-700 hover:bg-white rounded-full shadow-lg transition-all duration-300 transform hover:scale-110"
+                >
+                  <ShareIcon className="h-6 w-6" />
+                </button>
+                {showShareMenu && (
+                  <div className="absolute right-0 mt-2 w-56 bg-white rounded-xl shadow-xl border border-gray-200 z-10 overflow-hidden">
+                    <div className="py-2">
+                      <button
+                        onClick={() => shareOnSocial("facebook")}
+                        className="block w-full text-left px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors"
+                      >
+                        👥 Partager sur Facebook
+                      </button>
+                      <button
+                        onClick={() => shareOnSocial("twitter")}
+                        className="block w-full text-left px-4 py-3 text-sm text-gray-700 hover:bg-sky-50 hover:text-sky-600 transition-colors"
+                      >
+                        🐦 Partager sur Twitter
+                      </button>
+                      <button
+                        onClick={() => shareOnSocial("linkedin")}
+                        className="block w-full text-left px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors"
+                      >
+                        💼 Partager sur LinkedIn
+                      </button>
+                      <div className="border-t border-gray-100"></div>
+                      <button
+                        onClick={() => shareOnSocial("copy")}
+                        className="block w-full text-left px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 transition-colors"
+                      >
+                        🔗 Copier le lien
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
-        </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Contenu principal */}
           <div className="lg:col-span-2">
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-8">
-              {/* En-tête */}
-              <div className="mb-6">
-                <h1 className="text-3xl font-bold text-gray-900 mb-2">{opportunity.title}</h1>
-                <div className="flex items-center gap-2 mb-4">
-                  <BuildingOfficeIcon className="h-5 w-5 text-gray-500" />
-                  <span className="text-xl text-red-800 font-semibold">{opportunity.company}</span>
-                </div>
-              </div>
-
-              {/* Informations clés */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                <div className="flex items-start gap-3">
-                  <MapPinIcon className="h-6 w-6 text-green-600 mt-1" />
+            <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-sm border border-gray-200 p-8">
+              {/* Informations clés en grille */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8 pb-8 border-b border-gray-200">
+                <div className="flex items-start gap-4 p-4 bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl border border-green-100">
+                  <div className="bg-white p-3 rounded-lg shadow-sm">
+                    <MapPinIcon className="h-6 w-6 text-green-600" />
+                  </div>
                   <div>
-                    <p className="font-semibold text-gray-900">Localisation</p>
-                    <p className="text-gray-600">{opportunity.location}</p>
+                    <p className="font-semibold text-gray-900 text-sm mb-1">Localisation</p>
+                    <p className="text-gray-700">{opportunity.location}</p>
                   </div>
                 </div>
-                <div className="flex items-start gap-3">
-                  <CurrencyDollarIcon className="h-6 w-6 text-blue-600 mt-1" />
+                
+                <div className="flex items-start gap-4 p-4 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl border border-blue-100">
+                  <div className="bg-white p-3 rounded-lg shadow-sm">
+                    <CurrencyDollarIcon className="h-6 w-6 text-blue-600" />
+                  </div>
                   <div>
-                    <p className="font-semibold text-gray-900">Rémunération</p>
-                    <p className="text-gray-600">{opportunity.salary || 'Non spécifié'}</p>
+                    <p className="font-semibold text-gray-900 text-sm mb-1">Rémunération</p>
+                    <p className="text-gray-700">{opportunity.salary || 'Non spécifié'}</p>
                   </div>
                 </div>
-                <div className="flex items-start gap-3">
-                  <CalendarIcon className="h-6 w-6 text-purple-600 mt-1" />
+                
+                <div className="flex items-start gap-4 p-4 bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl border border-purple-100">
+                  <div className="bg-white p-3 rounded-lg shadow-sm">
+                    <CalendarIcon className="h-6 w-6 text-purple-600" />
+                  </div>
                   <div>
-                    <p className="font-semibold text-gray-900">Date limite</p>
-                    <p className={`text-sm ${deadlineInfo.isExpired ? 'text-red-600' : 'text-gray-600'}`}>
+                    <p className="font-semibold text-gray-900 text-sm mb-1">Date limite</p>
+                    <p className={`text-sm font-medium ${deadlineInfo.isExpired ? 'text-red-600' : 'text-gray-700'}`}>
                       {deadlineInfo.formatted}
-                      {!deadlineInfo.isExpired && (
-                        <span className="block text-xs text-gray-500">
-                          ({deadlineInfo.daysLeft} jour{deadlineInfo.daysLeft !== 1 ? 's' : ''} restant{deadlineInfo.daysLeft !== 1 ? 's' : ''})
-                        </span>
-                      )}
                     </p>
+                    {!deadlineInfo.isExpired && (
+                      <span className="inline-block mt-1 px-2 py-1 bg-white rounded text-xs font-semibold text-purple-600">
+                        {deadlineInfo.daysLeft} jour{deadlineInfo.daysLeft !== 1 ? 's' : ''} restant{deadlineInfo.daysLeft !== 1 ? 's' : ''}
+                      </span>
+                    )}
                   </div>
                 </div>
-                <div className="flex items-start gap-3">
-                  <UserGroupIcon className="h-6 w-6 text-orange-600 mt-1" />
+                
+                <div className="flex items-start gap-4 p-4 bg-gradient-to-br from-orange-50 to-red-50 rounded-xl border border-orange-100">
+                  <div className="bg-white p-3 rounded-lg shadow-sm">
+                    <UserGroupIcon className="h-6 w-6 text-orange-600" />
+                  </div>
                   <div>
-                    <p className="font-semibold text-gray-900">Candidatures</p>
-                    <p className="text-gray-600">{applicantsCount} candidat{applicantsCount !== 1 ? 's' : ''}</p>
+                    <p className="font-semibold text-gray-900 text-sm mb-1">Candidatures</p>
+                    <p className="text-gray-700 font-medium">{applicantsCount} candidat{applicantsCount !== 1 ? 's' : ''}</p>
                   </div>
                 </div>
               </div>
@@ -461,34 +478,34 @@ const OpportunityDetailPage: React.FC = () => {
 
           {/* Sidebar */}
           <div className="lg:col-span-1">
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 sticky top-8">
+            <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-sm border border-gray-200 p-6 sticky top-8">
               {/* Statut et candidature */}
               <div className="mb-6">
                 {!deadlineInfo.isExpired ? (
                   <>
-                    <div className="mb-4 p-3 bg-green-50 border border-green-200 rounded-lg">
+                    <div className="mb-4 p-4 bg-gradient-to-br from-green-50 to-emerald-50 border border-green-200 rounded-xl">
                       <div className="flex items-center gap-2">
-                        <CheckCircleIcon className="h-5 w-5 text-green-600" />
-                        <p className="text-green-800 font-medium text-sm">Candidatures ouvertes</p>
+                        <CheckCircleIcon className="h-6 w-6 text-green-600" />
+                        <p className="text-green-800 font-semibold">Candidatures ouvertes</p>
                       </div>
                     </div>
                     
                     <button
                       onClick={handleApply}
-                      className={`w-full py-3 px-4 rounded-lg font-semibold transition-colors ${
+                      className={`w-full py-4 px-4 rounded-xl font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-lg ${
                         hasApplied
-                          ? "bg-green-600 text-white hover:bg-green-700"
-                          : "bg-red-800 text-white hover:bg-red-900"
+                          ? "bg-gradient-to-r from-green-600 to-emerald-600 text-white"
+                          : "bg-gradient-to-r from-red-600 to-rose-600 text-white hover:from-red-700 hover:to-rose-700"
                       }`}
                     >
                       {hasApplied ? "✓ Candidature envoyée" : "Postuler maintenant"}
                     </button>
                   </>
                 ) : (
-                  <div className="p-3 bg-red-50 border border-red-200 rounded-lg">
+                  <div className="p-4 bg-gradient-to-br from-red-50 to-orange-50 border border-red-200 rounded-xl">
                     <div className="flex items-center gap-2">
-                      <ExclamationTriangleIcon className="h-5 w-5 text-red-600" />
-                      <p className="text-red-800 font-medium text-sm">Date limite dépassée</p>
+                      <ExclamationTriangleIcon className="h-6 w-6 text-red-600" />
+                      <p className="text-red-800 font-semibold">Date limite dépassée</p>
                     </div>
                   </div>
                 )}
@@ -497,29 +514,32 @@ const OpportunityDetailPage: React.FC = () => {
               {/* Contact */}
               {(opportunity.contactEmail || opportunity.contactPhone) && (
                 <div className="border-t border-gray-200 pt-6 mb-6">
-                  <h3 className="font-semibold text-gray-900 mb-4">Contact recruteur</h3>
+                  <h3 className="font-bold text-gray-900 mb-4 flex items-center gap-2">
+                    <EnvelopeIcon className="h-5 w-5 text-red-600" />
+                    Contact recruteur
+                  </h3>
                   <div className="space-y-3">
                     {opportunity.contactEmail && (
-                      <div className="flex items-center gap-3">
-                        <EnvelopeIcon className="h-4 w-4 text-gray-400" />
-                        <a 
-                          href={`mailto:${opportunity.contactEmail}`}
-                          className="text-sm text-red-800 hover:text-red-900 underline"
-                        >
+                      <a 
+                        href={`mailto:${opportunity.contactEmail}`}
+                        className="flex items-center gap-3 p-3 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-lg hover:from-blue-100 hover:to-indigo-100 transition-all duration-300 group"
+                      >
+                        <EnvelopeIcon className="h-5 w-5 text-blue-600 group-hover:scale-110 transition-transform" />
+                        <span className="text-sm text-blue-700 font-medium group-hover:underline">
                           {opportunity.contactEmail}
-                        </a>
-                      </div>
+                        </span>
+                      </a>
                     )}
                     {opportunity.contactPhone && (
-                      <div className="flex items-center gap-3">
-                        <PhoneIcon className="h-4 w-4 text-gray-400" />
-                        <a 
-                          href={`tel:${opportunity.contactPhone}`}
-                          className="text-sm text-red-800 hover:text-red-900 underline"
-                        >
+                      <a 
+                        href={`tel:${opportunity.contactPhone}`}
+                        className="flex items-center gap-3 p-3 bg-gradient-to-br from-green-50 to-emerald-50 rounded-lg hover:from-green-100 hover:to-emerald-100 transition-all duration-300 group"
+                      >
+                        <PhoneIcon className="h-5 w-5 text-green-600 group-hover:scale-110 transition-transform" />
+                        <span className="text-sm text-green-700 font-medium group-hover:underline">
                           {opportunity.contactPhone}
-                        </a>
-                      </div>
+                        </span>
+                      </a>
                     )}
                   </div>
                 </div>
@@ -527,30 +547,33 @@ const OpportunityDetailPage: React.FC = () => {
 
               {/* Informations supplémentaires */}
               <div className="border-t border-gray-200 pt-6">
-                <h3 className="font-semibold text-gray-900 mb-4">Informations</h3>
+                <h3 className="font-bold text-gray-900 mb-4 flex items-center gap-2">
+                  <DocumentTextIcon className="h-5 w-5 text-purple-600" />
+                  Informations
+                </h3>
                 <div className="space-y-3">
-                  <div className="flex items-center gap-3 text-sm">
-                    <DocumentTextIcon className="h-4 w-4 text-gray-400" />
-                    <span className="text-gray-600">CV et lettre de motivation requis</span>
+                  <div className="flex items-start gap-3 text-sm p-3 bg-gray-50 rounded-lg">
+                    <DocumentTextIcon className="h-5 w-5 text-gray-500 mt-0.5 flex-shrink-0" />
+                    <span className="text-gray-700">CV et lettre de motivation requis</span>
                   </div>
-                  <div className="flex items-center gap-3 text-sm">
-                    <ClockIcon className="h-4 w-4 text-gray-400" />
-                    <span className="text-gray-600">Réponse sous 1-2 semaines</span>
+                  <div className="flex items-start gap-3 text-sm p-3 bg-gray-50 rounded-lg">
+                    <ClockIcon className="h-5 w-5 text-gray-500 mt-0.5 flex-shrink-0" />
+                    <span className="text-gray-700">Réponse sous 1-2 semaines</span>
                   </div>
-                  <div className="flex items-center gap-3 text-sm">
-                    <BookmarkIcon className="h-4 w-4 text-gray-400" />
-                    <span className="text-gray-600">Offre référence: {opportunity._id.substring(0, 8)}</span>
+                  <div className="flex items-start gap-3 text-sm p-3 bg-gray-50 rounded-lg">
+                    <BookmarkIcon className="h-5 w-5 text-gray-500 mt-0.5 flex-shrink-0" />
+                    <span className="text-gray-700">Référence: <span className="font-mono font-semibold">{opportunity._id.substring(0, 8)}</span></span>
                   </div>
                 </div>
               </div>
 
               {/* Actions secondaires */}
               <div className="border-t border-gray-200 pt-6 mt-6">
-                <div className="flex gap-2">
-                  <button className="flex-1 py-2 px-3 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors text-center">
+                <div className="grid grid-cols-2 gap-3">
+                  <button className="py-3 px-4 border-2 border-gray-300 rounded-xl text-sm font-semibold text-gray-700 hover:bg-gray-50 hover:border-gray-400 transition-all duration-300 transform hover:scale-105">
                     Signaler
                   </button>
-                  <button className="flex-1 py-2 px-3 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors text-center">
+                  <button className="py-3 px-4 border-2 border-red-300 rounded-xl text-sm font-semibold text-red-600 hover:bg-red-50 hover:border-red-400 transition-all duration-300 transform hover:scale-105">
                     Similaires
                   </button>
                 </div>
@@ -559,6 +582,7 @@ const OpportunityDetailPage: React.FC = () => {
           </div>
         </div>
       </div>
+    </div>
     </div>
   );
 };
