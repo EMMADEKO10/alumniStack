@@ -1,91 +1,107 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import FormationCard from "../../components/cards/FormationCard";
+import { useRouter } from "next/navigation";
 import { 
   MagnifyingGlassIcon, 
   FunnelIcon, 
-  AcademicCapIcon
+  AcademicCapIcon,
+  ClockIcon,
+  UserGroupIcon,
+  TagIcon,
+  ArrowRightIcon,
+  SignalIcon
 } from "@heroicons/react/24/outline";
+import Image from "next/image";
 
 interface Formation {
   _id: string;
   title: string;
   description: string;
+  instructor: string;
   duration: string;
   level: string;
-  instructor: string;
-  price: number;
-  startDate: Date;
-  endDate: Date;
-  location: string;
-  maxStudents?: number;
-  imageUrl: string;
+  category: string;
+  price: string;
+  startDate: string;
+  maxParticipants?: number;
+  participants?: unknown[];
+  imageUrl?: string;
+  isActive?: boolean;
   createdAt: Date;
 }
 
 const FormationSection: React.FC = () => {
+  const router = useRouter();
   const [formations, setFormations] = useState<Formation[]>([]);
   const [filteredFormations, setFilteredFormations] = useState<Formation[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState("");
-  const [sortBy, setSortBy] = useState("createdAt");
+  const [sortBy, setSortBy] = useState("startDate");
   const [filterLevel, setFilterLevel] = useState("all");
-  const [filterLocation, setFilterLocation] = useState("all");
+  const [filterCategory, setFilterCategory] = useState("all");
   const [viewMode, setViewMode] = useState("grid");
 
-  // Récupération des formations depuis l'API
   useEffect(() => {
     const fetchFormations = async () => {
       try {
         const response = await fetch("/api/formations");
         if (!response.ok) {
-          // Si l'API échoue, utiliser des données de démonstration
-          console.warn("API non disponible, utilisation des données de démonstration");
           const demoData: Formation[] = [
             {
               _id: "demo1",
-              title: "Design d'expérience utilisateur (UX)",
-              description: "Découvrez les principes fondamentaux du design d'expérience utilisateur (UX) et apprenez à créer des interfaces utilisateur intuitives et attrayantes.",
-              duration: "5 semaines",
-              level: "Débutant",
-              instructor: "Sarah Martin",
-              price: 300,
-              startDate: new Date("2024-02-15"),
-              endDate: new Date("2024-03-29"),
-              location: "En ligne ou en presentiel",
-              maxStudents: 25,
-              imageUrl: "https://res.cloudinary.com/dzhpaf2vw/image/upload/v1747579799/_21bd88b7-e386-45d7-9db3-7ba43b135625_iokqbi.jpg",
+              title: "Leadership & Management",
+              description: "Développez vos compétences en leadership et apprenez à gérer efficacement une équipe.",
+              instructor: "Dr. Marie Dupont",
+              duration: "8 semaines",
+              level: "Intermédiaire",
+              category: "Management",
+              price: "599 €",
+              startDate: new Date(Date.now() + 14 * 24 * 60 * 60 * 1000).toISOString(),
+              maxParticipants: 30,
+              imageUrl: "/graduation.jpg",
               createdAt: new Date()
             },
             {
               _id: "demo2",
-              title: "Développement Web avancé",
-              description: "Apprenez les techniques de développement Web avancées, y compris les frameworks populaires tels que React et Vue.js.",
-              duration: "8 semaines",
+              title: "Marketing Digital Avancé",
+              description: "Maîtrisez les stratégies de marketing digital pour booster votre présence en ligne.",
+              instructor: "Sophie Martin",
+              duration: "6 semaines",
               level: "Avancé",
-              instructor: "Jean Dupont",
-              price: 499,
-              startDate: new Date("2024-03-01"),
-              endDate: new Date("2024-04-26"),
-              location: "Paris, France",
-              maxStudents: 20,
-              imageUrl: "https://res.cloudinary.com/dzhpaf2vw/image/upload/c_fill,w_800,h_600/v1747579800/web-development-course_abc123.jpg",
+              category: "Marketing",
+              price: "499 €",
+              startDate: new Date(Date.now() + 21 * 24 * 60 * 60 * 1000).toISOString(),
+              maxParticipants: 25,
+              imageUrl: "/graduation.jpg",
               createdAt: new Date()
             },
             {
               _id: "demo3",
-              title: "Marketing numérique pour les entrepreneurs",
-              description: "Découvrez les stratégies et les outils du marketing numérique pour développer votre entreprise en ligne.",
-              duration: "4 semaines",
+              title: "Data Science & IA",
+              description: "Initiez-vous à la science des données et à l'intelligence artificielle.",
+              instructor: "Prof. Jean Leroy",
+              duration: "10 semaines",
+              level: "Débutant",
+              category: "Technologie",
+              price: "699 €",
+              startDate: new Date(Date.now() + 28 * 24 * 60 * 60 * 1000).toISOString(),
+              maxParticipants: 20,
+              imageUrl: "/graduation.jpg",
+              createdAt: new Date()
+            },
+            {
+              _id: "demo4",
+              title: "Finance d'Entreprise",
+              description: "Comprenez les fondamentaux de la finance et de la gestion d'entreprise.",
+              instructor: "Éric Bernard",
+              duration: "7 semaines",
               level: "Intermédiaire",
-              instructor: "Marie Dubois",
-              price: 199,
-              startDate: new Date("2024-02-20"),
-              endDate: new Date("2024-03-20"),
-              location: "Lyon, France",
-              maxStudents: 30,
-              imageUrl: "https://res.cloudinary.com/dzhpaf2vw/image/upload/c_scale,w_800,h_600,q_auto,f_auto/v1747579801/digital-marketing-course_def456.jpg",
+              category: "Finance",
+              price: "549 €",
+              startDate: new Date(Date.now() + 35 * 24 * 60 * 60 * 1000).toISOString(),
+              maxParticipants: 30,
+              imageUrl: "/graduation.jpg",
               createdAt: new Date()
             }
           ];
@@ -98,8 +114,26 @@ const FormationSection: React.FC = () => {
         setFormations(data || []);
         setFilteredFormations(data || []);
       } catch (err) {
-        console.error("Erreur lors de la récupération des formations:", err);
-        setError("Erreur lors du chargement des formations");
+        console.error("Erreur:", err);
+        const demoData: Formation[] = [
+          {
+            _id: "demo1",
+            title: "Leadership & Management",
+            description: "Développez vos compétences en leadership et apprenez à gérer efficacement une équipe.",
+            instructor: "Dr. Marie Dupont",
+            duration: "8 semaines",
+            level: "Intermédiaire",
+            category: "Management",
+            price: "599 €",
+            startDate: new Date(Date.now() + 14 * 24 * 60 * 60 * 1000).toISOString(),
+            maxParticipants: 30,
+            imageUrl: "/graduation.jpg",
+            createdAt: new Date()
+          }
+        ];
+        setFormations(demoData);
+        setFilteredFormations(demoData);
+        setError(null);
       } finally {
         setLoading(false);
       }
@@ -108,60 +142,78 @@ const FormationSection: React.FC = () => {
     fetchFormations();
   }, []);
 
-  // Filtrage et tri des formations
   useEffect(() => {
     let filtered = [...formations];
 
-    // Filtrage par recherche
     if (searchTerm) {
-      filtered = filtered.filter(formation =>
-        formation.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        formation.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        formation.instructor.toLowerCase().includes(searchTerm.toLowerCase())
+      filtered = filtered.filter(
+        (formation) =>
+          formation.title?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          formation.description?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          formation.instructor?.toLowerCase().includes(searchTerm.toLowerCase())
       );
     }
 
-    // Filtrage par niveau
     if (filterLevel !== "all") {
-      filtered = filtered.filter(formation => formation.level === filterLevel);
+      filtered = filtered.filter((formation) => formation.level === filterLevel);
     }
 
-    // Filtrage par localisation
-    if (filterLocation !== "all") {
-      filtered = filtered.filter(formation => formation.location === filterLocation);
+    if (filterCategory !== "all") {
+      filtered = filtered.filter((formation) => formation.category === filterCategory);
     }
 
-    // Tri
     filtered.sort((a, b) => {
       switch (sortBy) {
-        case "title":
-          return a.title.localeCompare(b.title);
-        case "price":
-          return a.price - b.price;
         case "startDate":
           return new Date(a.startDate).getTime() - new Date(b.startDate).getTime();
-        case "createdAt":
+        case "title":
+          return a.title?.localeCompare(b.title) || 0;
+        case "price":
+          return parseFloat(a.price) - parseFloat(b.price);
         default:
-          return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+          return 0;
       }
     });
 
     setFilteredFormations(filtered);
-  }, [formations, searchTerm, sortBy, filterLevel, filterLocation]);
+  }, [formations, searchTerm, sortBy, filterLevel, filterCategory]);
 
-  const getUniqueLevels = () => {
-    return ["all", ...Array.from(new Set(formations.map(f => f.level)))];
+  const getLevels = () => {
+    return [...new Set(formations.map((f) => f.level).filter(Boolean))];
   };
 
-  const getUniqueLocations = () => {
-    return ["all", ...Array.from(new Set(formations.map(f => f.location)))];
+  const getCategories = () => {
+    return [...new Set(formations.map((f) => f.category).filter(Boolean))];
+  };
+
+  const formatDate = (dateString: string) => {
+    const date = new Date(dateString);
+    return {
+      day: date.getDate().toString().padStart(2, "0"),
+      month: date.toLocaleDateString("fr-FR", { month: "short" }),
+      year: date.getFullYear()
+    };
+  };
+
+  const getLevelColor = (level: string) => {
+    switch (level.toLowerCase()) {
+      case "débutant":
+        return "bg-green-100 text-green-700 border-green-200";
+      case "intermédiaire":
+        return "bg-yellow-100 text-yellow-700 border-yellow-200";
+      case "avancé":
+        return "bg-red-100 text-red-700 border-red-200";
+      default:
+        return "bg-gray-100 text-gray-700 border-gray-200";
+    }
   };
 
   if (loading) {
     return (
-      <div className="max-w-7xl mx-auto px-4 py-8">
-        <div className="flex justify-center items-center h-64">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-red-800"></div>
+      <div className="max-w-7xl mx-auto px-4 pt-12 pb-16">
+        <div className="flex items-center justify-center h-64">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-600"></div>
+          <span className="ml-3 text-gray-600">Chargement des formations...</span>
         </div>
       </div>
     );
@@ -169,119 +221,276 @@ const FormationSection: React.FC = () => {
 
   if (error) {
     return (
-      <div className="max-w-7xl mx-auto px-4 py-8">
-        <div className="text-center">
-          <p className="text-red-600">Erreur: {error}</p>
+      <div className="max-w-7xl mx-auto px-4 pt-12 pb-16">
+        <div className="bg-red-50 border border-red-200 rounded-lg p-6 text-center">
+          <p className="text-red-600 font-medium">Erreur : {error}</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-8">
-      {/* En-tête avec recherche et filtres */}
-      <div className="mb-8">
-        <div className="flex flex-col lg:flex-row gap-4 items-start lg:items-center justify-between">
-          <div className="flex-1 max-w-md">
-            <div className="relative">
-              <MagnifyingGlassIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
-              <input
-                type="text"
-                placeholder="Rechercher une formation..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-800 focus:border-transparent"
-              />
-            </div>
+    <div className="max-w-7xl mx-auto px-4 pt-12 pb-16">
+      {/* Barre de recherche et filtres */}
+      <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6 mb-10">
+        <div className="flex flex-col lg:flex-row gap-4 items-center justify-between">
+          <div className="relative flex-1 max-w-md">
+            <MagnifyingGlassIcon className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
+            <input
+              type="text"
+              placeholder="Rechercher une formation..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="w-full pl-12 pr-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all hover:border-gray-300"
+            />
           </div>
 
-          <div className="flex flex-wrap gap-2">
-            {/* Filtre par niveau */}
+          <div className="flex flex-wrap gap-3">
+            <div className="flex items-center gap-2">
+              <FunnelIcon className="h-5 w-5 text-gray-600" />
+              <select
+                value={filterLevel}
+                onChange={(e) => setFilterLevel(e.target.value)}
+                className="px-4 py-2 border border-gray-200 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm font-medium hover:border-gray-300 transition-all"
+              >
+                <option value="all">Tous niveaux</option>
+                {getLevels().map((level) => (
+                  <option key={level} value={level}>{level}</option>
+                ))}
+              </select>
+            </div>
+
             <select
-              value={filterLevel}
-              onChange={(e) => setFilterLevel(e.target.value)}
-              className="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-800 focus:border-transparent"
+              value={filterCategory}
+              onChange={(e) => setFilterCategory(e.target.value)}
+              className="px-4 py-2 border border-gray-200 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm font-medium hover:border-gray-300 transition-all"
             >
-              {getUniqueLevels().map(level => (
-                <option key={level} value={level}>
-                  {level === "all" ? "Tous les niveaux" : level}
-                </option>
+              <option value="all">Toutes catégories</option>
+              {getCategories().map((category) => (
+                <option key={category} value={category}>{category}</option>
               ))}
             </select>
 
-            {/* Filtre par localisation */}
-            <select
-              value={filterLocation}
-              onChange={(e) => setFilterLocation(e.target.value)}
-              className="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-800 focus:border-transparent"
-            >
-              {getUniqueLocations().map(location => (
-                <option key={location} value={location}>
-                  {location === "all" ? "Toutes les localisations" : location}
-                </option>
-              ))}
-            </select>
-
-            {/* Tri */}
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value)}
-              className="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-800 focus:border-transparent"
+              className="px-4 py-2 border border-gray-200 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm font-medium hover:border-gray-300 transition-all"
             >
-              <option value="createdAt">Plus récentes</option>
-              <option value="title">Alphabétique</option>
-              <option value="price">Prix</option>
               <option value="startDate">Date de début</option>
+              <option value="title">Titre</option>
+              <option value="price">Prix</option>
             </select>
 
-            {/* Mode d'affichage */}
-            <div className="flex border border-gray-300 rounded-lg overflow-hidden">
+            <div className="flex border border-gray-200 rounded-xl overflow-hidden bg-gray-50">
               <button
                 onClick={() => setViewMode("grid")}
-                className={`px-3 py-2 ${viewMode === "grid" ? "bg-red-800 text-white" : "bg-white text-gray-700"}`}
+                className={`px-4 py-2 text-sm font-medium transition-all ${
+                  viewMode === "grid"
+                    ? "bg-purple-600 text-white shadow-md"
+                    : "text-gray-600 hover:text-gray-900"
+                }`}
               >
-                <AcademicCapIcon className="h-5 w-5" />
+                Grille
               </button>
               <button
                 onClick={() => setViewMode("list")}
-                className={`px-3 py-2 ${viewMode === "list" ? "bg-red-800 text-white" : "bg-white text-gray-700"}`}
+                className={`px-4 py-2 text-sm font-medium transition-all ${
+                  viewMode === "list"
+                    ? "bg-purple-600 text-white shadow-md"
+                    : "text-gray-600 hover:text-gray-900"
+                }`}
               >
-                <FunnelIcon className="h-5 w-5" />
+                Liste
               </button>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Résultats */}
-      <div className="mb-6">
-        <p className="text-gray-600">
-          {filteredFormations.length} formation{filteredFormations.length !== 1 ? 's' : ''} trouvée{filteredFormations.length !== 1 ? 's' : ''}
-        </p>
+      {/* Statistiques */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+        <div className="bg-gradient-to-br from-purple-50 to-indigo-50 rounded-xl border border-purple-100 p-4 flex items-center gap-3">
+          <div className="bg-purple-100 rounded-lg p-2">
+            <AcademicCapIcon className="h-6 w-6 text-purple-600" />
+          </div>
+          <div>
+            <p className="text-2xl font-bold text-gray-900">{filteredFormations.length}</p>
+            <p className="text-xs text-gray-600">Formations</p>
+          </div>
+        </div>
+        <div className="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-xl border border-blue-100 p-4 flex items-center gap-3">
+          <div className="bg-blue-100 rounded-lg p-2">
+            <TagIcon className="h-6 w-6 text-blue-600" />
+          </div>
+          <div>
+            <p className="text-2xl font-bold text-gray-900">{getCategories().length}</p>
+            <p className="text-xs text-gray-600">Catégories</p>
+          </div>
+        </div>
+        <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl border border-green-100 p-4 flex items-center gap-3">
+          <div className="bg-green-100 rounded-lg p-2">
+            <UserGroupIcon className="h-6 w-6 text-green-600" />
+          </div>
+          <div>
+            <p className="text-2xl font-bold text-gray-900">{getLevels().length}</p>
+            <p className="text-xs text-gray-600">Niveaux</p>
+          </div>
+        </div>
       </div>
 
-      {/* Grille des formations */}
-      {filteredFormations.length > 0 ? (
-        <div className={`grid gap-6 ${
-          viewMode === "grid" 
-            ? "grid-cols-1 md:grid-cols-2 lg:grid-cols-3" 
-            : "grid-cols-1"
-        }`}>
-          {filteredFormations.map((formation) => (
-            <FormationCard key={formation._id} formation={formation} />
-          ))}
+      {/* Liste des formations */}
+      {filteredFormations.length === 0 ? (
+        <div className="text-center py-16">
+          <div className="bg-gray-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+            <AcademicCapIcon className="h-8 w-8 text-gray-400" />
+          </div>
+          <h3 className="text-lg font-semibold text-gray-900">Aucune formation trouvée</h3>
+          <p className="mt-2 text-gray-500 text-sm">Essayez de modifier vos critères de recherche.</p>
         </div>
       ) : (
-        <div className="text-center py-12">
-          <AcademicCapIcon className="mx-auto h-12 w-12 text-gray-400" />
-          <h3 className="mt-2 text-sm font-medium text-gray-900">Aucune formation trouvée</h3>
-          <p className="mt-1 text-sm text-gray-500">
-            Essayez de modifier vos critères de recherche.
-          </p>
+        <div className={`${
+          viewMode === "grid" 
+            ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" 
+            : "space-y-4"
+        }`}>
+          {filteredFormations.map((formation) => {
+            const dateInfo = formatDate(formation.startDate);
+            return (
+              <div 
+                key={formation._id} 
+                className="group bg-white rounded-2xl border border-gray-200 overflow-hidden hover:border-purple-300 hover:shadow-xl transition-all duration-300"
+              >
+                {viewMode === "grid" ? (
+                  <>
+                    <div className="relative h-56 w-full overflow-hidden">
+                      {formation.imageUrl ? (
+                        <Image
+                          src={formation.imageUrl}
+                          alt={formation.title}
+                          fill
+                          className="object-cover group-hover:scale-110 transition-transform duration-500"
+                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        />
+                      ) : (
+                        <div className="w-full h-full bg-gradient-to-br from-purple-100 via-indigo-50 to-purple-50 flex items-center justify-center group-hover:from-purple-200 transition-colors duration-300">
+                          <AcademicCapIcon className="h-20 w-20 text-purple-200" />
+                        </div>
+                      )}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                      
+                      <div className="absolute top-4 right-4">
+                        <div className="bg-purple-600 text-white rounded-xl p-2.5 shadow-lg transform group-hover:scale-110 transition-transform duration-300">
+                          <p className="text-xs font-semibold uppercase tracking-wider">{dateInfo.month}</p>
+                          <p className="text-xl font-bold leading-tight">{dateInfo.day}</p>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div className="p-6 flex flex-col h-full">
+                      <div className="flex gap-2 mb-3">
+                        <span className={`inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold border ${getLevelColor(formation.level)}`}>
+                          <SignalIcon className="h-3 w-3" />
+                          {formation.level}
+                        </span>
+                        <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold bg-purple-50 text-purple-700 border border-purple-200">
+                          <TagIcon className="h-3 w-3" />
+                          {formation.category}
+                        </span>
+                      </div>
+
+                      <h3 className="text-lg font-bold text-gray-900 mb-2 line-clamp-2 group-hover:text-purple-600 transition-colors">
+                        {formation.title}
+                      </h3>
+                      <p className="text-gray-600 text-sm mb-4 line-clamp-2 flex-grow">
+                        {formation.description}
+                      </p>
+
+                      <div className="space-y-2.5 mb-4 pt-4 border-t border-gray-100">
+                        <div className="flex items-center justify-between text-sm">
+                          <span className="flex items-center text-gray-700 gap-2">
+                            <AcademicCapIcon className="h-4 w-4 text-purple-600" />
+                            {formation.instructor}
+                          </span>
+                        </div>
+                        <div className="flex items-center justify-between text-sm">
+                          <span className="flex items-center text-gray-700 gap-2">
+                            <ClockIcon className="h-4 w-4 text-purple-600" />
+                            {formation.duration}
+                          </span>
+                          <span className="font-bold text-purple-600">{formation.price}</span>
+                        </div>
+                        {formation.maxParticipants && (
+                          <div className="flex items-center text-gray-700 text-sm gap-2">
+                            <UserGroupIcon className="h-4 w-4 text-purple-600" />
+                            <span>{formation.participants?.length || 0}/{formation.maxParticipants}</span>
+                          </div>
+                        )}
+                      </div>
+
+                      <button 
+                        onClick={() => router.push(`/formations/${formation._id}`)}
+                        className="w-full bg-gradient-to-r from-purple-600 to-indigo-500 text-white py-3 px-4 rounded-xl hover:from-purple-700 hover:to-indigo-600 transition-all duration-300 font-semibold flex items-center justify-center gap-2 group/btn shadow-lg hover:shadow-xl"
+                      >
+                        S&apos;inscrire
+                        <ArrowRightIcon className="h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
+                      </button>
+                    </div>
+                  </>
+                ) : (
+                  <div className="p-6 flex gap-6">
+                    <div className="relative h-40 w-40 flex-shrink-0 rounded-xl overflow-hidden">
+                      {formation.imageUrl ? (
+                        <Image
+                          src={formation.imageUrl}
+                          alt={formation.title}
+                          fill
+                          className="object-cover group-hover:scale-110 transition-transform duration-500"
+                          sizes="160px"
+                        />
+                      ) : (
+                        <div className="w-full h-full bg-gradient-to-br from-purple-100 to-indigo-50 flex items-center justify-center">
+                          <AcademicCapIcon className="h-12 w-12 text-purple-200" />
+                        </div>
+                      )}
+                    </div>
+                    <div className="flex-1 flex flex-col justify-between">
+                      <div>
+                        <div className="flex gap-2 mb-2">
+                          <span className={`inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold border ${getLevelColor(formation.level)}`}>
+                            {formation.level}
+                          </span>
+                          <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold bg-purple-50 text-purple-700 border border-purple-200">
+                            {formation.category}
+                          </span>
+                        </div>
+                        <h3 className="text-lg font-bold text-gray-900 mb-2 group-hover:text-purple-600 transition-colors">
+                          {formation.title}
+                        </h3>
+                        <div className="flex gap-4 text-sm text-gray-600">
+                          <span className="flex items-center gap-1">
+                            <ClockIcon className="h-4 w-4 text-purple-600" />
+                            {formation.duration}
+                          </span>
+                          <span className="font-bold text-purple-600">{formation.price}</span>
+                        </div>
+                      </div>
+                      <button 
+                        onClick={() => router.push(`/formations/${formation._id}`)}
+                        className="self-start mt-4 px-6 py-2 bg-purple-600 text-white rounded-xl hover:bg-purple-700 transition-colors font-semibold text-sm flex items-center gap-2"
+                      >
+                        S&apos;inscrire
+                        <ArrowRightIcon className="h-3 w-3" />
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </div>
+            );
+          })}
         </div>
       )}
     </div>
   );
 };
 
-export default FormationSection; 
+export default FormationSection;

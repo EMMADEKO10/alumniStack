@@ -1,7 +1,7 @@
 import React from "react";
 import Container from "./container";
 import Link from "next/link";
-import { FaGraduationCap, FaEnvelope, FaPhone, FaMapMarkerAlt, FaHeart } from "react-icons/fa";
+import { FaGraduationCap, FaEnvelope, FaPhone, FaMapMarkerAlt } from "react-icons/fa";
 import dynamic from 'next/dynamic';
 
 const Newsletter = dynamic(() => import('../Newsletter'), {
@@ -76,21 +76,21 @@ const Footer: React.FC = () => {
               </Link>
               
               <p className="text-gray-300 leading-relaxed">
-                La plateforme officielle des anciens étudiants de Leadership AcademiaUniversity. 
+                La plateforme officielle des anciens étudiants de Leadership Academia University. 
                 Connectez-vous, grandissez et construisez ensemble l&apos;avenir.
               </p>
 
               {/* Stats */}
-              <div className="grid grid-cols-2 gap-4 pt-4">
+              {/* <div className="grid grid-cols-2 gap-4 pt-4">
                 <div className="text-center p-3 bg-white/5 rounded-lg backdrop-blur-sm">
                   <div className="text-xl font-bold text-red-400">100K+</div>
                   <div className="text-xs text-gray-400">Alumni</div>
                 </div>
                 <div className="text-center p-3 bg-white/5 rounded-lg backdrop-blur-sm">
-                  <div className="text-xl font-bold text-blue-400">50+</div>
+                  <div className="text-xl font-bold text-blue-400">50+</div> 
                   <div className="text-xs text-gray-400">Pays</div>
                 </div>
-              </div>
+              </div> */}
             </div>
 
             {/* Navigation */}
@@ -143,11 +143,11 @@ const Footer: React.FC = () => {
                 </div>
                 <div className="flex items-center space-x-3 text-gray-300">
                   <FaPhone className="w-4 h-4 text-blue-400" />
-                  <span className="text-sm">+33 1 23 45 67 89</span>
+                  <span className="text-sm">+243 821 355 601</span>
                 </div>
                 <div className="flex items-center space-x-3 text-gray-300">
                   <FaMapMarkerAlt className="w-4 h-4 text-green-400" />
-                  <span className="text-sm">Paris, France</span>
+                  <span className="text-sm">Kinshasa, RDC</span>
                 </div>
               </div>
 
@@ -187,7 +187,7 @@ const Footer: React.FC = () => {
             <p className="text-sm text-gray-400 flex items-center justify-center space-x-2">
               <span>© {new Date().getFullYear()} LAU Alumni Platform.</span>
               <span>Fait avec</span>
-              <FaHeart className="w-4 h-4 text-red-400 animate-pulse" />
+              {/* <FaHeart className="w-4 h-4 text-red-400 animate-pulse" /> */}
               <span>par</span>
               <a
                 href="https://al-legacy.com/"
@@ -195,7 +195,7 @@ const Footer: React.FC = () => {
                 rel="noopener noreferrer"
                 className="font-semibold bg-gradient-to-r from-red-400 to-blue-400 bg-clip-text text-transparent hover:from-red-500 hover:to-blue-500 transition-all duration-200"
               >
-                Al & Leadership Team
+                Al & Legacy Team
               </a>
             </p>
           </div>

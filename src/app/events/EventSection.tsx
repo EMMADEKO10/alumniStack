@@ -1,8 +1,8 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import EventCard from "../../components/cards/EventCard";
-import { CalendarIcon, MapPinIcon, UsersIcon, FunnelIcon, MagnifyingGlassIcon } from "@heroicons/react/24/outline";
+// import EventCard from "../../components/cards/EventCard";
+import { CalendarIcon, MapPinIcon, UsersIcon, FunnelIcon, MagnifyingGlassIcon, ClockIcon, TagIcon, ArrowRightIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
 
 interface Event {
@@ -216,30 +216,19 @@ const EventSection: React.FC = () => {
   }
 
   return (
-    <div className="max-w-7xl mx-auto px-4 pt-16 pb-16">
-      {/* Description */}
-      <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-6 mb-8">
-        <p className="text-gray-700 text-lg leading-relaxed">
-          Pour plus d&apos;informations sur un événement Club ou SIG particulier,
-          veuillez contacter directement le Club ou le SIG. Pour les événements
-          exclusifs de réunion du Collège, veuillez visiter la page de votre
-          classe et les membres de la Crimson Society, veuillez visiter la page
-          d&apos;accueil de la Crimson Society.
-        </p>
-      </div>
-
+    <div className="max-w-7xl mx-auto px-4 pt-12 pb-16">
       {/* Barre de recherche et filtres */}
-      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-8">
+      <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6 mb-10">
         <div className="flex flex-col lg:flex-row gap-4 items-center justify-between">
           {/* Recherche */}
           <div className="relative flex-1 max-w-md">
-            <MagnifyingGlassIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
+            <MagnifyingGlassIcon className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
             <input
               type="text"
               placeholder="Rechercher un événement..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+              className="w-full pl-12 pr-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all hover:border-gray-300"
             />
           </div>
 
@@ -247,11 +236,11 @@ const EventSection: React.FC = () => {
           <div className="flex flex-wrap gap-3">
             {/* Filtre par type */}
             <div className="flex items-center gap-2">
-              <FunnelIcon className="h-5 w-5 text-gray-500" />
+              <FunnelIcon className="h-5 w-5 text-gray-600" />
               <select
                 value={filterType}
                 onChange={(e) => setFilterType(e.target.value)}
-                className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="px-4 py-2 border border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 focus:border-transparent text-sm font-medium hover:border-gray-300 transition-all"
               >
                 <option value="all">Tous les types</option>
                 {getEventTypes().map((type) => (
@@ -266,32 +255,32 @@ const EventSection: React.FC = () => {
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value)}
-              className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="px-4 py-2 border border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 focus:border-transparent text-sm font-medium hover:border-gray-300 transition-all"
             >
-              <option value="date">Trier par date</option>
-              <option value="title">Trier par titre</option>
-              <option value="location">Trier par lieu</option>
-              <option value="type">Trier par type</option>
+              <option value="date">Date</option>
+              <option value="title">Titre</option>
+              <option value="location">Lieu</option>
+              <option value="type">Type</option>
             </select>
 
             {/* Mode d'affichage */}
-            <div className="flex border border-gray-300 rounded-lg overflow-hidden">
+            <div className="flex border border-gray-200 rounded-xl overflow-hidden bg-gray-50">
               <button
                 onClick={() => setViewMode("grid")}
-                className={`px-4 py-2 text-sm font-medium ${
+                className={`px-4 py-2 text-sm font-medium transition-all ${
                   viewMode === "grid"
-                    ? "bg-blue-600 text-white"
-                    : "bg-white text-gray-700 hover:bg-gray-50"
+                    ? "bg-red-600 text-white shadow-md"
+                    : "text-gray-600 hover:text-gray-900"
                 }`}
               >
                 Grille
               </button>
               <button
                 onClick={() => setViewMode("list")}
-                className={`px-4 py-2 text-sm font-medium ${
+                className={`px-4 py-2 text-sm font-medium transition-all ${
                   viewMode === "list"
-                    ? "bg-blue-600 text-white"
-                    : "bg-white text-gray-700 hover:bg-gray-50"
+                    ? "bg-red-600 text-white shadow-md"
+                    : "text-gray-600 hover:text-gray-900"
                 }`}
               >
                 Liste
@@ -301,50 +290,52 @@ const EventSection: React.FC = () => {
         </div>
       </div>
 
-      {/* Statistiques */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-          <div className="flex items-center">
-            <CalendarIcon className="h-8 w-8 text-blue-600" />
-            <div className="ml-4">
-              <p className="text-2xl font-bold text-gray-900">{filteredEvents.length}</p>
-              <p className="text-gray-600">Événements trouvés</p>
-            </div>
+      {/* Statistiques compactes */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+        <div className="bg-gradient-to-br from-red-50 to-orange-50 rounded-xl border border-red-100 p-4 flex items-center gap-3">
+          <div className="bg-red-100 rounded-lg p-2">
+            <CalendarIcon className="h-6 w-6 text-red-600" />
+          </div>
+          <div>
+            <p className="text-2xl font-bold text-gray-900">{filteredEvents.length}</p>
+            <p className="text-xs text-gray-600">Événements</p>
           </div>
         </div>
-        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-          <div className="flex items-center">
-            <MapPinIcon className="h-8 w-8 text-green-600" />
-            <div className="ml-4">
-              <p className="text-2xl font-bold text-gray-900">
-                {[...new Set(filteredEvents.map(e => e.location).filter(Boolean))].length}
-              </p>
-              <p className="text-gray-600">Lieux différents</p>
-            </div>
+        <div className="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-xl border border-blue-100 p-4 flex items-center gap-3">
+          <div className="bg-blue-100 rounded-lg p-2">
+            <MapPinIcon className="h-6 w-6 text-blue-600" />
+          </div>
+          <div>
+            <p className="text-2xl font-bold text-gray-900">
+              {[...new Set(filteredEvents.map(e => e.location).filter(Boolean))].length}
+            </p>
+            <p className="text-xs text-gray-600">Lieux</p>
           </div>
         </div>
-        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-          <div className="flex items-center">
-            <UsersIcon className="h-8 w-8 text-purple-600" />
-            <div className="ml-4">
-              <p className="text-2xl font-bold text-gray-900">
-                {getEventTypes().length}
-              </p>
-              <p className="text-gray-600">Types d&apos;événements</p>
-            </div>
+        <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl border border-purple-100 p-4 flex items-center gap-3">
+          <div className="bg-purple-100 rounded-lg p-2">
+            <TagIcon className="h-6 w-6 text-purple-600" />
+          </div>
+          <div>
+            <p className="text-2xl font-bold text-gray-900">
+              {getEventTypes().length}
+            </p>
+            <p className="text-xs text-gray-600">Types</p>
           </div>
         </div>
       </div>
 
       {/* Liste des événements */}
       {filteredEvents.length === 0 ? (
-        <div className="text-center py-12">
-          <CalendarIcon className="mx-auto h-12 w-12 text-gray-400" />
-          <h3 className="mt-2 text-lg font-medium text-gray-900">
+        <div className="text-center py-16">
+          <div className="bg-gray-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+            <CalendarIcon className="h-8 w-8 text-gray-400" />
+          </div>
+          <h3 className="text-lg font-semibold text-gray-900">
             Aucun événement trouvé
           </h3>
-          <p className="mt-1 text-gray-500">
-            Essayez de modifier vos critères de recherche ou de filtrage.
+          <p className="mt-2 text-gray-500 text-sm">
+            Essayez de modifier vos critères de recherche.
           </p>
         </div>
       ) : (
@@ -356,89 +347,132 @@ const EventSection: React.FC = () => {
           {filteredEvents.map((event) => {
             const dateInfo = formatDate(event.date);
             return (
-              <div key={event._id} className={`${
-                viewMode === "grid" 
-                  ? "bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow duration-200" 
-                  : "bg-white rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition-shadow duration-200"
-              }`}>
+              <div 
+                key={event._id} 
+                className={`group bg-white rounded-2xl border border-gray-200 overflow-hidden hover:border-red-300 hover:shadow-xl transition-all duration-300 ${
+                  viewMode === "list" ? "flex" : ""
+                }`}
+              >
                 {viewMode === "grid" ? (
-                  <div className="overflow-hidden">
-                    {/* Image d'en-tête */}
-                    <div className="relative h-48 w-full">
+                  <>
+                    {/* Image d'en-tête avec overlay */}
+                    <div className="relative h-56 w-full overflow-hidden">
                       {event.imageUrl ? (
                         <Image
                           src={event.imageUrl}
                           alt={event.title}
                           fill
-                          className="object-cover"
+                          className="object-cover group-hover:scale-110 transition-transform duration-500"
                           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                           priority={false}
                           unoptimized={false}
                         />
                       ) : (
-                        <div className="w-full h-full bg-gradient-to-br from-blue-100 to-blue-200 flex items-center justify-center">
-                          <CalendarIcon className="h-16 w-16 text-blue-400" />
+                        <div className="w-full h-full bg-gradient-to-br from-red-100 via-orange-50 to-red-50 flex items-center justify-center group-hover:from-red-200 transition-colors duration-300">
+                          <CalendarIcon className="h-20 w-20 text-red-200" />
                         </div>
                       )}
-                      <div className="absolute top-4 left-4">
-                        <div className="bg-blue-600 text-white rounded-lg p-3 shadow-lg">
-                          <p className="text-sm font-medium uppercase">{dateInfo.month}</p>
-                          <p className="text-2xl font-bold">{dateInfo.day}</p>
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                      
+                      {/* Date badge */}
+                      <div className="absolute top-4 right-4">
+                        <div className="bg-red-600 text-white rounded-xl p-2.5 shadow-lg transform group-hover:scale-110 transition-transform duration-300">
+                          <p className="text-xs font-semibold uppercase tracking-wider">{dateInfo.month}</p>
+                          <p className="text-xl font-bold leading-tight">{dateInfo.day}</p>
                         </div>
                       </div>
                     </div>
                     
-                    <div className="p-6">
-                      <div className="flex items-start gap-4 mb-4">
-                        <div className="flex-1 min-w-0">
-                          <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800 mb-2">
-                            {event.type}
-                          </span>
-                          <h3 className="text-lg font-semibold text-gray-900 mb-2 line-clamp-2">
-                            {event.title}
-                          </h3>
-                          <p className="text-gray-600 text-sm mb-3 line-clamp-3">
-                            {event.description}
-                          </p>
-                        </div>
+                    <div className="p-6 flex flex-col h-full">
+                      {/* Badge type */}
+                      <div className="mb-3">
+                        <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold bg-red-50 text-red-700 border border-red-200">
+                          <TagIcon className="h-3 w-3" />
+                          {event.type.charAt(0).toUpperCase() + event.type.slice(1)}
+                        </span>
                       </div>
-                      <div className="space-y-2 text-sm text-gray-500">
-                        <div className="flex items-center">
-                          <MapPinIcon className="h-4 w-4 mr-2" />
-                          <span>{event.location}</span>
+
+                      {/* Titre et description */}
+                      <h3 className="text-lg font-bold text-gray-900 mb-2 line-clamp-2 group-hover:text-red-600 transition-colors">
+                        {event.title}
+                      </h3>
+                      <p className="text-gray-600 text-sm mb-4 line-clamp-2 flex-grow">
+                        {event.description}
+                      </p>
+
+                      {/* Infos */}
+                      <div className="space-y-2.5 mb-4 pt-4 border-t border-gray-100">
+                        <div className="flex items-center text-gray-700 text-sm gap-3">
+                          <MapPinIcon className="h-4 w-4 text-red-600 flex-shrink-0" />
+                          <span className="line-clamp-1">{event.location}</span>
                         </div>
-                        <div className="flex items-center">
-                          <CalendarIcon className="h-4 w-4 mr-2" />
+                        <div className="flex items-center text-gray-700 text-sm gap-3">
+                          <ClockIcon className="h-4 w-4 text-red-600 flex-shrink-0" />
                           <span>{dateInfo.time}</span>
                         </div>
                         {event.maxParticipants && (
-                          <div className="flex items-center">
-                            <UsersIcon className="h-4 w-4 mr-2" />
-                            <span>{event.participants?.length || 0}/{event.maxParticipants} participants</span>
+                          <div className="flex items-center text-gray-700 text-sm gap-3">
+                            <UsersIcon className="h-4 w-4 text-red-600 flex-shrink-0" />
+                            <span>{event.participants?.length || 0}/{event.maxParticipants}</span>
                           </div>
                         )}
                       </div>
-                      <div className="mt-4 pt-4 border-t border-gray-200">
-                        <button 
-                          onClick={() => router.push(`/events/${event._id}`)}
-                          className="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors font-medium"
-                        >
-                          Voir les détails
-                        </button>
-                      </div>
+
+                      {/* CTA Button */}
+                      <button 
+                        onClick={() => router.push(`/events/${event._id}`)}
+                        className="w-full bg-gradient-to-r from-red-600 to-orange-500 text-white py-3 px-4 rounded-xl hover:from-red-700 hover:to-orange-600 transition-all duration-300 font-semibold flex items-center justify-center gap-2 group/btn shadow-lg hover:shadow-xl"
+                      >
+                        Voir détails
+                        <ArrowRightIcon className="h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
+                      </button>
                     </div>
-                  </div>
+                  </>
                 ) : (
-                  <div className="p-6">
-                    <EventCard
-                      event={event.title}
-                      place={event.location}
-                      day={dateInfo.day}
-                      month={dateInfo.month}
-                      category={event.type}
-                      time={dateInfo.time}
-                      imageUrl={event.imageUrl}
-                    />
+                  <div className="p-6 flex gap-6 flex-1">
+                    <div className="relative h-40 w-40 flex-shrink-0 rounded-xl overflow-hidden">
+                      {event.imageUrl ? (
+                        <Image
+                          src={event.imageUrl}
+                          alt={event.title}
+                          fill
+                          className="object-cover group-hover:scale-110 transition-transform duration-500"
+                          sizes="160px"
+                        />
+                      ) : (
+                        <div className="w-full h-full bg-gradient-to-br from-red-100 to-orange-50 flex items-center justify-center">
+                          <CalendarIcon className="h-12 w-12 text-red-200" />
+                        </div>
+                      )}
+                    </div>
+                    <div className="flex-1 flex flex-col justify-between">
+                      <div>
+                        <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold bg-red-50 text-red-700 border border-red-200 mb-2">
+                          <TagIcon className="h-3 w-3" />
+                          {event.type}
+                        </span>
+                        <h3 className="text-lg font-bold text-gray-900 mb-2 group-hover:text-red-600 transition-colors">
+                          {event.title}
+                        </h3>
+                        <div className="flex gap-4 text-sm text-gray-600">
+                          <span className="flex items-center gap-1">
+                            <MapPinIcon className="h-4 w-4 text-red-600" />
+                            {event.location}
+                          </span>
+                          <span className="flex items-center gap-1">
+                            <ClockIcon className="h-4 w-4 text-red-600" />
+                            {dateInfo.time}
+                          </span>
+                        </div>
+                      </div>
+                      <button 
+                        onClick={() => router.push(`/events/${event._id}`)}
+                        className="self-start mt-4 px-6 py-2 bg-red-600 text-white rounded-xl hover:bg-red-700 transition-colors font-semibold text-sm flex items-center gap-2"
+                      >
+                        Détails
+                        <ArrowRightIcon className="h-3 w-3" />
+                      </button>
+                    </div>
                   </div>
                 )}
               </div>
@@ -450,4 +484,4 @@ const EventSection: React.FC = () => {
   );
 };
 
-export default EventSection; 
+export default EventSection;
