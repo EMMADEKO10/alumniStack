@@ -196,10 +196,57 @@ const EventSection: React.FC = () => {
 
   if (loading) {
     return (
-      <div className="max-w-7xl mx-auto px-4 pt-16 pb-16">
-        <div className="flex items-center justify-center h-64">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
-          <span className="ml-3 text-gray-600">Chargement des événements...</span>
+      <div className="max-w-7xl mx-auto px-4 pt-12 pb-16">
+        {/* Skeleton pour barre de recherche */}
+        <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6 mb-10 animate-pulse">
+          <div className="flex flex-col lg:flex-row gap-4 items-center justify-between">
+            <div className="relative flex-1 max-w-md w-full">
+              <div className="h-12 bg-gray-200 rounded-xl"></div>
+            </div>
+            <div className="flex flex-wrap gap-3">
+              <div className="h-10 w-32 bg-gray-200 rounded-xl"></div>
+              <div className="h-10 w-32 bg-gray-200 rounded-xl"></div>
+              <div className="h-10 w-32 bg-gray-200 rounded-xl"></div>
+              <div className="h-10 w-24 bg-gray-200 rounded-xl"></div>
+            </div>
+          </div>
+        </div>
+
+        {/* Skeleton pour statistiques */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+          {[1, 2, 3].map((i) => (
+            <div key={i} className="bg-white rounded-xl border border-gray-100 p-4 animate-pulse">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 bg-gray-200 rounded-lg"></div>
+                <div className="flex-1">
+                  <div className="h-8 w-12 bg-gray-200 rounded mb-2"></div>
+                  <div className="h-3 w-20 bg-gray-200 rounded"></div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Skeleton pour cartes d'événements */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {[1, 2, 3, 4, 5, 6].map((i) => (
+            <div key={i} className="bg-white rounded-2xl border border-gray-200 overflow-hidden animate-pulse">
+              <div className="h-56 bg-gray-200"></div>
+              <div className="p-6">
+                <div className="h-6 w-20 bg-gray-200 rounded-full mb-3"></div>
+                <div className="h-6 bg-gray-200 rounded mb-2"></div>
+                <div className="h-6 bg-gray-200 rounded w-3/4 mb-4"></div>
+                <div className="h-4 bg-gray-200 rounded mb-2"></div>
+                <div className="h-4 bg-gray-200 rounded w-2/3 mb-4"></div>
+                <div className="border-t border-gray-100 pt-4 space-y-2.5 mb-4">
+                  <div className="h-4 bg-gray-200 rounded"></div>
+                  <div className="h-4 bg-gray-200 rounded"></div>
+                  <div className="h-4 bg-gray-200 rounded w-1/2"></div>
+                </div>
+                <div className="h-12 bg-gray-200 rounded-xl"></div>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     );
@@ -348,8 +395,9 @@ const EventSection: React.FC = () => {
             const dateInfo = formatDate(event.date);
             return (
               <div 
-                key={event._id} 
-                className={`group bg-white rounded-2xl border border-gray-200 overflow-hidden hover:border-red-300 hover:shadow-xl transition-all duration-300 ${
+                key={event._id}
+                onClick={() => router.push(`/events/${event._id}`)}
+                className={`group bg-white rounded-2xl border border-gray-200 overflow-hidden hover:border-red-300 hover:shadow-xl transition-all duration-300 cursor-pointer ${
                   viewMode === "list" ? "flex" : ""
                 }`}
               >
@@ -383,7 +431,7 @@ const EventSection: React.FC = () => {
                       </div>
                     </div>
                     
-                    <div className="p-6 flex flex-col h-full">
+                    <div className="p-6 flex flex-col">
                       {/* Badge type */}
                       <div className="mb-3">
                         <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold bg-red-50 text-red-700 border border-red-200">
@@ -396,7 +444,7 @@ const EventSection: React.FC = () => {
                       <h3 className="text-lg font-bold text-gray-900 mb-2 line-clamp-2 group-hover:text-red-600 transition-colors">
                         {event.title}
                       </h3>
-                      <p className="text-gray-600 text-sm mb-4 line-clamp-2 flex-grow">
+                      <p className="text-gray-600 text-sm mb-4 line-clamp-2">
                         {event.description}
                       </p>
 
@@ -420,10 +468,13 @@ const EventSection: React.FC = () => {
 
                       {/* CTA Button */}
                       <button 
-                        onClick={() => router.push(`/events/${event._id}`)}
-                        className="w-full bg-gradient-to-r from-red-600 to-orange-500 text-white py-3 px-4 rounded-xl hover:from-red-700 hover:to-orange-600 transition-all duration-300 font-semibold flex items-center justify-center gap-2 group/btn shadow-lg hover:shadow-xl"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          router.push(`/events/${event._id}`);
+                        }}
+                        className="relative z-10 w-full bg-red-600 text-white py-3 px-4 rounded-xl hover:bg-red-700 transition-all duration-300 font-semibold flex items-center justify-center gap-2 group/btn shadow-lg hover:shadow-xl"
                       >
-                        Voir détails
+                        Voir plus
                         <ArrowRightIcon className="h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
                       </button>
                     </div>
@@ -466,10 +517,13 @@ const EventSection: React.FC = () => {
                         </div>
                       </div>
                       <button 
-                        onClick={() => router.push(`/events/${event._id}`)}
-                        className="self-start mt-4 px-6 py-2 bg-red-600 text-white rounded-xl hover:bg-red-700 transition-colors font-semibold text-sm flex items-center gap-2"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          router.push(`/events/${event._id}`);
+                        }}
+                        className="relative z-10 self-start mt-4 px-6 py-2 bg-red-600 text-white rounded-xl hover:bg-red-700 transition-all duration-300 font-semibold text-sm flex items-center gap-2 shadow-md hover:shadow-lg"
                       >
-                        Détails
+                        Voir plus
                         <ArrowRightIcon className="h-3 w-3" />
                       </button>
                     </div>

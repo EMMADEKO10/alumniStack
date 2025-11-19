@@ -19,7 +19,6 @@ import {
   PlayCircleIcon,
   ChartBarIcon
 } from "@heroicons/react/24/outline";
-import { HeartIcon } from "@heroicons/react/24/solid";
 
 interface Formation {
   _id: string;
@@ -45,7 +44,6 @@ const FormationDetailPage: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [isEnrolled, setIsEnrolled] = useState(false);
   const [showShareMenu, setShowShareMenu] = useState(false);
-  const [isFavorite, setIsFavorite] = useState(false);
 
   useEffect(() => {
     const fetchFormation = async () => {
@@ -182,10 +180,6 @@ const FormationDetailPage: React.FC = () => {
     setShowShareMenu(!showShareMenu);
   };
 
-  const handleFavorite = () => {
-    setIsFavorite(!isFavorite);
-  };
-
   const shareOnSocial = (platform: string) => {
     const url = window.location.href;
     const text = `Découvrez cette formation : ${formation?.title} par ${formation?.instructor}`;
@@ -215,11 +209,51 @@ const FormationDetailPage: React.FC = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50">
-        <div className="max-w-5xl mx-auto px-4 pt-8">
-          <div className="flex items-center justify-center h-64">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-red-800"></div>
-            <span className="ml-3 text-gray-600">Chargement des détails...</span>
+      <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100">
+        <div className="pt-32">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            {/* Skeleton bouton retour */}
+            <div className="h-6 w-48 bg-gray-200 rounded mb-8 animate-pulse"></div>
+
+            {/* Skeleton Hero */}
+            <div className="relative h-96 w-full rounded-2xl bg-gray-200 mb-8 animate-pulse"></div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+              {/* Skeleton contenu principal */}
+              <div className="lg:col-span-2">
+                <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-sm border border-gray-200 p-8 animate-pulse">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8 pb-8 border-b border-gray-200">
+                    {[1, 2, 3, 4].map((i) => (
+                      <div key={i} className="p-4 bg-gray-100 rounded-xl">
+                        <div className="h-12 bg-gray-200 rounded mb-2"></div>
+                        <div className="h-4 bg-gray-200 rounded w-3/4"></div>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="space-y-4">
+                    <div className="h-6 bg-gray-200 rounded w-1/3"></div>
+                    <div className="h-4 bg-gray-200 rounded"></div>
+                    <div className="h-4 bg-gray-200 rounded"></div>
+                    <div className="h-4 bg-gray-200 rounded w-5/6"></div>
+                    <div className="h-4 bg-gray-200 rounded"></div>
+                    <div className="h-4 bg-gray-200 rounded w-4/5"></div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Skeleton sidebar */}
+              <div className="lg:col-span-1">
+                <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-sm border border-gray-200 p-6 animate-pulse">
+                  <div className="h-32 bg-gray-200 rounded-xl mb-6"></div>
+                  <div className="h-14 bg-gray-200 rounded-xl mb-6"></div>
+                  <div className="space-y-3">
+                    <div className="h-4 bg-gray-200 rounded"></div>
+                    <div className="h-4 bg-gray-200 rounded"></div>
+                    <div className="h-4 bg-gray-200 rounded w-3/4"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -249,139 +283,159 @@ const FormationDetailPage: React.FC = () => {
   const daysUntilStart = getDaysUntilStart();
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="max-w-5xl mx-auto px-4 pt-8 pb-16">
-        {/* Bouton de retour */}
-        <button
-          onClick={() => router.back()}
-          className="flex items-center text-red-800 hover:text-red-900 mb-6 transition-colors"
-        >
-          <ArrowLeftIcon className="h-5 w-5 mr-2" />
-          Retour aux formations
-        </button>
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100">
+      {/* Espacement pour le header fixe */}
+      <div className="pt-32">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          {/* Bouton de retour */}
+          <button
+            onClick={() => router.back()}
+            className="flex items-center text-red-600 hover:text-red-700 mb-8 transition-colors font-medium group"
+          >
+            <ArrowLeftIcon className="h-5 w-5 mr-2 transform group-hover:-translate-x-1 transition-transform" />
+            Retour aux formations
+          </button>
 
-        {/* Image principale */}
-        <div className="relative h-80 w-full rounded-xl overflow-hidden mb-8 shadow-lg">
-          {formation.imageUrl ? (
-            <Image
-              src={formation.imageUrl}
-              alt={formation.title}
-              fill
-              className="object-cover"
-              sizes="(max-width: 1280px) 100vw, 1280px"
-              priority
-            />
-          ) : (
-            <div className="w-full h-full bg-gradient-to-br from-red-400 to-red-600 flex items-center justify-center">
-              <AcademicCapIcon className="h-24 w-24 text-white opacity-80" />
-            </div>
-          )}
-          <div className="absolute inset-0 bg-black bg-opacity-40"></div>
-          <div className="absolute bottom-6 left-6">
-            <div className={`inline-flex items-center px-4 py-2 rounded-full text-sm font-bold border-2 ${getLevelColor(formation.level)}`}>
-              <ChartBarIcon className="h-4 w-4 mr-2" />
-              {formation.level}
-            </div>
-          </div>
-          <div className="absolute bottom-6 right-6">
-            <div className="bg-red-800 text-white px-4 py-2 rounded-lg font-bold text-lg">
-              {formatPrice(formation.price)}
-            </div>
-          </div>
-          <div className="absolute top-6 right-6 flex gap-2">
-            <button
-              onClick={handleFavorite}
-              className={`p-3 rounded-full shadow-lg transition-colors ${
-                isFavorite 
-                  ? "bg-red-500 text-white" 
-                  : "bg-white text-gray-600 hover:bg-gray-100"
-              }`}
-            >
-              <HeartIcon className="h-5 w-5" />
-            </button>
-            <div className="relative">
-              <button
-                onClick={handleShare}
-                className="p-3 bg-white text-gray-600 hover:bg-gray-100 rounded-full shadow-lg transition-colors"
-              >
-                <ShareIcon className="h-5 w-5" />
-              </button>
-              {showShareMenu && (
-                <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 z-10">
-                  <div className="py-1">
-                    <button
-                      onClick={() => shareOnSocial("facebook")}
-                      className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                    >
-                      Partager sur Facebook
-                    </button>
-                    <button
-                      onClick={() => shareOnSocial("twitter")}
-                      className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                    >
-                      Partager sur Twitter
-                    </button>
-                    <button
-                      onClick={() => shareOnSocial("linkedin")}
-                      className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                    >
-                      Partager sur LinkedIn
-                    </button>
-                    <button
-                      onClick={() => shareOnSocial("copy")}
-                      className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                    >
-                      Copier le lien
-                    </button>
-                  </div>
+          {/* Hero Section avec image */}
+          <div className="relative h-96 w-full rounded-2xl overflow-hidden mb-8 shadow-xl">
+            {formation.imageUrl ? (
+              <Image
+                src={formation.imageUrl}
+                alt={formation.title}
+                fill
+                className="object-cover"
+                sizes="(max-width: 1536px) 100vw, 1536px"
+                priority
+              />
+            ) : (
+              <div className="w-full h-full bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 flex items-center justify-center">
+                <AcademicCapIcon className="h-32 w-32 text-white opacity-50" />
+              </div>
+            )}
+            
+            {/* Overlay gradient */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
+            
+            {/* Contenu sur l'image */}
+            <div className="absolute inset-0 flex flex-col justify-end p-8">
+              <div className="flex items-center gap-4 mb-4">
+                <div className={`inline-flex items-center px-4 py-2 rounded-full text-sm font-semibold border-2 backdrop-blur-sm ${getLevelColor(formation.level)} bg-white/90`}>
+                  <ChartBarIcon className="h-4 w-4 mr-2" />
+                  {formation.level}
                 </div>
-              )}
+                <div className="bg-gradient-to-r from-red-600 to-rose-600 text-white px-5 py-2 rounded-full font-bold text-lg shadow-lg backdrop-blur-sm">
+                  {formatPrice(formation.price)}
+                </div>
+              </div>
+              
+              <h1 className="text-4xl md:text-5xl font-bold text-white mb-3 drop-shadow-lg">
+                {formation.title}
+              </h1>
+              
+              <div className="flex flex-wrap items-center gap-4 text-white">
+                <div className="flex items-center gap-2 bg-white/20 backdrop-blur-sm px-4 py-2 rounded-lg">
+                  <AcademicCapIcon className="h-5 w-5" />
+                  <span className="font-semibold">{formation.instructor}</span>
+                </div>
+                <div className="flex items-center gap-2 bg-white/20 backdrop-blur-sm px-4 py-2 rounded-lg">
+                  <ClockIcon className="h-5 w-5" />
+                  <span>{formation.duration}</span>
+                </div>
+                <div className="flex items-center gap-2 bg-white/20 backdrop-blur-sm px-4 py-2 rounded-lg">
+                  <UserGroupIcon className="h-5 w-5" />
+                  <span>{currentStudents} / {formation.maxStudents || '∞'} inscrits</span>
+                </div>
+              </div>
+            </div>
+            
+            {/* Bouton de partage */}
+            <div className="absolute top-6 right-6">
+              <div className="relative">
+                <button
+                  onClick={handleShare}
+                  className="p-3 bg-white/90 backdrop-blur-sm text-gray-700 hover:bg-white rounded-full shadow-lg transition-all duration-300 transform hover:scale-110"
+                >
+                  <ShareIcon className="h-6 w-6" />
+                </button>
+                {showShareMenu && (
+                  <div className="absolute right-0 mt-2 w-56 bg-white rounded-xl shadow-xl border border-gray-200 z-10 overflow-hidden">
+                    <div className="py-2">
+                      <button
+                        onClick={() => shareOnSocial("facebook")}
+                        className="block w-full text-left px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors"
+                      >
+                        👥 Partager sur Facebook
+                      </button>
+                      <button
+                        onClick={() => shareOnSocial("twitter")}
+                        className="block w-full text-left px-4 py-3 text-sm text-gray-700 hover:bg-sky-50 hover:text-sky-600 transition-colors"
+                      >
+                        🐦 Partager sur Twitter
+                      </button>
+                      <button
+                        onClick={() => shareOnSocial("linkedin")}
+                        className="block w-full text-left px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors"
+                      >
+                        💼 Partager sur LinkedIn
+                      </button>
+                      <div className="border-t border-gray-100"></div>
+                      <button
+                        onClick={() => shareOnSocial("copy")}
+                        className="block w-full text-left px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 transition-colors"
+                      >
+                        🔗 Copier le lien
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
-        </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Contenu principal */}
           <div className="lg:col-span-2">
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-8">
-              {/* En-tête */}
-              <div className="mb-6">
-                <h1 className="text-3xl font-bold text-gray-900 mb-2">{formation.title}</h1>
-                <div className="flex items-center gap-2 mb-4">
-                  <AcademicCapIcon className="h-5 w-5 text-gray-500" />
-                  <span className="text-xl text-red-800 font-semibold">par {formation.instructor}</span>
-                </div>
-              </div>
-
-              {/* Informations clés */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                <div className="flex items-start gap-3">
-                  <CalendarIcon className="h-6 w-6 text-blue-600 mt-1" />
+            <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-sm border border-gray-200 p-8">
+              {/* Informations clés en grille */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8 pb-8 border-b border-gray-200">
+                <div className="flex items-start gap-4 p-4 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl border border-blue-100">
+                  <div className="bg-white p-3 rounded-lg shadow-sm">
+                    <CalendarIcon className="h-6 w-6 text-blue-600" />
+                  </div>
                   <div>
-                    <p className="font-semibold text-gray-900">Dates</p>
-                    <p className="text-gray-600">Du {formatDate(formation.startDate)}</p>
-                    <p className="text-gray-600">au {formatDate(formation.endDate)}</p>
+                    <p className="font-semibold text-gray-900 text-sm mb-1">Dates</p>
+                    <p className="text-gray-700 text-sm">Du {formatDate(formation.startDate)}</p>
+                    <p className="text-gray-700 text-sm">au {formatDate(formation.endDate)}</p>
                   </div>
                 </div>
-                <div className="flex items-start gap-3">
-                  <ClockIcon className="h-6 w-6 text-green-600 mt-1" />
+                
+                <div className="flex items-start gap-4 p-4 bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl border border-green-100">
+                  <div className="bg-white p-3 rounded-lg shadow-sm">
+                    <ClockIcon className="h-6 w-6 text-green-600" />
+                  </div>
                   <div>
-                    <p className="font-semibold text-gray-900">Durée</p>
-                    <p className="text-gray-600">{formation.duration}</p>
+                    <p className="font-semibold text-gray-900 text-sm mb-1">Durée</p>
+                    <p className="text-gray-700">{formation.duration}</p>
                   </div>
                 </div>
-                <div className="flex items-start gap-3">
-                  <MapPinIcon className="h-6 w-6 text-purple-600 mt-1" />
+                
+                <div className="flex items-start gap-4 p-4 bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl border border-purple-100">
+                  <div className="bg-white p-3 rounded-lg shadow-sm">
+                    <MapPinIcon className="h-6 w-6 text-purple-600" />
+                  </div>
                   <div>
-                    <p className="font-semibold text-gray-900">Lieu</p>
-                    <p className="text-gray-600">{formation.location}</p>
+                    <p className="font-semibold text-gray-900 text-sm mb-1">Lieu</p>
+                    <p className="text-gray-700">{formation.location}</p>
                   </div>
                 </div>
-                <div className="flex items-start gap-3">
-                  <UserGroupIcon className="h-6 w-6 text-orange-600 mt-1" />
+                
+                <div className="flex items-start gap-4 p-4 bg-gradient-to-br from-orange-50 to-red-50 rounded-xl border border-orange-100">
+                  <div className="bg-white p-3 rounded-lg shadow-sm">
+                    <UserGroupIcon className="h-6 w-6 text-orange-600" />
+                  </div>
                   <div>
-                    <p className="font-semibold text-gray-900">Participants</p>
-                    <p className="text-gray-600">
+                    <p className="font-semibold text-gray-900 text-sm mb-1">Participants</p>
+                    <p className="text-gray-700 font-medium">
                       {currentStudents} / {formation.maxStudents || 'Illimité'} inscrits
                     </p>
                   </div>
@@ -437,12 +491,14 @@ const FormationDetailPage: React.FC = () => {
 
           {/* Sidebar */}
           <div className="lg:col-span-1">
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 sticky top-8">
+            <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-sm border border-gray-200 p-6 sticky top-8">
               {/* Prix et inscription */}
               <div className="mb-6">
-                <div className="text-center mb-4">
-                  <p className="text-3xl font-bold text-red-800">{formatPrice(formation.price)}</p>
-                  <p className="text-sm text-gray-600">Prix total de la formation</p>
+                <div className="text-center mb-6 p-6 bg-gradient-to-br from-red-50 to-rose-50 rounded-xl border border-red-100">
+                  <p className="text-4xl font-bold bg-gradient-to-r from-red-600 to-rose-600 bg-clip-text text-transparent mb-2">
+                    {formatPrice(formation.price)}
+                  </p>
+                  <p className="text-sm text-gray-600 font-medium">Prix total de la formation</p>
                 </div>
                 
                 {!isFormationEnded() ? (
@@ -450,36 +506,36 @@ const FormationDetailPage: React.FC = () => {
                     {!isFormationStarted() ? (
                       <>
                         {daysUntilStart > 0 && (
-                          <div className="mb-4 p-3 bg-blue-50 border border-blue-200 rounded-lg">
-                            <p className="text-blue-800 font-medium text-sm text-center">
+                          <div className="mb-4 p-4 bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-200 rounded-xl">
+                            <p className="text-blue-800 font-semibold text-center">
                               Début dans {daysUntilStart} jour{daysUntilStart !== 1 ? 's' : ''}
                             </p>
                           </div>
                         )}
                         
                         {formation.maxStudents && currentStudents >= formation.maxStudents ? (
-                          <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg">
-                            <p className="text-red-600 font-medium text-sm text-center">
+                          <div className="mb-4 p-4 bg-gradient-to-br from-red-50 to-orange-50 border border-red-200 rounded-xl">
+                            <p className="text-red-600 font-semibold text-center">
                               Formation complète
                             </p>
                           </div>
                         ) : (
-                          <div className="mb-4 p-3 bg-green-50 border border-green-200 rounded-lg">
-                            <div className="flex items-center justify-center gap-2">
-                              <CheckCircleIcon className="h-5 w-5 text-green-600" />
-                              <p className="text-green-800 font-medium text-sm">
+                          <div className="mb-4 p-4 bg-gradient-to-br from-green-50 to-emerald-50 border border-green-200 rounded-xl">
+                            <div className="flex items-center justify-center gap-2 mb-3">
+                              <CheckCircleIcon className="h-6 w-6 text-green-600" />
+                              <p className="text-green-800 font-semibold">
                                 Places disponibles
                               </p>
                             </div>
                             {formation.maxStudents && (
-                              <div className="mt-2">
-                                <div className="w-full bg-gray-200 rounded-full h-2">
+                              <div>
+                                <div className="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
                                   <div 
-                                    className="bg-green-600 h-2 rounded-full" 
+                                    className="bg-gradient-to-r from-green-500 to-emerald-500 h-3 rounded-full transition-all duration-500" 
                                     style={{ width: `${(currentStudents / formation.maxStudents) * 100}%` }}
                                   ></div>
                                 </div>
-                                <p className="text-xs text-center mt-1 text-gray-600">
+                                <p className="text-sm text-center mt-2 font-semibold text-gray-700">
                                   {formation.maxStudents - currentStudents} places restantes
                                 </p>
                               </div>
@@ -490,12 +546,12 @@ const FormationDetailPage: React.FC = () => {
                         <button
                           onClick={handleEnroll}
                           disabled={!!(formation.maxStudents && currentStudents >= formation.maxStudents)}
-                          className={`w-full py-3 px-4 rounded-lg font-semibold transition-colors ${
+                          className={`w-full py-4 px-4 rounded-xl font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-lg ${
                             isEnrolled
-                              ? "bg-green-600 text-white hover:bg-green-700"
+                              ? "bg-gradient-to-r from-green-600 to-emerald-600 text-white"
                               : formation.maxStudents && currentStudents >= formation.maxStudents
                               ? "bg-gray-300 text-gray-500 cursor-not-allowed"
-                              : "bg-red-800 text-white hover:bg-red-900"
+                              : "bg-gradient-to-r from-red-600 to-rose-600 text-white hover:from-red-700 hover:to-rose-700"
                           }`}
                         >
                           {isEnrolled ? "✓ Inscrit à la formation" : 
@@ -504,41 +560,44 @@ const FormationDetailPage: React.FC = () => {
                         </button>
                       </>
                     ) : (
-                      <div className="p-3 bg-blue-50 border border-blue-200 rounded-lg text-center">
-                        <div className="flex items-center justify-center gap-2 mb-2">
-                          <PlayCircleIcon className="h-5 w-5 text-blue-600" />
-                          <p className="text-blue-800 font-medium text-sm">Formation en cours</p>
+                      <div className="p-4 bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-200 rounded-xl">
+                        <div className="flex items-center justify-center gap-2 mb-3">
+                          <PlayCircleIcon className="h-6 w-6 text-blue-600" />
+                          <p className="text-blue-800 font-semibold">Formation en cours</p>
                         </div>
-                        <button className="w-full mt-2 py-2 px-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                        <button className="w-full py-3 px-4 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl hover:from-blue-700 hover:to-indigo-700 transition-all duration-300 font-semibold transform hover:scale-105">
                           Accéder au contenu
                         </button>
                       </div>
                     )}
                   </>
                 ) : (
-                  <div className="p-3 bg-gray-50 border border-gray-200 rounded-lg text-center">
-                    <p className="text-gray-600 font-medium">Formation terminée</p>
+                  <div className="p-4 bg-gradient-to-br from-gray-50 to-gray-100 border border-gray-200 rounded-xl">
+                    <p className="text-gray-600 font-semibold text-center">Formation terminée</p>
                   </div>
                 )}
               </div>
 
               {/* Informations instructeur */}
               <div className="border-t border-gray-200 pt-6 mb-6">
-                <h3 className="font-semibold text-gray-900 mb-4">Instructeur</h3>
-                <div className="flex items-start gap-3">
-                  <div className="w-12 h-12 bg-red-800 rounded-full flex items-center justify-center">
-                    <span className="text-white font-bold text-lg">
+                <h3 className="font-bold text-gray-900 mb-4 flex items-center gap-2">
+                  <AcademicCapIcon className="h-5 w-5 text-indigo-600" />
+                  Instructeur
+                </h3>
+                <div className="flex items-start gap-3 p-4 bg-gradient-to-br from-indigo-50 to-purple-50 rounded-xl">
+                  <div className="w-14 h-14 bg-gradient-to-br from-indigo-600 to-purple-600 rounded-full flex items-center justify-center shadow-md">
+                    <span className="text-white font-bold text-xl">
                       {formation.instructor.split(' ').map(n => n[0]).join('')}
                     </span>
                   </div>
                   <div>
-                    <p className="font-semibold text-gray-900">{formation.instructor}</p>
-                    <p className="text-sm text-gray-600">Expert formateur</p>
-                    <div className="flex items-center gap-1 mt-1">
+                    <p className="font-bold text-gray-900">{formation.instructor}</p>
+                    <p className="text-sm text-gray-600 mb-2">Expert formateur</p>
+                    <div className="flex items-center gap-1">
                       {[...Array(5)].map((_, i) => (
                         <StarIcon key={i} className="h-4 w-4 text-yellow-400 fill-current" />
                       ))}
-                      <span className="text-xs text-gray-500 ml-1">(4.9/5)</span>
+                      <span className="text-xs text-gray-600 ml-1 font-semibold">(4.9/5)</span>
                     </div>
                   </div>
                 </div>
@@ -546,34 +605,37 @@ const FormationDetailPage: React.FC = () => {
 
               {/* Informations pratiques */}
               <div className="border-t border-gray-200 pt-6">
-                <h3 className="font-semibold text-gray-900 mb-4">Informations pratiques</h3>
+                <h3 className="font-bold text-gray-900 mb-4 flex items-center gap-2">
+                  <DocumentTextIcon className="h-5 w-5 text-green-600" />
+                  Informations pratiques
+                </h3>
                 <div className="space-y-3">
-                  <div className="flex items-center gap-3 text-sm">
-                    <DocumentTextIcon className="h-4 w-4 text-gray-400" />
-                    <span className="text-gray-600">Support de cours inclus</span>
+                  <div className="flex items-start gap-3 text-sm p-3 bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg">
+                    <DocumentTextIcon className="h-5 w-5 text-gray-500 flex-shrink-0" />
+                    <span className="text-gray-700">Support de cours inclus</span>
                   </div>
-                  <div className="flex items-center gap-3 text-sm">
-                    <CheckCircleIcon className="h-4 w-4 text-gray-400" />
-                    <span className="text-gray-600">Certificat délivré</span>
+                  <div className="flex items-start gap-3 text-sm p-3 bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg">
+                    <CheckCircleIcon className="h-5 w-5 text-gray-500 flex-shrink-0" />
+                    <span className="text-gray-700">Certificat délivré</span>
                   </div>
-                  <div className="flex items-center gap-3 text-sm">
-                    <BookmarkIcon className="h-4 w-4 text-gray-400" />
-                    <span className="text-gray-600">Niveau {formation.level.toLowerCase()}</span>
+                  <div className="flex items-start gap-3 text-sm p-3 bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg">
+                    <BookmarkIcon className="h-5 w-5 text-gray-500 flex-shrink-0" />
+                    <span className="text-gray-700">Niveau {formation.level.toLowerCase()}</span>
                   </div>
-                  <div className="flex items-center gap-3 text-sm">
-                    <CurrencyEuroIcon className="h-4 w-4 text-gray-400" />
-                    <span className="text-gray-600">Paiement en 3x possible</span>
+                  <div className="flex items-start gap-3 text-sm p-3 bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg">
+                    <CurrencyEuroIcon className="h-5 w-5 text-gray-500 flex-shrink-0" />
+                    <span className="text-gray-700">Paiement en 3x possible</span>
                   </div>
                 </div>
               </div>
 
               {/* Actions secondaires */}
               <div className="border-t border-gray-200 pt-6 mt-6">
-                <div className="flex gap-2">
-                  <button className="flex-1 py-2 px-3 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors text-center">
+                <div className="grid grid-cols-2 gap-3">
+                  <button className="py-3 px-4 border-2 border-indigo-300 rounded-xl text-sm font-semibold text-indigo-600 hover:bg-indigo-50 hover:border-indigo-400 transition-all duration-300 transform hover:scale-105">
                     Programme
                   </button>
-                  <button className="flex-1 py-2 px-3 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors text-center">
+                  <button className="py-3 px-4 border-2 border-purple-300 rounded-xl text-sm font-semibold text-purple-600 hover:bg-purple-50 hover:border-purple-400 transition-all duration-300 transform hover:scale-105">
                     Contact
                   </button>
                 </div>
@@ -582,6 +644,7 @@ const FormationDetailPage: React.FC = () => {
           </div>
         </div>
       </div>
+    </div>
     </div>
   );
 };

@@ -264,9 +264,72 @@ const DonationsPage = () => {
   if (loading) {
     return (
       <div className="max-w-7xl mx-auto px-4 pt-24 pb-16">
-        <div className="flex items-center justify-center h-64">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-red-600"></div>
-          <span className="ml-3 text-gray-600">Chargement des donations...</span>
+        {/* Skeleton Titre principal */}
+        <div className="text-center mb-12 mt-8 animate-pulse">
+          <div className="h-12 bg-gray-200 rounded-lg w-3/4 mx-auto mb-4"></div>
+          <div className="h-6 bg-gray-200 rounded w-2/3 mx-auto"></div>
+        </div>
+
+        {/* Skeleton Grille de fonctionnalités */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+          {[1, 2, 3].map((i) => (
+            <div key={i} className="bg-white rounded-xl p-6 border border-gray-200 animate-pulse">
+              <div className="w-14 h-14 bg-gray-200 rounded-xl mb-4"></div>
+              <div className="h-6 bg-gray-200 rounded mb-2 w-3/4"></div>
+              <div className="h-4 bg-gray-200 rounded mb-2"></div>
+              <div className="h-4 bg-gray-200 rounded w-5/6"></div>
+            </div>
+          ))}
+        </div>
+
+        {/* Skeleton Barre de recherche */}
+        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-8 animate-pulse">
+          <div className="flex flex-col lg:flex-row gap-4 items-center justify-between mb-4">
+            <div className="h-12 bg-gray-200 rounded-lg flex-1 max-w-md"></div>
+            <div className="flex gap-3">
+              <div className="h-10 w-32 bg-gray-200 rounded-lg"></div>
+              <div className="h-10 w-32 bg-gray-200 rounded-lg"></div>
+              <div className="h-10 w-24 bg-gray-200 rounded-lg"></div>
+            </div>
+          </div>
+          <div className="flex gap-2">
+            <div className="h-10 w-32 bg-gray-200 rounded-lg"></div>
+            <div className="h-10 w-32 bg-gray-200 rounded-lg"></div>
+            <div className="h-10 w-32 bg-gray-200 rounded-lg"></div>
+          </div>
+        </div>
+
+        {/* Skeleton Statistiques */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+          {[1, 2, 3, 4].map((i) => (
+            <div key={i} className="bg-white rounded-xl p-6 border border-gray-200 animate-pulse">
+              <div className="flex items-center justify-between mb-3">
+                <div className="w-12 h-12 bg-gray-200 rounded-lg"></div>
+              </div>
+              <div className="h-8 bg-gray-200 rounded w-24 mb-1"></div>
+              <div className="h-4 bg-gray-200 rounded w-32"></div>
+            </div>
+          ))}
+        </div>
+
+        {/* Skeleton Cartes de donations */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {[1, 2, 3, 4, 5, 6].map((i) => (
+            <div key={i} className="bg-white rounded-xl overflow-hidden border border-gray-200 animate-pulse">
+              <div className="h-48 bg-gray-200"></div>
+              <div className="p-6">
+                <div className="h-6 bg-gray-200 rounded mb-3 w-3/4"></div>
+                <div className="h-4 bg-gray-200 rounded mb-2"></div>
+                <div className="h-4 bg-gray-200 rounded w-5/6 mb-4"></div>
+                <div className="h-2 bg-gray-200 rounded mb-2"></div>
+                <div className="flex justify-between mb-4">
+                  <div className="h-4 bg-gray-200 rounded w-24"></div>
+                  <div className="h-4 bg-gray-200 rounded w-16"></div>
+                </div>
+                <div className="h-10 bg-gray-200 rounded-lg"></div>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     );

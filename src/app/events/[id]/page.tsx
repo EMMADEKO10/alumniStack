@@ -14,7 +14,6 @@ import {
   TagIcon,
   GlobeAltIcon,
 } from "@heroicons/react/24/outline";
-import { HeartIcon } from "@heroicons/react/24/solid";
 
 interface Event {
   _id: string;
@@ -40,7 +39,6 @@ const EventDetailPage: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [isRegistered, setIsRegistered] = useState(false);
   const [showShareMenu, setShowShareMenu] = useState(false);
-  const [isFavorite, setIsFavorite] = useState(false);
 
   useEffect(() => {
     const fetchEvent = async () => {
@@ -146,10 +144,6 @@ const EventDetailPage: React.FC = () => {
     setShowShareMenu(!showShareMenu);
   };
 
-  const handleFavorite = () => {
-    setIsFavorite(!isFavorite);
-  };
-
   const shareOnSocial = (platform: string) => {
     const url = window.location.href;
     const text = `Découvrez cet événement : ${event?.title}`;
@@ -179,11 +173,51 @@ const EventDetailPage: React.FC = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50">
-        <div className="max-w-4xl mx-auto px-4 pt-8">
-          <div className="flex items-center justify-center h-64">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
-            <span className="ml-3 text-gray-600">Chargement des détails...</span>
+      <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100">
+        <div className="pt-32">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            {/* Skeleton bouton retour */}
+            <div className="h-6 w-40 bg-gray-200 rounded mb-8 animate-pulse"></div>
+
+            {/* Skeleton Hero */}
+            <div className="relative h-96 w-full rounded-2xl bg-gray-200 mb-8 animate-pulse"></div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+              {/* Skeleton contenu principal */}
+              <div className="lg:col-span-2">
+                <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-sm border border-gray-200 p-8 animate-pulse">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8 pb-8 border-b border-gray-200">
+                    {[1, 2, 3, 4].map((i) => (
+                      <div key={i} className="p-4 bg-gray-100 rounded-xl">
+                        <div className="h-12 bg-gray-200 rounded mb-2"></div>
+                        <div className="h-4 bg-gray-200 rounded w-3/4"></div>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="space-y-4">
+                    <div className="h-6 bg-gray-200 rounded w-1/4"></div>
+                    <div className="h-4 bg-gray-200 rounded"></div>
+                    <div className="h-4 bg-gray-200 rounded"></div>
+                    <div className="h-4 bg-gray-200 rounded w-5/6"></div>
+                    <div className="h-4 bg-gray-200 rounded"></div>
+                    <div className="h-4 bg-gray-200 rounded w-4/5"></div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Skeleton sidebar */}
+              <div className="lg:col-span-1">
+                <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-sm border border-gray-200 p-6 animate-pulse">
+                  <div className="h-32 bg-gray-200 rounded-xl mb-6"></div>
+                  <div className="h-14 bg-gray-200 rounded-xl mb-6"></div>
+                  <div className="space-y-3">
+                    <div className="h-4 bg-gray-200 rounded"></div>
+                    <div className="h-4 bg-gray-200 rounded"></div>
+                    <div className="h-4 bg-gray-200 rounded w-3/4"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -215,143 +249,164 @@ const EventDetailPage: React.FC = () => {
   const availableSpots = event.maxParticipants ? event.maxParticipants - participantsCount : null;
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="max-w-4xl mx-auto px-4 pt-8 pb-16">
-        {/* Bouton de retour */}
-        <button
-          onClick={() => router.back()}
-          className="flex items-center text-blue-600 hover:text-blue-800 mb-6 transition-colors"
-        >
-          <ArrowLeftIcon className="h-5 w-5 mr-2" />
-          Retour aux événements
-        </button>
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100">
+      {/* Espacement pour le header fixe */}
+      <div className="pt-32">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          {/* Bouton de retour */}
+          <button
+            onClick={() => router.back()}
+            className="flex items-center text-red-600 hover:text-red-700 mb-8 transition-colors font-medium group"
+          >
+            <ArrowLeftIcon className="h-5 w-5 mr-2 transform group-hover:-translate-x-1 transition-transform" />
+            Retour aux événements
+          </button>
 
-        {/* Image principale */}
-        <div className="relative h-80 w-full rounded-xl overflow-hidden mb-8 shadow-lg">
-          {event.imageUrl ? (
-            <Image
-              src={event.imageUrl}
-              alt={event.title}
-              fill
-              className="object-cover"
-              sizes="(max-width: 1024px) 100vw, 1024px"
-              priority
-            />
-          ) : (
-            <div className="w-full h-full bg-gradient-to-br from-blue-400 to-purple-600 flex items-center justify-center">
-              <CalendarIcon className="h-24 w-24 text-white opacity-80" />
-            </div>
-          )}
-          <div className="absolute inset-0 bg-black bg-opacity-30"></div>
-          <div className="absolute bottom-6 left-6">
-            <div className="bg-white rounded-lg p-4 shadow-lg">
-              <p className="text-sm font-medium text-gray-600 uppercase">{dateInfo.month}</p>
-              <p className="text-3xl font-bold text-gray-900">{dateInfo.day}</p>
-            </div>
-          </div>
-          <div className="absolute top-6 right-6 flex gap-2">
-            <button
-              onClick={handleFavorite}
-              className={`p-3 rounded-full shadow-lg transition-colors ${
-                isFavorite 
-                  ? "bg-red-500 text-white" 
-                  : "bg-white text-gray-600 hover:bg-gray-100"
-              }`}
-            >
-              <HeartIcon className="h-5 w-5" />
-            </button>
-            <div className="relative">
-              <button
-                onClick={handleShare}
-                className="p-3 bg-white text-gray-600 hover:bg-gray-100 rounded-full shadow-lg transition-colors"
-              >
-                <ShareIcon className="h-5 w-5" />
-              </button>
-              {showShareMenu && (
-                <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 z-10">
-                  <div className="py-1">
-                    <button
-                      onClick={() => shareOnSocial("facebook")}
-                      className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                    >
-                      Partager sur Facebook
-                    </button>
-                    <button
-                      onClick={() => shareOnSocial("twitter")}
-                      className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                    >
-                      Partager sur Twitter
-                    </button>
-                    <button
-                      onClick={() => shareOnSocial("linkedin")}
-                      className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                    >
-                      Partager sur LinkedIn
-                    </button>
-                    <button
-                      onClick={() => shareOnSocial("copy")}
-                      className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                    >
-                      Copier le lien
-                    </button>
-                  </div>
+          {/* Hero Section avec image */}
+          <div className="relative h-96 w-full rounded-2xl overflow-hidden mb-8 shadow-xl">
+            {event.imageUrl ? (
+              <Image
+                src={event.imageUrl}
+                alt={event.title}
+                fill
+                className="object-cover"
+                sizes="(max-width: 1536px) 100vw, 1536px"
+                priority
+              />
+            ) : (
+              <div className="w-full h-full bg-gradient-to-br from-red-400 via-orange-500 to-red-600 flex items-center justify-center">
+                <CalendarIcon className="h-32 w-32 text-white opacity-50" />
+              </div>
+            )}
+            
+            {/* Overlay gradient */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
+            
+            {/* Contenu sur l'image */}
+            <div className="absolute inset-0 flex flex-col justify-end p-8">
+              <div className="flex items-center gap-4 mb-4">
+                <div className="inline-flex items-center px-4 py-2 rounded-full text-sm font-semibold bg-white/90 backdrop-blur-sm text-red-700 border-2 border-red-200">
+                  <TagIcon className="h-4 w-4 mr-2" />
+                  {event.type.charAt(0).toUpperCase() + event.type.slice(1)}
                 </div>
-              )}
+                {isEventPast && (
+                  <div className="inline-flex items-center px-4 py-2 rounded-full text-sm font-semibold bg-gray-100/90 backdrop-blur-sm text-gray-700 border-2 border-gray-300">
+                    Événement passé
+                  </div>
+                )}
+              </div>
+              
+              <h1 className="text-4xl md:text-5xl font-bold text-white mb-3 drop-shadow-lg">
+                {event.title}
+              </h1>
+              
+              <div className="flex flex-wrap items-center gap-4 text-white">
+                <div className="flex items-center gap-2 bg-white/20 backdrop-blur-sm px-4 py-2 rounded-lg">
+                  <CalendarIcon className="h-5 w-5" />
+                  <span className="font-semibold">{dateInfo.weekday} {dateInfo.day} {dateInfo.month}</span>
+                </div>
+                <div className="flex items-center gap-2 bg-white/20 backdrop-blur-sm px-4 py-2 rounded-lg">
+                  <ClockIcon className="h-5 w-5" />
+                  <span>{dateInfo.time}</span>
+                </div>
+                <div className="flex items-center gap-2 bg-white/20 backdrop-blur-sm px-4 py-2 rounded-lg">
+                  <MapPinIcon className="h-5 w-5" />
+                  <span className="line-clamp-1">{event.location.split(',')[0]}</span>
+                </div>
+              </div>
+            </div>
+            
+            {/* Bouton de partage */}
+            <div className="absolute top-6 right-6">
+              <div className="relative">
+                <button
+                  onClick={handleShare}
+                  className="p-3 bg-white/90 backdrop-blur-sm text-gray-700 hover:bg-white rounded-full shadow-lg transition-all duration-300 transform hover:scale-110"
+                >
+                  <ShareIcon className="h-6 w-6" />
+                </button>
+                {showShareMenu && (
+                  <div className="absolute right-0 mt-2 w-56 bg-white rounded-xl shadow-xl border border-gray-200 z-10 overflow-hidden">
+                    <div className="py-2">
+                      <button
+                        onClick={() => shareOnSocial("facebook")}
+                        className="block w-full text-left px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors"
+                      >
+                        👥 Partager sur Facebook
+                      </button>
+                      <button
+                        onClick={() => shareOnSocial("twitter")}
+                        className="block w-full text-left px-4 py-3 text-sm text-gray-700 hover:bg-sky-50 hover:text-sky-600 transition-colors"
+                      >
+                        🐦 Partager sur Twitter
+                      </button>
+                      <button
+                        onClick={() => shareOnSocial("linkedin")}
+                        className="block w-full text-left px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors"
+                      >
+                        💼 Partager sur LinkedIn
+                      </button>
+                      <div className="border-t border-gray-100"></div>
+                      <button
+                        onClick={() => shareOnSocial("copy")}
+                        className="block w-full text-left px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 transition-colors"
+                      >
+                        🔗 Copier le lien
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
-        </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Contenu principal */}
           <div className="lg:col-span-2">
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-8">
-              {/* En-tête */}
-              <div className="mb-6">
-                <div className="flex items-center gap-3 mb-4">
-                  <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
-                    <TagIcon className="h-4 w-4 mr-1" />
-                    {event.type.charAt(0).toUpperCase() + event.type.slice(1)}
-                  </span>
-                  {isEventPast && (
-                    <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-gray-100 text-gray-800">
-                      Événement passé
-                    </span>
-                  )}
-                </div>
-                <h1 className="text-3xl font-bold text-gray-900 mb-4">{event.title}</h1>
-              </div>
-
-              {/* Informations clés */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                <div className="flex items-start gap-3">
-                  <CalendarIcon className="h-6 w-6 text-blue-600 mt-1" />
+            <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-sm border border-gray-200 p-8">
+              {/* Informations clés en grille */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8 pb-8 border-b border-gray-200">
+                <div className="flex items-start gap-4 p-4 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl border border-blue-100">
+                  <div className="bg-white p-3 rounded-lg shadow-sm">
+                    <CalendarIcon className="h-6 w-6 text-blue-600" />
+                  </div>
                   <div>
-                    <p className="font-semibold text-gray-900">{dateInfo.fullDate}</p>
-                    <p className="text-gray-600">{dateInfo.time}</p>
+                    <p className="font-semibold text-gray-900 text-sm mb-1">Date</p>
+                    <p className="text-gray-700 text-sm">{dateInfo.fullDate}</p>
+                    <p className="text-gray-600 text-sm">{dateInfo.time}</p>
                   </div>
                 </div>
-                <div className="flex items-start gap-3">
-                  <MapPinIcon className="h-6 w-6 text-green-600 mt-1" />
+                
+                <div className="flex items-start gap-4 p-4 bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl border border-green-100">
+                  <div className="bg-white p-3 rounded-lg shadow-sm">
+                    <MapPinIcon className="h-6 w-6 text-green-600" />
+                  </div>
                   <div>
-                    <p className="font-semibold text-gray-900">Lieu</p>
-                    <p className="text-gray-600">{event.location}</p>
+                    <p className="font-semibold text-gray-900 text-sm mb-1">Lieu</p>
+                    <p className="text-gray-700 text-sm">{event.location}</p>
                   </div>
                 </div>
+                
                 {event.organizer && (
-                  <div className="flex items-start gap-3">
-                    <UserIcon className="h-6 w-6 text-purple-600 mt-1" />
+                  <div className="flex items-start gap-4 p-4 bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl border border-purple-100">
+                    <div className="bg-white p-3 rounded-lg shadow-sm">
+                      <UserIcon className="h-6 w-6 text-purple-600" />
+                    </div>
                     <div>
-                      <p className="font-semibold text-gray-900">Organisateur</p>
-                      <p className="text-gray-600">{event.organizer}</p>
+                      <p className="font-semibold text-gray-900 text-sm mb-1">Organisateur</p>
+                      <p className="text-gray-700 font-medium">{event.organizer}</p>
                     </div>
                   </div>
                 )}
+                
                 {event.maxParticipants && (
-                  <div className="flex items-start gap-3">
-                    <UsersIcon className="h-6 w-6 text-orange-600 mt-1" />
+                  <div className="flex items-start gap-4 p-4 bg-gradient-to-br from-orange-50 to-red-50 rounded-xl border border-orange-100">
+                    <div className="bg-white p-3 rounded-lg shadow-sm">
+                      <UsersIcon className="h-6 w-6 text-orange-600" />
+                    </div>
                     <div>
-                      <p className="font-semibold text-gray-900">Participants</p>
-                      <p className="text-gray-600">
+                      <p className="font-semibold text-gray-900 text-sm mb-1">Participants</p>
+                      <p className="text-gray-700 font-medium">
                         {participantsCount} / {event.maxParticipants} inscrits
                       </p>
                     </div>
@@ -377,84 +432,94 @@ const EventDetailPage: React.FC = () => {
 
           {/* Sidebar */}
           <div className="lg:col-span-1">
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 sticky top-8">
+            <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-sm border border-gray-200 p-6 sticky top-8">
               {/* Statut et inscription */}
               <div className="mb-6">
                 {!isEventPast ? (
                   <>
                     {availableSpots !== null && availableSpots > 0 ? (
-                      <div className="mb-4">
-                        <div className="flex items-center justify-between mb-2">
-                          <span className="text-sm font-medium text-gray-700">Places disponibles</span>
-                          <span className="text-sm font-bold text-green-600">{availableSpots}</span>
+                      <div className="mb-4 p-4 bg-gradient-to-br from-green-50 to-emerald-50 border border-green-200 rounded-xl">
+                        <div className="flex items-center justify-between mb-3">
+                          <span className="text-sm font-semibold text-gray-700">Places disponibles</span>
+                          <span className="text-lg font-bold text-green-600">{availableSpots}</span>
                         </div>
-                        <div className="w-full bg-gray-200 rounded-full h-2">
+                        <div className="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
                           <div 
-                            className="bg-green-600 h-2 rounded-full" 
+                            className="bg-gradient-to-r from-green-500 to-emerald-500 h-3 rounded-full transition-all duration-500" 
                             style={{ width: `${((participantsCount) / (event.maxParticipants || 1)) * 100}%` }}
                           ></div>
                         </div>
+                        <p className="text-xs text-center mt-2 font-medium text-gray-600">
+                          {participantsCount} / {event.maxParticipants} participants
+                        </p>
                       </div>
                     ) : availableSpots === 0 ? (
-                      <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg">
-                        <p className="text-red-600 font-medium text-sm">Événement complet</p>
+                      <div className="mb-4 p-4 bg-gradient-to-br from-red-50 to-orange-50 border border-red-200 rounded-xl">
+                        <p className="text-red-600 font-semibold text-center">Événement complet</p>
                       </div>
                     ) : null}
                     
                     <button
                       onClick={handleRegister}
                       disabled={availableSpots === 0}
-                      className={`w-full py-3 px-4 rounded-lg font-semibold transition-colors ${
+                      className={`w-full py-4 px-4 rounded-xl font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-lg ${
                         isRegistered
-                          ? "bg-green-600 text-white hover:bg-green-700"
+                          ? "bg-gradient-to-r from-green-600 to-emerald-600 text-white"
                           : availableSpots === 0
                           ? "bg-gray-300 text-gray-500 cursor-not-allowed"
-                          : "bg-blue-600 text-white hover:bg-blue-700"
+                          : "bg-gradient-to-r from-red-600 to-orange-600 text-white hover:from-red-700 hover:to-orange-700"
                       }`}
                     >
-                      {isRegistered ? "✓ Inscrit" : availableSpots === 0 ? "Complet" : "S'inscrire"}
+                      {isRegistered ? "✓ Inscrit à l'événement" : availableSpots === 0 ? "Complet" : "S'inscrire maintenant"}
                     </button>
                   </>
                 ) : (
-                  <div className="p-3 bg-gray-50 border border-gray-200 rounded-lg text-center">
-                    <p className="text-gray-600 font-medium">Événement terminé</p>
+                  <div className="p-4 bg-gradient-to-br from-gray-50 to-gray-100 border border-gray-200 rounded-xl">
+                    <p className="text-gray-600 font-semibold text-center">Événement terminé</p>
                   </div>
                 )}
               </div>
 
               {/* Informations pratiques */}
               <div className="border-t border-gray-200 pt-6">
-                <h3 className="font-semibold text-gray-900 mb-4">Informations pratiques</h3>
+                <h3 className="font-bold text-gray-900 mb-4 flex items-center gap-2">
+                  <CalendarIcon className="h-5 w-5 text-blue-600" />
+                  Informations pratiques
+                </h3>
                 <div className="space-y-3">
-                  <div className="flex items-center gap-3 text-sm">
-                    <ClockIcon className="h-4 w-4 text-gray-400" />
-                    <span className="text-gray-600">Durée estimée : 3-4 heures</span>
+                  <div className="flex items-start gap-3 text-sm p-3 bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg">
+                    <ClockIcon className="h-5 w-5 text-gray-500 flex-shrink-0" />
+                    <span className="text-gray-700">Durée estimée : 3-4 heures</span>
                   </div>
-                  <div className="flex items-center gap-3 text-sm">
-                    <GlobeAltIcon className="h-4 w-4 text-gray-400" />
-                    <span className="text-gray-600">Langue : Français</span>
+                  <div className="flex items-start gap-3 text-sm p-3 bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg">
+                    <GlobeAltIcon className="h-5 w-5 text-gray-500 flex-shrink-0" />
+                    <span className="text-gray-700">Langue : Français</span>
                   </div>
-                  <div className="flex items-center gap-3 text-sm">
-                    <BookmarkIcon className="h-4 w-4 text-gray-400" />
-                    <span className="text-gray-600">Gratuit pour les membres</span>
+                  <div className="flex items-start gap-3 text-sm p-3 bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg">
+                    <BookmarkIcon className="h-5 w-5 text-gray-500 flex-shrink-0" />
+                    <span className="text-gray-700">Gratuit pour les membres</span>
                   </div>
                 </div>
               </div>
 
               {/* Contact */}
               <div className="border-t border-gray-200 pt-6 mt-6">
-                <h3 className="font-semibold text-gray-900 mb-4">Besoin d'aide ?</h3>
-                <p className="text-sm text-gray-600 mb-3">
-                  Pour toute question concernant cet événement, contactez l'organisateur.
+                <h3 className="font-bold text-gray-900 mb-4 flex items-center gap-2">
+                  <UserIcon className="h-5 w-5 text-purple-600" />
+                  Besoin d&apos;aide ?
+                </h3>
+                <p className="text-sm text-gray-600 mb-4">
+                  Pour toute question concernant cet événement, contactez l&apos;organisateur.
                 </p>
-                <button className="w-full py-2 px-4 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors">
-                  Contacter l'organisateur
+                <button className="w-full py-3 px-4 border-2 border-red-300 rounded-xl text-sm font-semibold text-red-600 hover:bg-red-50 hover:border-red-400 transition-all duration-300 transform hover:scale-105">
+                  Contacter l&apos;organisateur
                 </button>
               </div>
             </div>
           </div>
         </div>
       </div>
+    </div>
     </div>
   );
 };
