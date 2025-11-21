@@ -9,10 +9,12 @@ export const verificationEmailTemplate = (verifyUrl, firstName = '', appUrl = ''
   // Si appUrl n'est pas fourni ou est en localhost, on n'affiche pas les images
   const isProduction = appUrl && appUrl.startsWith('https://');
   const logoUrl = isProduction ? `${appUrl}/lau/imgi_1_Logo%20LAU-03.png` : '';
-  const facebookIcon = isProduction ? `${appUrl}/icon_reseaux_sociaux/svg/icons8-facebook.svg` : '';
-  const linkedinIcon = isProduction ? `${appUrl}/icon_reseaux_sociaux/svg/icons8-linkedin.svg` : '';
-  const xIcon = isProduction ? `${appUrl}/icon_reseaux_sociaux/svg/icons8-x.svg` : '';
-  const instagramIcon = isProduction ? `${appUrl}/icon_reseaux_sociaux/svg/icons8-instagram.svg` : '';
+  
+  // Utiliser les PNG au lieu des SVG pour une meilleure compatibilité email
+  const facebookIcon = isProduction ? `${appUrl}/icon_reseaux_sociaux/png/icons8-facebook-nouveau-50.png` : '';
+  const linkedinIcon = isProduction ? `${appUrl}/icon_reseaux_sociaux/png/icons8-linkedin-48.png` : '';
+  const xIcon = isProduction ? `${appUrl}/icon_reseaux_sociaux/png/icons8-twitterx-50.png` : '';
+  const instagramIcon = isProduction ? `${appUrl}/icon_reseaux_sociaux/png/icons8-instagram-50.png` : '';
   
   return `
 <!DOCTYPE html>
@@ -448,10 +450,30 @@ export const verificationEmailTemplate = (verifyUrl, firstName = '', appUrl = ''
                                 <tr>
                                     <td align="center" class="social-icons" style="padding-top: 15px;">
                                         ${isProduction ? `
-                                        <a href="#" class="social-icon" style="display: inline-block; margin: 0 5px;"><img src="${facebookIcon}" alt="Facebook" width="32" height="32" style="width: 32px; height: 32px; display: block;" /></a>
-                                        <a href="#" class="social-icon" style="display: inline-block; margin: 0 5px;"><img src="${linkedinIcon}" alt="LinkedIn" width="32" height="32" style="width: 32px; height: 32px; display: block;" /></a>
-                                        <a href="#" class="social-icon" style="display: inline-block; margin: 0 5px;"><img src="${xIcon}" alt="X" width="32" height="32" style="width: 32px; height: 32px; display: block;" /></a>
-                                        <a href="#" class="social-icon" style="display: inline-block; margin: 0 5px;"><img src="${instagramIcon}" alt="Instagram" width="32" height="32" style="width: 32px; height: 32px; display: block;" /></a>
+                                        <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin: 0 auto;">
+                                            <tr>
+                                                <td style="padding: 0 8px;">
+                                                    <a href="#" style="display: inline-block; width: 40px; height: 40px; background-color: rgba(255, 255, 255, 0.1); border-radius: 8px; text-align: center; line-height: 40px;">
+                                                        <img src="${facebookIcon}" alt="Facebook" width="28" height="28" style="width: 28px; height: 28px; vertical-align: middle; display: inline-block;" />
+                                                    </a>
+                                                </td>
+                                                <td style="padding: 0 8px;">
+                                                    <a href="#" style="display: inline-block; width: 40px; height: 40px; background-color: rgba(255, 255, 255, 0.1); border-radius: 8px; text-align: center; line-height: 40px;">
+                                                        <img src="${linkedinIcon}" alt="LinkedIn" width="28" height="28" style="width: 28px; height: 28px; vertical-align: middle; display: inline-block;" />
+                                                    </a>
+                                                </td>
+                                                <td style="padding: 0 8px;">
+                                                    <a href="#" style="display: inline-block; width: 40px; height: 40px; background-color: rgba(255, 255, 255, 0.1); border-radius: 8px; text-align: center; line-height: 40px;">
+                                                        <img src="${xIcon}" alt="X" width="28" height="28" style="width: 28px; height: 28px; vertical-align: middle; display: inline-block;" />
+                                                    </a>
+                                                </td>
+                                                <td style="padding: 0 8px;">
+                                                    <a href="#" style="display: inline-block; width: 40px; height: 40px; background-color: rgba(255, 255, 255, 0.1); border-radius: 8px; text-align: center; line-height: 40px;">
+                                                        <img src="${instagramIcon}" alt="Instagram" width="28" height="28" style="width: 28px; height: 28px; vertical-align: middle; display: inline-block;" />
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        </table>
                                         ` : `
                                         <div style="font-size: 24px; letter-spacing: 10px;">
                                             📘 💼 ✖️ 📸
