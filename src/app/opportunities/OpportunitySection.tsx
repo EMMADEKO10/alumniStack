@@ -224,9 +224,57 @@ const OpportunitySection: React.FC = () => {
   if (loading) {
     return (
       <div className="max-w-7xl mx-auto px-4 py-8">
-        <div className="flex flex-col justify-center items-center h-64">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-red-800"></div>
-          <p className="mt-4 text-gray-600">Chargement des opportunités...</p>
+        {/* Skeleton Statistiques */}
+        <div className="bg-gradient-to-r from-red-50 to-rose-50 rounded-xl p-6 border border-red-100 mb-6 animate-pulse">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+            {[1, 2, 3, 4].map((i) => (
+              <div key={i} className="text-center">
+                <div className="h-10 w-16 bg-gray-200 rounded mx-auto mb-2"></div>
+                <div className="h-4 w-24 bg-gray-200 rounded mx-auto"></div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Skeleton Barre de recherche */}
+        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-6 animate-pulse">
+          <div className="flex flex-col lg:flex-row gap-4 mb-4">
+            <div className="h-12 bg-gray-200 rounded-lg flex-1"></div>
+            <div className="flex gap-3">
+              <div className="h-10 w-32 bg-gray-200 rounded-lg"></div>
+              <div className="h-10 w-32 bg-gray-200 rounded-lg"></div>
+              <div className="h-10 w-32 bg-gray-200 rounded-lg"></div>
+            </div>
+          </div>
+          <div className="flex gap-2">
+            {[1, 2, 3, 4].map((i) => (
+              <div key={i} className="h-10 w-24 bg-gray-200 rounded-lg"></div>
+            ))}
+          </div>
+        </div>
+
+        {/* Skeleton Cartes d'opportunités */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {[1, 2, 3, 4, 5, 6].map((i) => (
+            <div key={i} className="bg-white rounded-xl border border-gray-200 overflow-hidden animate-pulse">
+              <div className="h-48 bg-gray-200"></div>
+              <div className="p-6">
+                <div className="flex gap-2 mb-3">
+                  <div className="h-6 w-20 bg-gray-200 rounded-full"></div>
+                  <div className="h-6 w-24 bg-gray-200 rounded-full"></div>
+                </div>
+                <div className="h-6 bg-gray-200 rounded mb-2"></div>
+                <div className="h-6 bg-gray-200 rounded w-3/4 mb-4"></div>
+                <div className="h-4 bg-gray-200 rounded mb-2"></div>
+                <div className="h-4 bg-gray-200 rounded w-2/3 mb-4"></div>
+                <div className="border-t border-gray-100 pt-4 space-y-2 mb-4">
+                  <div className="h-4 bg-gray-200 rounded"></div>
+                  <div className="h-4 bg-gray-200 rounded w-1/2"></div>
+                </div>
+                <div className="h-12 bg-gray-200 rounded-xl"></div>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     );

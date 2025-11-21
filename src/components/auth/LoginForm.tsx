@@ -6,10 +6,11 @@ import Link from 'next/link';
 import { FaLock, FaEnvelope, FaSignInAlt } from 'react-icons/fa';
 
 interface LoginFormProps {
-  // Props optionnelles si nécessaire
+  onSuccess?: () => void;
 }
 
-export default function LoginForm({}: LoginFormProps) {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export default function LoginForm({ onSuccess }: LoginFormProps) {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [error, setError] = useState<string>('');
@@ -53,22 +54,22 @@ export default function LoginForm({}: LoginFormProps) {
   };
 
   return (
-    <div className="w-full max-w-md mx-auto p-8 bg-white rounded-xl shadow-lg">
+    <div className="w-full max-w-md mx-auto p-8 bg-white rounded-2xl shadow-xl border border-gray-100">
       <div className="mb-8 text-center">
-        <h2 className="text-3xl font-bold text-gray-800 mb-2">Bienvenue</h2>
-        <p className="text-gray-600">Connectez-vous pour accéder à votre compte</p>
+        <h2 className="text-3xl font-bold text-gray-900 mb-2">Connexion</h2>
+        <p className="text-gray-600">Accédez à votre espace alumni</p>
       </div>
       
       {error && (
-        <div className="bg-red-50 border-l-4 border-red-500 p-4 mb-6 rounded">
+        <div className="bg-red-50 border-l-4 border-red-600 p-4 mb-6 rounded">
           <div className="flex items-center">
             <div className="flex-shrink-0">
-              <svg className="h-5 w-5 text-red-500" viewBox="0 0 20 20" fill="currentColor">
+              <svg className="h-5 w-5 text-red-600" viewBox="0 0 20 20" fill="currentColor">
                 <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
               </svg>
             </div>
             <div className="ml-3">
-              <p className="text-sm text-red-700">{error}</p>
+              <p className="text-sm text-red-700 font-medium">{error}</p>
             </div>
           </div>
         </div>
@@ -88,7 +89,7 @@ export default function LoginForm({}: LoginFormProps) {
               id="email"
               value={email}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
-              className="pl-10 w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              className="pl-10 w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-red-600 transition-all"
               placeholder="exemple@email.com"
               required
             />
@@ -100,7 +101,7 @@ export default function LoginForm({}: LoginFormProps) {
             <label htmlFor="password" className="block text-sm font-medium text-gray-700">
               Mot de passe
             </label>
-            <Link href="#" className="text-sm text-blue-600 hover:text-blue-800">
+            <Link href="#" className="text-sm text-cyan-600 hover:text-cyan-700 font-medium">
               Mot de passe oublié?
             </Link>
           </div>
@@ -113,7 +114,7 @@ export default function LoginForm({}: LoginFormProps) {
               id="password"
               value={password}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
-              className="pl-10 w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              className="pl-10 w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-red-600 transition-all"
               placeholder="••••••••"
               required
             />
@@ -123,7 +124,7 @@ export default function LoginForm({}: LoginFormProps) {
         <button
           type="submit"
           disabled={loading}
-          className="w-full flex justify-center items-center bg-blue-600 text-white py-3 px-4 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors disabled:opacity-50"
+          className="w-full flex justify-center items-center bg-red-600 text-white py-3 px-4 rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-600 focus:ring-offset-2 transition-all disabled:opacity-50 disabled:cursor-not-allowed font-medium"
         >
           {loading ? (
             <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -142,7 +143,7 @@ export default function LoginForm({}: LoginFormProps) {
       <div className="mt-8 text-center">
         <p className="text-gray-600">
           Pas encore de compte?{' '}
-          <Link href="/register" className="text-blue-600 hover:text-blue-800 font-medium">
+          <Link href="/register" className="text-red-600 hover:text-red-700 font-semibold">
             Créer un compte
           </Link>
         </p>

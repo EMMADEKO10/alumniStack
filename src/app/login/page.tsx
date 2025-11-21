@@ -1,15 +1,74 @@
+'use client';
+
 import LoginForm from '../../components/auth/LoginForm';
-import PageTitle from '../../ui/navigation/PageTitle';
+import Image from 'next/image';
+import { motion } from 'framer-motion';
 
 export default function LoginPage() {
   return (
-    <div className="container mx-auto py-10">
-      <PageTitle 
-        title="Connexion" 
-        content="Connectez-vous à votre compte pour accéder à toutes les fonctionnalités de la plateforme alumni."
-      />
-      <div className="mt-10">
-        <LoginForm />
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-cyan-50/30 relative overflow-hidden">
+      {/* Décorations de fond */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute -top-24 -left-24 w-96 h-96 bg-red-100/20 rounded-full blur-3xl"></div>
+        <div className="absolute top-1/2 -right-24 w-96 h-96 bg-cyan-100/20 rounded-full blur-3xl"></div>
+      </div>
+
+      <div className="pt-32 pb-16 relative z-10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            
+            {/* Colonne gauche - Image et informations */}
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6 }}
+              className="hidden lg:block"
+            >
+              {/* Image de graduation */}
+              <div className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-white mt-8">
+                <Image
+                  src="/lau/collation.jpg"
+                  alt="LAU Graduation"
+                  width={600}
+                  height={400}
+                  className="w-full h-auto object-cover"
+                  priority
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
+                <div className="absolute bottom-0 left-0 right-0 p-8 text-white">
+                  <h2 className="text-3xl font-bold mb-2">Rejoignez la Famille LAU</h2>
+                  <p className="text-lg opacity-90">Connectez-vous avec des milliers d&apos;alumni à travers le monde</p>
+                </div>
+              </div>
+
+              {/* Statistiques */}
+              <div className="grid grid-cols-3 gap-4 mt-8">
+                <div className="bg-white rounded-xl p-4 shadow-sm border border-red-100">
+                  <p className="text-2xl font-bold text-red-600">500+</p>
+                  <p className="text-sm text-gray-600">Alumni</p>
+                </div>
+                <div className="bg-white rounded-xl p-4 shadow-sm border border-blue-100">
+                  <p className="text-2xl font-bold text-blue-900">50+</p>
+                  <p className="text-sm text-gray-600">Événements</p>
+                </div>
+                <div className="bg-white rounded-xl p-4 shadow-sm border border-cyan-100">
+                  <p className="text-2xl font-bold text-cyan-600">20+</p>
+                  <p className="text-sm text-gray-600">Communautés</p>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Colonne droite - Formulaire */}
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
+              <LoginForm />
+            </motion.div>
+          </div>
+        </div>
       </div>
     </div>
   );

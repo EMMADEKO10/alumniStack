@@ -251,11 +251,47 @@ const OpportunityDetailPage: React.FC = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50">
-        <div className="max-w-5xl mx-auto px-4 pt-8">
-          <div className="flex items-center justify-center h-64">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-red-800"></div>
-            <span className="ml-3 text-gray-600">Chargement des détails...</span>
+      <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100">
+        <div className="pt-32">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            {/* Skeleton bouton retour */}
+            <div className="h-6 w-48 bg-gray-200 rounded mb-8 animate-pulse"></div>
+
+            {/* Skeleton Hero */}
+            <div className="relative h-96 w-full rounded-2xl bg-gray-200 mb-8 animate-pulse"></div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+              {/* Skeleton contenu principal */}
+              <div className="lg:col-span-2">
+                <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-sm border border-gray-200 p-8 animate-pulse">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8 pb-8 border-b border-gray-200">
+                    {[1, 2, 3, 4].map((i) => (
+                      <div key={i} className="p-4 bg-gray-100 rounded-xl">
+                        <div className="h-12 bg-gray-200 rounded mb-2"></div>
+                        <div className="h-4 bg-gray-200 rounded w-3/4"></div>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="space-y-4">
+                    <div className="h-6 bg-gray-200 rounded w-1/3"></div>
+                    <div className="h-4 bg-gray-200 rounded"></div>
+                    <div className="h-4 bg-gray-200 rounded"></div>
+                    <div className="h-4 bg-gray-200 rounded w-5/6"></div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Skeleton sidebar */}
+              <div className="lg:col-span-1">
+                <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-sm border border-gray-200 p-6 animate-pulse">
+                  <div className="h-14 bg-gray-200 rounded-xl mb-6"></div>
+                  <div className="space-y-3">
+                    <div className="h-4 bg-gray-200 rounded"></div>
+                    <div className="h-4 bg-gray-200 rounded w-3/4"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

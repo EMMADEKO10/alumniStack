@@ -81,63 +81,96 @@ export async function POST(request: Request) {
       // Vérifier si l'utilisateur existe déjà (insensible à la casse) dans users
       const existingUser = await usersCollection.findOne({ email: { $regex: `^${normalizedEmail}$`, $options: 'i' } });
       if (existingUser) {
-        console.log(`L'utilisateur avec l'email ${normalizedEmail} existe déjà`);
+        console.log(`L'utilisateur avec l'email ${normalizedEmail} existe déjà (compte vérifié)`);
         return NextResponse.json(
-          { error: 'Cet email est déjà utilisé' },
+          { error: 'Un compte vérifié existe déjà avec cet email. Veuillez vous connecter ou réinitialiser votre mot de passe.' },
           { status: 409 }
         );
       }
 
       // Vérifier s'il y a déjà une inscription en attente
       const existingPending = await pendingUsersCollection.findOne({ email: { $regex: `^${normalizedEmail}$`, $options: 'i' } });
+      
+      let verificationToken: string;
+      let verificationExpires: Date;
+      let hashedPassword: string;
+      let pendingId: string;
+
       if (existingPending) {
-        console.log(`Un compte en attente existe déjà pour ${normalizedEmail}`);
-        return NextResponse.json(
-          { error: 'Un compte en attente existe déjà pour cet email. Vérifiez votre boîte mail.' },
-          { status: 409 }
+        console.log(`Un compte en attente existe déjà pour ${normalizedEmail}. Mise à jour et renvoi de l'email.`);
+        
+        // Générer un nouveau token et mettre à jour les données
+        verificationToken = crypto.randomBytes(32).toString('hex');
+        verificationExpires = new Date(Date.now() + 1000 * 60 * 60 * 24); // 24h
+        hashedPassword = await bcrypt.hash(password, 10);
+
+        // Mettre à jour le compte en attente avec les nouvelles données
+        await pendingUsersCollection.updateOne(
+          { email: { $regex: `^${normalizedEmail}$`, $options: 'i' } },
+          {
+            $set: {
+              password: hashedPassword,
+              firstName: firstName || existingPending.firstName || '',
+              lastName: lastName || existingPending.lastName || '',
+              verificationToken,
+              verificationExpires,
+              updatedAt: new Date()
+            }
+          }
         );
+
+        pendingId = existingPending._id.toString();
+        console.log(`Compte en attente mis à jour pour ${normalizedEmail}`);
+      } else {
+        // Nouveau compte en attente
+        // Hachage du mot de passe
+        hashedPassword = await bcrypt.hash(password, 10);
+
+        // Générer un token de vérification
+        verificationToken = crypto.randomBytes(32).toString('hex');
+        verificationExpires = new Date(Date.now() + 1000 * 60 * 60 * 24); // 24h
+
+        // Création du document pending user
+        const pendingUser: User = {
+          email: normalizedEmail,
+          password: hashedPassword,
+          firstName: firstName || '',
+          lastName: lastName || '',
+          role: 'user',
+          createdAt: new Date(),
+          // @ts-ignore - champs additionnels non typés dans l'interface User locale
+          isVerified: false,
+          // @ts-ignore
+          verificationToken,
+          // @ts-ignore
+          verificationExpires
+        };
+
+        const result = await pendingUsersCollection.insertOne(pendingUser);
+        pendingId = result.insertedId.toString();
+        console.log(`Nouvel utilisateur en attente créé avec l'ID: ${pendingId}`);
       }
 
-      // Hachage du mot de passe
-      const hashedPassword = await bcrypt.hash(password, 10);
-
-      // Générer un token de vérification
-      const verificationToken = crypto.randomBytes(32).toString('hex');
-      const verificationExpires = new Date(Date.now() + 1000 * 60 * 60 * 24); // 24h
-
-      // Création du document pending user
-      const pendingUser: User = {
-        email: normalizedEmail,
-        password: hashedPassword,
-        firstName: firstName || '',
-        lastName: lastName || '',
-        role: 'user',
-        createdAt: new Date(),
-        // @ts-ignore - champs additionnels non typés dans l'interface User locale
-        isVerified: false,
-        // @ts-ignore
-        verificationToken,
-        // @ts-ignore
-        verificationExpires
-      };
-
-      const result = await pendingUsersCollection.insertOne(pendingUser);
-
-      console.log(`Utilisateur créé avec l'ID: ${result.insertedId}`);
-
       // Construire le lien de vérification
-      const origin = request.headers.get('origin') || process.env.NEXT_PUBLIC_APP_URL || '';
+      const origin = request.headers.get('origin') || process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000';
       const verifyUrl = `${origin}/api/auth/verify?token=${verificationToken}`;
 
       try {
         // Import dynamique pour compatibilité CJS
         const { sendEmail } = await import('../../../../utils/sendEmails.js');
+        const { verificationEmailTemplate, verificationEmailText } = await import('../../../../utils/emailTemplates.js');
+        
+        const htmlContent = verificationEmailTemplate(verifyUrl, firstName, origin);
+        const textContent = verificationEmailText(verifyUrl, firstName);
+        
         await sendEmail(
           normalizedEmail,
-          'Vérifiez votre adresse e-mail',
-          `Bienvenue! Veuillez confirmer votre inscription en cliquant: ${verifyUrl}`,
-          `<p>Bienvenue!</p><p>Veuillez confirmer votre inscription en cliquant sur le lien ci-dessous:</p><p><a href="${verifyUrl}">Confirmer mon inscription</a></p><p>Ce lien expire dans 24 heures.</p>`
+          '🎓 Bienvenue sur LAU Alumni - Vérifiez votre compte',
+          textContent,
+          htmlContent
         );
+        
+        console.log(`Email de vérification envoyé à ${normalizedEmail}`);
       } catch (emailError) {
         console.error('Erreur lors de l\'envoi de l\'email de vérification:', emailError);
         // Ne pas échouer l'inscription si l'envoi d'email échoue
@@ -146,7 +179,8 @@ export async function POST(request: Request) {
       return NextResponse.json(
         {
           message: 'Inscription reçue. Vérifiez votre e-mail pour activer votre compte.',
-          pendingId: result.insertedId.toString()
+          pendingId: pendingId,
+          updated: existingPending ? true : false
         },
         { status: 201 }
       );

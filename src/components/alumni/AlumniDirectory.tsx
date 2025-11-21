@@ -236,27 +236,62 @@ const AlumniDirectory: React.FC<AlumniDirectoryProps> = ({ onAlumniSelect }) => 
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center">
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          className="text-center"
-        >
-          <div className="relative">
-            <div className="animate-spin rounded-full h-16 w-16 border-4 border-red-200 border-t-red-600 mx-auto"></div>
-            <div className="absolute inset-0 flex items-center justify-center">
-              <FaUsers className="text-red-600 text-lg animate-pulse" />
+      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
+        <div className="pt-32 pb-16">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            {/* Skeleton Header */}
+            <div className="text-center mb-12 animate-pulse">
+              <div className="h-12 bg-gray-200 rounded w-1/2 mx-auto mb-4"></div>
+              <div className="h-6 bg-gray-200 rounded w-2/3 mx-auto"></div>
             </div>
+
+            {/* Skeleton Statistiques */}
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+              {[1, 2, 3, 4].map((i) => (
+                <div key={i} className="bg-white rounded-xl p-6 shadow-sm border border-gray-200 animate-pulse">
+                  <div className="h-6 w-12 bg-gray-200 rounded mb-2"></div>
+                  <div className="h-10 bg-gray-200 rounded w-16 mb-2"></div>
+                  <div className="h-4 bg-gray-200 rounded w-24"></div>
+                </div>
+              ))}
+            </div>
+
+            {/* Skeleton Filtres */}
+            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-8 animate-pulse">
+              <div className="flex flex-col lg:flex-row gap-4">
+                <div className="h-12 bg-gray-200 rounded-lg flex-1"></div>
+                <div className="flex gap-3">
+                  <div className="h-12 w-32 bg-gray-200 rounded-lg"></div>
+                  <div className="h-12 w-32 bg-gray-200 rounded-lg"></div>
+                  <div className="h-12 w-32 bg-gray-200 rounded-lg"></div>
+                </div>
+              </div>
+            </div>
+
+            {/* Skeleton Cartes Alumni */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {[1, 2, 3, 4, 5, 6].map((i) => (
+                <div key={i} className="bg-white rounded-xl border border-gray-200 p-6 animate-pulse">
+                  <div className="flex items-center gap-4 mb-4">
+                    <div className="w-16 h-16 bg-gray-200 rounded-full"></div>
+                    <div className="flex-1">
+                      <div className="h-6 bg-gray-200 rounded w-3/4 mb-2"></div>
+                      <div className="h-4 bg-gray-200 rounded w-1/2"></div>
+                    </div>
+                  </div>
+                  <div className="space-y-2 mb-4">
+                    <div className="h-4 bg-gray-200 rounded"></div>
+                    <div className="h-4 bg-gray-200 rounded w-2/3"></div>
+                  </div>
+                  <div className="flex gap-2">
+                    <div className="h-6 w-20 bg-gray-200 rounded-full"></div>
+                    <div className="h-6 w-24 bg-gray-200 rounded-full"></div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.2 }}
-            className="mt-6 text-gray-600 font-medium"
-          >
-            Chargement des profils alumni...
-          </motion.p>
-        </motion.div>
       </div>
     );
   }
@@ -288,11 +323,11 @@ const AlumniDirectory: React.FC<AlumniDirectoryProps> = ({ onAlumniSelect }) => 
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 relative">
-      {/* Décorations de fond */}
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-cyan-50/30 relative">
+      {/* Décorations de fond avec palette LAU */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div
-          className="absolute -top-24 -left-24 w-96 h-96 bg-gradient-to-br from-blue-200/20 to-purple-200/20 rounded-full blur-3xl"
+          className="absolute -top-24 -left-24 w-96 h-96 bg-gradient-to-br from-red-200/20 to-cyan-200/20 rounded-full blur-3xl"
           animate={{
             x: [0, 50, 0],
             y: [0, 30, 0],
@@ -304,7 +339,7 @@ const AlumniDirectory: React.FC<AlumniDirectoryProps> = ({ onAlumniSelect }) => 
           }}
         />
         <motion.div
-          className="absolute top-1/2 -right-24 w-96 h-96 bg-gradient-to-br from-purple-200/20 to-blue-200/20 rounded-full blur-3xl"
+          className="absolute top-1/2 -right-24 w-96 h-96 bg-gradient-to-br from-blue-900/10 to-red-200/20 rounded-full blur-3xl"
           animate={{
             x: [0, -30, 0],
             y: [0, 50, 0],
@@ -321,7 +356,7 @@ const AlumniDirectory: React.FC<AlumniDirectoryProps> = ({ onAlumniSelect }) => 
       <div className="pt-32">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 relative z-10">
           
-          {/* Header avec titre harmonisé */}
+          {/* Header avec titre harmonisé - Palette LAU */}
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -330,7 +365,7 @@ const AlumniDirectory: React.FC<AlumniDirectoryProps> = ({ onAlumniSelect }) => 
           >
             <h1 className="text-4xl md:text-5xl font-bold mb-4">
               <span className="text-gray-900">Découvrez </span>
-              <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">
+              <span className="text-red-600">
                 Notre Communauté
               </span>
             </h1>
@@ -339,7 +374,7 @@ const AlumniDirectory: React.FC<AlumniDirectoryProps> = ({ onAlumniSelect }) => 
             </p>
           </motion.div>
 
-          {/* Grille de fonctionnalités */}
+          {/* Grille de fonctionnalités - Palette LAU */}
           <motion.div 
             className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12"
             initial={{ opacity: 0, y: 20 }}
@@ -350,29 +385,41 @@ const AlumniDirectory: React.FC<AlumniDirectoryProps> = ({ onAlumniSelect }) => 
               {
                 icon: FaUsers,
                 title: "Réseau Alumni",
-                description: "Rejoignez une communauté mondiale d'anciens étudiants brillants et engagés."
+                description: "Rejoignez une communauté mondiale d'anciens étudiants brillants et engagés.",
+                gradient: "from-red-50 to-red-100/50",
+                iconBg: "from-red-100 to-red-200",
+                iconColor: "text-red-600",
+                border: "border-red-100"
               },
               {
                 icon: FaGraduationCap,
                 title: "Toutes Promotions",
-                description: "Explorez les profils d'alumni de toutes les facultés et années de graduation."
+                description: "Explorez les profils d'alumni de toutes les facultés et années de graduation.",
+                gradient: "from-blue-50 to-blue-100/50",
+                iconBg: "from-blue-900/10 to-blue-900/20",
+                iconColor: "text-blue-900",
+                border: "border-blue-100"
               },
               {
                 icon: FaBuilding,
                 title: "Secteurs Variés",
-                description: "Découvrez des professionnels actifs dans de nombreux domaines d'expertise."
+                description: "Découvrez des professionnels actifs dans de nombreux domaines d'expertise.",
+                gradient: "from-cyan-50 to-cyan-100/50",
+                iconBg: "from-cyan-100 to-cyan-200",
+                iconColor: "text-cyan-600",
+                border: "border-cyan-100"
               }
             ].map((feature, index) => (
               <motion.div
                 key={index}
-                className="bg-white/80 backdrop-blur-sm rounded-xl p-6 border border-gray-200 hover:shadow-lg transition-all duration-300 group"
+                className={`bg-gradient-to-br ${feature.gradient} backdrop-blur-sm rounded-xl p-6 border ${feature.border} hover:shadow-lg transition-all duration-300 group`}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
                 whileHover={{ y: -8 }}
               >
-                <div className="bg-gradient-to-br from-blue-50 to-purple-50 w-14 h-14 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
-                  <feature.icon className="text-2xl text-blue-600" />
+                <div className={`bg-gradient-to-br ${feature.iconBg} w-14 h-14 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}>
+                  <feature.icon className={`text-2xl ${feature.iconColor}`} />
                 </div>
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">
                   {feature.title}
@@ -384,7 +431,7 @@ const AlumniDirectory: React.FC<AlumniDirectoryProps> = ({ onAlumniSelect }) => 
             ))}
           </motion.div>
 
-          {/* Statistiques améliorées */}
+          {/* Statistiques améliorées - Palette LAU */}
           <motion.div
             variants={staggerChildren}
             initial="initial"
@@ -396,33 +443,37 @@ const AlumniDirectory: React.FC<AlumniDirectoryProps> = ({ onAlumniSelect }) => 
                 icon: FaUsers,
                 value: alumni.length,
                 label: "Alumni inscrits",
-                bgColor: "bg-gradient-to-br from-blue-50 to-indigo-50",
-                iconColor: "text-blue-600",
-                borderColor: "border-blue-100"
+                bgColor: "bg-gradient-to-br from-red-50 to-red-100/50",
+                iconBg: "bg-gradient-to-br from-red-100 to-red-200",
+                iconColor: "text-red-600",
+                borderColor: "border-red-100"
               },
               {
                 icon: FaSearch,
                 value: filteredAlumni.length,
                 label: "Résultats trouvés",
-                bgColor: "bg-gradient-to-br from-green-50 to-emerald-50",
-                iconColor: "text-green-600",
-                borderColor: "border-green-100"
+                bgColor: "bg-gradient-to-br from-cyan-50 to-cyan-100/50",
+                iconBg: "bg-gradient-to-br from-cyan-100 to-cyan-200",
+                iconColor: "text-cyan-600",
+                borderColor: "border-cyan-100"
               },
               {
                 icon: FaGraduationCap,
                 value: faculties.length,
                 label: "Facultés",
-                bgColor: "bg-gradient-to-br from-purple-50 to-pink-50",
-                iconColor: "text-purple-600",
-                borderColor: "border-purple-100"
+                bgColor: "bg-gradient-to-br from-blue-50 to-blue-100/50",
+                iconBg: "bg-gradient-to-br from-blue-900/10 to-blue-900/20",
+                iconColor: "text-blue-900",
+                borderColor: "border-blue-100"
               },
               {
                 icon: FaBuilding,
                 value: industries.length,
                 label: "Secteurs",
-                bgColor: "bg-gradient-to-br from-orange-50 to-red-50",
-                iconColor: "text-orange-600",
-                borderColor: "border-orange-100"
+                bgColor: "bg-gradient-to-br from-gray-50 to-gray-100/50",
+                iconBg: "bg-gradient-to-br from-gray-200 to-gray-300",
+                iconColor: "text-gray-900",
+                borderColor: "border-gray-200"
               }
             ].map((stat) => (
               <motion.div
@@ -432,7 +483,7 @@ const AlumniDirectory: React.FC<AlumniDirectoryProps> = ({ onAlumniSelect }) => 
                 whileHover={{ y: -4 }}
               >
                 <div className="flex items-center justify-between mb-3">
-                  <div className={`${stat.bgColor} p-3 rounded-lg`}>
+                  <div className={`${stat.iconBg} p-3 rounded-lg`}>
                     <stat.icon className={`h-6 w-6 ${stat.iconColor}`} />
                   </div>
                 </div>
@@ -461,7 +512,7 @@ const AlumniDirectory: React.FC<AlumniDirectoryProps> = ({ onAlumniSelect }) => 
                 placeholder="Rechercher par nom, entreprise, compétence..."
                 value={filters.search}
                 onChange={(e) => handleFilterChange('search', e.target.value)}
-                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-all duration-200"
+                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-red-600 focus:border-red-600 transition-all duration-200"
                 />
               </div>
 
@@ -471,7 +522,7 @@ const AlumniDirectory: React.FC<AlumniDirectoryProps> = ({ onAlumniSelect }) => 
                   onClick={() => setShowFilters(!showFilters)}
                   className={`flex items-center gap-2 px-4 py-3 rounded-xl font-medium transition-all duration-200 ${
                     showFilters || activeFiltersCount > 0
-                      ? 'bg-red-600 text-white shadow-md'
+                      ? 'bg-red-600 text-white shadow-md hover:bg-red-700'
                       : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                   }`}
                 >
@@ -490,7 +541,7 @@ const AlumniDirectory: React.FC<AlumniDirectoryProps> = ({ onAlumniSelect }) => 
                   <select
                     value={filters.sortBy}
                     onChange={(e) => handleFilterChange('sortBy', e.target.value as FilterState['sortBy'])}
-                    className="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 text-sm"
+                    className="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 text-sm"
                   >
                     <option value="name">Nom</option>
                     <option value="graduation">Promotion</option>
@@ -520,7 +571,7 @@ const AlumniDirectory: React.FC<AlumniDirectoryProps> = ({ onAlumniSelect }) => 
             <select
               value={filters.facultyId}
               onChange={(e) => handleFilterChange('facultyId', e.target.value)}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-900 focus:border-blue-900"
             >
               <option value="">Toutes les facultés</option>
               {faculties.map(faculty => (
@@ -537,7 +588,7 @@ const AlumniDirectory: React.FC<AlumniDirectoryProps> = ({ onAlumniSelect }) => 
             <select
               value={filters.graduationYear}
               onChange={(e) => handleFilterChange('graduationYear', e.target.value)}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500"
             >
               <option value="">Toutes les promotions</option>
               {graduationYears.map(year => (
@@ -554,7 +605,7 @@ const AlumniDirectory: React.FC<AlumniDirectoryProps> = ({ onAlumniSelect }) => 
             <select
               value={filters.industry}
               onChange={(e) => handleFilterChange('industry', e.target.value)}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-600 focus:border-red-600"
             >
               <option value="">Tous les secteurs</option>
               {industries.map(industry => (
@@ -591,8 +642,8 @@ const AlumniDirectory: React.FC<AlumniDirectoryProps> = ({ onAlumniSelect }) => 
                 animate={{ opacity: 1, y: 0 }}
                 className="text-center py-16 bg-white/80 backdrop-blur-sm rounded-xl border border-gray-200 shadow-sm"
               >
-                <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-full w-20 h-20 mx-auto mb-6 flex items-center justify-center">
-                  <FaUsers className="text-blue-600 text-2xl" />
+                <div className="bg-gradient-to-br from-red-50 to-cyan-50 rounded-full w-20 h-20 mx-auto mb-6 flex items-center justify-center">
+                  <FaUsers className="text-red-600 text-2xl" />
             </div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-4">
                   {alumni.length === 0 ? 'Aucun alumni dans la base de données' : 'Aucun alumni trouvé'}
@@ -605,7 +656,7 @@ const AlumniDirectory: React.FC<AlumniDirectoryProps> = ({ onAlumniSelect }) => 
                 </p>
                 <button
                   onClick={resetFilters}
-                  className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-6 py-3 rounded-lg font-semibold hover:from-blue-700 hover:to-indigo-700 transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-105"
+                  className="bg-red-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-red-700 transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-105"
                 >
                   Réinitialiser les filtres
                 </button>

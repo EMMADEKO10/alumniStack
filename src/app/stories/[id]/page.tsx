@@ -61,19 +61,40 @@ export default function StoryDetailPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-red-50">
+      <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-cyan-50/30">
         <div className="max-w-6xl mx-auto px-4 pt-8">
-          <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="flex flex-col items-center justify-center h-96"
-          >
-            <div className="relative">
-              <div className="animate-spin rounded-full h-16 w-16 border-4 border-red-200"></div>
-              <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-red-600 absolute top-0"></div>
+          <div className="pt-32 pb-16">
+            {/* Skeleton bouton retour */}
+            <div className="h-6 w-40 bg-gray-200 rounded mb-8 animate-pulse"></div>
+
+            {/* Skeleton Image hero */}
+            <div className="h-96 bg-gray-200 rounded-2xl mb-8 animate-pulse"></div>
+
+            {/* Skeleton Contenu */}
+            <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-sm border border-gray-200 p-8 animate-pulse">
+              <div className="flex items-center gap-4 mb-6">
+                <div className="h-6 w-24 bg-gray-200 rounded-full"></div>
+                <div className="h-6 w-32 bg-gray-200 rounded-full"></div>
+              </div>
+              <div className="h-10 bg-gray-200 rounded w-3/4 mb-6"></div>
+              <div className="flex items-center gap-6 mb-8 pb-6 border-b border-gray-200">
+                <div className="flex items-center gap-2">
+                  <div className="w-10 h-10 bg-gray-200 rounded-full"></div>
+                  <div className="h-4 w-24 bg-gray-200 rounded"></div>
+                </div>
+                <div className="h-4 w-32 bg-gray-200 rounded"></div>
+              </div>
+              <div className="space-y-4">
+                <div className="h-4 bg-gray-200 rounded"></div>
+                <div className="h-4 bg-gray-200 rounded"></div>
+                <div className="h-4 bg-gray-200 rounded w-5/6"></div>
+                <div className="h-4 bg-gray-200 rounded"></div>
+                <div className="h-4 bg-gray-200 rounded w-4/5"></div>
+                <div className="h-4 bg-gray-200 rounded"></div>
+                <div className="h-4 bg-gray-200 rounded w-3/4"></div>
+              </div>
             </div>
-            <p className="mt-6 text-gray-600 font-medium">Chargement de l&apos;histoire...</p>
-          </motion.div>
+          </div>
         </div>
       </div>
     );
@@ -81,7 +102,7 @@ export default function StoryDetailPage() {
 
   if (error || !story) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-red-50">
+      <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-cyan-50/30">
         <div className="max-w-6xl mx-auto px-4 pt-8">
           <motion.button
             initial={{ opacity: 0, x: -20 }}
@@ -109,11 +130,11 @@ export default function StoryDetailPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-red-50">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-cyan-50/30">
       {/* Background Decorations */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-20 -left-20 w-72 h-72 bg-red-100 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse"></div>
-        <div className="absolute top-40 -right-20 w-96 h-96 bg-rose-100 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse" style={{ animationDelay: '2s' }}></div>
+        <div className="absolute top-40 -right-20 w-96 h-96 bg-cyan-100 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse" style={{ animationDelay: '2s' }}></div>
       </div>
 
       <div className="max-w-6xl mx-auto px-4 pt-8 pb-16 relative z-10">

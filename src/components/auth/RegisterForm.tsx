@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import axios from 'axios';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { FaUser, FaLock, FaEnvelope, FaUserPlus, FaIdCard } from 'react-icons/fa';
 
 interface FormData {
@@ -13,10 +14,12 @@ interface FormData {
 }
 
 interface RegisterFormProps {
-  // Props optionnelles si nécessaire
+  onSuccess?: () => void;
 }
 
-export default function RegisterForm({}: RegisterFormProps) {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export default function RegisterForm({ onSuccess }: RegisterFormProps) {
+  const router = useRouter();
   const [formData, setFormData] = useState<FormData>({
     email: '',
     password: '',
@@ -25,6 +28,7 @@ export default function RegisterForm({}: RegisterFormProps) {
   });
   const [error, setError] = useState<string>('');
   const [success, setSuccess] = useState<string>('');
+  const [info, setInfo] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -40,6 +44,7 @@ export default function RegisterForm({}: RegisterFormProps) {
     setLoading(true);
     setError('');
     setSuccess('');
+    setInfo('');
 
     try {
       console.log('Données d\'inscription:', formData);
@@ -54,11 +59,29 @@ export default function RegisterForm({}: RegisterFormProps) {
       
       console.log('Réponse d\'inscription:', response.data);
       
-      setSuccess("Inscription réussie! Vérifiez votre e-mail pour confirmer votre compte.");
+      // Vérifier s'il y a un message d'information (compte mis à jour)
+      if (response.data.updated) {
+        setInfo('Vos informations ont été mises à jour. Un nouvel email de vérification vous a été envoyé.');
+        // Attendre 2 secondes avant de rediriger
+        setTimeout(() => {
+          router.push('/verify-email');
+        }, 2000);
+      } else {
+        // Nouveau compte créé, rediriger immédiatement
+        router.push('/verify-email');
+      }
     } catch (error: any) {
       console.error("Erreur d'inscription:", error);
       
-      if (error.response?.data?.error) {
+      if (error.response?.status === 409) {
+        // Conflit - compte existe déjà
+        const errorMsg = error.response.data.error || '';
+        if (errorMsg.includes('déjà utilisé') || errorMsg.includes('compte vérifié')) {
+          setError('Cet email est déjà associé à un compte actif. Veuillez vous connecter.');
+        } else {
+          setError(errorMsg);
+        }
+      } else if (error.response?.data?.error) {
         setError(error.response.data.error);
       } else if (error.code === 'ERR_NETWORK') {
         setError('Impossible de se connecter au serveur. Veuillez vérifier votre connexion internet.');
@@ -73,37 +96,52 @@ export default function RegisterForm({}: RegisterFormProps) {
   };
 
   return (
-    <div className="w-full max-w-md mx-auto p-8 bg-white rounded-xl shadow-lg">
+    <div className="w-full max-w-md mx-auto p-8 bg-white rounded-2xl shadow-xl border border-gray-100">
       <div className="mb-8 text-center">
-        <h2 className="text-3xl font-bold text-gray-800 mb-2">Créer un compte</h2>
-        <p className="text-gray-600">Rejoignez notre communauté d&apos;alumni</p>
+        <h2 className="text-3xl font-bold text-gray-900 mb-2">Inscription</h2>
+        <p className="text-gray-600">Rejoignez la communauté alumni LAU</p>
       </div>
       
       {error && (
-        <div className="bg-red-50 border-l-4 border-red-500 p-4 mb-6 rounded">
+        <div className="bg-red-50 border-l-4 border-red-600 p-4 mb-6 rounded">
           <div className="flex items-center">
             <div className="flex-shrink-0">
-              <svg className="h-5 w-5 text-red-500" viewBox="0 0 20 20" fill="currentColor">
+              <svg className="h-5 w-5 text-red-600" viewBox="0 0 20 20" fill="currentColor">
                 <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
               </svg>
             </div>
             <div className="ml-3">
-              <p className="text-sm text-red-700">{error}</p>
+              <p className="text-sm text-red-700 font-medium">{error}</p>
             </div>
           </div>
         </div>
       )}
 
       {success && (
-        <div className="bg-green-50 border-l-4 border-green-500 p-4 mb-6 rounded">
+        <div className="bg-cyan-50 border-l-4 border-cyan-600 p-4 mb-6 rounded">
           <div className="flex items-center">
             <div className="flex-shrink-0">
-              <svg className="h-5 w-5 text-green-500" viewBox="0 0 20 20" fill="currentColor">
+              <svg className="h-5 w-5 text-cyan-600" viewBox="0 0 20 20" fill="currentColor">
                 <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
               </svg>
             </div>
             <div className="ml-3">
-              <p className="text-sm text-green-700">{success}</p>
+              <p className="text-sm text-cyan-700 font-medium">{success}</p>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {info && (
+        <div className="bg-blue-50 border-l-4 border-blue-900 p-4 mb-6 rounded">
+          <div className="flex items-center">
+            <div className="flex-shrink-0">
+              <svg className="h-5 w-5 text-blue-900" viewBox="0 0 20 20" fill="currentColor">
+                <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
+              </svg>
+            </div>
+            <div className="ml-3">
+              <p className="text-sm text-blue-900 font-medium">{info}</p>
             </div>
           </div>
         </div>
@@ -124,7 +162,7 @@ export default function RegisterForm({}: RegisterFormProps) {
               name="email"
               value={formData.email}
               onChange={handleChange}
-              className="pl-10 w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              className="pl-10 w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-red-600 transition-all"
               placeholder="exemple@email.com"
               required
             />
@@ -145,7 +183,7 @@ export default function RegisterForm({}: RegisterFormProps) {
               name="password"
               value={formData.password}
               onChange={handleChange}
-              className="pl-10 w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              className="pl-10 w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-900 focus:border-blue-900 transition-all"
               placeholder="••••••••"
               required
             />
@@ -168,7 +206,7 @@ export default function RegisterForm({}: RegisterFormProps) {
                 name="firstName"
                 value={formData.firstName}
                 onChange={handleChange}
-                className="pl-10 w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                className="pl-10 w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-600 focus:border-cyan-600 transition-all"
                 placeholder="Jean"
               />
             </div>
@@ -188,7 +226,7 @@ export default function RegisterForm({}: RegisterFormProps) {
                 name="lastName"
                 value={formData.lastName}
                 onChange={handleChange}
-                className="pl-10 w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                className="pl-10 w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-600 focus:border-cyan-600 transition-all"
                 placeholder="Dupont"
               />
             </div>
@@ -198,7 +236,7 @@ export default function RegisterForm({}: RegisterFormProps) {
         <button
           type="submit"
           disabled={loading}
-          className="w-full flex justify-center items-center bg-blue-600 text-white py-3 px-4 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors disabled:opacity-50 mt-6"
+          className="w-full flex justify-center items-center bg-red-600 text-white py-3 px-4 rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-600 focus:ring-offset-2 transition-all disabled:opacity-50 disabled:cursor-not-allowed mt-6 font-medium"
         >
           {loading ? (
             <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -217,7 +255,7 @@ export default function RegisterForm({}: RegisterFormProps) {
       <div className="mt-8 text-center">
         <p className="text-gray-600">
           Déjà inscrit?{' '}
-          <Link href="/login" className="text-blue-600 hover:text-blue-800 font-medium">
+          <Link href="/login" className="text-red-600 hover:text-red-700 font-semibold">
             Se connecter
           </Link>
         </p>

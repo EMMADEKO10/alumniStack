@@ -74,9 +74,54 @@ export default function ProfilePage() {
   // Afficher un état de chargement pendant la vérification de la session
   if (status === 'loading' || loading) {
     return (
-      <div className="container mx-auto py-10">
-        <div className="flex justify-center items-center h-64">
-          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+      <div className="min-h-screen bg-gray-50">
+        <div className="pt-32 pb-16">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            {/* Skeleton Header */}
+            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-8 mb-8 animate-pulse">
+              <div className="flex items-center justify-between mb-6">
+                <div className="h-8 bg-gray-200 rounded w-1/3"></div>
+                <div className="h-10 w-32 bg-gray-200 rounded"></div>
+              </div>
+              <div className="grid md:grid-cols-2 gap-6">
+                {[1, 2, 3, 4].map((i) => (
+                  <div key={i} className="flex items-start gap-3">
+                    <div className="w-5 h-5 bg-gray-200 rounded mt-1"></div>
+                    <div className="flex-1">
+                      <div className="h-4 bg-gray-200 rounded w-1/4 mb-2"></div>
+                      <div className="h-5 bg-gray-200 rounded w-2/3"></div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Skeleton Statut Alumni */}
+            <div className="bg-gradient-to-r from-blue-600 to-blue-800 text-white rounded-lg p-6 mb-8 animate-pulse">
+              <div className="h-6 bg-white/30 rounded w-1/2 mb-4"></div>
+              <div className="flex gap-4">
+                <div className="h-4 bg-white/30 rounded w-1/4"></div>
+                <div className="h-4 bg-white/30 rounded w-1/4"></div>
+              </div>
+            </div>
+
+            {/* Skeleton Sections */}
+            <div className="space-y-8">
+              {[1, 2, 3].map((i) => (
+                <div key={i} className="bg-white rounded-lg shadow-md p-8 animate-pulse">
+                  <div className="flex justify-between items-center mb-6">
+                    <div className="h-7 bg-gray-200 rounded w-1/4"></div>
+                    <div className="h-10 w-24 bg-gray-200 rounded"></div>
+                  </div>
+                  <div className="space-y-4">
+                    {[1, 2, 3].map((j) => (
+                      <div key={j} className="h-4 bg-gray-200 rounded"></div>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     );

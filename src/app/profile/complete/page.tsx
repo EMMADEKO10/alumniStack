@@ -46,10 +46,36 @@ const CompleteProfilePage = () => {
 
   if (status === 'loading' || loading) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
-          <p className="mt-4 text-gray-600">Chargement...</p>
+      <div className="min-h-screen bg-gray-50">
+        <div className="pt-32 pb-16">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            {/* Skeleton Titre */}
+            <div className="text-center mb-8 animate-pulse">
+              <div className="h-10 bg-gray-200 rounded w-2/3 mx-auto mb-4"></div>
+              <div className="h-6 bg-gray-200 rounded w-1/2 mx-auto"></div>
+            </div>
+
+            {/* Skeleton Formulaire */}
+            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-8 animate-pulse">
+              <div className="space-y-8">
+                {/* Sections du formulaire */}
+                {[1, 2, 3, 4].map((section) => (
+                  <div key={section}>
+                    <div className="h-6 bg-gray-200 rounded w-1/4 mb-4"></div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      {[1, 2, 3, 4].map((field) => (
+                        <div key={field}>
+                          <div className="h-4 bg-gray-200 rounded w-1/3 mb-2"></div>
+                          <div className="h-12 bg-gray-200 rounded"></div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+                <div className="h-12 bg-gray-200 rounded-lg w-full mt-8"></div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     );
