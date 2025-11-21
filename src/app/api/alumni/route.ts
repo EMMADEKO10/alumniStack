@@ -130,6 +130,7 @@ export async function POST(request: Request) {
         dateOfBirth: body.personalInfo.dateOfBirth ? new Date(body.personalInfo.dateOfBirth) : undefined,
         gender: body.personalInfo.gender,
         nationality: body.personalInfo.nationality,
+        profilePicture: body.personalInfo.profilePicture,
         bio: body.personalInfo.bio,
         linkedinUrl: body.personalInfo.linkedinUrl,
         websiteUrl: body.personalInfo.websiteUrl,

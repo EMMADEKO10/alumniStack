@@ -46,20 +46,32 @@ const CompleteProfilePage = () => {
 
   if (status === 'loading' || loading) {
     return (
-      <div className="min-h-screen bg-gray-50">
-        <div className="pt-32 pb-16">
+      <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-cyan-50/30 relative overflow-hidden">
+        {/* Décorations de fond */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute -top-24 -left-24 w-96 h-96 bg-red-100/20 rounded-full blur-3xl"></div>
+          <div className="absolute top-1/2 -right-24 w-96 h-96 bg-cyan-100/20 rounded-full blur-3xl"></div>
+        </div>
+
+        <div className="pt-32 pb-16 relative z-10">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            {/* Skeleton Titre */}
-            <div className="text-center mb-8 animate-pulse">
-              <div className="h-10 bg-gray-200 rounded w-2/3 mx-auto mb-4"></div>
+            {/* Skeleton En-tête */}
+            <div className="text-center mb-12 animate-pulse">
+              <div className="h-8 bg-gray-200 rounded-full w-48 mx-auto mb-6"></div>
+              <div className="h-12 bg-gray-200 rounded w-2/3 mx-auto mb-4"></div>
               <div className="h-6 bg-gray-200 rounded w-1/2 mx-auto"></div>
             </div>
 
             {/* Skeleton Formulaire */}
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-8 animate-pulse">
+            <div className="max-w-4xl mx-auto bg-white rounded-2xl shadow-xl border border-gray-200 p-8">
+              <div className="mb-8">
+                <div className="h-8 bg-gray-200 rounded w-1/3 mb-4"></div>
+                <div className="h-6 bg-gray-200 rounded w-2/3"></div>
+              </div>
+
               <div className="space-y-8">
                 {/* Sections du formulaire */}
-                {[1, 2, 3, 4].map((section) => (
+                {[1, 2].map((section) => (
                   <div key={section}>
                     <div className="h-6 bg-gray-200 rounded w-1/4 mb-4"></div>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -72,7 +84,17 @@ const CompleteProfilePage = () => {
                     </div>
                   </div>
                 ))}
-                <div className="h-12 bg-gray-200 rounded-lg w-full mt-8"></div>
+                
+                {/* Skeleton Navigation */}
+                <div className="flex justify-between items-center pt-6 border-t">
+                  <div className="h-10 bg-gray-200 rounded w-32"></div>
+                  <div className="flex space-x-2">
+                    {[1, 2, 3, 4, 5].map((i) => (
+                      <div key={i} className="w-3 h-3 rounded-full bg-gray-200"></div>
+                    ))}
+                  </div>
+                  <div className="h-10 bg-gray-200 rounded w-32"></div>
+                </div>
               </div>
             </div>
           </div>
@@ -82,23 +104,38 @@ const CompleteProfilePage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-4">
-            {existingProfile ? 'Modifier mon profil Alumni' : 'Devenir un Alumni Legacy University'}
-          </h1>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Complétez votre profil pour rejoindre automatiquement les communautés correspondant à 
-            votre promotion, faculté, région et secteur professionnel.
-          </p>
-        </div>
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-cyan-50/30 relative overflow-hidden">
+      {/* Décorations de fond LAU */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute -top-24 -left-24 w-96 h-96 bg-red-100/20 rounded-full blur-3xl"></div>
+        <div className="absolute top-1/2 -right-24 w-96 h-96 bg-cyan-100/20 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-0 left-1/3 w-96 h-96 bg-blue-100/10 rounded-full blur-3xl"></div>
+      </div>
 
-        <AlumniProfileForm 
-          initialData={existingProfile || undefined}
-          onSubmit={handleProfileSubmit}
-          isEditing={!!existingProfile}
-        />
+      <div className="pt-32 pb-16 relative z-10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* En-tête avec image */}
+          <div className="text-center mb-12">
+            <div className="mb-6">
+              <span className="inline-flex items-center px-4 py-2 rounded-full bg-red-100 text-red-700 text-sm font-medium">
+                {existingProfile ? '✏️ Mise à jour du profil' : '🎓 Nouveau profil Alumni'}
+              </span>
+            </div>
+            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+              {existingProfile ? 'Modifier mon profil Alumni' : 'Rejoignez la communauté LAU'}
+            </h1>
+            <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
+              Complétez votre profil pour rejoindre automatiquement les communautés correspondant à 
+              votre <span className="text-red-600 font-semibold">promotion</span>, <span className="text-blue-900 font-semibold">faculté</span>, <span className="text-cyan-600 font-semibold">région</span> et <span className="text-gray-900 font-semibold">secteur professionnel</span>.
+            </p>
+          </div>
+
+          <AlumniProfileForm 
+            initialData={existingProfile || undefined}
+            onSubmit={handleProfileSubmit}
+            isEditing={!!existingProfile}
+          />
+        </div>
       </div>
     </div>
   );

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSession } from 'next-auth/react';
 import { 
   AlumniProfile, 
@@ -29,17 +29,21 @@ const AlumniProfileForm: React.FC<AlumniProfileFormProps> = ({
   const { data: session } = useSession();
   const [loading, setLoading] = useState(false);
   const [currentStep, setCurrentStep] = useState(1);
+  const [profileImageUrl, setProfileImageUrl] = useState<string>(initialData?.personalInfo?.profilePicture || '');
+  const [uploadingImage, setUploadingImage] = useState(false);
+  const [imageInputType, setImageInputType] = useState<'upload' | 'url'>('upload');
   const [formData, setFormData] = useState<Partial<AlumniProfile>>({
     personalInfo: {
-      firstName: '',
-      lastName: '',
-      email: session?.user?.email || '',
-      phone: '',
-      bio: '',
-      linkedinUrl: '',
-      websiteUrl: '',
-      nationality: 'République Démocratique du Congo',
-      ...initialData?.personalInfo
+      ...initialData?.personalInfo,
+      firstName: initialData?.personalInfo?.firstName || '',
+      lastName: initialData?.personalInfo?.lastName || '',
+      email: initialData?.personalInfo?.email || session?.user?.email || '',
+      phone: initialData?.personalInfo?.phone || '',
+      bio: initialData?.personalInfo?.bio || '',
+      linkedinUrl: initialData?.personalInfo?.linkedinUrl || '',
+      websiteUrl: initialData?.personalInfo?.websiteUrl || '',
+      nationality: initialData?.personalInfo?.nationality || 'République Démocratique du Congo',
+      profilePicture: initialData?.personalInfo?.profilePicture || '',
     },
     academicInfo: {
       facultyId: '',
@@ -92,6 +96,19 @@ const AlumniProfileForm: React.FC<AlumniProfileFormProps> = ({
       ...initialData?.privacySettings
     }
   });
+
+  // Synchroniser profileImageUrl avec formData.personalInfo.profilePicture
+  useEffect(() => {
+    if (profileImageUrl && profileImageUrl !== formData.personalInfo?.profilePicture) {
+      setFormData(prev => ({
+        ...prev,
+        personalInfo: {
+          ...prev.personalInfo!,
+          profilePicture: profileImageUrl
+        }
+      }));
+    }
+  }, [profileImageUrl]);
 
   const totalSteps = 5;
 
@@ -166,6 +183,15 @@ const AlumniProfileForm: React.FC<AlumniProfileFormProps> = ({
     try {
       setLoading(true);
       
+      // S'assurer que l'image de profil est bien dans formData
+      const dataToSubmit = {
+        ...formData,
+        personalInfo: {
+          ...formData.personalInfo,
+          profilePicture: profileImageUrl || formData.personalInfo?.profilePicture || ''
+        }
+      };
+      
       const method = isEditing ? 'PUT' : 'POST';
       const response = await fetch('/api/alumni', {
         method,
@@ -173,7 +199,7 @@ const AlumniProfileForm: React.FC<AlumniProfileFormProps> = ({
           'Content-Type': 'application/json',
         },
         credentials: 'include',
-        body: JSON.stringify(formData),
+        body: JSON.stringify(dataToSubmit),
       });
 
       if (response.ok) {
@@ -220,7 +246,171 @@ const AlumniProfileForm: React.FC<AlumniProfileFormProps> = ({
   // Étape 1: Informations personnelles
   const renderPersonalInfoStep = () => (
     <div className="space-y-6">
-      <h3 className="text-xl font-semibold text-gray-900 mb-4">Informations Personnelles</h3>
+      <div className="mb-6">
+        <h3 className="text-2xl font-bold text-gray-900 mb-2">Informations Personnelles</h3>
+        <p className="text-sm text-gray-600">Commençons par les bases pour créer votre profil alumni</p>
+      </div>
+
+      {/* Section Photo de Profil */}
+      <div className="border border-gray-200 rounded-lg bg-gray-50 p-6">
+        <h4 className="text-lg font-semibold text-gray-900 mb-4">Photo de profil</h4>
+        
+        <div className="flex flex-col md:flex-row gap-6 items-start">
+          {/* Aperçu de l'image */}
+          <div className="flex-shrink-0">
+            <div className="w-32 h-32 rounded-full overflow-hidden bg-gray-200 border-4 border-white shadow-lg">
+              {profileImageUrl ? (
+                <img 
+                  src={profileImageUrl} 
+                  alt="Aperçu du profil" 
+                  className="w-full h-full object-cover"
+                />
+              ) : (
+                <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-red-100 to-cyan-100">
+                  <svg className="w-16 h-16 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
+                  </svg>
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* Options d'upload */}
+          <div className="flex-1 space-y-4">
+            {/* Toggle entre Upload et URL */}
+            <div className="flex gap-2">
+              <button
+                type="button"
+                onClick={() => setImageInputType('upload')}
+                className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                  imageInputType === 'upload'
+                    ? 'bg-red-600 text-white'
+                    : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                }`}
+              >
+                📤 Upload une image
+              </button>
+              <button
+                type="button"
+                onClick={() => setImageInputType('url')}
+                className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                  imageInputType === 'url'
+                    ? 'bg-red-600 text-white'
+                    : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                }`}
+              >
+                🔗 Lien URL
+              </button>
+            </div>
+
+            {/* Upload de fichier */}
+            {imageInputType === 'upload' && (
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                  Choisir une image
+                </label>
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={async (e) => {
+                    const file = e.target.files?.[0];
+                    if (!file) return;
+
+                    // Vérifier la taille (max 5MB)
+                    if (file.size > 5 * 1024 * 1024) {
+                      alert('L\'image ne doit pas dépasser 5 MB');
+                      return;
+                    }
+
+                    setUploadingImage(true);
+                    try {
+                      const uploadFormData = new FormData();
+                      uploadFormData.append('file', file);
+                      uploadFormData.append('type', 'profile');
+
+                      const response = await fetch('/api/upload', {
+                        method: 'POST',
+                        body: uploadFormData,
+                      });
+
+                      const data = await response.json();
+                      if (data.success && data.url) {
+                        setProfileImageUrl(data.url);
+                        updateFormData('personalInfo', 'profilePicture', data.url);
+                      } else {
+                        alert('Erreur lors de l\'upload de l\'image');
+                      }
+                    } catch (error) {
+                      console.error('Erreur upload:', error);
+                      alert('Erreur lors de l\'upload de l\'image');
+                    } finally {
+                      setUploadingImage(false);
+                    }
+                  }}
+                  disabled={uploadingImage}
+                  className="w-full px-4 py-3 border-2 border-dashed border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-red-600 cursor-pointer hover:border-red-400 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                />
+                {uploadingImage && (
+                  <p className="text-sm text-cyan-600 mt-2 flex items-center gap-2">
+                    <svg className="animate-spin h-4 w-4" fill="none" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    Upload en cours...
+                  </p>
+                )}
+                <p className="text-xs text-gray-500 mt-2">
+                  Formats acceptés: JPG, PNG, GIF (max 5 MB)
+                </p>
+              </div>
+            )}
+
+            {/* Lien URL */}
+            {imageInputType === 'url' && (
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                  URL de l'image
+                </label>
+                <div className="flex gap-2">
+                  <input
+                    type="url"
+                    value={profileImageUrl}
+                    onChange={(e) => setProfileImageUrl(e.target.value)}
+                    placeholder="https://example.com/image.jpg"
+                    className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-red-600"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => {
+                      updateFormData('personalInfo', 'profilePicture', profileImageUrl);
+                    }}
+                    className="px-4 py-3 bg-cyan-600 text-white rounded-lg hover:bg-cyan-700 transition-colors font-medium"
+                  >
+                    Appliquer
+                  </button>
+                </div>
+                <p className="text-xs text-gray-500 mt-2">
+                  Collez l'URL d'une image hébergée en ligne
+                </p>
+              </div>
+            )}
+
+            {/* Bouton pour supprimer l'image */}
+            {profileImageUrl && (
+              <button
+                type="button"
+                onClick={() => {
+                  setProfileImageUrl('');
+                  updateFormData('personalInfo', 'profilePicture', '');
+                }}
+                className="text-sm text-red-600 hover:text-red-700 font-medium"
+              >
+                🗑️ Supprimer l'image
+              </button>
+            )}
+          </div>
+        </div>
+      </div>
       
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
@@ -578,7 +768,7 @@ const AlumniProfileForm: React.FC<AlumniProfileFormProps> = ({
                   {skills.map((skill, index) => (
                     <span
                       key={index}
-                      className="inline-flex items-center px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm"
+                      className="inline-flex items-center px-3 py-1.5 bg-cyan-100 text-cyan-800 rounded-full text-sm font-medium border border-cyan-200 hover:bg-cyan-200 transition-colors"
                     >
                       {skill}
                       <button
@@ -635,7 +825,7 @@ const AlumniProfileForm: React.FC<AlumniProfileFormProps> = ({
                       profSelect.selectedIndex = 0;
                     }
                   }}
-                  className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+                  className="px-4 py-2 bg-red-600 text-white rounded-lg font-semibold hover:bg-red-700 transition-all"
                 >
                   Ajouter
                 </button>
@@ -845,23 +1035,32 @@ const AlumniProfileForm: React.FC<AlumniProfileFormProps> = ({
 
   // Navigation
   const renderNavigation = () => (
-    <div className="flex justify-between items-center pt-6 border-t">
+    <div className="flex flex-col sm:flex-row justify-between items-center gap-4 pt-8 border-t border-gray-200 mt-8">
       <button
         type="button"
         onClick={prevStep}
         disabled={currentStep === 1}
-        className="px-6 py-2 text-gray-600 bg-gray-100 rounded-md hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed"
+        className="w-full sm:w-auto px-8 py-3 text-gray-700 bg-white border-2 border-gray-300 rounded-full font-semibold hover:bg-gray-50 hover:border-gray-400 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
       >
-        Précédent
+        ← Précédent
       </button>
       
-      <div className="flex space-x-2">
+      <div className="flex space-x-3">
         {Array.from({ length: totalSteps }, (_, i) => (
           <div
             key={i}
-            className={`w-3 h-3 rounded-full ${
-              i + 1 <= currentStep ? 'bg-blue-600' : 'bg-gray-300'
+            className={`transition-all duration-300 rounded-full ${
+              i + 1 === currentStep ? 'w-8 h-3' : 'w-3 h-3'
+            } ${
+              i + 1 <= currentStep 
+                ? i + 1 === 1 ? 'bg-red-600' 
+                  : i + 1 === 2 ? 'bg-blue-900'
+                  : i + 1 === 3 ? 'bg-cyan-600'
+                  : i + 1 === 4 ? 'bg-red-600'
+                  : 'bg-blue-900'
+                : 'bg-gray-300'
             }`}
+            title={`Étape ${i + 1}`}
           />
         ))}
       </div>
@@ -870,32 +1069,65 @@ const AlumniProfileForm: React.FC<AlumniProfileFormProps> = ({
         <button
           type="button"
           onClick={nextStep}
-          className="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+          className="w-full sm:w-auto px-8 py-3 bg-red-600 text-white rounded-full font-semibold hover:bg-red-700 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
         >
-          Suivant
+          Suivant →
         </button>
       ) : (
         <button
           type="button"
           onClick={handleSubmit}
           disabled={loading}
-          className="px-6 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 disabled:opacity-50"
+          className="w-full sm:w-auto px-8 py-3 bg-gradient-to-r from-cyan-600 to-blue-900 text-white rounded-full font-semibold hover:from-cyan-700 hover:to-blue-950 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
         >
-          {loading ? 'Sauvegarde...' : (isEditing ? 'Mettre à jour' : 'Créer le profil')}
+          {loading ? (
+            <span className="flex items-center justify-center gap-2">
+              <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
+                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none"></circle>
+                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+              </svg>
+              Sauvegarde...
+            </span>
+          ) : (
+            <span className="flex items-center justify-center gap-2">
+              ✓ {isEditing ? 'Mettre à jour mon profil' : 'Créer mon profil Alumni'}
+            </span>
+          )}
         </button>
       )}
     </div>
   );
 
   return (
-    <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-md p-8">
+    <div className="max-w-4xl mx-auto bg-white rounded-2xl shadow-xl border border-gray-100 p-8 md:p-10">
+      {/* Indicateur de progression */}}
       <div className="mb-8">
-        <h2 className="text-2xl font-bold text-gray-900 mb-2">
-          {isEditing ? 'Modifier mon profil Alumni' : 'Compléter mon profil Alumni'}
-        </h2>
-        <p className="text-gray-600">
-          Étape {currentStep} sur {totalSteps} - Renseignez vos informations pour rejoindre automatiquement les bonnes communautés
-        </p>
+        <div className="flex items-center justify-between mb-6">
+          <div>
+            <h2 className="text-2xl font-bold text-gray-900 mb-1">
+              {currentStep === 1 && '📝 Informations Personnelles'}
+              {currentStep === 2 && '🎓 Parcours Académique'}
+              {currentStep === 3 && '📍 Localisation'}
+              {currentStep === 4 && '💼 Carrière Professionnelle'}
+              {currentStep === 5 && '🌐 Communautés & Préférences'}
+            </h2>
+            <p className="text-sm text-gray-600">
+              Étape {currentStep} sur {totalSteps}
+            </p>
+          </div>
+          <div className="text-right">
+            <div className="text-3xl font-bold text-red-600">{Math.round((currentStep / totalSteps) * 100)}%</div>
+            <div className="text-xs text-gray-500">Complété</div>
+          </div>
+        </div>
+        
+        {/* Barre de progression */}
+        <div className="w-full bg-gray-200 rounded-full h-2 overflow-hidden">
+          <div 
+            className="h-full bg-gradient-to-r from-red-600 via-cyan-600 to-blue-900 transition-all duration-500 ease-out"
+            style={{ width: `${(currentStep / totalSteps) * 100}%` }}
+          ></div>
+        </div>
       </div>
 
       <form onSubmit={(e) => e.preventDefault()}>

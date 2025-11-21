@@ -40,6 +40,9 @@ export async function POST(request: NextRequest) {
       case 'donations':
         folder = 'alumni/donations';
         break;
+      case 'profile':
+        folder = 'alumni/profiles';
+        break;
       default:
         folder = 'alumni/general';
     }
@@ -50,7 +53,10 @@ export async function POST(request: NextRequest) {
         {
           resource_type: 'image',
           folder: folder,
-          transformation: [
+          transformation: type === 'profile' ? [
+            { width: 500, height: 500, crop: 'fill', gravity: 'face' }, // Photo de profil carrée centrée sur le visage
+            { quality: 'auto', fetch_format: 'auto' }
+          ] : [
             { width: 800, height: 600, crop: 'limit' }, // Redimensionner l'image
             { quality: 'auto' } // Optimisation automatique
           ]
