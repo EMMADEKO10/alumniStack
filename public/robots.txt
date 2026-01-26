@@ -1,0 +1,13 @@
+# robots.txt pour Leadership Academy Alumni Platform
+
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+Disallow: /profile/
+
+# Sitemap
+Sitemap: https://alumni-launiversity.cd/sitemap.xml
+
+# Crawl-delay pour être respectueux
+Crawl-delay: 1
