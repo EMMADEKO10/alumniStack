@@ -4,10 +4,12 @@ const uri = process.env.MONGODB_URI || 'mongodb://localhost:27017/alumni-platfor
 
 // Configuration simplifiée et optimisée pour MongoDB Atlas
 const options = {
-  serverSelectionTimeoutMS: 5000, // Réduire de 30s à 5s
-  connectTimeoutMS: 10000,
+  serverSelectionTimeoutMS: 30000, // 30 secondes pour la sélection du serveur
+  connectTimeoutMS: 30000, // 30 secondes pour la connexion
+  socketTimeoutMS: 45000, // 45 secondes pour les opérations socket
   maxPoolSize: 10, // Limiter le nombre de connexions simultanées
   retryWrites: true,
+  retryReads: true,
 };
 
 let client: MongoClient;

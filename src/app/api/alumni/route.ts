@@ -20,7 +20,18 @@ export async function GET(request: Request) {
     const industry = searchParams.get('industry');
     const public_only = searchParams.get('public_only');
 
-    const { db } = await connectDB();
+    // Connexion à la base de données avec gestion d'erreur explicite
+    let db;
+    try {
+      const connection = await connectDB();
+      db = connection.db;
+    } catch (dbError) {
+      console.error('Erreur de connexion à la base de données:', dbError);
+      return NextResponse.json({ 
+        error: 'Service temporairement indisponible. Veuillez réessayer dans quelques instants.',
+        details: process.env.NODE_ENV === 'development' ? String(dbError) : undefined
+      }, { status: 503 });
+    }
 
     // Si userId spécifique, retourner ce profil
     if (userId) {
