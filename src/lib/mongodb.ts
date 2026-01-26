@@ -15,27 +15,24 @@ const options = {
 let client: MongoClient;
 let clientPromise: Promise<MongoClient>;
 
-if (process.env.NODE_ENV === 'development') {
-  // In development mode, use a global variable so that the value
-  // is preserved across module reloads caused by HMR (Hot Module Replacement).
-  const globalWithMongo = global as typeof globalThis & {
-    _mongoClientPromise?: Promise<MongoClient>;
-  };
+// Utiliser une variable globale pour la production aussi afin de réutiliser les connexions
+const globalWithMongo = global as typeof globalThis & {
+  _mongoClientPromise?: Promise<MongoClient>;
+};
 
-  if (!globalWithMongo._mongoClientPromise) {
-    client = new MongoClient(uri, options);
-    globalWithMongo._mongoClientPromise = client.connect();
-  }
-  clientPromise = globalWithMongo._mongoClientPromise;
-} else {
-  // In production mode, it's best to not use a global variable.
+if (!globalWithMongo._mongoClientPromise) {
   client = new MongoClient(uri, options);
-  clientPromise = client.connect();
+  globalWithMongo._mongoClientPromise = client.connect();
+  console.log('🔄 Nouvelle connexion MongoDB initialisée');
 }
+clientPromise = globalWithMongo._mongoClientPromise;
 
 export async function connectDB(): Promise<{ client: MongoClient; db: Db }> {
   try {
+    console.log('🔌 Tentative de connexion à MongoDB...');
     const client = await clientPromise;
+    console.log('✅ Connexion MongoDB établie');
+    
     // Extraire le nom de la base de données de l'URI ou utiliser une variable d'environnement
     let dbName = process.env.MONGODB_DB_NAME;
     
@@ -51,10 +48,12 @@ export async function connectDB(): Promise<{ client: MongoClient; db: Db }> {
       dbName = 'alumniprod';
     }
     
+    console.log(`📊 Utilisation de la base de données: ${dbName}`);
     const db = client.db(dbName);
     return { client, db };
   } catch (error) {
-    console.error('Erreur de connexion MongoDB:', error);
+    console.error('❌ Erreur de connexion MongoDB:', error);
+    console.error('URI (masquée):', uri.replace(/\/\/([^:]+):([^@]+)@/, '//*****:*****@'));
     throw error;
   }
 }

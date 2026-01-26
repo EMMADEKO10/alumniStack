@@ -12,6 +12,7 @@ import { authOptions } from '../../../lib/auth';
 // GET - Récupérer le profil alumni de l'utilisateur connecté ou rechercher des profils
 export async function GET(request: Request) {
   try {
+    console.log('📥 Requête reçue sur /api/alumni');
     const { searchParams } = new URL(request.url);
     const userId = searchParams.get('userId');
     const search = searchParams.get('search');
@@ -19,14 +20,18 @@ export async function GET(request: Request) {
     const graduationYear = searchParams.get('graduationYear');
     const industry = searchParams.get('industry');
     const public_only = searchParams.get('public_only');
+    
+    console.log('🔍 Paramètres:', { userId, search, facultyId, graduationYear, industry, public_only });
 
     // Connexion à la base de données avec gestion d'erreur explicite
     let db;
     try {
+      console.log('🔌 Tentative de connexion à la base de données...');
       const connection = await connectDB();
       db = connection.db;
+      console.log('✅ Connexion à la base de données réussie');
     } catch (dbError) {
-      console.error('Erreur de connexion à la base de données:', dbError);
+      console.error('❌ Erreur de connexion à la base de données:', dbError);
       return NextResponse.json({ 
         error: 'Service temporairement indisponible. Veuillez réessayer dans quelques instants.',
         details: process.env.NODE_ENV === 'development' ? String(dbError) : undefined
@@ -35,14 +40,17 @@ export async function GET(request: Request) {
 
     // Si userId spécifique, retourner ce profil
     if (userId) {
+      console.log('👤 Recherche du profil pour userId:', userId);
       const profile = await db.collection('alumni_profiles').findOne({ userId });
       
       if (!profile) {
+        console.log('❌ Profil non trouvé');
         return NextResponse.json({ error: 'Profil alumni non trouvé' }, { status: 404 });
       }
 
       // Si demande publique, filtrer les informations selon les préférences
       if (public_only === 'true') {
+        console.log('🔒 Filtrage des informations publiques');
         const publicProfile = await filterPublicProfile(profile as AlumniProfile);
         return NextResponse.json(publicProfile);
       }
@@ -51,6 +59,7 @@ export async function GET(request: Request) {
     }
 
     // Recherche de profils avec filtres
+    console.log('🔎 Recherche de profils avec filtres');
     const filter: Record<string, unknown> = {};
     
     if (search) {
@@ -69,12 +78,16 @@ export async function GET(request: Request) {
 
     // Toujours filtrer les profils publics pour les recherches
     filter['privacySettings.profileVisibility'] = { $in: ['Public', 'Alumni seulement'] };
+    
+    console.log('📋 Filtre MongoDB:', JSON.stringify(filter));
 
     const profiles = await db.collection('alumni_profiles')
       .find(filter)
       .sort({ 'status.isVerified': -1, 'academicInfo.graduationYear': -1 })
       .limit(50)
       .toArray();
+    
+    console.log(`✅ ${profiles.length} profil(s) trouvé(s)`);
 
     // Filtrer les informations selon les préférences de confidentialité
     const publicProfiles = await Promise.all(
