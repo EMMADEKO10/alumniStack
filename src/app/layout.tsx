@@ -16,8 +16,13 @@ const firaCode = Fira_Code({
 });
 
 export const metadata: Metadata = {
-  title: "Leadership AcademiaAlumni Platform",
+  title: "Leadership Academia Alumni Platform",
   description: "Plateforme des anciens élèves de Leadership Academy",
+  icons: {
+    icon: '/Logo LAU .png',
+    shortcut: '/Logo LAU .png',
+    apple: '/Logo LAU .png',
+  },
 };
 
 export default function RootLayout({

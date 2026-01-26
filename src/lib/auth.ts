@@ -4,6 +4,7 @@ import bcrypt from 'bcryptjs';
 import { connectDB } from './mongodb';
 
 export const authOptions: AuthOptions = {
+  debug: process.env.NODE_ENV === 'development',
   providers: [
     CredentialsProvider({
       name: 'credentials',
@@ -18,6 +19,7 @@ export const authOptions: AuthOptions = {
         }
 
         try {
+          console.log('🔐 Tentative d\'authentification pour:', credentials.email);
           const { db } = await connectDB();
 
           const normalizedEmail = String(credentials.email).trim();
