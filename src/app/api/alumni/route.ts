@@ -18,7 +18,7 @@ export async function GET(request: Request) {
     const facultyId = searchParams.get('facultyId');
     const graduationYear = searchParams.get('graduationYear');
     const industry = searchParams.get('industry');
-    const public_only = searchParams.get('public');
+    const public_only = searchParams.get('public_only');
 
     const { db } = await connectDB();
 
