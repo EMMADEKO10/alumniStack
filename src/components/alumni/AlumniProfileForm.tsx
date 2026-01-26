@@ -1100,7 +1100,7 @@ const AlumniProfileForm: React.FC<AlumniProfileFormProps> = ({
 
   return (
     <div className="max-w-4xl mx-auto bg-white rounded-2xl shadow-xl border border-gray-100 p-8 md:p-10">
-      {/* Indicateur de progression */}}
+      {/* Indicateur de progression */}
       <div className="mb-8">
         <div className="flex items-center justify-between mb-6">
           <div>
