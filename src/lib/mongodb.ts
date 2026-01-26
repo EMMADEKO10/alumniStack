@@ -13,7 +13,6 @@ const options = {
 };
 
 let client: MongoClient;
-let clientPromise: Promise<MongoClient>;
 
 // Utiliser une variable globale pour la production aussi afin de réutiliser les connexions
 const globalWithMongo = global as typeof globalThis & {
@@ -25,7 +24,7 @@ if (!globalWithMongo._mongoClientPromise) {
   globalWithMongo._mongoClientPromise = client.connect();
   console.log('🔄 Nouvelle connexion MongoDB initialisée');
 }
-clientPromise = globalWithMongo._mongoClientPromise;
+const clientPromise = globalWithMongo._mongoClientPromise;
 
 export async function connectDB(): Promise<{ client: MongoClient; db: Db }> {
   try {
