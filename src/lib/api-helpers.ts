@@ -21,7 +21,7 @@ interface QueryOptions {
  */
 export async function optimizedQuery<T>(
   collection: string,
-  query: Record<string, any>,
+  query: Record<string, unknown>,
   options: QueryOptions = {}
 ): Promise<T[]> {
   const {
@@ -72,7 +72,7 @@ export async function optimizedQuery<T>(
  */
 export async function optimizedCount(
   collection: string,
-  query: Record<string, any> = {},
+  query: Record<string, unknown> = {},
   useCache: boolean = true
 ): Promise<number> {
   const cacheKey = `count:${collection}:${JSON.stringify(query)}`;
@@ -94,7 +94,7 @@ export async function optimizedCount(
  */
 export async function optimizedFindOne<T>(
   collection: string,
-  query: Record<string, any>,
+  query: Record<string, unknown>,
   useCache: boolean = true
 ): Promise<T | null> {
   const cacheKey = `findOne:${collection}:${JSON.stringify(query)}`;
@@ -114,10 +114,10 @@ export async function optimizedFindOne<T>(
 /**
  * Wrapper pour les handlers API avec gestion d'erreurs
  */
-export function apiHandler<T = any>(
-  handler: (request: Request, context?: any) => Promise<T>
+export function apiHandler<T = NextResponse>(
+  handler: (request: Request, context?: Record<string, unknown>) => Promise<T>
 ) {
-  return async (request: Request, context?: any) => {
+  return async (request: Request, context?: Record<string, unknown>) => {
     try {
       const result = await handler(request, context);
       return result;
@@ -150,9 +150,9 @@ export function apiHandler<T = any>(
 /**
  * Helper pour invalider le cache après une mutation
  */
-export function invalidateCache(patterns: string[]) {
-  const cache = require('./cache').default;
+export async function invalidateCache(patterns: string[]) {
+  const { invalidateCacheByPrefix } = await import('./cache');
   patterns.forEach(pattern => {
-    cache.deleteByPrefix(pattern);
+    invalidateCacheByPrefix(pattern);
   });
 }

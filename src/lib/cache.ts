@@ -9,7 +9,7 @@ interface CacheEntry<T> {
 }
 
 class MemoryCache {
-  private cache: Map<string, CacheEntry<any>>;
+  private cache: Map<string, CacheEntry<unknown>>;
   private defaultTTL: number;
 
   constructor(defaultTTL: number = 5 * 60 * 1000) { // 5 minutes par défaut
@@ -130,6 +130,14 @@ export async function withCache<T>(
   globalCache.set(key, data, ttl);
   
   return data;
+}
+
+/**
+ * Fonction helper pour invalider le cache par préfixe
+ */
+export function invalidateCacheByPrefix(prefix: string): void {
+  globalCache.deleteByPrefix(prefix);
+  console.log(`🗑️ Cache invalidé pour le préfixe: ${prefix}`);
 }
 
 export default globalCache;
