@@ -106,9 +106,9 @@ const Hero: React.FC = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="space-y-4"
           >
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-xl font-bold text-white tracking-tight leading-tight">
+            <h1 className="text-4xl sm:text-5xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight leading-tight">
               Rejoignez une
-              <span className="block text-5xl sm:text-6xl md:text-6xl lg:text-8xl bg-linear-to-r from-red-400 to-red-600 bg-clip-text text-transparent mt-1 sm:mt-2">
+              <span className="block text-5xl sm:text-5xl md:text-5xl lg:text-6xl bg-linear-to-r from-red-400 to-red-600 bg-clip-text text-transparent mt-1 sm:mt-2">
                 communauté
               </span>
               d&apos;exception
