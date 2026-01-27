@@ -49,7 +49,7 @@ const Hero: React.FC = () => {
             />
           </motion.div>
         ))}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/65 to-red-900/45"></div>
+        <div className="absolute inset-0 bg-linear-to-r from-black/85 via-black/65 to-red-900/45"></div>
         {/* Overlay supplémentaire pour le header transparent */}
         <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-black/30 to-transparent"></div>
       </div>
@@ -108,7 +108,7 @@ const Hero: React.FC = () => {
           >
             <h1 className="text-4xl md:text-5xl lg:text-7xl font-extrabold text-white leading-[1.1] tracking-tight">
               Rejoignez une
-              <span className="block bg-gradient-to-r from-red-400 to-red-600 bg-clip-text text-transparent mt-2">
+              <span className="block bg-gradient-to-r from-red-400 to-red-600 bg-clip-text text-transparent">
                 communauté
               </span>
               d&apos;exception
@@ -129,7 +129,7 @@ const Hero: React.FC = () => {
           >
             <Link
               href="/register"
-              className="group inline-flex items-center justify-center px-6 sm:px-8 py-3.5 sm:py-4 bg-gradient-to-r from-red-600 to-red-700 text-white font-semibold rounded-xl shadow-lg hover:from-red-700 hover:to-red-800 transform hover:scale-105 transition-all duration-300 text-sm sm:text-base"
+              className="group inline-flex items-center justify-center px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-red-600 to-red-700 text-white font-semibold rounded-lg shadow-lg hover:from-red-700 hover:to-red-800 transform hover:scale-105 transition-all duration-300 text-sm sm:text-base"
             >
               Rejoindre la communauté
               <FaArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />

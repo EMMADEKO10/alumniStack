@@ -104,7 +104,7 @@ const Events: React.FC = () => {
   };
 
   return (
-    <section className="py-16 md:py-20 bg-gradient-to-br from-slate-50 via-white to-slate-100">
+    <section className="py-16 md:py-20 bg-linear-to-br from-slate-50 via-white to-slate-100">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
@@ -173,7 +173,7 @@ const Events: React.FC = () => {
                     className="object-cover"
                   />
                 </div>
-                <div className="absolute inset-0 bg-gradient-to-r from-slate-900/90 via-slate-900/70 to-slate-900/40" />
+                <div className="absolute inset-0 bg-linear-to-r from-slate-900/90 via-slate-900/70 to-slate-900/40" />
                 <div className="relative px-6 py-10 md:px-10 md:py-12 lg:px-14">
                   <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
                     <div className="flex items-start gap-4">
@@ -213,7 +213,7 @@ const Events: React.FC = () => {
                         </div>
                       </div>
                     </div>
-                    <div className="flex flex-col items-stretch gap-3 min-w-[200px]">
+                    <div className="flex flex-col items-stretch gap-3 min-w-50">
                       {spotlightEvent.maxParticipants && (
                         <div className="rounded-xl bg-white/10 px-4 py-3 text-sm text-white/80 border border-white/10">
                           <div className="font-semibold text-white">
@@ -260,7 +260,7 @@ const Events: React.FC = () => {
                       fill
                       className="object-cover"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-slate-900/10 to-transparent" />
+                    <div className="absolute inset-0 bg-linear-to-t from-slate-900/60 via-slate-900/10 to-transparent" />
                     <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between">
                       <span className="inline-flex items-center px-3 py-1 rounded-full bg-white/90 text-xs font-semibold uppercase tracking-wide text-slate-900">
                         {event.type}
