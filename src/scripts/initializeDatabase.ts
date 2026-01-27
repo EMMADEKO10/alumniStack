@@ -1,3 +1,10 @@
+// Charger les variables d'environnement
+import { config } from 'dotenv';
+import { resolve } from 'path';
+
+// Charger le fichier .env depuis la racine du projet
+config({ path: resolve(__dirname, '../../.env') });
+
 import { ensureIndexes } from '../lib/mongodb';
 
 /**
@@ -6,6 +13,15 @@ import { ensureIndexes } from '../lib/mongodb';
  */
 async function initializeDatabase() {
   console.log('🚀 Initialisation de la base de données...');
+  
+  // Vérifier que MONGODB_URI est chargée
+  if (!process.env.MONGODB_URI) {
+    console.error('❌ MONGODB_URI non trouvée dans le fichier .env');
+    console.log('📁 Vérifiez que le fichier .env existe à la racine du projet avec MONGODB_URI');
+    process.exit(1);
+  }
+  
+  console.log('✅ Variables d\'environnement chargées');
   
   try {
     await ensureIndexes();
