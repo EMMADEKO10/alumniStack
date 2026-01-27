@@ -18,7 +18,7 @@ const firaCode = Fira_Code({
 const siteUrl = 'https://alumni-launiversity.cd';
 const siteName = 'Leadership Academia Alumni Platform';
 const siteDescription = 'Plateforme officielle des anciens étudiants de Leadership Academy University. Connectez-vous avec des milliers d\'alumni, découvrez des opportunités professionnelles, participez à des événements exclusifs et contribuez au développement de notre communauté.';
-const ogImage = `${siteUrl}/Logo LAU .png`;
+const ogImage = `${siteUrl}/lau/felicitations_finalistes.jpg`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -68,7 +68,7 @@ export const metadata: Metadata = {
         url: ogImage,
         width: 1200,
         height: 630,
-        alt: 'Leadership Academy University - Logo',
+        alt: 'Leadership Academy University - Cérémonie de remise des diplômes',
       },
     ],
   },
