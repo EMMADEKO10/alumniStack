@@ -101,7 +101,7 @@ const AlumniModal: React.FC<{
             onClick={(e) => e.stopPropagation()}
           >
             {/* Header du modal */}
-            <div className={`bg-gradient-to-r ${getFacultyColor(alumni.academicInfo.facultyId)} p-6 text-white relative`}>
+            <div className={`bg-linear-to-r ${getFacultyColor(alumni.academicInfo.facultyId)} p-6 text-white relative`}>
               <button
                 onClick={onClose}
                 className="absolute top-4 right-4 text-white/80 hover:text-white transition-colors p-2 rounded-full hover:bg-white/20"
@@ -236,7 +236,7 @@ const AlumniModal: React.FC<{
                       {alumni.professionalInfo.skills.map((skill, index) => (
                         <span 
                           key={index}
-                          className={`px-4 py-2 rounded-full text-sm font-medium bg-gradient-to-r ${getFacultyColor(alumni.academicInfo.facultyId)} text-white`}
+                          className={`px-4 py-2 rounded-full text-sm font-medium bg-linear-to-r ${getFacultyColor(alumni.academicInfo.facultyId)} text-white`}
                         >
                           {skill}
                         </span>
@@ -354,12 +354,12 @@ const AlumniCard: React.FC<AlumniCardProps> = ({ alumni, onClick }) => {
         layout
       >
         {/* Badge de faculté */}
-        <div className={`absolute top-0 right-0 w-20 h-20 bg-gradient-to-br ${getFacultyColor(alumni.academicInfo.facultyId)} rounded-bl-full opacity-10 group-hover:opacity-20 transition-opacity`}></div>
+        <div className={`absolute top-0 right-0 w-20 h-20 bg-linear-to-br ${getFacultyColor(alumni.academicInfo.facultyId)} rounded-bl-full opacity-10 group-hover:opacity-20 transition-opacity`}></div>
         
         <div className="p-6 relative">
         {/* Header avec photo et nom */}
           <div className="flex items-start space-x-4 mb-4">
-            <div className={`w-16 h-16 bg-gradient-to-br ${getFacultyColor(alumni.academicInfo.facultyId)} rounded-2xl flex items-center justify-center text-white font-bold text-lg shadow-lg group-hover:shadow-xl transition-shadow`}>
+            <div className={`w-16 h-16 bg-linear-to-br ${getFacultyColor(alumni.academicInfo.facultyId)} rounded-2xl flex items-center justify-center text-white font-bold text-lg shadow-lg group-hover:shadow-xl transition-shadow`}>
             {alumni.personalInfo.profilePicture ? (
               <img 
                 src={alumni.personalInfo.profilePicture} 
@@ -422,7 +422,7 @@ const AlumniCard: React.FC<AlumniCardProps> = ({ alumni, onClick }) => {
                 {alumni.professionalInfo.skills.slice(0, 2).map((skill, index) => (
                 <span 
                   key={index}
-                    className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-gradient-to-r ${getFacultyColor(alumni.academicInfo.facultyId)} text-white shadow-sm`}
+                    className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-linear-to-r ${getFacultyColor(alumni.academicInfo.facultyId)} text-white shadow-sm`}
                 >
                   {skill}
                 </span>

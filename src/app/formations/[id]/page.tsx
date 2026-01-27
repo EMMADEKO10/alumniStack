@@ -209,7 +209,7 @@ const FormationDetailPage: React.FC = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100">
+      <div className="min-h-screen bg-linear-to-br from-gray-50 via-white to-gray-100">
         <div className="pt-32">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             {/* Skeleton bouton retour */}
@@ -283,7 +283,7 @@ const FormationDetailPage: React.FC = () => {
   const daysUntilStart = getDaysUntilStart();
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100">
+    <div className="min-h-screen bg-linear-to-br from-gray-50 via-white to-gray-100">
       {/* Espacement pour le header fixe */}
       <div className="pt-32">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -308,13 +308,13 @@ const FormationDetailPage: React.FC = () => {
                 priority
               />
             ) : (
-              <div className="w-full h-full bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 flex items-center justify-center">
+              <div className="w-full h-full bg-linear-to-br from-indigo-500 via-purple-500 to-pink-500 flex items-center justify-center">
                 <AcademicCapIcon className="h-32 w-32 text-white opacity-50" />
               </div>
             )}
             
             {/* Overlay gradient */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
+            <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/40 to-transparent"></div>
             
             {/* Contenu sur l'image */}
             <div className="absolute inset-0 flex flex-col justify-end p-8">
@@ -323,7 +323,7 @@ const FormationDetailPage: React.FC = () => {
                   <ChartBarIcon className="h-4 w-4 mr-2" />
                   {formation.level}
                 </div>
-                <div className="bg-gradient-to-r from-red-600 to-rose-600 text-white px-5 py-2 rounded-full font-bold text-lg shadow-lg backdrop-blur-sm">
+                <div className="bg-linear-to-r from-red-600 to-rose-600 text-white px-5 py-2 rounded-full font-bold text-lg shadow-lg backdrop-blur-sm">
                   {formatPrice(formation.price)}
                 </div>
               </div>
@@ -398,7 +398,7 @@ const FormationDetailPage: React.FC = () => {
             <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-sm border border-gray-200 p-8">
               {/* Informations clés en grille */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8 pb-8 border-b border-gray-200">
-                <div className="flex items-start gap-4 p-4 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl border border-blue-100">
+                <div className="flex items-start gap-4 p-4 bg-linear-to-br from-blue-50 to-indigo-50 rounded-xl border border-blue-100">
                   <div className="bg-white p-3 rounded-lg shadow-sm">
                     <CalendarIcon className="h-6 w-6 text-blue-600" />
                   </div>
@@ -409,7 +409,7 @@ const FormationDetailPage: React.FC = () => {
                   </div>
                 </div>
                 
-                <div className="flex items-start gap-4 p-4 bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl border border-green-100">
+                <div className="flex items-start gap-4 p-4 bg-linear-to-br from-green-50 to-emerald-50 rounded-xl border border-green-100">
                   <div className="bg-white p-3 rounded-lg shadow-sm">
                     <ClockIcon className="h-6 w-6 text-green-600" />
                   </div>
@@ -419,7 +419,7 @@ const FormationDetailPage: React.FC = () => {
                   </div>
                 </div>
                 
-                <div className="flex items-start gap-4 p-4 bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl border border-purple-100">
+                <div className="flex items-start gap-4 p-4 bg-linear-to-br from-purple-50 to-pink-50 rounded-xl border border-purple-100">
                   <div className="bg-white p-3 rounded-lg shadow-sm">
                     <MapPinIcon className="h-6 w-6 text-purple-600" />
                   </div>
@@ -429,7 +429,7 @@ const FormationDetailPage: React.FC = () => {
                   </div>
                 </div>
                 
-                <div className="flex items-start gap-4 p-4 bg-gradient-to-br from-orange-50 to-red-50 rounded-xl border border-orange-100">
+                <div className="flex items-start gap-4 p-4 bg-linear-to-br from-orange-50 to-red-50 rounded-xl border border-orange-100">
                   <div className="bg-white p-3 rounded-lg shadow-sm">
                     <UserGroupIcon className="h-6 w-6 text-orange-600" />
                   </div>
@@ -461,27 +461,27 @@ const FormationDetailPage: React.FC = () => {
                 <h2 className="text-xl font-semibold text-gray-900 mb-4">Ce qui est inclus</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="flex items-start gap-3">
-                    <CheckCircleIcon className="h-5 w-5 text-green-600 mt-0.5 flex-shrink-0" />
+                    <CheckCircleIcon className="h-5 w-5 text-green-600 mt-0.5 shrink-0" />
                     <span className="text-gray-700">Accès aux supports de cours</span>
                   </div>
                   <div className="flex items-start gap-3">
-                    <CheckCircleIcon className="h-5 w-5 text-green-600 mt-0.5 flex-shrink-0" />
+                    <CheckCircleIcon className="h-5 w-5 text-green-600 mt-0.5 shrink-0" />
                     <span className="text-gray-700">Certificat de fin de formation</span>
                   </div>
                   <div className="flex items-start gap-3">
-                    <CheckCircleIcon className="h-5 w-5 text-green-600 mt-0.5 flex-shrink-0" />
+                    <CheckCircleIcon className="h-5 w-5 text-green-600 mt-0.5 shrink-0" />
                     <span className="text-gray-700">Suivi personnalisé</span>
                   </div>
                   <div className="flex items-start gap-3">
-                    <CheckCircleIcon className="h-5 w-5 text-green-600 mt-0.5 flex-shrink-0" />
+                    <CheckCircleIcon className="h-5 w-5 text-green-600 mt-0.5 shrink-0" />
                     <span className="text-gray-700">Accès à la communauté</span>
                   </div>
                   <div className="flex items-start gap-3">
-                    <CheckCircleIcon className="h-5 w-5 text-green-600 mt-0.5 flex-shrink-0" />
+                    <CheckCircleIcon className="h-5 w-5 text-green-600 mt-0.5 shrink-0" />
                     <span className="text-gray-700">Support post-formation (30 jours)</span>
                   </div>
                   <div className="flex items-start gap-3">
-                    <CheckCircleIcon className="h-5 w-5 text-green-600 mt-0.5 flex-shrink-0" />
+                    <CheckCircleIcon className="h-5 w-5 text-green-600 mt-0.5 shrink-0" />
                     <span className="text-gray-700">Projets pratiques</span>
                   </div>
                 </div>
@@ -494,8 +494,8 @@ const FormationDetailPage: React.FC = () => {
             <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-sm border border-gray-200 p-6 sticky top-8">
               {/* Prix et inscription */}
               <div className="mb-6">
-                <div className="text-center mb-6 p-6 bg-gradient-to-br from-red-50 to-rose-50 rounded-xl border border-red-100">
-                  <p className="text-4xl font-bold bg-gradient-to-r from-red-600 to-rose-600 bg-clip-text text-transparent mb-2">
+                <div className="text-center mb-6 p-6 bg-linear-to-br from-red-50 to-rose-50 rounded-xl border border-red-100">
+                  <p className="text-4xl font-bold bg-linear-to-r from-red-600 to-rose-600 bg-clip-text text-transparent mb-2">
                     {formatPrice(formation.price)}
                   </p>
                   <p className="text-sm text-gray-600 font-medium">Prix total de la formation</p>
@@ -506,7 +506,7 @@ const FormationDetailPage: React.FC = () => {
                     {!isFormationStarted() ? (
                       <>
                         {daysUntilStart > 0 && (
-                          <div className="mb-4 p-4 bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-200 rounded-xl">
+                          <div className="mb-4 p-4 bg-linear-to-br from-blue-50 to-indigo-50 border border-blue-200 rounded-xl">
                             <p className="text-blue-800 font-semibold text-center">
                               Début dans {daysUntilStart} jour{daysUntilStart !== 1 ? 's' : ''}
                             </p>
@@ -514,13 +514,13 @@ const FormationDetailPage: React.FC = () => {
                         )}
                         
                         {formation.maxStudents && currentStudents >= formation.maxStudents ? (
-                          <div className="mb-4 p-4 bg-gradient-to-br from-red-50 to-orange-50 border border-red-200 rounded-xl">
+                          <div className="mb-4 p-4 bg-linear-to-br from-red-50 to-orange-50 border border-red-200 rounded-xl">
                             <p className="text-red-600 font-semibold text-center">
                               Formation complète
                             </p>
                           </div>
                         ) : (
-                          <div className="mb-4 p-4 bg-gradient-to-br from-green-50 to-emerald-50 border border-green-200 rounded-xl">
+                          <div className="mb-4 p-4 bg-linear-to-br from-green-50 to-emerald-50 border border-green-200 rounded-xl">
                             <div className="flex items-center justify-center gap-2 mb-3">
                               <CheckCircleIcon className="h-6 w-6 text-green-600" />
                               <p className="text-green-800 font-semibold">
@@ -531,7 +531,7 @@ const FormationDetailPage: React.FC = () => {
                               <div>
                                 <div className="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
                                   <div 
-                                    className="bg-gradient-to-r from-green-500 to-emerald-500 h-3 rounded-full transition-all duration-500" 
+                                    className="bg-linear-to-r from-green-500 to-emerald-500 h-3 rounded-full transition-all duration-500" 
                                     style={{ width: `${(currentStudents / formation.maxStudents) * 100}%` }}
                                   ></div>
                                 </div>
@@ -548,10 +548,10 @@ const FormationDetailPage: React.FC = () => {
                           disabled={!!(formation.maxStudents && currentStudents >= formation.maxStudents)}
                           className={`w-full py-4 px-4 rounded-xl font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-lg ${
                             isEnrolled
-                              ? "bg-gradient-to-r from-green-600 to-emerald-600 text-white"
+                              ? "bg-linear-to-r from-green-600 to-emerald-600 text-white"
                               : formation.maxStudents && currentStudents >= formation.maxStudents
                               ? "bg-gray-300 text-gray-500 cursor-not-allowed"
-                              : "bg-gradient-to-r from-red-600 to-rose-600 text-white hover:from-red-700 hover:to-rose-700"
+                              : "bg-linear-to-r from-red-600 to-rose-600 text-white hover:from-red-700 hover:to-rose-700"
                           }`}
                         >
                           {isEnrolled ? "✓ Inscrit à la formation" : 
@@ -560,19 +560,19 @@ const FormationDetailPage: React.FC = () => {
                         </button>
                       </>
                     ) : (
-                      <div className="p-4 bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-200 rounded-xl">
+                      <div className="p-4 bg-linear-to-br from-blue-50 to-indigo-50 border border-blue-200 rounded-xl">
                         <div className="flex items-center justify-center gap-2 mb-3">
                           <PlayCircleIcon className="h-6 w-6 text-blue-600" />
                           <p className="text-blue-800 font-semibold">Formation en cours</p>
                         </div>
-                        <button className="w-full py-3 px-4 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl hover:from-blue-700 hover:to-indigo-700 transition-all duration-300 font-semibold transform hover:scale-105">
+                        <button className="w-full py-3 px-4 bg-linear-to-r from-blue-600 to-indigo-600 text-white rounded-xl hover:from-blue-700 hover:to-indigo-700 transition-all duration-300 font-semibold transform hover:scale-105">
                           Accéder au contenu
                         </button>
                       </div>
                     )}
                   </>
                 ) : (
-                  <div className="p-4 bg-gradient-to-br from-gray-50 to-gray-100 border border-gray-200 rounded-xl">
+                  <div className="p-4 bg-linear-to-br from-gray-50 to-gray-100 border border-gray-200 rounded-xl">
                     <p className="text-gray-600 font-semibold text-center">Formation terminée</p>
                   </div>
                 )}
@@ -584,8 +584,8 @@ const FormationDetailPage: React.FC = () => {
                   <AcademicCapIcon className="h-5 w-5 text-indigo-600" />
                   Instructeur
                 </h3>
-                <div className="flex items-start gap-3 p-4 bg-gradient-to-br from-indigo-50 to-purple-50 rounded-xl">
-                  <div className="w-14 h-14 bg-gradient-to-br from-indigo-600 to-purple-600 rounded-full flex items-center justify-center shadow-md">
+                <div className="flex items-start gap-3 p-4 bg-linear-to-br from-indigo-50 to-purple-50 rounded-xl">
+                  <div className="w-14 h-14 bg-linear-to-br from-indigo-600 to-purple-600 rounded-full flex items-center justify-center shadow-md">
                     <span className="text-white font-bold text-xl">
                       {formation.instructor.split(' ').map(n => n[0]).join('')}
                     </span>
@@ -610,20 +610,20 @@ const FormationDetailPage: React.FC = () => {
                   Informations pratiques
                 </h3>
                 <div className="space-y-3">
-                  <div className="flex items-start gap-3 text-sm p-3 bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg">
-                    <DocumentTextIcon className="h-5 w-5 text-gray-500 flex-shrink-0" />
+                  <div className="flex items-start gap-3 text-sm p-3 bg-linear-to-br from-gray-50 to-gray-100 rounded-lg">
+                    <DocumentTextIcon className="h-5 w-5 text-gray-500 shrink-0" />
                     <span className="text-gray-700">Support de cours inclus</span>
                   </div>
-                  <div className="flex items-start gap-3 text-sm p-3 bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg">
-                    <CheckCircleIcon className="h-5 w-5 text-gray-500 flex-shrink-0" />
+                  <div className="flex items-start gap-3 text-sm p-3 bg-linear-to-br from-gray-50 to-gray-100 rounded-lg">
+                    <CheckCircleIcon className="h-5 w-5 text-gray-500 shrink-0" />
                     <span className="text-gray-700">Certificat délivré</span>
                   </div>
-                  <div className="flex items-start gap-3 text-sm p-3 bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg">
-                    <BookmarkIcon className="h-5 w-5 text-gray-500 flex-shrink-0" />
+                  <div className="flex items-start gap-3 text-sm p-3 bg-linear-to-br from-gray-50 to-gray-100 rounded-lg">
+                    <BookmarkIcon className="h-5 w-5 text-gray-500 shrink-0" />
                     <span className="text-gray-700">Niveau {formation.level.toLowerCase()}</span>
                   </div>
-                  <div className="flex items-start gap-3 text-sm p-3 bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg">
-                    <CurrencyEuroIcon className="h-5 w-5 text-gray-500 flex-shrink-0" />
+                  <div className="flex items-start gap-3 text-sm p-3 bg-linear-to-br from-gray-50 to-gray-100 rounded-lg">
+                    <CurrencyEuroIcon className="h-5 w-5 text-gray-500 shrink-0" />
                     <span className="text-gray-700">Paiement en 3x possible</span>
                   </div>
                 </div>

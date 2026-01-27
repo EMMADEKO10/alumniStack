@@ -113,7 +113,7 @@ const DonationCard = ({
         />
         
         {/* Overlay gradient */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
+        <div className="absolute inset-0 bg-linear-to-t from-black/40 via-transparent to-transparent"></div>
         
         {/* Badge de statut */}
         <div className="absolute top-4 left-4">
@@ -155,7 +155,7 @@ const DonationCard = ({
         {/* Barre de progression en bas de l'image */}
         <div className="absolute bottom-0 left-0 right-0 h-1 bg-black/20">
           <motion.div
-            className={`h-full bg-gradient-to-r ${getProgressColor()}`}
+            className={`h-full bg-linear-to-r ${getProgressColor()}`}
             initial={{ width: 0 }}
             animate={{ width: `${Math.min(100, progressPercentage)}%` }}
             transition={{ duration: 1.5, delay: 0.5 }}
@@ -198,13 +198,13 @@ const DonationCard = ({
           {/* Barre de progression */}
           <div className="relative w-full bg-gray-200 rounded-full h-2 overflow-hidden">
             <motion.div 
-              className={`h-full bg-gradient-to-r ${getProgressColor()} relative`}
+              className={`h-full bg-linear-to-r ${getProgressColor()} relative`}
               initial={{ width: 0 }}
               animate={{ width: `${Math.min(100, progressPercentage)}%` }}
               transition={{ duration: 1.5, delay: 0.3 }}
             >
               {/* Effet de brillance */}
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent transform -skew-x-12 animate-pulse"></div>
+              <div className="absolute inset-0 bg-linear-to-r from-transparent via-white/30 to-transparent transform -skew-x-12 animate-pulse"></div>
             </motion.div>
           </div>
         </div>
@@ -267,7 +267,7 @@ const DonationCard = ({
         >
           {isActive && !isCompleted && (
             <motion.div
-              className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0"
+              className="absolute inset-0 bg-linear-to-r from-white/0 via-white/20 to-white/0"
               initial={{ x: '-100%' }}
               whileHover={{ x: '100%' }}
               transition={{ duration: 0.6 }}
@@ -299,7 +299,7 @@ const DonationCard = ({
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.8 }}
-            className="text-center mt-4 p-3 bg-gradient-to-r from-red-50 to-pink-50 rounded-lg border border-red-100"
+            className="text-center mt-4 p-3 bg-linear-to-r from-red-50 to-pink-50 rounded-lg border border-red-100"
           >
             <p className="text-sm text-red-700">
               <span className="font-semibold">Plus que {formatAmount(remainingAmount)}</span>
@@ -314,7 +314,7 @@ const DonationCard = ({
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5, delay: 0.8 }}
-            className="text-center mt-4 p-3 bg-gradient-to-r from-emerald-50 to-green-50 rounded-lg border border-emerald-200"
+            className="text-center mt-4 p-3 bg-linear-to-r from-emerald-50 to-green-50 rounded-lg border border-emerald-200"
           >
             <p className="text-sm text-emerald-700">
               🎉 <span className="font-semibold">Merci !</span>

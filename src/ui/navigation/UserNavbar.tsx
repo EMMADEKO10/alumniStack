@@ -100,12 +100,12 @@ export default function UserNavbar() {
             className="flex items-center space-x-2 rounded-full p-1 text-gray-700 hover:bg-gray-100 transition-colors focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
           >
             <div className="relative">
-              <div className="w-8 h-8 bg-gradient-to-br from-red-500 to-red-700 rounded-full flex items-center justify-center text-white shadow-md">
+              <div className="w-8 h-8 bg-linear-to-br from-red-500 to-red-700 rounded-full flex items-center justify-center text-white shadow-md">
                 {session.user?.name ? session.user.name.charAt(0).toUpperCase() : session.user?.email?.charAt(0).toUpperCase()}
               </div>
               <div className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-500 border-2 border-white rounded-full"></div>
             </div>
-            <span className="hidden md:block text-sm font-medium truncate max-w-[100px]">
+            <span className="hidden md:block text-sm font-medium truncate max-w-25">
               {session.user?.name || session.user?.email?.split('@')[0]}
             </span>
           </button>
@@ -121,7 +121,7 @@ export default function UserNavbar() {
               >
                 <div className="px-4 py-3 border-b border-gray-100">
                   <div className="flex items-center space-x-3">
-                    <div className="w-10 h-10 bg-gradient-to-br from-red-500 to-red-700 rounded-full flex items-center justify-center text-white shadow-md">
+                    <div className="w-10 h-10 bg-linear-to-br from-red-500 to-red-700 rounded-full flex items-center justify-center text-white shadow-md">
                       {session.user?.name ? session.user.name.charAt(0).toUpperCase() : session.user?.email?.charAt(0).toUpperCase()}
                     </div>
                     <div className="flex-1">
@@ -223,7 +223,7 @@ export default function UserNavbar() {
           </Link>
           <Link
             href="/register"
-            className="flex items-center text-sm bg-gradient-to-r from-red-500 to-red-700 text-white px-3 py-1.5 rounded-md hover:from-red-600 hover:to-red-800 shadow-sm transition-colors"
+            className="flex items-center text-sm bg-linear-to-r from-red-500 to-red-700 text-white px-3 py-1.5 rounded-md hover:from-red-600 hover:to-red-800 shadow-sm transition-colors"
           >
             <FaUserPlus className="mr-1.5" /> Inscription
           </Link>

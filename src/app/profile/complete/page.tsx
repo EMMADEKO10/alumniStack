@@ -46,7 +46,7 @@ const CompleteProfilePage = () => {
 
   if (status === 'loading' || loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-cyan-50/30 relative overflow-hidden">
+      <div className="min-h-screen bg-linear-to-br from-gray-50 via-white to-cyan-50/30 relative overflow-hidden">
         {/* Décorations de fond */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <div className="absolute -top-24 -left-24 w-96 h-96 bg-red-100/20 rounded-full blur-3xl"></div>
@@ -104,7 +104,7 @@ const CompleteProfilePage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-cyan-50/30 relative overflow-hidden">
+    <div className="min-h-screen bg-linear-to-br from-gray-50 via-white to-cyan-50/30 relative overflow-hidden">
       {/* Décorations de fond LAU */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute -top-24 -left-24 w-96 h-96 bg-red-100/20 rounded-full blur-3xl"></div>

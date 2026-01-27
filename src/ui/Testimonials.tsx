@@ -35,9 +35,8 @@ const Testimonials: React.FC = () => {
   };
 
   return (
-    <section className="py-12 sm:py-16 lg:py-20 bg-gradient-to-br from-red-50 via-white to-orange-50 relative overflow-hidden">
-      
-      {/* Background Decorations */
+    <section className="py-12 sm:py-16 lg:py-20 bg-linear-to-br from-red-50 via-white to-orange-50 relative overflow-hidden">
+      {/* Background Decorations */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-20 -left-20 w-40 h-40 sm:w-60 sm:h-60 lg:w-72 lg:h-72 bg-red-100 rounded-full mix-blend-multiply filter blur-xl opacity-50 animate-pulse"></div>
         <div className="absolute bottom-20 -right-20 w-40 h-40 sm:w-60 sm:h-60 lg:w-72 lg:h-72 bg-orange-100 rounded-full mix-blend-multiply filter blur-xl opacity-50 animate-pulse" style={{ animationDelay: '2s' }}></div>
@@ -59,7 +58,7 @@ const Testimonials: React.FC = () => {
           </div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-gray-900 mb-3 sm:mb-4 px-4 tracking-tight leading-tight">
             Ce que disent nos
-            <span className="block bg-gradient-to-r from-red-600 to-red-700 bg-clip-text text-transparent mt-2">
+            <span className="block bg-linear-to-r from-red-600 to-red-700 bg-clip-text text-transparent mt-2">
               Alumni
             </span>
           </h2>
@@ -79,7 +78,7 @@ const Testimonials: React.FC = () => {
           <div className="bg-white rounded-2xl sm:rounded-3xl shadow-xl sm:shadow-2xl p-6 sm:p-8 lg:p-10 relative">
             
             {/* Quote Icon */}
-            <div className="absolute top-4 left-4 sm:top-6 sm:left-6 w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-red-500 to-red-600 rounded-full flex items-center justify-center shadow-lg">
+            <div className="absolute top-4 left-4 sm:top-6 sm:left-6 w-10 h-10 sm:w-12 sm:h-12 bg-linear-to-br from-red-500 to-red-600 rounded-full flex items-center justify-center shadow-lg">
               <FaQuoteLeft className="text-white text-sm sm:text-lg" />
             </div>
 
@@ -98,7 +97,7 @@ const Testimonials: React.FC = () => {
             {/* Author Info */}
             <div className="flex flex-col items-center space-y-4 sm:space-y-0 sm:flex-row sm:justify-between sm:items-center">
               <div className="flex items-center">
-                <div className="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 bg-gradient-to-br from-red-500 to-red-600 rounded-full flex items-center justify-center text-white font-bold text-base sm:text-lg lg:text-xl mr-3 sm:mr-4 shadow-md flex-shrink-0">
+                <div className="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 bg-linear-to-br from-red-500 to-red-600 rounded-full flex items-center justify-center text-white font-bold text-base sm:text-lg lg:text-xl mr-3 sm:mr-4 shadow-md shrink-0">
                   {testimonials[activeTestimonial].avatar}
                 </div>
                 <div className="text-left">
@@ -118,7 +117,7 @@ const Testimonials: React.FC = () => {
               </div>
 
               {/* Achievement Badge */}
-              <div className="bg-gradient-to-r from-red-500 to-red-600 text-white px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-xs sm:text-sm font-medium shadow-md whitespace-nowrap">
+              <div className="bg-linear-to-r from-red-500 to-red-600 text-white px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-xs sm:text-sm font-medium shadow-md whitespace-nowrap">
                 {testimonials[activeTestimonial].achievement}
               </div>
             </div>
@@ -181,8 +180,6 @@ const Testimonials: React.FC = () => {
             →
           </motion.button>
         </div>
-        
-        
       </div>
     </section>
   );

@@ -6,7 +6,7 @@ import { motion } from 'framer-motion';
 
 export default function RegisterPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-cyan-50/30 relative overflow-hidden">
+    <div className="min-h-screen bg-linear-to-br from-gray-50 via-white to-cyan-50/30 relative overflow-hidden">
       {/* Décorations de fond */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute -top-24 -left-24 w-96 h-96 bg-red-100/20 rounded-full blur-3xl"></div>
@@ -35,7 +35,7 @@ export default function RegisterPage() {
                   className="w-full h-auto object-cover"
                   priority
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
+                <div className="absolute inset-0 bg-linear-to-t from-black/60 via-black/20 to-transparent"></div>
                 <div className="absolute bottom-0 left-0 right-0 p-8 text-white">
                   <h2 className="text-3xl font-bold mb-2">Devenez Alumni LAU</h2>
                   <p className="text-lg opacity-90">Rejoignez une communauté d&apos;excellence et d&apos;opportunités</p>

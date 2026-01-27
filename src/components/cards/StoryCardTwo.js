@@ -46,7 +46,7 @@ const StoryCardTwo = ({ title, description, image, category, date, featured, rea
           initial={{ scale: 0, rotate: -45 }}
           animate={{ scale: 1, rotate: 0 }}
           transition={{ type: "spring", stiffness: 300, delay: 0.3 }}
-          className="absolute top-4 right-4 z-20 bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-3 py-1.5 rounded-full text-xs font-bold flex items-center space-x-1 shadow-lg"
+          className="absolute top-4 right-4 z-20 bg-linear-to-r from-yellow-400 to-orange-500 text-white px-3 py-1.5 rounded-full text-xs font-bold flex items-center space-x-1 shadow-lg"
         >
           <FaStar className="text-xs" />
           <span>À la Une</span>
@@ -64,11 +64,11 @@ const StoryCardTwo = ({ title, description, image, category, date, featured, rea
         />
         
         {/* Overlay gradient */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-500" />
+        <div className="absolute inset-0 bg-linear-to-t from-black/60 via-black/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-500" />
         
         {/* Category Badge */}
         <div className="absolute top-4 left-4 z-10">
-          <div className={`bg-gradient-to-r ${getCategoryColor(category)} text-white px-3 py-1.5 rounded-full text-xs font-semibold flex items-center space-x-2 shadow-lg backdrop-blur-sm`}>
+          <div className={`bg-linear-to-r ${getCategoryColor(category)} text-white px-3 py-1.5 rounded-full text-xs font-semibold flex items-center space-x-2 shadow-lg backdrop-blur-sm`}>
             <span>{getCategoryIcon(category)}</span>
             <span>{category}</span>
           </div>
@@ -83,7 +83,7 @@ const StoryCardTwo = ({ title, description, image, category, date, featured, rea
         )}
 
         {/* Hover overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-red-600/0 to-red-600/0 group-hover:from-red-600/30 group-hover:to-transparent transition-all duration-500" />
+        <div className="absolute inset-0 bg-linear-to-t from-red-600/0 to-red-600/0 group-hover:from-red-600/30 group-hover:to-transparent transition-all duration-500" />
       </div>
 
       {/* Content */}
@@ -118,10 +118,10 @@ const StoryCardTwo = ({ title, description, image, category, date, featured, rea
         <motion.button
           whileHover={{ scale: 1.02, x: 4 }}
           whileTap={{ scale: 0.98 }}
-          className="group/btn relative w-full bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-semibold py-3.5 px-6 rounded-xl transition-all duration-300 flex items-center justify-center space-x-2 overflow-hidden shadow-md hover:shadow-lg"
+          className="group/btn relative w-full bg-linear-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-semibold py-3.5 px-6 rounded-xl transition-all duration-300 flex items-center justify-center space-x-2 overflow-hidden shadow-md hover:shadow-lg"
         >
           {/* Shine effect */}
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] group-hover/btn:translate-x-[100%] transition-transform duration-700" />
+          <div className="absolute inset-0 bg-linear-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] group-hover/btn:translate-x-[100%] transition-transform duration-700" />
           
           <FaBookOpen className="text-sm relative z-10" />
           <span className="relative z-10">Lire l&apos;histoire</span>
@@ -130,13 +130,13 @@ const StoryCardTwo = ({ title, description, image, category, date, featured, rea
       </div>
 
       {/* Decorative Elements */}
-      <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-red-500 via-rose-500 to-red-600 transform scale-y-0 group-hover:scale-y-100 transition-transform duration-500 origin-top" />
+      <div className="absolute top-0 left-0 w-1 h-full bg-linear-to-b from-red-500 via-rose-500 to-red-600 transform scale-y-0 group-hover:scale-y-100 transition-transform duration-500 origin-top" />
       
       {/* Bottom decorative line */}
-      <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-red-500 via-rose-500 to-red-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
+      <div className="absolute bottom-0 left-0 right-0 h-1 bg-linear-to-r from-red-500 via-rose-500 to-red-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
       
       {/* Corner accent */}
-      <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-red-500/0 to-red-500/10 rounded-bl-full transform scale-0 group-hover:scale-100 transition-transform duration-500" />
+      <div className="absolute top-0 right-0 w-20 h-20 bg-linear-to-br from-red-500/0 to-red-500/10 rounded-bl-full transform scale-0 group-hover:scale-100 transition-transform duration-500" />
     </motion.div>
   );
 };

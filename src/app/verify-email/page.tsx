@@ -21,7 +21,7 @@ export default function VerifyEmailPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-cyan-50/30 relative overflow-hidden">
+    <div className="min-h-screen bg-linear-to-br from-gray-50 via-white to-cyan-50/30 relative overflow-hidden">
       {/* Décorations de fond avec palette LAU */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute -top-24 -left-24 w-96 h-96 bg-red-100/30 rounded-full blur-3xl"></div>
@@ -38,7 +38,7 @@ export default function VerifyEmailPage() {
             className="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden"
           >
             {/* En-tête avec icône */}
-            <div className="bg-gradient-to-br from-red-600 to-red-500 px-8 py-12 text-center">
+            <div className="bg-linear-to-br from-red-600 to-red-500 px-8 py-12 text-center">
               <motion.div
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
@@ -68,7 +68,7 @@ export default function VerifyEmailPage() {
               </div>
 
               {/* Instructions pas à pas */}
-              <div className="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-xl p-6 mb-8 border border-cyan-100">
+              <div className="bg-linear-to-br from-blue-50 to-cyan-50 rounded-xl p-6 mb-8 border border-cyan-100">
                 <h2 className="text-lg font-semibold text-blue-900 mb-4 flex items-center gap-2">
                   <CheckCircleIcon className="w-5 h-5 text-cyan-600" />
                   Instructions

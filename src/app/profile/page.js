@@ -97,7 +97,7 @@ export default function ProfilePage() {
             </div>
 
             {/* Skeleton Statut Alumni */}
-            <div className="bg-gradient-to-r from-blue-600 to-blue-800 text-white rounded-lg p-6 mb-8 animate-pulse">
+            <div className="bg-linear-to-r from-blue-600 to-blue-800 text-white rounded-lg p-6 mb-8 animate-pulse">
               <div className="h-6 bg-white/30 rounded w-1/2 mb-4"></div>
               <div className="flex gap-4">
                 <div className="h-4 bg-white/30 rounded w-1/4"></div>

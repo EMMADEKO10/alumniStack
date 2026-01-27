@@ -69,7 +69,7 @@ const Stats: React.FC = () => {
   ];
 
   return (
-    <section ref={ref} className="py-20 bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white relative overflow-hidden">
+    <section ref={ref} className="py-20 bg-linear-to-br from-gray-900 via-gray-800 to-black text-white relative overflow-hidden">
       
       {/* Background Decorations */}
       <div className="absolute inset-0 overflow-hidden">
@@ -93,7 +93,7 @@ const Stats: React.FC = () => {
           </div>
           <h2 className="text-4xl lg:text-5xl font-bold mb-6">
             Notre impact en
-            <span className="block bg-gradient-to-r from-red-400 to-red-600 bg-clip-text text-transparent">
+            <span className="block bg-linear-to-r from-red-400 to-red-600 bg-clip-text text-transparent">
               chiffres
             </span>
           </h2>
@@ -117,10 +117,10 @@ const Stats: React.FC = () => {
               <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 hover:bg-white/10 transition-all duration-300 relative overflow-hidden">
                 
                 {/* Background Glow */}
-                <div className={`absolute inset-0 bg-gradient-to-br ${stat.color} opacity-0 group-hover:opacity-10 transition-opacity duration-300 rounded-2xl`}></div>
+                <div className={`absolute inset-0 bg-linear-to-br ${stat.color} opacity-0 group-hover:opacity-10 transition-opacity duration-300 rounded-2xl`}></div>
                 
                 {/* Icon */}
-                <div className={`inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br ${stat.color} text-white rounded-xl mb-6 group-hover:scale-110 transition-transform duration-300`}>
+                <div className={`inline-flex items-center justify-center w-16 h-16 bg-linear-to-br ${stat.color} text-white rounded-xl mb-6 group-hover:scale-110 transition-transform duration-300`}>
                   {stat.icon}
                 </div>
 
@@ -143,7 +143,7 @@ const Stats: React.FC = () => {
                 </p>
 
                 {/* Hover Effect */}
-                <div className={`absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r ${stat.color} transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left`}></div>
+                <div className={`absolute bottom-0 left-0 right-0 h-1 bg-linear-to-r ${stat.color} transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left`}></div>
               </div>
             </motion.div>
           ))}
@@ -157,7 +157,7 @@ const Stats: React.FC = () => {
           transition={{ duration: 0.8, delay: 0.5 }}
           className="text-center mt-16"
         >
-          <div className="bg-gradient-to-r from-red-500/10 to-red-600/10 border border-red-500/20 rounded-2xl p-8">
+          <div className="bg-linear-to-r from-red-500/10 to-red-600/10 border border-red-500/20 rounded-2xl p-8">
             <h3 className="text-2xl font-bold text-white mb-4">
               Vous aussi, faites partie de ces chiffres ! 
             </h3>
@@ -170,7 +170,7 @@ const Stats: React.FC = () => {
                 href="/register"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="px-8 py-4 bg-gradient-to-r from-red-600 to-red-700 text-white font-semibold rounded-lg shadow-lg hover:from-red-700 hover:to-red-800 transition-all duration-300"
+                className="px-8 py-4 bg-linear-to-r from-red-600 to-red-700 text-white font-semibold rounded-lg shadow-lg hover:from-red-700 hover:to-red-800 transition-all duration-300"
               >
                 Rejoindre la communauté
               </motion.a>
@@ -235,7 +235,7 @@ const AnimatedCounter: React.FC<AnimatedCounterProps> = ({ value, suffix, isInVi
   };
 
   return (
-    <div className="text-4xl lg:text-5xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+    <div className="text-4xl lg:text-5xl font-bold bg-linear-to-r from-white to-gray-300 bg-clip-text text-transparent">
       {formatNumber(count)}{suffix}
     </div>
   );

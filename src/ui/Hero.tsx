@@ -129,7 +129,7 @@ const Hero: React.FC = () => {
           >
             <Link
               href="/register"
-              className="group inline-flex items-center justify-center px-6 sm:px-8 py-3.5 sm:py-4 bg-gradient-to-r from-red-600 to-red-700 text-white font-semibold rounded-xl shadow-lg hover:from-red-700 hover:to-red-800 transform hover:scale-105 transition-all duration-300 text-sm sm:text-base"
+              className="group inline-flex items-center justify-center px-6 sm:px-8 py-3.5 sm:py-4 bg-linear-to-r from-red-600 to-red-700 text-white font-semibold rounded-xl shadow-lg hover:from-red-700 hover:to-red-800 transform hover:scale-105 transition-all duration-300 text-sm sm:text-base"
             >
               Rejoindre la communauté
               <FaArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />

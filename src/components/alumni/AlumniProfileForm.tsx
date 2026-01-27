@@ -266,7 +266,7 @@ const AlumniProfileForm: React.FC<AlumniProfileFormProps> = ({
                   className="w-full h-full object-cover"
                 />
               ) : (
-                <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-red-100 to-cyan-100">
+                <div className="w-full h-full flex items-center justify-center bg-linear-to-br from-red-100 to-cyan-100">
                   <svg className="w-16 h-16 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
                   </svg>
@@ -1078,7 +1078,7 @@ const AlumniProfileForm: React.FC<AlumniProfileFormProps> = ({
           type="button"
           onClick={handleSubmit}
           disabled={loading}
-          className="w-full sm:w-auto px-8 py-3 bg-gradient-to-r from-cyan-600 to-blue-900 text-white rounded-full font-semibold hover:from-cyan-700 hover:to-blue-950 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+          className="w-full sm:w-auto px-8 py-3 bg-linear-to-r from-cyan-600 to-blue-900 text-white rounded-full font-semibold hover:from-cyan-700 hover:to-blue-950 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
         >
           {loading ? (
             <span className="flex items-center justify-center gap-2">
@@ -1124,7 +1124,7 @@ const AlumniProfileForm: React.FC<AlumniProfileFormProps> = ({
         {/* Barre de progression */}
         <div className="w-full bg-gray-200 rounded-full h-2 overflow-hidden">
           <div 
-            className="h-full bg-gradient-to-r from-red-600 via-cyan-600 to-blue-900 transition-all duration-500 ease-out"
+            className="h-full bg-linear-to-r from-red-600 via-cyan-600 to-blue-900 transition-all duration-500 ease-out"
             style={{ width: `${(currentStep / totalSteps) * 100}%` }}
           ></div>
         </div>

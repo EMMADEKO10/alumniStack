@@ -359,7 +359,7 @@ const FormationSection: React.FC = () => {
 
       {/* Statistiques */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-        <div className="bg-gradient-to-br from-purple-50 to-indigo-50 rounded-xl border border-purple-100 p-4 flex items-center gap-3">
+        <div className="bg-linear-to-br from-purple-50 to-indigo-50 rounded-xl border border-purple-100 p-4 flex items-center gap-3">
           <div className="bg-purple-100 rounded-lg p-2">
             <AcademicCapIcon className="h-6 w-6 text-purple-600" />
           </div>
@@ -368,7 +368,7 @@ const FormationSection: React.FC = () => {
             <p className="text-xs text-gray-600">Formations</p>
           </div>
         </div>
-        <div className="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-xl border border-blue-100 p-4 flex items-center gap-3">
+        <div className="bg-linear-to-br from-blue-50 to-cyan-50 rounded-xl border border-blue-100 p-4 flex items-center gap-3">
           <div className="bg-blue-100 rounded-lg p-2">
             <TagIcon className="h-6 w-6 text-blue-600" />
           </div>
@@ -377,7 +377,7 @@ const FormationSection: React.FC = () => {
             <p className="text-xs text-gray-600">Catégories</p>
           </div>
         </div>
-        <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl border border-green-100 p-4 flex items-center gap-3">
+        <div className="bg-linear-to-br from-green-50 to-emerald-50 rounded-xl border border-green-100 p-4 flex items-center gap-3">
           <div className="bg-green-100 rounded-lg p-2">
             <UserGroupIcon className="h-6 w-6 text-green-600" />
           </div>
@@ -423,11 +423,11 @@ const FormationSection: React.FC = () => {
                           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                         />
                       ) : (
-                        <div className="w-full h-full bg-gradient-to-br from-purple-100 via-indigo-50 to-purple-50 flex items-center justify-center group-hover:from-purple-200 transition-colors duration-300">
+                        <div className="w-full h-full bg-linear-to-br from-purple-100 via-indigo-50 to-purple-50 flex items-center justify-center group-hover:from-purple-200 transition-colors duration-300">
                           <AcademicCapIcon className="h-20 w-20 text-purple-200" />
                         </div>
                       )}
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                      <div className="absolute inset-0 bg-linear-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                       
                       <div className="absolute top-4 right-4">
                         <div className="bg-purple-600 text-white rounded-xl p-2.5 shadow-lg transform group-hover:scale-110 transition-transform duration-300">
@@ -502,7 +502,7 @@ const FormationSection: React.FC = () => {
                           sizes="160px"
                         />
                       ) : (
-                        <div className="w-full h-full bg-gradient-to-br from-purple-100 to-indigo-50 flex items-center justify-center">
+                        <div className="w-full h-full bg-linear-to-br from-purple-100 to-indigo-50 flex items-center justify-center">
                           <AcademicCapIcon className="h-12 w-12 text-purple-200" />
                         </div>
                       )}

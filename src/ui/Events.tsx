@@ -104,7 +104,7 @@ const Events: React.FC = () => {
   };
 
   return (
-    <section className="py-16 md:py-20 bg-gradient-to-br from-slate-50 via-white to-slate-100">
+    <section className="py-16 md:py-20 bg-linear-to-br from-slate-50 via-white to-slate-100">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <motion.div
           initial={{ opacity: 0, y: 16 }}

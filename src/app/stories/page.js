@@ -65,7 +65,7 @@ const Page = () => {
   const regularStories = filteredStories.filter(story => !story.featured);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-cyan-50/30">
+    <div className="min-h-screen bg-linear-to-br from-gray-50 via-white to-cyan-50/30">
       {/* Background Decorations */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-40 -left-20 w-72 h-72 bg-red-100 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse"></div>
@@ -99,7 +99,7 @@ const Page = () => {
           >
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 leading-tight">
               Découvrez
-              <span className="block bg-gradient-to-r from-red-600 via-rose-600 to-red-500 bg-clip-text text-transparent mt-2">
+              <span className="block bg-linear-to-r from-red-600 via-rose-600 to-red-500 bg-clip-text text-transparent mt-2">
                 Nos Histoires Inspirantes
               </span>
             </h1>
@@ -195,7 +195,7 @@ const Page = () => {
               transition={{ duration: 0.6 }}
               className="text-center mb-10"
             >
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-yellow-100 to-orange-100 rounded-full mb-4">
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-linear-to-r from-yellow-100 to-orange-100 rounded-full mb-4">
                 <FaStar className="text-yellow-600" />
                 <span className="text-sm font-semibold text-gray-800">À la Une</span>
               </div>
@@ -275,7 +275,7 @@ const Page = () => {
           {loading ? (
             <div className="py-8">
               {/* Skeleton Statistiques */}
-              <div className="bg-gradient-to-r from-red-50 to-rose-50 rounded-xl p-6 border border-red-100 mb-8 animate-pulse">
+              <div className="bg-linear-to-r from-red-50 to-rose-50 rounded-xl p-6 border border-red-100 mb-8 animate-pulse">
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
                   {[1, 2, 3, 4].map((i) => (
                     <div key={i} className="text-center">
@@ -336,7 +336,7 @@ const Page = () => {
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.5 }}
-                className="text-center py-16 bg-gradient-to-br from-gray-50 to-red-50 rounded-2xl border border-gray-200"
+                className="text-center py-16 bg-linear-to-br from-gray-50 to-red-50 rounded-2xl border border-gray-200"
               >
                 <div className="inline-flex items-center justify-center w-20 h-20 bg-white rounded-full mb-6 shadow-md">
                   <FaSearch className="text-3xl text-gray-400" />
@@ -350,7 +350,7 @@ const Page = () => {
                     setSearchTerm("");
                     setSelectedCategory("Toutes");
                   }}
-                  className="bg-gradient-to-r from-red-600 to-red-700 text-white px-6 py-3 rounded-xl hover:from-red-700 hover:to-red-800 transition-all duration-300 shadow-md hover:shadow-lg font-semibold"
+                  className="bg-linear-to-r from-red-600 to-red-700 text-white px-6 py-3 rounded-xl hover:from-red-700 hover:to-red-800 transition-all duration-300 shadow-md hover:shadow-lg font-semibold"
                 >
                   Réinitialiser les filtres
                 </button>

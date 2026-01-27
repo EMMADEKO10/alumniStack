@@ -225,7 +225,7 @@ const OpportunitySection: React.FC = () => {
     return (
       <div className="max-w-7xl mx-auto px-4 py-8">
         {/* Skeleton Statistiques */}
-        <div className="bg-gradient-to-r from-red-50 to-rose-50 rounded-xl p-6 border border-red-100 mb-6 animate-pulse">
+        <div className="bg-linear-to-r from-red-50 to-rose-50 rounded-xl p-6 border border-red-100 mb-6 animate-pulse">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
             {[1, 2, 3, 4].map((i) => (
               <div key={i} className="text-center">
@@ -313,7 +313,7 @@ const OpportunitySection: React.FC = () => {
             exit={{ opacity: 0, height: 0 }}
             className="mb-6 overflow-hidden"
           >
-            <div className="bg-gradient-to-r from-red-50 to-rose-50 rounded-xl p-6 border border-red-100">
+            <div className="bg-linear-to-r from-red-50 to-rose-50 rounded-xl p-6 border border-red-100">
               <div className="flex justify-between items-center mb-4">
                 <h3 className="text-lg font-bold text-gray-900 flex items-center gap-2">
                   <ChartBarIcon className="h-5 w-5 text-red-600" />
@@ -399,7 +399,7 @@ const OpportunitySection: React.FC = () => {
                 exit={{ opacity: 0, height: 0 }}
                 className="overflow-hidden"
               >
-                <div className="bg-gradient-to-r from-gray-50 to-red-50 rounded-lg p-4 border border-gray-200">
+                <div className="bg-linear-to-r from-gray-50 to-red-50 rounded-lg p-4 border border-gray-200">
                   <div className="flex flex-wrap gap-3">
                     {/* Filtre par type */}
                     <div className="flex-1 min-w-[200px]">
@@ -608,7 +608,7 @@ const OpportunitySection: React.FC = () => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-center py-16 bg-gradient-to-br from-gray-50 to-red-50 rounded-xl border border-gray-200"
+          className="text-center py-16 bg-linear-to-br from-gray-50 to-red-50 rounded-xl border border-gray-200"
         >
           <BriefcaseIcon className="mx-auto h-16 w-16 text-gray-400" />
           <h3 className="mt-4 text-lg font-semibold text-gray-900">Aucune opportunité trouvée</h3>

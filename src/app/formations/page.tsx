@@ -7,7 +7,7 @@ import FormationSection from "./FormationSection";
 
 const Page: React.FC = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-red-50">
+    <div className="min-h-screen bg-linear-to-br from-gray-50 via-white to-red-50">
       {/* Background Decorations */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-40 -left-20 w-72 h-72 bg-red-100 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse"></div>
@@ -46,7 +46,7 @@ const Page: React.FC = () => {
           >
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 leading-tight">
               Les
-              <span className="block bg-gradient-to-r from-red-600 via-rose-600 to-red-500 bg-clip-text text-transparent mt-2">
+              <span className="block bg-linear-to-r from-red-600 via-rose-600 to-red-500 bg-clip-text text-transparent mt-2">
                 Formations
               </span>
             </h1>

@@ -358,7 +358,7 @@ const DonationsPage = () => {
       {/* Décorations de fond */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div
-          className="absolute -top-24 -left-24 w-96 h-96 bg-gradient-to-br from-red-200/20 to-pink-200/20 rounded-full blur-3xl"
+          className="absolute -top-24 -left-24 w-96 h-96 bg-linear-to-br from-red-200/20 to-pink-200/20 rounded-full blur-3xl"
           animate={{
             x: [0, 50, 0],
             y: [0, 30, 0],
@@ -370,7 +370,7 @@ const DonationsPage = () => {
           }}
         />
         <motion.div
-          className="absolute top-1/2 -right-24 w-96 h-96 bg-gradient-to-br from-pink-200/20 to-red-200/20 rounded-full blur-3xl"
+          className="absolute top-1/2 -right-24 w-96 h-96 bg-linear-to-br from-pink-200/20 to-red-200/20 rounded-full blur-3xl"
           animate={{
             x: [0, -30, 0],
             y: [0, 50, 0],
@@ -392,7 +392,7 @@ const DonationsPage = () => {
       >
         <h1 className="text-4xl md:text-5xl font-bold mb-4">
           <span className="text-gray-900">Soutenez </span>
-          <span className="bg-gradient-to-r from-red-600 via-rose-600 to-red-500 bg-clip-text text-transparent">
+          <span className="bg-linear-to-r from-red-600 via-rose-600 to-red-500 bg-clip-text text-transparent">
             Notre Mission
           </span>
         </h1>
@@ -433,7 +433,7 @@ const DonationsPage = () => {
             transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
             whileHover={{ y: -8 }}
           >
-            <div className="bg-gradient-to-br from-red-50 to-pink-50 w-14 h-14 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+            <div className="bg-linear-to-br from-red-50 to-pink-50 w-14 h-14 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
               <feature.icon className="text-2xl text-red-600" />
             </div>
             <h3 className="text-lg font-semibold text-gray-900 mb-2">
@@ -558,7 +558,7 @@ const DonationsPage = () => {
             value: filteredDonations.length,
             label: "Campagnes trouvées",
             color: "red",
-            bgColor: "bg-gradient-to-br from-red-50 to-pink-50",
+            bgColor: "bg-linear-to-br from-red-50 to-pink-50",
             iconColor: "text-red-600",
             borderColor: "border-red-100"
           },
@@ -567,7 +567,7 @@ const DonationsPage = () => {
             value: stats.totalAmount,
             label: "Montant total collecté",
             color: "green",
-            bgColor: "bg-gradient-to-br from-green-50 to-emerald-50",
+            bgColor: "bg-linear-to-br from-green-50 to-emerald-50",
             iconColor: "text-green-600",
             borderColor: "border-green-100",
             format: "currency"
@@ -577,7 +577,7 @@ const DonationsPage = () => {
             value: stats.totalDonors,
             label: "Donateurs",
             color: "blue",
-            bgColor: "bg-gradient-to-br from-blue-50 to-indigo-50",
+            bgColor: "bg-linear-to-br from-blue-50 to-indigo-50",
             iconColor: "text-blue-600",
             borderColor: "border-blue-100"
           },
@@ -586,7 +586,7 @@ const DonationsPage = () => {
             value: stats.completedCampaigns,
             label: "Objectifs atteints",
             color: "purple",
-            bgColor: "bg-gradient-to-br from-purple-50 to-pink-50",
+            bgColor: "bg-linear-to-br from-purple-50 to-pink-50",
             iconColor: "text-purple-600",
             borderColor: "border-purple-100"
           }
@@ -645,7 +645,7 @@ const DonationsPage = () => {
               {viewMode === "list" ? (
                 <div className="p-6">
                   <div className="flex items-center gap-6">
-                    <div className="flex-shrink-0 w-24 h-24 bg-gradient-to-br from-red-100 to-red-200 rounded-lg flex items-center justify-center">
+                    <div className="flex-shrink-0 w-24 h-24 bg-linear-to-br from-red-100 to-red-200 rounded-lg flex items-center justify-center">
                       <HeartIcon className="h-8 w-8 text-red-600" />
                     </div>
                     <div className="flex-1">
@@ -692,7 +692,7 @@ const DonationsPage = () => {
 
       {/* Section d'informations sur les dons */}
       <motion.div 
-        className="bg-gradient-to-br from-red-50 via-white to-red-50 rounded-xl p-8 mt-12 relative z-10 border border-red-100 shadow-lg"
+        className="bg-linear-to-br from-red-50 via-white to-red-50 rounded-xl p-8 mt-12 relative z-10 border border-red-100 shadow-lg"
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
@@ -773,7 +773,7 @@ const DonationsPage = () => {
               </div>
             </div>
 
-            <div className="mt-4 p-3 bg-gradient-to-r from-green-50 to-blue-50 border border-green-200 rounded-lg">
+            <div className="mt-4 p-3 bg-linear-to-r from-green-50 to-blue-50 border border-green-200 rounded-lg">
               <p className="text-xs text-green-800">
                 📧 Confirmez votre don par email à <strong>dons@lau.org</strong>
               </p>

@@ -339,7 +339,7 @@ const EventSection: React.FC = () => {
 
       {/* Statistiques compactes */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-        <div className="bg-gradient-to-br from-red-50 to-orange-50 rounded-xl border border-red-100 p-4 flex items-center gap-3">
+        <div className="bg-linear-to-br from-red-50 to-orange-50 rounded-xl border border-red-100 p-4 flex items-center gap-3">
           <div className="bg-red-100 rounded-lg p-2">
             <CalendarIcon className="h-6 w-6 text-red-600" />
           </div>
@@ -348,7 +348,7 @@ const EventSection: React.FC = () => {
             <p className="text-xs text-gray-600">Événements</p>
           </div>
         </div>
-        <div className="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-xl border border-blue-100 p-4 flex items-center gap-3">
+        <div className="bg-linear-to-br from-blue-50 to-cyan-50 rounded-xl border border-blue-100 p-4 flex items-center gap-3">
           <div className="bg-blue-100 rounded-lg p-2">
             <MapPinIcon className="h-6 w-6 text-blue-600" />
           </div>
@@ -359,7 +359,7 @@ const EventSection: React.FC = () => {
             <p className="text-xs text-gray-600">Lieux</p>
           </div>
         </div>
-        <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl border border-purple-100 p-4 flex items-center gap-3">
+        <div className="bg-linear-to-br from-purple-50 to-pink-50 rounded-xl border border-purple-100 p-4 flex items-center gap-3">
           <div className="bg-purple-100 rounded-lg p-2">
             <TagIcon className="h-6 w-6 text-purple-600" />
           </div>
@@ -416,11 +416,11 @@ const EventSection: React.FC = () => {
                           unoptimized={false}
                         />
                       ) : (
-                        <div className="w-full h-full bg-gradient-to-br from-red-100 via-orange-50 to-red-50 flex items-center justify-center group-hover:from-red-200 transition-colors duration-300">
+                        <div className="w-full h-full bg-linear-to-br from-red-100 via-orange-50 to-red-50 flex items-center justify-center group-hover:from-red-200 transition-colors duration-300">
                           <CalendarIcon className="h-20 w-20 text-red-200" />
                         </div>
                       )}
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                      <div className="absolute inset-0 bg-linear-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                       
                       {/* Date badge */}
                       <div className="absolute top-4 right-4">
@@ -491,7 +491,7 @@ const EventSection: React.FC = () => {
                           sizes="160px"
                         />
                       ) : (
-                        <div className="w-full h-full bg-gradient-to-br from-red-100 to-orange-50 flex items-center justify-center">
+                        <div className="w-full h-full bg-linear-to-br from-red-100 to-orange-50 flex items-center justify-center">
                           <CalendarIcon className="h-12 w-12 text-red-200" />
                         </div>
                       )}

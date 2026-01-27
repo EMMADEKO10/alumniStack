@@ -20,7 +20,7 @@ const PageTitle: React.FC<PageTitleProps> = ({
   icon 
 }) => {
   return (
-    <div className="relative bg-gradient-to-br from-gray-50 to-gray-100 pt-40 pb-16 overflow-hidden">
+    <div className="relative bg-linear-to-br from-gray-50 to-gray-100 pt-40 pb-16 overflow-hidden">
       {/* Éléments décoratifs de fond */}
       <div className="absolute inset-0">
         <div className="absolute top-20 left-20 w-32 h-32 bg-blue-100 rounded-full blur-3xl opacity-60"></div>
@@ -39,7 +39,7 @@ const PageTitle: React.FC<PageTitleProps> = ({
               transition={{ duration: 0.5 }}
               className="flex justify-center mb-6"
             >
-              <div className={`bg-gradient-to-r ${gradient} p-4 rounded-2xl shadow-lg text-white`}>
+              <div className={`bg-linear-to-r ${gradient} p-4 rounded-2xl shadow-lg text-white`}>
                 {icon}
               </div>
             </motion.div>
@@ -64,7 +64,7 @@ const PageTitle: React.FC<PageTitleProps> = ({
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 font-sans"
           >
-            <span className={`bg-gradient-to-r ${gradient} bg-clip-text text-transparent`}>
+            <span className={`bg-linear-to-r ${gradient} bg-clip-text text-transparent`}>
               {title}
             </span>
           </motion.h1>
@@ -90,7 +90,7 @@ const PageTitle: React.FC<PageTitleProps> = ({
             transition={{ duration: 0.8, delay: 0.6 }}
             className="mt-8 flex justify-center"
           >
-            <div className={`h-1 w-24 bg-gradient-to-r ${gradient} rounded-full`}></div>
+            <div className={`h-1 w-24 bg-linear-to-r ${gradient} rounded-full`}></div>
           </motion.div>
 
         </div>

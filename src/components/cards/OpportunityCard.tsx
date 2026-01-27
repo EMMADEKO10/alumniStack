@@ -83,7 +83,7 @@ const OpportunityCard: React.FC<OpportunityCardProps> = ({ opportunity }) => {
           src={opportunity.imageUrl || "/graduation.jpg"} 
           alt={opportunity.title} 
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+        <div className="absolute inset-0 bg-linear-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
         
         {/* Badges en haut */}
         <div className="absolute top-4 left-4 flex gap-2">
@@ -170,7 +170,7 @@ const OpportunityCard: React.FC<OpportunityCardProps> = ({ opportunity }) => {
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
           onClick={() => router.push(`/opportunities/${opportunity._id}`)}
-          className="w-full bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-semibold py-3 px-4 rounded-lg transition-all duration-200 shadow-md hover:shadow-lg flex items-center justify-center gap-2 group"
+          className="w-full bg-linear-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-semibold py-3 px-4 rounded-lg transition-all duration-200 shadow-md hover:shadow-lg flex items-center justify-center gap-2 group"
         >
           Voir les détails
           <ArrowRightIcon className="h-4 w-4 group-hover:translate-x-1 transition-transform" />

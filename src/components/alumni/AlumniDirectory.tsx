@@ -236,7 +236,7 @@ const AlumniDirectory: React.FC<AlumniDirectoryProps> = ({ onAlumniSelect }) => 
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
+      <div className="min-h-screen bg-linear-to-br from-gray-50 to-gray-100">
         <div className="pt-32 pb-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             {/* Skeleton Header */}
@@ -298,7 +298,7 @@ const AlumniDirectory: React.FC<AlumniDirectoryProps> = ({ onAlumniSelect }) => 
 
   if (error) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center">
+      <div className="min-h-screen bg-linear-to-br from-gray-50 to-gray-100 flex items-center justify-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -323,11 +323,11 @@ const AlumniDirectory: React.FC<AlumniDirectoryProps> = ({ onAlumniSelect }) => 
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-cyan-50/30 relative">
+    <div className="min-h-screen bg-linear-to-br from-gray-50 via-white to-cyan-50/30 relative">
       {/* Décorations de fond avec palette LAU */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div
-          className="absolute -top-24 -left-24 w-96 h-96 bg-gradient-to-br from-red-200/20 to-cyan-200/20 rounded-full blur-3xl"
+          className="absolute -top-24 -left-24 w-96 h-96 bg-linear-to-br from-red-200/20 to-cyan-200/20 rounded-full blur-3xl"
           animate={{
             x: [0, 50, 0],
             y: [0, 30, 0],
@@ -339,7 +339,7 @@ const AlumniDirectory: React.FC<AlumniDirectoryProps> = ({ onAlumniSelect }) => 
           }}
         />
         <motion.div
-          className="absolute top-1/2 -right-24 w-96 h-96 bg-gradient-to-br from-blue-900/10 to-red-200/20 rounded-full blur-3xl"
+          className="absolute top-1/2 -right-24 w-96 h-96 bg-linear-to-br from-blue-900/10 to-red-200/20 rounded-full blur-3xl"
           animate={{
             x: [0, -30, 0],
             y: [0, 50, 0],
@@ -412,13 +412,13 @@ const AlumniDirectory: React.FC<AlumniDirectoryProps> = ({ onAlumniSelect }) => 
             ].map((feature, index) => (
               <motion.div
                 key={index}
-                className={`bg-gradient-to-br ${feature.gradient} backdrop-blur-sm rounded-xl p-6 border ${feature.border} hover:shadow-lg transition-all duration-300 group`}
+                className={`bg-linear-to-br ${feature.gradient} backdrop-blur-sm rounded-xl p-6 border ${feature.border} hover:shadow-lg transition-all duration-300 group`}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
                 whileHover={{ y: -8 }}
               >
-                <div className={`bg-gradient-to-br ${feature.iconBg} w-14 h-14 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}>
+                <div className={`bg-linear-to-br ${feature.iconBg} w-14 h-14 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}>
                   <feature.icon className={`text-2xl ${feature.iconColor}`} />
                 </div>
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">
@@ -443,8 +443,8 @@ const AlumniDirectory: React.FC<AlumniDirectoryProps> = ({ onAlumniSelect }) => 
                 icon: FaUsers,
                 value: alumni.length,
                 label: "Alumni inscrits",
-                bgColor: "bg-gradient-to-br from-red-50 to-red-100/50",
-                iconBg: "bg-gradient-to-br from-red-100 to-red-200",
+                bgColor: "bg-linear-to-br from-red-50 to-red-100/50",
+                iconBg: "bg-linear-to-br from-red-100 to-red-200",
                 iconColor: "text-red-600",
                 borderColor: "border-red-100"
               },
@@ -452,8 +452,8 @@ const AlumniDirectory: React.FC<AlumniDirectoryProps> = ({ onAlumniSelect }) => 
                 icon: FaSearch,
                 value: filteredAlumni.length,
                 label: "Résultats trouvés",
-                bgColor: "bg-gradient-to-br from-cyan-50 to-cyan-100/50",
-                iconBg: "bg-gradient-to-br from-cyan-100 to-cyan-200",
+                bgColor: "bg-linear-to-br from-cyan-50 to-cyan-100/50",
+                iconBg: "bg-linear-to-br from-cyan-100 to-cyan-200",
                 iconColor: "text-cyan-600",
                 borderColor: "border-cyan-100"
               },
@@ -461,8 +461,8 @@ const AlumniDirectory: React.FC<AlumniDirectoryProps> = ({ onAlumniSelect }) => 
                 icon: FaGraduationCap,
                 value: faculties.length,
                 label: "Facultés",
-                bgColor: "bg-gradient-to-br from-blue-50 to-blue-100/50",
-                iconBg: "bg-gradient-to-br from-blue-900/10 to-blue-900/20",
+                bgColor: "bg-linear-to-br from-blue-50 to-blue-100/50",
+                iconBg: "bg-linear-to-br from-blue-900/10 to-blue-900/20",
                 iconColor: "text-blue-900",
                 borderColor: "border-blue-100"
               },
@@ -470,8 +470,8 @@ const AlumniDirectory: React.FC<AlumniDirectoryProps> = ({ onAlumniSelect }) => 
                 icon: FaBuilding,
                 value: industries.length,
                 label: "Secteurs",
-                bgColor: "bg-gradient-to-br from-gray-50 to-gray-100/50",
-                iconBg: "bg-gradient-to-br from-gray-200 to-gray-300",
+                bgColor: "bg-linear-to-br from-gray-50 to-gray-100/50",
+                iconBg: "bg-linear-to-br from-gray-200 to-gray-300",
                 iconColor: "text-gray-900",
                 borderColor: "border-gray-200"
               }
@@ -642,7 +642,7 @@ const AlumniDirectory: React.FC<AlumniDirectoryProps> = ({ onAlumniSelect }) => 
                 animate={{ opacity: 1, y: 0 }}
                 className="text-center py-16 bg-white/80 backdrop-blur-sm rounded-xl border border-gray-200 shadow-sm"
               >
-                <div className="bg-gradient-to-br from-red-50 to-cyan-50 rounded-full w-20 h-20 mx-auto mb-6 flex items-center justify-center">
+                <div className="bg-linear-to-br from-red-50 to-cyan-50 rounded-full w-20 h-20 mx-auto mb-6 flex items-center justify-center">
                   <FaUsers className="text-red-600 text-2xl" />
             </div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-4">
