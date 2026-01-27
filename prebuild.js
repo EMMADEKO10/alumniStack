@@ -3,35 +3,29 @@ const fs = require('fs');
 const path = require('path');
 const { execSync } = require('child_process');
 
-console.log('🔧 Prebuild: Installation des bonnes versions de types React...');
+console.log('🔧 Prebuild: Nettoyage et installation des dépendances...');
 
-// Chemins des types à supprimer
-const typesReact = path.join(__dirname, 'node_modules', '@types', 'react');
-const typesReactDom = path.join(__dirname, 'node_modules', '@types', 'react-dom');
-
-// Supprimer les types React existants
+// Supprimer node_modules complet pour forcer une installation propre
+const nodeModules = path.join(__dirname, 'node_modules');
 try {
-  if (fs.existsSync(typesReact)) {
-    fs.rmSync(typesReact, { recursive: true, force: true });
-    console.log('✓ @types/react supprimé');
-  }
-  if (fs.existsSync(typesReactDom)) {
-    fs.rmSync(typesReactDom, { recursive: true, force: true });
-    console.log('✓ @types/react-dom supprimé');
+  if (fs.existsSync(nodeModules)) {
+    console.log('🗑️  Suppression de node_modules...');
+    fs.rmSync(nodeModules, { recursive: true, force: true });
+    console.log('✓ node_modules supprimé');
   }
 } catch (err) {
-  console.warn('⚠ Erreur lors de la suppression des types:', err.message);
+  console.warn('⚠ Erreur lors de la suppression:', err.message);
 }
 
-// Installer les bonnes versions
+// Installer toutes les dépendances avec les versions exactes
 try {
-  console.log('📦 Installation de @types/react@18.3.12 et @types/react-dom@18.3.1...');
-  execSync('npm install @types/react@18.3.12 @types/react-dom@18.3.1 --save-exact --legacy-peer-deps --no-save', {
+  console.log('📦 Installation de toutes les dépendances...');
+  execSync('npm install --legacy-peer-deps --force', {
     stdio: 'inherit',
     cwd: __dirname
   });
-  console.log('✓ Types React 18 installés avec succès');
+  console.log('✓ Dépendances installées avec succès');
 } catch (err) {
-  console.error('❌ Erreur lors de l\'installation des types:', err.message);
+  console.error('❌ Erreur lors de l\'installation:', err.message);
   process.exit(1);
 }
