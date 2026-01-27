@@ -10,7 +10,8 @@
     "lint": "next lint",
     "type-check": "tsc --noEmit",
     "init-communities": "tsx src/scripts/initializeCommunities.ts",
-    "reset-communities": "tsx src/scripts/initializeCommunities.ts --reset"
+    "reset-communities": "tsx src/scripts/initializeCommunities.ts --reset",
+    "init-db": "tsx src/scripts/initializeDatabase.ts"
   },
   "dependencies": {
     "@babel/runtime": "^7.26.0",

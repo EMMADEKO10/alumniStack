@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { connectDB } from '../../../lib/mongodb';
+import { optimizedQuery, optimizedFindOne, apiHandler } from '../../../lib/api-helpers';
 import { 
   AlumniProfile, 
   PublicAlumniProfile,
@@ -10,43 +11,33 @@ import { getServerSession } from 'next-auth';
 import { authOptions } from '../../../lib/auth';
 
 // GET - Récupérer le profil alumni de l'utilisateur connecté ou rechercher des profils
-export async function GET(request: Request) {
-  try {
-    console.log('📥 Requête reçue sur /api/alumni');
-    const { searchParams } = new URL(request.url);
-    const userId = searchParams.get('userId');
-    const search = searchParams.get('search');
-    const facultyId = searchParams.get('facultyId');
-    const graduationYear = searchParams.get('graduationYear');
-    const industry = searchParams.get('industry');
-    const public_only = searchParams.get('public_only');
+export const GET = apiHandler(async (request: Request) => {
+  console.log('📥 Requête reçue sur /api/alumni');
+  const { searchParams } = new URL(request.url);
+  const userId = searchParams.get('userId');
+  const search = searchParams.get('search');
+  const facultyId = searchParams.get('facultyId');
+  const graduationYear = searchParams.get('graduationYear');
+  const industry = searchParams.get('industry');
+  const public_only = searchParams.get('public_only');
+  const page = parseInt(searchParams.get('page') || '1');
+  const limit = parseInt(searchParams.get('limit') || '20');
+  
+  console.log('🔍 Paramètres:', { userId, search, facultyId, graduationYear, industry, public_only, page, limit });
+
+  // Si userId spécifique, retourner ce profil avec cache
+  if (userId) {
+    console.log('👤 Recherche du profil pour userId:', userId);
+    const profile = await optimizedFindOne<AlumniProfile>(
+      'alumni_profiles',
+      { userId },
+      true // utiliser le cache
+    );
     
-    console.log('🔍 Paramètres:', { userId, search, facultyId, graduationYear, industry, public_only });
-
-    // Connexion à la base de données avec gestion d'erreur explicite
-    let db;
-    try {
-      console.log('🔌 Tentative de connexion à la base de données...');
-      const connection = await connectDB();
-      db = connection.db;
-      console.log('✅ Connexion à la base de données réussie');
-    } catch (dbError) {
-      console.error('❌ Erreur de connexion à la base de données:', dbError);
-      return NextResponse.json({ 
-        error: 'Service temporairement indisponible. Veuillez réessayer dans quelques instants.',
-        details: process.env.NODE_ENV === 'development' ? String(dbError) : undefined
-      }, { status: 503 });
+    if (!profile) {
+      console.log('❌ Profil non trouvé');
+      return NextResponse.json({ error: 'Profil alumni non trouvé' }, { status: 404 });
     }
-
-    // Si userId spécifique, retourner ce profil
-    if (userId) {
-      console.log('👤 Recherche du profil pour userId:', userId);
-      const profile = await db.collection('alumni_profiles').findOne({ userId });
-      
-      if (!profile) {
-        console.log('❌ Profil non trouvé');
-        return NextResponse.json({ error: 'Profil alumni non trouvé' }, { status: 404 });
-      }
 
       // Si demande publique, filtrer les informations selon les préférences
       if (public_only === 'true') {
@@ -58,7 +49,7 @@ export async function GET(request: Request) {
       return NextResponse.json(profile);
     }
 
-    // Recherche de profils avec filtres
+    // Recherche de profils avec filtres et pagination optimisée
     console.log('🔎 Recherche de profils avec filtres');
     const filter: Record<string, unknown> = {};
     
@@ -81,29 +72,32 @@ export async function GET(request: Request) {
     
     console.log('📋 Filtre MongoDB:', JSON.stringify(filter));
 
-    const profiles = await db.collection('alumni_profiles')
-      .find(filter)
-      .sort({ 'status.isVerified': -1, 'academicInfo.graduationYear': -1 })
-      .limit(50)
-      .toArray();
+    // Utiliser la requête optimisée avec cache et pagination
+    const profiles = await optimizedQuery<AlumniProfile>(
+      'alumni_profiles',
+      filter,
+      {
+        cache: true,
+        cacheTTL: 2 * 60 * 1000, // 2 minutes de cache pour les recherches
+        pagination: { page, limit },
+        sort: { 'status.isVerified': -1, 'academicInfo.graduationYear': -1 },
+      }
+    );
     
     console.log(`✅ ${profiles.length} profil(s) trouvé(s)`);
 
     // Filtrer les informations selon les préférences de confidentialité
     const publicProfiles = await Promise.all(
-      profiles.map(profile => filterPublicProfile(profile as AlumniProfile))
+      profiles.map(profile => filterPublicProfile(profile))
     );
 
     return NextResponse.json({
       profiles: publicProfiles,
-      totalCount: publicProfiles.length
+      totalCount: publicProfiles.length,
+      page,
+      limit
     });
-
-  } catch (error) {
-    console.error('Erreur lors de la récupération des profils alumni:', error);
-    return NextResponse.json({ error: 'Impossible de récupérer les profils' }, { status: 500 });
-  }
-}
+});
 
 // POST - Créer un nouveau profil alumni
 export async function POST(request: Request) {
