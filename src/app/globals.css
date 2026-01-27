@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
 @import "tailwindcss/preflight";
-@tailwind utilities;
+@import "tailwindcss/utilities";
 
 /* Configuration globale des polices sans-serif */
 * {
@@ -13,7 +13,8 @@ body {
 }
 
 .bg-blur { 
-  backdrop-blur: 10px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
 /* Styles personnalisés pour l'interface */
