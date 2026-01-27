@@ -1,13 +1,8 @@
 import { MongoClient, Db } from 'mongodb';
 
-if (!process.env.MONGODB_URI) {
-  throw new Error(
-    '❌ MONGODB_URI manquante dans les variables d\'environnement. ' +
-    'Veuillez configurer MONGODB_URI dans Hostinger ou votre fichier .env'
-  );
-}
-
-const uri = process.env.MONGODB_URI;
+// Ne pas crasher l'application au démarrage si MONGODB_URI est manquante
+// L'erreur sera levée uniquement lors de la tentative de connexion
+const uri = process.env.MONGODB_URI || '';
 
 // Configuration simplifiée et optimisée pour MongoDB Atlas
 const options = {
@@ -34,6 +29,22 @@ if (!globalWithMongo._mongoClientPromise) {
 const clientPromise = globalWithMongo._mongoClientPromise;
 
 export async function connectDB(): Promise<{ client: MongoClient; db: Db }> {
+  // Vérifier la présence de MONGODB_URI au moment de la connexion
+  if (!process.env.MONGODB_URI || process.env.MONGODB_URI.trim() === '') {
+    const errorMsg = 
+      '❌ MONGODB_URI manquante dans les variables d\'environnement.\n' +
+      'Configuration requise sur Hostinger:\n' +
+      '1. Allez dans votre panneau Hostinger\n' +
+      '2. Sites web > alumni-launiversity.cd > Paramètres\n' +
+      '3. Variables d\'environnement > Ajouter:\n' +
+      '   - MONGODB_URI=mongodb+srv://...\n' +
+      '   - NEXTAUTH_SECRET=...\n' +
+      '   - NEXTAUTH_URL=https://alumni-launiversity.cd\n' +
+      '   - NODE_ENV=production';
+    console.error(errorMsg);
+    throw new Error(errorMsg);
+  }
+
   try {
     console.log('🔌 Tentative de connexion à MongoDB...');
     const client = await clientPromise;

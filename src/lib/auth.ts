@@ -3,18 +3,23 @@ import CredentialsProvider from 'next-auth/providers/credentials';
 import bcrypt from 'bcryptjs';
 import { connectDB } from './mongodb';
 
-if (!process.env.NEXTAUTH_SECRET) {
-  throw new Error(
-    '❌ NEXTAUTH_SECRET manquante dans les variables d\'environnement. ' +
-    'Générez-en une avec: openssl rand -base64 32'
-  );
-}
-
-if (!process.env.NEXTAUTH_URL && process.env.NODE_ENV === 'production') {
-  throw new Error(
-    '❌ NEXTAUTH_URL manquante en production. ' +
-    'Configurez: https://alumni-launiversity.cd'
-  );
+// Ne pas crasher l'app au démarrage - valider au runtime
+function validateAuthConfig() {
+  const errors: string[] = [];
+  
+  if (!process.env.NEXTAUTH_SECRET) {
+    errors.push('❌ NEXTAUTH_SECRET manquante. Générez-en une avec: openssl rand -base64 32');
+  }
+  
+  if (!process.env.NEXTAUTH_URL && process.env.NODE_ENV === 'production') {
+    errors.push('❌ NEXTAUTH_URL manquante en production. Configurez: https://alumni-launiversity.cd');
+  }
+  
+  if (errors.length > 0) {
+    console.error('⚠️ Configuration NextAuth incomplète:\n' + errors.join('\n'));
+  }
+  
+  return errors.length === 0;
 }
 
 export const authOptions: AuthOptions = {
@@ -27,6 +32,12 @@ export const authOptions: AuthOptions = {
         password: { label: "Mot de passe", type: "password" }
       },
       async authorize(credentials) {
+        // Valider la configuration avant toute opération
+        if (!validateAuthConfig()) {
+          console.error('⚠️ Impossible de s\'authentifier: NextAuth mal configuré');
+          return null;
+        }
+        
         if (!credentials?.email || !credentials?.password) {
           console.warn('Authorize: email ou mot de passe manquant');
           return null;
