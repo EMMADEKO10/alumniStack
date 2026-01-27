@@ -93,26 +93,37 @@ const testOpportunities: Opportunity[] = [
 
 export async function GET() {
   try {
+    console.log('🔍 GET /api/opportunities - Début');
     const { db } = await connectDB();
+    console.log('✅ Connexion MongoDB établie pour opportunities');
     
     // Vérifier si la collection a des données
     const count = await db.collection('opportunities').countDocuments();
+    console.log(`📊 Nombre d'opportunités dans la base: ${count}`);
     
     // Si pas de données, initialiser avec des données de test
     if (count === 0) {
-      console.log('Aucune opportunité trouvée, initialisation avec des données de test...');
+      console.log('⚠️ Aucune opportunité trouvée, initialisation avec des données de test...');
       await db.collection('opportunities').insertMany(testOpportunities);
     }
     
     const opportunities = await db.collection('opportunities').find({}).sort({ createdAt: -1 }).toArray();
     
-    console.log(`Nombre d'opportunités récupérées: ${opportunities.length}`);
-    return NextResponse.json(opportunities);
+    console.log(`✅ ${opportunities.length} opportunités récupérées avec succès`);
+    return NextResponse.json(opportunities, { status: 200 });
   } catch (error) {
-    console.error('Error fetching opportunities:', error);
-    // En cas d'erreur de base de données, retourner les données de test
-    console.log('Erreur de base de données, utilisation des données de test locales');
-    return NextResponse.json(testOpportunities);
+    console.error('❌ Error fetching opportunities:', error);
+    console.error('Stack:', error instanceof Error ? error.stack : 'No stack trace');
+    
+    // Renvoyer une erreur JSON claire au lieu d'une page HTML
+    return NextResponse.json(
+      { 
+        error: 'Failed to fetch opportunities',
+        message: error instanceof Error ? error.message : 'Unknown error',
+        details: process.env.NODE_ENV === 'development' ? (error instanceof Error ? error.stack : null) : undefined
+      }, 
+      { status: 500 }
+    );
   }
 }
 

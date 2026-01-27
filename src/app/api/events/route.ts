@@ -17,16 +17,29 @@ interface Event {
 
 export async function GET() {
   try {
+    console.log('🔍 GET /api/events - Début');
     const { db } = await connectDB();
+    console.log('✅ Connexion MongoDB établie pour events');
+    
     const events = await db.collection('events')
       .find({})
       .sort({ createdAt: -1 })
       .toArray();
     
-    return NextResponse.json(events);
+    console.log(`✅ ${events.length} événements récupérés avec succès`);
+    return NextResponse.json(events, { status: 200 });
   } catch (error) {
-    console.error('Error fetching events:', error);
-    return NextResponse.json({ error: 'Failed to fetch events' }, { status: 500 });
+    console.error('❌ Error fetching events:', error);
+    console.error('Stack:', error instanceof Error ? error.stack : 'No stack trace');
+    
+    return NextResponse.json(
+      { 
+        error: 'Failed to fetch events',
+        message: error instanceof Error ? error.message : 'Unknown error',
+        details: process.env.NODE_ENV === 'development' ? (error instanceof Error ? error.stack : null) : undefined
+      }, 
+      { status: 500 }
+    );
   }
 }
 
