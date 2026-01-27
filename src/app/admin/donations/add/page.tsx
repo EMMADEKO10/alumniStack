@@ -126,23 +126,23 @@ const AddDonationPage: React.FC = () => {
           </h3>
           <ul className="space-y-2 text-blue-800">
             <li className="flex items-start">
-              <span className="inline-block w-2 h-2 bg-blue-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+              <span className="inline-block w-2 h-2 bg-blue-500 rounded-full mt-2 mr-3 shrink-0"></span>
               <span>Utilisez un titre clair et engageant qui explique l&apos;objectif de la donation</span>
             </li>
             <li className="flex items-start">
-              <span className="inline-block w-2 h-2 bg-blue-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+              <span className="inline-block w-2 h-2 bg-blue-500 rounded-full mt-2 mr-3 shrink-0"></span>
               <span>Décrivez l&apos;impact concret que aura la donation sur l&apos;université ou la communauté</span>
             </li>
             <li className="flex items-start">
-              <span className="inline-block w-2 h-2 bg-blue-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+              <span className="inline-block w-2 h-2 bg-blue-500 rounded-full mt-2 mr-3 shrink-0"></span>
               <span>Définissez un montant cible réaliste et motivant</span>
             </li>
             <li className="flex items-start">
-              <span className="inline-block w-2 h-2 bg-blue-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+              <span className="inline-block w-2 h-2 bg-blue-500 rounded-full mt-2 mr-3 shrink-0"></span>
               <span>Ajoutez une image représentative pour rendre l&apos;action plus attractive</span>
             </li>
             <li className="flex items-start">
-              <span className="inline-block w-2 h-2 bg-blue-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+              <span className="inline-block w-2 h-2 bg-blue-500 rounded-full mt-2 mr-3 shrink-0"></span>
               <span>Mettez à jour régulièrement le montant actuel pour encourager les donations</span>
             </li>
           </ul>

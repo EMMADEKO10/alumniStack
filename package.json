@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "prebuild": "npm install --legacy-peer-deps",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
@@ -32,10 +33,10 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3.2.0",
     "@types/bcryptjs": "^2.4.6",
-    "@types/node": "^22.10.5",
+    "@types/node": "22.10.5",
     "@types/nodemailer": "^6.4.17",
-    "@types/react": "^18.3.12",
-    "@types/react-dom": "^18.3.1",
+    "@types/react": "18.3.12",
+    "@types/react-dom": "18.3.1",
     "eslint": "^9.18.0",
     "eslint-config-next": "^15.3.5",
     "md-to-pdf": "^5.2.4",
