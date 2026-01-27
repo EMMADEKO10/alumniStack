@@ -111,7 +111,7 @@ const Features: React.FC = () => {
           </div>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-gray-900 mb-6 tracking-tight leading-tight">
             Tout ce dont vous avez besoin pour
-            <span className="block bg-gradient-to-r from-red-600 to-red-700 bg-clip-text text-transparent">
+            <span className="block bg-linear-to-r from-red-600 to-red-700 bg-clip-text text-transparent mt-2">
               rester connecté
             </span>
           </h2>
@@ -182,8 +182,8 @@ const Features: React.FC = () => {
           transition={{ duration: 0.8, delay: 0.4 }}
           className="text-center mt-16"
         >
-          <div className="bg-gradient-to-r from-red-600 to-red-700 rounded-2xl p-8 text-white">
-            <h3 className="text-2xl font-bold mb-4">
+          <div className="bg-linear-to-r from-red-600 to-red-700 rounded-2xl p-10 md:p-12 text-white shadow-2xl">
+            <h3 className="text-2xl md:text-3xl font-extrabold mb-4 tracking-tight">
               Prêt à rejoindre la communauté LAU ?
             </h3>
             <p className="text-red-50 mb-8 max-w-2xl mx-auto leading-relaxed text-base">

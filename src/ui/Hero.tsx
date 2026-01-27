@@ -51,7 +51,7 @@ const Hero: React.FC = () => {
         ))}
         <div className="absolute inset-0 bg-linear-to-r from-black/85 via-black/65 to-red-900/45"></div>
         {/* Overlay supplémentaire pour le header transparent */}
-        <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-black/30 to-transparent"></div>
+        <div className="absolute top-0 left-0 right-0 h-32 bg-linear-to-b from-black/30 to-transparent"></div>
       </div>
 
       {/* Floating Elements */}
@@ -108,7 +108,7 @@ const Hero: React.FC = () => {
           >
             <h1 className="text-4xl md:text-5xl lg:text-7xl font-extrabold text-white leading-[1.1] tracking-tight">
               Rejoignez une
-              <span className="block bg-gradient-to-r from-red-400 to-red-600 bg-clip-text text-transparent">
+              <span className="block bg-linear-to-r from-red-400 to-red-600 bg-clip-text text-transparent mt-2">
                 communauté
               </span>
               d&apos;exception
@@ -129,7 +129,7 @@ const Hero: React.FC = () => {
           >
             <Link
               href="/register"
-              className="group inline-flex items-center justify-center px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-red-600 to-red-700 text-white font-semibold rounded-lg shadow-lg hover:from-red-700 hover:to-red-800 transform hover:scale-105 transition-all duration-300 text-sm sm:text-base"
+              className="group inline-flex items-center justify-center px-6 sm:px-8 py-3.5 sm:py-4 bg-linear-to-r from-red-600 to-red-700 text-white font-semibold rounded-xl shadow-lg hover:from-red-700 hover:to-red-800 transform hover:scale-105 transition-all duration-300 text-sm sm:text-base"
             >
               Rejoindre la communauté
               <FaArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
@@ -152,7 +152,7 @@ const Hero: React.FC = () => {
               {[1, 2, 3, 4, 5].map((i) => (
                 <div
                   key={i}
-                  className="w-8 h-8 sm:w-10 sm:h-10 rounded-full border-2 border-white bg-gradient-to-br from-red-400 to-red-600"
+                  className="w-8 h-8 sm:w-10 sm:h-10 rounded-full border-2 border-white bg-linear-to-br from-red-400 to-red-600"
                 />
               ))}
             </div>
@@ -208,7 +208,7 @@ const Hero: React.FC = () => {
             className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6"
           >
             <div className="flex items-start space-x-4">
-              <div className="w-12 h-12 rounded-full bg-gradient-to-br from-red-400 to-red-600 flex items-center justify-center text-white font-bold">
+              <div className="w-12 h-12 rounded-full bg-linear-to-br from-red-400 to-red-600 flex items-center justify-center text-white font-bold">
                 AM
               </div>
               <div className="flex-1">
