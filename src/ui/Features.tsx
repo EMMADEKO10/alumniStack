@@ -94,7 +94,7 @@ const Features: React.FC = () => {
   };
 
   return (
-    <section className="py-20 bg-linear-to-br from-gray-50 to-white">
+    <section className="py-20 bg-gradient-to-br from-gray-50 to-white">
       <div className="max-w-7xl mx-auto px-6">
         
         {/* Header */}
@@ -111,7 +111,7 @@ const Features: React.FC = () => {
           </div>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-gray-900 mb-6 tracking-tight leading-tight">
             Tout ce dont vous avez besoin pour
-            <span className="block bg-linear-to-r from-red-600 to-red-700 bg-clip-text text-transparent mt-2">
+            <span className="block bg-gradient-to-r from-red-600 to-red-700 bg-clip-text text-transparent mt-2">
               rester connecté
             </span>
           </h2>
@@ -140,7 +140,7 @@ const Features: React.FC = () => {
                   
                   {/* Background Pattern */}
                   <div className="absolute top-0 right-0 w-32 h-32 opacity-10">
-                    <div className={`w-full h-full bg-linear-to-br ${feature.color} rounded-full transform translate-x-16 -translate-y-16`}></div>
+                    <div className={`w-full h-full bg-gradient-to-br ${feature.color} rounded-full transform translate-x-16 -translate-y-16`}></div>
                   </div>
 
                   {/* Stats Badge */}
@@ -151,7 +151,7 @@ const Features: React.FC = () => {
                   </div>
 
                   {/* Icon */}
-                  <div className={`inline-flex items-center justify-center w-16 h-16 bg-linear-to-br ${feature.color} text-white rounded-xl mb-6 group-hover:scale-110 transition-transform duration-300`}>
+                  <div className={`inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br ${feature.color} text-white rounded-xl mb-6 group-hover:scale-110 transition-transform duration-300`}>
                     {feature.icon}
                   </div>
 
@@ -182,7 +182,7 @@ const Features: React.FC = () => {
           transition={{ duration: 0.8, delay: 0.4 }}
           className="text-center mt-16"
         >
-          <div className="bg-linear-to-r from-red-600 to-red-700 rounded-2xl p-10 md:p-12 text-white shadow-2xl">
+          <div className="bg-gradient-to-r from-red-600 to-red-700 rounded-2xl p-10 md:p-12 text-white shadow-2xl">
             <h3 className="text-2xl md:text-3xl font-extrabold mb-4 tracking-tight">
               Prêt à rejoindre la communauté LAU ?
             </h3>
