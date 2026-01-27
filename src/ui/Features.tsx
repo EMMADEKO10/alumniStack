@@ -105,17 +105,17 @@ const Features: React.FC = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <div className="inline-flex items-center px-4 py-2 bg-red-100 text-red-700 rounded-full text-sm font-medium mb-6">
+          <div className="inline-flex items-center px-4 py-2 bg-red-50 text-red-600 rounded-full text-sm font-medium mb-6 border border-red-100">
             <FaNetworkWired className="mr-2" />
             Fonctionnalités principales
           </div>
-          <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-gray-900 mb-6 tracking-tight leading-tight">
             Tout ce dont vous avez besoin pour
-            <span className="block bg-gradient-to-r from-red-600 to-red-700 bg-clip-text text-transparent">
+            <span className="block bg-gradient-to-r from-red-600 to-red-700 bg-clip-text text-transparent mt-2">
               rester connecté
             </span>
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-base md:text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
             Notre plateforme offre tous les outils nécessaires pour maintenir et développer 
             votre réseau professionnel alumni.
           </p>
@@ -156,10 +156,10 @@ const Features: React.FC = () => {
                   </div>
 
                   {/* Content */}
-                  <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-red-600 transition-colors">
+                  <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-red-600 transition-colors tracking-tight">
                     {feature.title}
                   </h3>
-                  <p className="text-gray-600 mb-6 leading-relaxed">
+                  <p className="text-gray-600 mb-6 leading-relaxed text-sm">
                     {feature.description}
                   </p>
 
@@ -182,17 +182,17 @@ const Features: React.FC = () => {
           transition={{ duration: 0.8, delay: 0.4 }}
           className="text-center mt-16"
         >
-          <div className="bg-gradient-to-r from-red-600 to-red-700 rounded-2xl p-8 text-white">
-            <h3 className="text-2xl font-bold mb-4">
+          <div className="bg-gradient-to-r from-red-600 to-red-700 rounded-2xl p-10 md:p-12 text-white shadow-2xl">
+            <h3 className="text-2xl md:text-3xl font-extrabold mb-4 tracking-tight">
               Prêt à rejoindre la communauté LAU ?
             </h3>
-            <p className="text-red-100 mb-6 max-w-2xl mx-auto">
+            <p className="text-red-50 mb-8 max-w-2xl mx-auto leading-relaxed text-base">
               Inscrivez-vous aujourd&apos;hui et commencez à bénéficier de tous 
               les avantages de notre réseau alumni.
             </p>
             <Link
               href="/register"
-              className="inline-flex items-center px-8 py-4 bg-white text-red-600 font-semibold rounded-lg shadow-lg hover:bg-gray-50 transform hover:scale-105 transition-all duration-300"
+              className="inline-flex items-center px-8 py-4 bg-white text-red-600 font-semibold rounded-xl shadow-lg hover:bg-gray-50 transform hover:scale-105 transition-all duration-300 text-base"
             >
               Commencer maintenant
               <FaArrowRight className="ml-2" />

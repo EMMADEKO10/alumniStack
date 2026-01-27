@@ -57,13 +57,13 @@ const Testimonials: React.FC = () => {
             <FaQuoteLeft className="mr-1.5 sm:mr-2 text-xs sm:text-sm" />
             Témoignages
           </div>
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-3 sm:mb-4 px-4">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-gray-900 mb-3 sm:mb-4 px-4 tracking-tight leading-tight">
             Ce que disent nos
-            <span className="block bg-gradient-to-r from-red-600 to-red-700 bg-clip-text text-transparent mt-1">
+            <span className="block bg-gradient-to-r from-red-600 to-red-700 bg-clip-text text-transparent mt-2">
               Alumni
             </span>
           </h2>
-          <p className="text-sm sm:text-base lg:text-lg text-gray-600 max-w-2xl mx-auto px-4">
+          <p className="text-sm sm:text-base lg:text-lg text-gray-600 max-w-2xl mx-auto px-4 leading-relaxed">
             Découvrez comment le réseau LAU a transformé la carrière de milliers d&apos;anciens étudiants.
           </p>
         </motion.div>
@@ -91,7 +91,7 @@ const Testimonials: React.FC = () => {
             </div>
 
             {/* Quote */}
-            <blockquote className="text-base sm:text-lg lg:text-xl text-gray-700 text-center leading-relaxed mb-6 sm:mb-8 font-normal px-2 sm:px-4">
+            <blockquote className="text-base sm:text-lg lg:text-xl text-gray-700 text-center leading-relaxed mb-6 sm:mb-8 font-normal px-2 sm:px-4 italic">
               &ldquo;{testimonials[activeTestimonial].quote}&rdquo;
             </blockquote>
 

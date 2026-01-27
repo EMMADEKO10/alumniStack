@@ -93,10 +93,10 @@ const Hero: React.FC = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="inline-flex items-center px-4 py-2 bg-red-600/20 border border-red-500/30 rounded-full text-red-200"
+            className="inline-flex items-center px-4 py-2.5 bg-red-600/20 backdrop-blur-sm border border-red-500/30 rounded-full text-red-100"
           >
-            <FaGraduationCap className="mr-2" />
-            <span className="text-sm font-medium">Réseau Alumni Leadership Academia(LAU)</span>
+            <FaGraduationCap className="mr-2 text-base" />
+            <span className="text-sm font-medium tracking-tight">Réseau Alumni Leadership Academia (LAU)</span>
           </motion.div>
 
           {/* Main Title */}
@@ -104,18 +104,18 @@ const Hero: React.FC = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="space-y-3"
+            className="space-y-4"
           >
-            <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold text-white leading-tight">
+            <h1 className="text-4xl md:text-5xl lg:text-7xl font-extrabold text-white leading-[1.1] tracking-tight">
               Rejoignez une
-              <span className="block bg-gradient-to-r from-red-400 to-red-600 bg-clip-text text-transparent">
+              <span className="block bg-gradient-to-r from-red-400 to-red-600 bg-clip-text text-transparent mt-2">
                 communauté
               </span>
               d&apos;exception
             </h1>
-            <p className="text-lg md:text-xl lg:text-2xl text-gray-200 leading-relaxed max-w-2xl">
-              Connectez-vous avec plus de <strong className="text-white">20,000 alumni </strong> 
-              à travers le monde. Développez votre carrière, créez des partenariats et 
+            <p className="text-base md:text-lg lg:text-xl text-gray-200 leading-relaxed max-w-2xl font-normal">
+              Connectez-vous avec plus de <strong className="text-white font-semibold">20,000 alumni</strong> 
+              {' '}à travers le monde. Développez votre carrière, créez des partenariats et 
               contribuez à l&apos;évolution de votre alma mater.
             </p>
           </motion.div>
@@ -125,17 +125,17 @@ const Hero: React.FC = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="flex flex-col sm:flex-row gap-3 sm:gap-4"
+            className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-2"
           >
             <Link
               href="/register"
-              className="group inline-flex items-center justify-center px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-red-600 to-red-700 text-white font-semibold rounded-lg shadow-lg hover:from-red-700 hover:to-red-800 transform hover:scale-105 transition-all duration-300 text-sm sm:text-base"
+              className="group inline-flex items-center justify-center px-6 sm:px-8 py-3.5 sm:py-4 bg-gradient-to-r from-red-600 to-red-700 text-white font-semibold rounded-xl shadow-lg hover:from-red-700 hover:to-red-800 transform hover:scale-105 transition-all duration-300 text-sm sm:text-base"
             >
               Rejoindre la communauté
               <FaArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
             </Link>
             
-            <button className="group inline-flex items-center justify-center px-6 sm:px-8 py-3 sm:py-4 border-2 border-white/30 text-white font-semibold rounded-lg hover:bg-white/10 transition-all duration-300 text-sm sm:text-base">
+            <button className="group inline-flex items-center justify-center px-6 sm:px-8 py-3.5 sm:py-4 border-2 border-white/30 backdrop-blur-sm text-white font-semibold rounded-xl hover:bg-white/10 hover:border-white/50 transition-all duration-300 text-sm sm:text-base">
               <FaPlay className="mr-2 group-hover:scale-110 transition-transform" />
               Découvrir LAU
             </button>
