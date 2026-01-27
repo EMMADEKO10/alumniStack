@@ -59,7 +59,7 @@ const Testimonials: React.FC = () => {
           </div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-gray-900 mb-3 sm:mb-4 px-4 tracking-tight leading-tight">
             Ce que disent nos
-            <span className="block bg-gradient-to-r from-red-600 to-red-700 bg-clip-text text-transparent mt-1">
+            <span className="block bg-linear-to-r from-red-600 to-red-700 bg-clip-text text-transparent mt-1">
               Alumni
             </span>
           </h2>
