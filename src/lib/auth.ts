@@ -3,6 +3,20 @@ import CredentialsProvider from 'next-auth/providers/credentials';
 import bcrypt from 'bcryptjs';
 import { connectDB } from './mongodb';
 
+if (!process.env.NEXTAUTH_SECRET) {
+  throw new Error(
+    '❌ NEXTAUTH_SECRET manquante dans les variables d\'environnement. ' +
+    'Générez-en une avec: openssl rand -base64 32'
+  );
+}
+
+if (!process.env.NEXTAUTH_URL && process.env.NODE_ENV === 'production') {
+  throw new Error(
+    '❌ NEXTAUTH_URL manquante en production. ' +
+    'Configurez: https://alumni-launiversity.cd'
+  );
+}
+
 export const authOptions: AuthOptions = {
   debug: process.env.NODE_ENV === 'development',
   providers: [

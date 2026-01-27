@@ -1,6 +1,13 @@
 import { MongoClient, Db } from 'mongodb';
 
-const uri = process.env.MONGODB_URI || 'mongodb://localhost:27017/alumni-platform';
+if (!process.env.MONGODB_URI) {
+  throw new Error(
+    '❌ MONGODB_URI manquante dans les variables d\'environnement. ' +
+    'Veuillez configurer MONGODB_URI dans Hostinger ou votre fichier .env'
+  );
+}
+
+const uri = process.env.MONGODB_URI;
 
 // Configuration simplifiée et optimisée pour MongoDB Atlas
 const options = {
