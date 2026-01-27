@@ -106,14 +106,14 @@ const Hero: React.FC = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="space-y-4"
           >
-            <h1 className="text-4xl md:text-5xl lg:text-7xl font-extrabold text-white leading-[1.1] tracking-tight">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-white leading-[1.1] tracking-tight">
               Rejoignez une
               <span className="block bg-linear-to-r from-red-400 to-red-600 bg-clip-text text-transparent mt-2">
                 communauté
               </span>
               d&apos;exception
             </h1>
-            <p className="text-base md:text-lg lg:text-xl text-gray-200 leading-relaxed max-w-2xl font-normal">
+            <p className="text-sm md:text-base lg:text-lg text-gray-200 leading-relaxed max-w-2xl font-normal">
               Connectez-vous avec plus de <strong className="text-white font-semibold">20,000 alumni</strong> 
               {' '}à travers le monde. Développez votre carrière, créez des partenariats et 
               contribuez à l&apos;évolution de votre alma mater.

@@ -109,13 +109,13 @@ const Features: React.FC = () => {
             <FaNetworkWired className="mr-2" />
             Fonctionnalités principales
           </div>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-gray-900 mb-6 tracking-tight leading-tight">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold text-gray-900 mb-6 tracking-tight leading-tight">
             Tout ce dont vous avez besoin pour
             <span className="block bg-linear-to-r from-red-600 to-red-700 bg-clip-text text-transparent mt-2">
               rester connecté
             </span>
           </h2>
-          <p className="text-base md:text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-sm md:text-base text-gray-600 max-w-3xl mx-auto leading-relaxed">
             Notre plateforme offre tous les outils nécessaires pour maintenir et développer 
             votre réseau professionnel alumni.
           </p>

@@ -56,13 +56,13 @@ const Testimonials: React.FC = () => {
             <FaQuoteLeft className="mr-1.5 sm:mr-2 text-xs sm:text-sm" />
             Témoignages
           </div>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-gray-900 mb-3 sm:mb-4 px-4 tracking-tight leading-tight">
+          <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-extrabold text-gray-900 mb-3 sm:mb-4 px-4 tracking-tight leading-tight">
             Ce que disent nos
             <span className="block bg-linear-to-r from-red-600 to-red-700 bg-clip-text text-transparent mt-2">
               Alumni
             </span>
           </h2>
-          <p className="text-sm sm:text-base lg:text-lg text-gray-600 max-w-2xl mx-auto px-4 leading-relaxed">
+          <p className="text-xs sm:text-sm lg:text-base text-gray-600 max-w-2xl mx-auto px-4 leading-relaxed">
             Découvrez comment le réseau LAU a transformé la carrière de milliers d&apos;anciens étudiants.
           </p>
         </motion.div>
