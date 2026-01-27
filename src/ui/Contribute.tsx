@@ -183,7 +183,7 @@ const Contribute: React.FC = () => {
           </div>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
             Faites la
-            <span className="block bg-linear-to-r from-red-600 via-rose-600 to-red-500 bg-clip-text text-transparent mt-1">
+            <span className="from-red-600 via-rose-600 to-red-500 bg-clip-text text-transparent mt-1">
               différence
             </span>
           </h2>
