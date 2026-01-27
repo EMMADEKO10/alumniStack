@@ -178,7 +178,6 @@ const Contribute: React.FC = () => {
           viewport={{ once: true }}
         >
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-linear-to-r from-red-100 to-pink-100 rounded-full mb-4">
-            <FaHeart className="text-red-600" />
             <span className="text-sm font-semibold text-red-600">Soutenez-nous</span>
           </div>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
@@ -188,7 +187,7 @@ const Contribute: React.FC = () => {
             </span>
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Votre générosité aide à bâtir l&apos;avenir de l&apos;éducation et à soutenir nos étudiants dans leur parcours académique.
+            Votre générosité aide à bâtir l&apos;avenir de l&apos;éducation 
           </p>
         </motion.div>
 
