@@ -109,9 +109,9 @@ const Features: React.FC = () => {
             <FaNetworkWired className="mr-2" />
             Fonctionnalités principales
           </div>
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold text-gray-900 mb-6 tracking-tight leading-tight">
+          <h2 className="text-sm md:text-base lg:text-lg font-medium text-gray-900 mb-6 tracking-tight leading-tight">
             Tout ce dont vous avez besoin pour
-            <span className="block bg-linear-to-r from-red-600 to-red-700 bg-clip-text text-transparent mt-2">
+            <span className="block bg-linear-to-r from-red-600 to-red-700 bg-clip-text text-transparent mt-1">
               rester connecté
             </span>
           </h2>

@@ -106,9 +106,9 @@ const Hero: React.FC = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="space-y-4"
           >
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-white leading-[1.1] tracking-tight">
+            <h1 className="text-[10px] md:text-[11px] lg:text-[12px] font-light text-white leading-tight tracking-tight">
               Rejoignez une
-              <span className="block bg-linear-to-r from-red-400 to-red-600 bg-clip-text text-transparent mt-2">
+              <span className="block bg-linear-to-r from-red-400 to-red-600 bg-clip-text text-transparent mt-0.5">
                 communauté
               </span>
               d&apos;exception

@@ -56,9 +56,9 @@ const Testimonials: React.FC = () => {
             <FaQuoteLeft className="mr-1.5 sm:mr-2 text-xs sm:text-sm" />
             Témoignages
           </div>
-          <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-extrabold text-gray-900 mb-3 sm:mb-4 px-4 tracking-tight leading-tight">
+          <h2 className="text-sm sm:text-base md:text-lg font-medium text-gray-900 mb-3 sm:mb-4 px-4 tracking-tight leading-tight">
             Ce que disent nos
-            <span className="block bg-linear-to-r from-red-600 to-red-700 bg-clip-text text-transparent mt-2">
+            <span className="block bg-linear-to-r from-red-600 to-red-700 bg-clip-text text-transparent mt-1">
               Alumni
             </span>
           </h2>
