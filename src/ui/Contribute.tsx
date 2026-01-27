@@ -329,36 +329,6 @@ const Contribute: React.FC = () => {
             </motion.button>
           </Link>
         </motion.div>
-
-        {/* Section informative */}
-        <motion.div
-          className="mt-12 bg-white/80 backdrop-blur-sm rounded-2xl p-8 border border-gray-200 shadow-sm"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          viewport={{ once: true }}
-        >
-          <div className="grid md:grid-cols-3 gap-8 text-center">
-            <div>
-              <div className="text-3xl font-bold bg-linear-to-r from-red-600 to-rose-600 bg-clip-text text-transparent mb-2">
-                100%
-              </div>
-              <p className="text-sm text-gray-600">De transparence sur l&apos;utilisation des fonds</p>
-            </div>
-            <div>
-              <div className="text-3xl font-bold bg-linear-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent mb-2">
-                Sécurisé
-              </div>
-              <p className="text-sm text-gray-600">Transactions protégées et cryptées</p>
-            </div>
-            <div>
-              <div className="text-3xl font-bold bg-linear-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent mb-2">
-                <FaChartLine className="inline-block" />
-              </div>
-              <p className="text-sm text-gray-600">Suivi en temps réel de vos contributions</p>
-            </div>
-          </div>
-        </motion.div>
       </div>
     </section>
   );
