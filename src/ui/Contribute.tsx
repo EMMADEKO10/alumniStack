@@ -135,6 +135,7 @@ const Contribute: React.FC = () => {
   };
 
   const calculateProgress = (current: number, target: number) => {
+    if (!current || !target || target === 0) return 0;
     return Math.min((current / target) * 100, 100);
   };
 
