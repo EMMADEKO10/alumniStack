@@ -140,7 +140,7 @@ const Contribute: React.FC = () => {
   };
 
   return (
-    <section className="py-20 bg-linear-to-b from-white via-red-50/30 to-white relative overflow-hidden">
+    <section className="py-16 bg-linear-to-b from-white via-red-50/30 to-white relative overflow-hidden">
       {/* Décorations de fond */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div
@@ -233,7 +233,7 @@ const Contribute: React.FC = () => {
                   className="group"
                 >
                   <Link href={`/donations`}>
-                    <div className="h-full bg-white rounded-2xl overflow-hidden border border-gray-200 shadow-lg hover:shadow-2xl transition-all duration-300 relative">
+                    <div className="h-full bg-white rounded-none overflow-hidden border border-gray-200 shadow-lg hover:shadow-2xl transition-all duration-300 relative">
                       {/* Effet de brillance au survol */}
                       <div className="absolute inset-0 bg-linear-to-r from-transparent via-white/10 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 z-10" />
                       

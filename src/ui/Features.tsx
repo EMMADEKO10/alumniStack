@@ -27,8 +27,7 @@ const Features: React.FC = () => {
       description: "Connectez-vous avec plus de 100,000 anciens étudiants à travers le monde entier pour partager expertises et opportunités.",
       link: "/community",
       color: "from-blue-600 to-blue-800",
-      image: "/lau/Auditoire_LAU.jpg",
-      stats: "100K+ membres"
+      image: "/lau/Auditoire_LAU.jpg"
     },
     {
       icon: <FaBriefcase className="text-3xl md:text-4xl" />,
@@ -36,8 +35,7 @@ const Features: React.FC = () => {
       description: "Accédez à un marché de l'emploi privilégié avec des offres exclusives partagées par les leaders de notre communauté.",
       link: "/opportunities", 
       color: "from-green-600 to-green-800",
-      image: "/lau/communication_technologie_de_l_info.jpg",
-      stats: "2K+ opportunités"
+      image: "/lau/communication_technologie_de_l_info.jpg"
     },
     {
       icon: <FaCalendarAlt className="text-3xl md:text-4xl" />,
@@ -45,8 +43,7 @@ const Features: React.FC = () => {
       description: "Participez à des sommets, des forums de networking et des galas de retrouvailles organisés dans les capitales mondiales.",
       link: "/events",
       color: "from-purple-600 to-purple-800", 
-      image: "/lau/hiro_leadership_academy.jpg",
-      stats: "500+ événements/an"
+      image: "/lau/hiro_leadership_academy.jpg"
     },
     {
       icon: <FaGraduationCap className="text-3xl md:text-4xl" />,
@@ -54,8 +51,7 @@ const Features: React.FC = () => {
       description: "Développez votre leadership avec nos programmes certifiants conçus pour les cadres et entrepreneurs alumni.",
       link: "/formations",
       color: "from-orange-600 to-orange-800",
-      image: "/lau/leadership_et_gouvernance.jpg",
-      stats: "200+ formations"
+      image: "/lau/leadership_et_gouvernance.jpg"
     },
     {
       icon: <FaHandHoldingHeart className="text-3xl md:text-4xl" />,
@@ -63,8 +59,7 @@ const Features: React.FC = () => {
       description: "Soutenez le fonds de bourses d'excellence et financez les projets innovants portés par les futurs talents de la LAU.",
       link: "/donations",
       color: "from-red-600 to-red-800",
-      image: "/lau/collation.jpg",
-      stats: "€2M+ collectés"
+      image: "/lau/collation.jpg"
     },
     {
       icon: <FaBookOpen className="text-3xl md:text-4xl" />,
@@ -72,8 +67,7 @@ const Features: React.FC = () => {
       description: "Découvrez les parcours inspirants de nos diplômés qui redéfinissent le leadership dans leurs domaines respectifs.",
       link: "/stories",
       color: "from-indigo-600 to-indigo-800",
-      image: "/lau/Etudiants_finalistes.jpg",
-      stats: "1K+ histoires"
+      image: "/lau/Etudiants_finalistes.jpg"
     }
   ];
 
@@ -132,15 +126,12 @@ const Features: React.FC = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <div className="inline-flex items-center px-4 py-2 bg-red-50 text-red-700 rounded-full text-sm font-bold mb-6 border border-red-100 uppercase tracking-widest">
+          <div className="inline-flex items-center px-4 py-2 bg-red-50 text-red-700 rounded-none text-sm font-bold mb-6 border border-red-100 uppercase tracking-widest">
             <FaNetworkWired className="mr-2" />
             Écosystème LAU
           </div>
-          <h2 className="typography-heading-1 font-extrabold text-slate-900 mb-6">
-            Une plateforme conçue pour votre 
-            <span className="block bg-linear-to-r from-red-600 to-red-800 bg-clip-text text-transparent mt-2">
-              ascension professionnelle
-            </span>
+          <h2 className="typography-heading-2 font-black text-slate-900 mb-6">
+            Une plateforme conçue pour votre <span className="bg-linear-to-r from-red-600 to-red-800 bg-clip-text text-transparent">ascension professionnelle</span>
           </h2>
         </motion.div>
 
@@ -156,12 +147,13 @@ const Features: React.FC = () => {
               exit="exit"
               className="absolute inset-0 w-full h-full"
             >
-              <div className="relative w-full h-full rounded-[2.5rem] overflow-hidden shadow-2xl border border-white/20">
+              <div className="relative w-full h-full rounded-none overflow-hidden shadow-2xl border border-white/20">
                 {/* Background Image with Overlay */}
                 <Image
                   src={features[activeIndex].image}
                   alt={features[activeIndex].title}
                   fill
+                  priority
                   className="object-cover transform scale-105 group-hover:scale-110 transition-transform duration-[10s]"
                 />
                 <div className="absolute inset-0 bg-linear-to-r from-slate-900 via-slate-900/80 to-transparent md:to-slate-900/20" />
@@ -169,22 +161,14 @@ const Features: React.FC = () => {
                 {/* Content Overlay */}
                 <div className="absolute inset-0 flex items-center px-8 md:px-20 lg:px-24">
                   <div className="max-w-2xl space-y-6 md:space-y-8">
-                    <motion.div
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.3 }}
-                      className="inline-flex items-center px-4 py-1.5 bg-white/10 backdrop-blur-md rounded-full text-white/90 text-sm font-semibold border border-white/20"
-                    >
-                      <span className="w-2 h-2 rounded-full bg-red-500 mr-2 animate-pulse" />
-                      {features[activeIndex].stats}
-                    </motion.div>
+                    
 
                     <div className="space-y-4">
                       <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.4 }}
-                        className={`w-16 h-16 md:w-20 md:h-20 bg-linear-to-br ${features[activeIndex].color} text-white rounded-2xl flex items-center justify-center shadow-xl mb-6`}
+                        className={`w-16 h-16 md:w-20 md:h-20 bg-linear-to-br ${features[activeIndex].color} text-white rounded-none flex items-center justify-center shadow-xl mb-6`}
                       >
                         {features[activeIndex].icon}
                       </motion.div>
@@ -215,7 +199,7 @@ const Features: React.FC = () => {
                     >
                       <Link
                         href={features[activeIndex].link}
-                        className="inline-flex items-center gap-3 px-8 py-4 bg-white text-slate-900 font-bold rounded-xl hover:bg-red-600 hover:text-white transition-all duration-300 shadow-xl group/btn"
+                        className="inline-flex items-center gap-3 px-8 py-4 bg-white text-slate-900 font-bold rounded-none hover:bg-red-600 hover:text-white transition-all duration-300 shadow-xl group/btn"
                       >
                         <span>Découvrir maintenant</span>
                         <FaArrowRight className="group-hover/btn:translate-x-1 transition-transform" />
@@ -238,7 +222,7 @@ const Features: React.FC = () => {
                     setDirection(index > activeIndex ? 1 : -1);
                     setActiveIndex(index);
                   }}
-                  className={`h-2.5 rounded-full transition-all duration-500 ${
+                  className={`h-2.5 rounded-none transition-all duration-500 ${
                     index === activeIndex ? "w-12 bg-red-600" : "w-2.5 bg-slate-300 hover:bg-slate-400"
                   }`}
                   aria-label={`Aller à la slide ${index + 1}`}
@@ -250,14 +234,14 @@ const Features: React.FC = () => {
             <div className="flex gap-4">
               <button
                 onClick={() => paginate(-1)}
-                className="w-14 h-14 rounded-full border-2 border-slate-200 flex items-center justify-center text-slate-600 hover:border-red-600 hover:text-red-600 hover:bg-red-50 transition-all duration-300 shadow-lg bg-white"
+                className="w-14 h-14 rounded-none border-2 border-slate-200 flex items-center justify-center text-slate-600 hover:border-red-600 hover:text-red-600 hover:bg-red-50 transition-all duration-300 shadow-lg bg-white"
                 aria-label="Slide précédente"
               >
                 <FaArrowLeft />
               </button>
               <button
                 onClick={() => paginate(1)}
-                className="w-14 h-14 rounded-full bg-red-600 flex items-center justify-center text-white hover:bg-red-700 transition-all duration-300 shadow-xl shadow-red-500/20"
+                className="w-14 h-14 rounded-none bg-red-600 flex items-center justify-center text-white hover:bg-red-700 transition-all duration-300 shadow-xl shadow-red-500/20"
                 aria-label="Slide suivante"
               >
                 <FaArrowRight />
@@ -274,7 +258,7 @@ const Features: React.FC = () => {
           transition={{ duration: 0.8, delay: 0.4 }}
           className="mt-32"
         >
-          <div className="relative rounded-3xl overflow-hidden py-12 px-8 text-center border border-red-100 bg-white shadow-xl">
+          <div className="relative rounded-none overflow-hidden py-12 px-8 text-center border border-red-100 bg-white shadow-xl">
             <div className="relative z-10">
               <h3 className="typography-heading-2 font-bold text-slate-900 mb-4">
                 Prêt à rejoindre l&apos;élite des Alumni ?
@@ -284,7 +268,7 @@ const Features: React.FC = () => {
               </p>
               <Link
                 href="/register"
-                className="inline-flex items-center px-10 py-4 bg-red-600 text-white font-black rounded-xl shadow-2xl hover:bg-red-700 transform hover:scale-105 transition-all duration-500 uppercase tracking-widest text-sm md:text-base"
+                className="inline-flex items-center px-10 py-4 bg-red-600 text-white font-black rounded-none shadow-2xl hover:bg-red-700 transform hover:scale-105 transition-all duration-500 uppercase tracking-widest text-sm md:text-base"
               >
                 S&apos;inscrire aujourd&apos;hui
                 <FaArrowRight className="ml-3" />

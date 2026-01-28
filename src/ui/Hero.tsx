@@ -89,7 +89,7 @@ const Hero: React.FC = () => {
     }
 
     return (
-      <h1 className="typography-heading-1 font-extrabold text-white tracking-tight leading-tight min-h-24 sm:min-h-32 flex items-center">
+      <h1 className="typography-hero font-extrabold text-white tracking-tight leading-tight min-h-24 sm:min-h-32 flex items-center">
         <span className="relative">
           {content}
           <motion.span

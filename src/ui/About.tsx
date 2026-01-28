@@ -7,7 +7,7 @@ import { FaArrowRight, FaUniversity, FaQuoteLeft } from "react-icons/fa";
 
 const About: React.FC = () => {
   return (
-    <section className="py-24 bg-white relative overflow-hidden">
+    <section className="py-16 bg-white relative overflow-hidden">
       {/* Background Decorations */}
       <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 w-96 h-96 bg-red-50 rounded-full blur-3xl opacity-50" />
       <div className="absolute bottom-0 left-0 translate-y-1/2 -translate-x-1/2 w-96 h-96 bg-slate-50 rounded-full blur-3xl opacity-50" />
@@ -53,7 +53,7 @@ const About: React.FC = () => {
             <div className="flex flex-wrap gap-4">
               <Link
                 href="/about"
-                className="inline-flex items-center gap-3 px-8 py-4 bg-red-600 text-white rounded-xl font-bold typography-body hover:bg-red-700 transition-all duration-300 shadow-xl hover:shadow-red-500/20 group"
+                className="inline-flex items-center gap-3 px-8 py-4 bg-red-600 text-white rounded-none font-bold typography-body hover:bg-red-700 transition-all duration-300 shadow-xl hover:shadow-red-500/20 group"
               >
                 <span>Notre Vision 2030</span>
                 <FaArrowRight className="group-hover:translate-x-1 transition-transform" />
@@ -68,7 +68,7 @@ const About: React.FC = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <div className="relative h-125 lg:h-150 w-full rounded-[2.5rem] overflow-hidden shadow-2xl">
+            <div className="relative h-125 lg:h-150 w-full rounded-none overflow-hidden shadow-2xl">
               <Image
                 src="/graduation.jpg"
                 alt="Graduation LAU"
@@ -83,7 +83,7 @@ const About: React.FC = () => {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5 }}
-              className="absolute -bottom-8 -left-8 bg-white p-8 rounded-2xl shadow-2xl border border-slate-100 hidden md:block max-w-xs"
+              className="absolute -bottom-8 -left-8 bg-white p-8 rounded-none shadow-2xl border border-slate-100 hidden md:block max-w-xs"
             >
               <div className="flex items-center gap-4 mb-4">
                 <div className="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center text-red-600">

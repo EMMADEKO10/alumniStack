@@ -35,7 +35,7 @@ const Testimonials: React.FC = () => {
   };
 
   return (
-    <section className="py-12 sm:py-16 lg:py-20 bg-linear-to-br from-red-50 via-white to-orange-50 relative overflow-hidden">
+    <section className="py-10 sm:py-12 lg:py-14 bg-linear-to-br from-red-50 via-white to-orange-50 relative overflow-hidden">
       {/* Background Decorations */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-20 -left-20 w-40 h-40 sm:w-60 sm:h-60 lg:w-72 lg:h-72 bg-red-100 rounded-full mix-blend-multiply filter blur-xl opacity-50 animate-pulse"></div>
@@ -75,7 +75,7 @@ const Testimonials: React.FC = () => {
           transition={{ duration: 0.5 }}
           className="max-w-4xl mx-auto mb-8 sm:mb-10 lg:mb-12"
         >
-          <div className="bg-white rounded-2xl sm:rounded-3xl shadow-xl sm:shadow-2xl p-6 sm:p-8 lg:p-10 relative">
+          <div className="bg-white rounded-none shadow-xl sm:shadow-2xl p-6 sm:p-8 lg:p-10 relative">
             
             {/* Quote Icon */}
             <div className="absolute top-4 left-4 sm:top-6 sm:left-6 w-10 h-10 sm:w-12 sm:h-12 bg-linear-to-br from-red-500 to-red-600 rounded-full flex items-center justify-center shadow-lg">

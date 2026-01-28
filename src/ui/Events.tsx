@@ -104,7 +104,7 @@ const Events: React.FC = () => {
   };
 
   return (
-    <section className="py-20 bg-linear-to-b from-white via-slate-50 to-white relative overflow-hidden">
+    <section className="py-16 bg-linear-to-b from-white via-slate-50 to-white relative overflow-hidden">
       {/* Décorations de fond */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-linear-to-bl from-red-50/50 to-transparent rounded-full blur-3xl" />
@@ -117,16 +117,16 @@ const Events: React.FC = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-12"
         >
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-linear-to-r from-red-100 to-pink-100 rounded-full mb-6">
             <FaCalendarAlt className="text-red-600" />
             <span className="typography-small font-semibold text-red-600 uppercase tracking-wider">Programme</span>
           </div>
-          <h2 className="typography-heading-1 text-slate-900 mb-6 font-extrabold">
-            Explorez les prochains <span className="bg-linear-to-r from-red-600 via-rose-600 to-red-500 bg-clip-text text-transparent">rendez-vous</span> de la communauté
+          <h2 className="typography-heading-2 text-slate-900 mb-6 font-black leading-tight">
+            Explorez les prochains <span className="bg-linear-to-r from-red-600 via-rose-600 to-red-500 bg-clip-text text-transparent italic">rendez-vous</span> de la communauté
           </h2>
-          <p className="typography-body text-slate-600 max-w-2xl mx-auto">
+          <p className="typography-body text-slate-600 max-w-2xl mx-auto md:text-xl">
             Des conférences inspirantes, des ateliers pratiques et des moments de networking exclusifs pour les alumni LAU.
           </p>
         </motion.div>
@@ -257,7 +257,7 @@ const Events: React.FC = () => {
                 <motion.div
                   key={event._id}
                   variants={itemVariants}
-                  className="group relative overflow-hidden rounded-2xl border border-slate-100 bg-white shadow-sm transition-shadow hover:shadow-lg"
+                  className="group relative overflow-hidden rounded-none border border-slate-100 bg-white shadow-sm transition-shadow hover:shadow-lg"
                 >
                   <div className="relative h-40 w-full">
                     <Image
@@ -326,11 +326,11 @@ const Events: React.FC = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="mt-16 text-center"
+          className="mt-12 text-center"
         >
           <Link
             href="/events"
-            className="inline-flex items-center gap-3 px-8 py-4 bg-white border-2 border-red-600 text-red-600 rounded-xl font-bold typography-body hover:bg-red-600 hover:text-white transition-all duration-300 shadow-lg hover:shadow-xl group"
+            className="inline-flex items-center gap-3 px-8 py-4 bg-white border-2 border-red-600 text-red-600 rounded-none font-bold typography-body hover:bg-red-600 hover:text-white transition-all duration-300 shadow-lg hover:shadow-xl group"
           >
             <span>Voir tous les événements</span>
             <FaArrowRight className="group-hover:translate-x-1 transition-transform" />
