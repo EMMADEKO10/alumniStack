@@ -256,24 +256,16 @@ const Features: React.FC = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="mt-32"
+          className="mt-20 text-center"
         >
-          <div className="relative rounded-none overflow-hidden py-12 px-8 text-center border border-red-100 bg-white shadow-xl">
-            <div className="relative z-10">
-              <h3 className="typography-heading-2 font-bold text-slate-900 mb-4">
-                Prêt à rejoindre l&apos;élite des Alumni ?
-              </h3>
-              <p className="typography-body text-slate-600 mb-8 max-w-2xl mx-auto">
-                Ne restez pas en marge de ce réseau d&apos;excellence. Rejoignez-nous pour donner une nouvelle dimension à votre carrière.
-              </p>
-              <Link
-                href="/register"
-                className="inline-flex items-center px-10 py-4 bg-red-600 text-white font-black rounded-none shadow-2xl hover:bg-red-700 transform hover:scale-105 transition-all duration-500 uppercase tracking-widest text-sm md:text-base"
-              >
-                S&apos;inscrire aujourd&apos;hui
-                <FaArrowRight className="ml-3" />
-              </Link>
-            </div>
+          <div className="relative inline-block">
+            <Link
+              href="/register"
+              className="inline-flex items-center px-10 py-4 bg-red-600 text-white font-black rounded-none shadow-2xl hover:bg-red-700 transform hover:scale-105 transition-all duration-500 uppercase tracking-widest text-sm md:text-base border-2 border-red-600"
+            >
+              S&apos;inscrire aujourd&apos;hui
+              <FaArrowRight className="ml-3" />
+            </Link>
           </div>
         </motion.div>
       </div>

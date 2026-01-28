@@ -73,24 +73,24 @@ const Testimonials: React.FC = () => {
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5 }}
-          className="max-w-4xl mx-auto mb-8 sm:mb-10 lg:mb-12"
+          className="max-w-3xl mx-auto mb-6 sm:mb-8 lg:mb-10"
         >
-          <div className="bg-white rounded-none shadow-xl sm:shadow-2xl p-6 sm:p-8 lg:p-10 relative">
+          <div className="bg-white rounded-none shadow-xl sm:shadow-2xl p-6 sm:p-8 relative">
             
             {/* Quote Icon */}
-            <div className="absolute top-4 left-4 sm:top-6 sm:left-6 w-10 h-10 sm:w-12 sm:h-12 bg-linear-to-br from-red-500 to-red-600 rounded-full flex items-center justify-center shadow-lg">
-              <FaQuoteLeft className="text-white text-sm sm:text-lg" />
+            <div className="absolute top-4 left-4 sm:top-5 sm:left-5 w-8 h-8 sm:w-10 sm:h-10 bg-linear-to-br from-red-500 to-red-600 rounded-full flex items-center justify-center shadow-lg">
+              <FaQuoteLeft className="text-white text-xs sm:text-sm" />
             </div>
 
             {/* Rating */}
-            <div className="flex justify-center mb-4 sm:mb-6 pt-2">
+            <div className="flex justify-center mb-3 sm:mb-4 pt-2">
               {[...Array(testimonials[activeTestimonial].rating)].map((_, i) => (
-                <FaStar key={i} className="text-yellow-400 text-lg sm:text-xl mx-0.5" />
+                <FaStar key={i} className="text-yellow-400 text-base sm:text-lg mx-0.5" />
               ))}
             </div>
 
             {/* Quote */}
-            <blockquote className="typography-heading-2 text-gray-700 text-center mb-8 font-normal px-4 italic leading-relaxed">
+            <blockquote className="text-lg sm:text-xl text-gray-700 text-center mb-6 font-medium px-4 italic leading-relaxed">
               &ldquo;{testimonials[activeTestimonial].quote}&rdquo;
             </blockquote>
 
