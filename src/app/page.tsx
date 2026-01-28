@@ -12,21 +12,19 @@ export default function Home() {
       {/* Hero Section - Première impression immersive */}
       <Hero />
       
+      {/* Contribute Section - Appel à l'action et philanthropie */}
+      <Contribute />
+{/* Events Section - Engagement communautaire et actualité */}
+      <Events />
       {/* Features Section - Proposition de valeur (Carousel interactif) */}
       <Features />
 
       {/* About Section - Notre histoire et mission */}
-      <About />
+      {/* <About /> */}
 
       {/* Stats Section - Preuve de l'impact et crédibilité globale */}
-      <Stats />
-      
-      {/* Events Section - Engagement communautaire et actualité */}
-      <Events />
-      
-      {/* Contribute Section - Appel à l'action et philanthropie */}
-      <Contribute />
-      
+      {/* <Stats /> */}
+            
       {/* Testimonials Section - Preuve sociale par les pairs */}
       <Testimonials />
     </main>
