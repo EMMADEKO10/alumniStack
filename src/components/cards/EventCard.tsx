@@ -27,7 +27,7 @@ const EventCard: React.FC<EventCardProps> = ({
   return (
     <div className="flex gap-4 p-4 hover:bg-gray-50 rounded-lg transition-colors duration-200 cursor-pointer group">
       {/* Date Section */}
-      <div className="flex-shrink-0 text-center">
+      <div className="shrink-0 text-center">
         <div className="bg-linear-to-br from-blue-600 to-blue-700 text-white rounded-lg p-3 shadow-sm group-hover:shadow-md transition-shadow">
           <p className="text-xs font-medium uppercase tracking-wide">{month}</p>
           <p className="text-2xl font-bold leading-none">{day}</p>
@@ -35,7 +35,7 @@ const EventCard: React.FC<EventCardProps> = ({
       </div>
 
       {/* Image Section */}
-      <div className="flex-shrink-0">
+      <div className="shrink-0">
         <div className="relative w-24 h-24 rounded-lg overflow-hidden bg-linear-to-br from-gray-100 to-gray-200">
           {imageUrl ? (
             <Image
@@ -83,7 +83,7 @@ const EventCard: React.FC<EventCardProps> = ({
       </div>
 
       {/* Action Indicator */}
-      <div className="flex-shrink-0 flex items-center">
+      <div className="shrink-0 flex items-center">
         <div className="w-2 h-2 bg-blue-600 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></div>
       </div>
     </div>

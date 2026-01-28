@@ -321,25 +321,25 @@ export default function StoryDetailPage() {
                 <div className="space-y-3">
                   {story.category && (
                     <div className="flex items-start gap-3">
-                      <span className="text-sm text-gray-600 min-w-[80px]">Catégorie</span>
+                      <span className="text-sm text-gray-600 min-w-20">Catégorie</span>
                       <span className="text-sm font-semibold text-gray-900">{story.category}</span>
                     </div>
                   )}
                   {story.date && (
                     <div className="flex items-start gap-3">
-                      <span className="text-sm text-gray-600 min-w-[80px]">Date</span>
+                      <span className="text-sm text-gray-600 min-w-20">Date</span>
                       <span className="text-sm font-semibold text-gray-900">{story.date}</span>
                     </div>
                   )}
                   {story.author && (
                     <div className="flex items-start gap-3">
-                      <span className="text-sm text-gray-600 min-w-[80px]">Auteur</span>
+                      <span className="text-sm text-gray-600 min-w-20">Auteur</span>
                       <span className="text-sm font-semibold text-gray-900">{story.author}</span>
                     </div>
                   )}
                   {story.readTime && (
                     <div className="flex items-start gap-3">
-                      <span className="text-sm text-gray-600 min-w-[80px]">Lecture</span>
+                      <span className="text-sm text-gray-600 min-w-20">Lecture</span>
                       <span className="text-sm font-semibold text-gray-900">{story.readTime}</span>
                     </div>
                   )}

@@ -399,15 +399,15 @@ const OpportunitySection: React.FC = () => {
                 exit={{ opacity: 0, height: 0 }}
                 className="overflow-hidden"
               >
-                <div className="bg-linear-to-r from-gray-50 to-red-50 rounded-lg p-4 border border-gray-200">
+                <div className="bg-linear-to-r from-gray-50 to-red-50 rounded-none p-4 border border-gray-200">
                   <div className="flex flex-wrap gap-3">
                     {/* Filtre par type */}
-                    <div className="flex-1 min-w-[200px]">
+                    <div className="flex-1 min-w-48">
                       <label className="block text-sm font-medium text-gray-700 mb-1">Type de contrat</label>
                       <select
                         value={filterType}
                         onChange={(e) => setFilterType(e.target.value)}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-600 focus:border-transparent bg-white shadow-sm"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-white shadow-sm"
                       >
                         {getUniqueTypes().map(type => (
                           <option key={type} value={type}>
@@ -418,12 +418,12 @@ const OpportunitySection: React.FC = () => {
                     </div>
 
                     {/* Filtre par localisation */}
-                    <div className="flex-1 min-w-[200px]">
+                    <div className="flex-1 min-w-48">
                       <label className="block text-sm font-medium text-gray-700 mb-1">Localisation</label>
                       <select
                         value={filterLocation}
                         onChange={(e) => setFilterLocation(e.target.value)}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-600 focus:border-transparent bg-white shadow-sm"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-white shadow-sm"
                       >
                         {getUniqueLocations().map(location => (
                           <option key={location} value={location}>
@@ -434,12 +434,12 @@ const OpportunitySection: React.FC = () => {
                     </div>
 
                     {/* Tri */}
-                    <div className="flex-1 min-w-[200px]">
+                    <div className="flex-1 min-w-48">
                       <label className="block text-sm font-medium text-gray-700 mb-1">Trier par</label>
                       <select
                         value={sortBy}
                         onChange={(e) => setSortBy(e.target.value)}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-600 focus:border-transparent bg-white shadow-sm"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-white shadow-sm"
                       >
                         <option value="createdAt">Plus récentes</option>
                         <option value="title">Alphabétique</option>

@@ -600,7 +600,7 @@ const DonationsPage = () => {
               {viewMode === "list" ? (
                 <div className="p-6">
                   <div className="flex items-center gap-6">
-                    <div className="flex-shrink-0 w-24 h-24 bg-linear-to-br from-red-100 to-red-200 rounded-lg flex items-center justify-center">
+                    <div className="shrink-0 w-24 h-24 bg-linear-to-br from-red-100 to-red-200 rounded-lg flex items-center justify-center">
                       <HeartIcon className="h-8 w-8 text-red-600" />
                     </div>
                     <div className="flex-1">
@@ -617,7 +617,7 @@ const DonationsPage = () => {
                         </div>
                       </div>
                     </div>
-                    <div className="flex-shrink-0">
+                    <div className="shrink-0">
                       <button
                         onClick={() => handleDonate(donation._id)}
                         className="bg-red-600 text-white px-6 py-2 rounded-lg hover:bg-red-700 transition-colors font-medium"

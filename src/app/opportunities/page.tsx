@@ -56,9 +56,9 @@ const Page: React.FC = () => {
             transition={{ duration: 0.6 }}
             className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6"
           >
-            <div className="bg-white/80 backdrop-blur-sm rounded-lg p-4 shadow-md border border-red-100">
+            <div className="bg-white/80 backdrop-blur-sm rounded-none p-4 shadow-md border border-red-100">
               <div className="flex items-center gap-3">
-                <div className="p-2 bg-red-100 rounded-lg">
+                <div className="p-2 bg-red-100 rounded-none">
                   <FaBriefcase className="text-red-600 text-xl" />
                 </div>
                 <div>
@@ -68,9 +68,9 @@ const Page: React.FC = () => {
               </div>
             </div>
 
-            <div className="bg-white/80 backdrop-blur-sm rounded-lg p-4 shadow-md border border-blue-100">
+            <div className="bg-white/80 backdrop-blur-sm rounded-none p-4 shadow-md border border-blue-100">
               <div className="flex items-center gap-3">
-                <div className="p-2 bg-blue-100 rounded-lg">
+                <div className="p-2 bg-blue-100 rounded-none">
                   <FaMapMarkerAlt className="text-blue-600 text-xl" />
                 </div>
                 <div>
@@ -80,9 +80,9 @@ const Page: React.FC = () => {
               </div>
             </div>
 
-            <div className="bg-white/80 backdrop-blur-sm rounded-lg p-4 shadow-md border border-green-100">
+            <div className="bg-white/80 backdrop-blur-sm rounded-none p-4 shadow-md border border-green-100">
               <div className="flex items-center gap-3">
-                <div className="p-2 bg-green-100 rounded-lg">
+                <div className="p-2 bg-green-100 rounded-none">
                   <FaClock className="text-green-600 text-xl" />
                 </div>
                 <div>
@@ -92,9 +92,9 @@ const Page: React.FC = () => {
               </div>
             </div>
 
-            <div className="bg-white/80 backdrop-blur-sm rounded-lg p-4 shadow-md border border-purple-100">
+            <div className="bg-white/80 backdrop-blur-sm rounded-none p-4 shadow-md border border-purple-100">
               <div className="flex items-center gap-3">
-                <div className="p-2 bg-purple-100 rounded-lg">
+                <div className="p-2 bg-purple-100 rounded-none">
                   <FaUsers className="text-purple-600 text-xl" />
                 </div>
                 <div>

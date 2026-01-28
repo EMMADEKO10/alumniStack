@@ -3,8 +3,8 @@ import Features from "../ui/Features";
 import Testimonials from "../ui/Testimonials";
 import Events from "../ui/Events";
 import Contribute from "../ui/Contribute";
-import About from "../ui/About";
-import Stats from "../ui/Stats";
+// import About from "../ui/About";
+// import Stats from "../ui/Stats";
 
 export default function Home() {
   return (

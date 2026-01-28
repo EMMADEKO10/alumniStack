@@ -219,9 +219,9 @@ const Events: React.FC = () => {
                         </div>
                       </div>
                     </div>
-                    <div className="flex flex-col items-stretch gap-3 min-w-50">
+                    <div className="flex flex-col items-stretch gap-3 min-w-48">
                       {spotlightEvent.maxParticipants && (
-                        <div className="rounded-xl bg-white/10 px-4 py-3 text-sm text-white/80 border border-white/10">
+                        <div className="rounded-none bg-white/10 px-4 py-3 text-sm text-white/80 border border-white/10">
                           <div className="font-semibold text-white">
                             {spotlightEvent.maxParticipants} places disponibles
                           </div>
@@ -234,7 +234,7 @@ const Events: React.FC = () => {
                       )}
                       <Link
                         href={`/events/${spotlightEvent._id}`}
-                        className="inline-flex items-center justify-center gap-2 rounded-xl bg-white text-slate-900 font-semibold py-3 px-6 hover:bg-slate-100 transition-colors"
+                        className="inline-flex items-center justify-center gap-2 rounded-none bg-white text-slate-900 font-semibold py-3 px-6 hover:bg-slate-100 transition-colors"
                       >
                         <FaTicketAlt />
                         Découvrir l&apos;événement

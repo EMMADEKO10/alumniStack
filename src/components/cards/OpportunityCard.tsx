@@ -73,7 +73,7 @@ const OpportunityCard: React.FC<OpportunityCardProps> = ({ opportunity }) => {
   return (
     <motion.div
       whileHover={{ y: -5, transition: { duration: 0.2 } }}
-      className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-2xl transition-all duration-300 border border-gray-100 h-full flex flex-col"
+      className="bg-white rounded-none shadow-md overflow-hidden hover:shadow-2xl transition-all duration-300 border border-gray-100 h-full flex flex-col"
     >
       {/* Image */}
       <div className="relative h-48 w-full overflow-hidden group">
@@ -87,16 +87,16 @@ const OpportunityCard: React.FC<OpportunityCardProps> = ({ opportunity }) => {
         
         {/* Badges en haut */}
         <div className="absolute top-4 left-4 flex gap-2">
-          <span className={`px-3 py-1 text-xs font-semibold rounded-full shadow-lg ${getTypeColor(opportunity.type)}`}>
+          <span className={`px-3 py-1 text-xs font-semibold rounded-none shadow-lg ${getTypeColor(opportunity.type)}`}>
             {opportunity.type}
           </span>
           {daysRemaining !== null && daysRemaining <= 7 && daysRemaining > 0 && (
-            <span className="px-3 py-1 text-xs font-semibold rounded-full bg-orange-500 text-white shadow-lg animate-pulse">
+            <span className="px-3 py-1 text-xs font-semibold rounded-none bg-orange-500 text-white shadow-lg animate-pulse">
               {daysRemaining}j restants
             </span>
           )}
           {daysRemaining !== null && daysRemaining <= 0 && (
-            <span className="px-3 py-1 text-xs font-semibold rounded-full bg-red-500 text-white shadow-lg">
+            <span className="px-3 py-1 text-xs font-semibold rounded-none bg-red-500 text-white shadow-lg">
               Expiré
             </span>
           )}
@@ -135,25 +135,25 @@ const OpportunityCard: React.FC<OpportunityCardProps> = ({ opportunity }) => {
         {/* Informations détaillées */}
         <div className="space-y-2.5 mb-5">
           <div className="flex items-center text-sm text-gray-700">
-            <MapPinIcon className="h-4 w-4 mr-2 text-gray-500 flex-shrink-0" />
+            <MapPinIcon className="h-4 w-4 mr-2 text-gray-500 shrink-0" />
             <span className="truncate">{opportunity.location}</span>
           </div>
           
           <div className="flex items-center text-sm text-gray-700">
-            <CurrencyDollarIcon className="h-4 w-4 mr-2 text-gray-500 flex-shrink-0" />
+            <CurrencyDollarIcon className="h-4 w-4 mr-2 text-gray-500 shrink-0" />
             <span className="truncate">{formatSalary(opportunity.salary)}</span>
           </div>
           
           {opportunity.deadline && (
             <div className="flex items-center text-sm text-gray-700">
-              <CalendarIcon className="h-4 w-4 mr-2 text-gray-500 flex-shrink-0" />
+              <CalendarIcon className="h-4 w-4 mr-2 text-gray-500 shrink-0" />
               <span className="truncate">Échéance: {formatDeadline(opportunity.deadline)}</span>
             </div>
           )}
 
           {daysRemaining !== null && daysRemaining > 0 && (
             <div className="flex items-center text-sm text-gray-700">
-              <ClockIcon className="h-4 w-4 mr-2 text-gray-500 flex-shrink-0" />
+              <ClockIcon className="h-4 w-4 mr-2 text-gray-500 shrink-0" />
               <span className={`font-medium ${
                 daysRemaining <= 3 ? 'text-red-600' : 
                 daysRemaining <= 7 ? 'text-orange-600' : 
@@ -170,7 +170,7 @@ const OpportunityCard: React.FC<OpportunityCardProps> = ({ opportunity }) => {
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
           onClick={() => router.push(`/opportunities/${opportunity._id}`)}
-          className="w-full bg-linear-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-semibold py-3 px-4 rounded-lg transition-all duration-200 shadow-md hover:shadow-lg flex items-center justify-center gap-2 group"
+          className="w-full bg-linear-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-semibold py-3 px-4 rounded-none transition-all duration-200 shadow-md hover:shadow-lg flex items-center justify-center gap-2 group"
         >
           Voir les détails
           <ArrowRightIcon className="h-4 w-4 group-hover:translate-x-1 transition-transform" />

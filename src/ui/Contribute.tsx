@@ -178,7 +178,7 @@ const Contribute: React.FC = () => {
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-linear-to-r from-red-100 to-pink-100 rounded-full mb-4">
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-linear-to-r from-red-100 to-pink-100 rounded-none mb-4">
             <span className="typography-small font-semibold text-red-600">Soutenez-nous</span>
           </div>
           <h2 className="typography-heading-1 text-gray-900 mb-4">
@@ -294,7 +294,7 @@ const Contribute: React.FC = () => {
                         </div>
 
                         {/* Bouton d'action */}
-                        <div className="inline-flex items-center gap-2 px-5 py-3 bg-linear-to-r from-red-500 to-rose-600 text-white rounded-lg font-semibold typography-small group-hover:gap-4 transition-all duration-300 shadow-md hover:shadow-lg w-full justify-center">
+                        <div className="inline-flex items-center gap-2 px-5 py-3 bg-linear-to-r from-red-500 to-rose-600 text-white rounded-none font-semibold typography-small group-hover:gap-4 transition-all duration-300 shadow-md hover:shadow-lg w-full justify-center">
                           <span>Contribuer</span>
                           <FaArrowRight />
                         </div>
