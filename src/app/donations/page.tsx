@@ -13,7 +13,6 @@ import {
   MagnifyingGlassIcon, 
   FunnelIcon, 
   UsersIcon,
-  ChartBarIcon,
   CurrencyDollarIcon,
   HeartIcon
 } from "@heroicons/react/24/outline";
@@ -299,19 +298,6 @@ const DonationsPage = () => {
           </div>
         </div>
 
-        {/* Skeleton Statistiques */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          {[1, 2, 3, 4].map((i) => (
-            <div key={i} className="bg-white rounded-xl p-6 border border-gray-200 animate-pulse">
-              <div className="flex items-center justify-between mb-3">
-                <div className="w-12 h-12 bg-gray-200 rounded-lg"></div>
-              </div>
-              <div className="h-8 bg-gray-200 rounded w-24 mb-1"></div>
-              <div className="h-4 bg-gray-200 rounded w-32"></div>
-            </div>
-          ))}
-        </div>
-
         {/* Skeleton Cartes de donations */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {[1, 2, 3, 4, 5, 6].map((i) => (
@@ -498,73 +484,6 @@ const DonationsPage = () => {
             </button>
           ))}
         </div>
-      </motion.div>
-
-      {/* Statistiques */}
-      <motion.div 
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8 relative z-10"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.4 }}
-      >
-        {[
-          {
-            icon: HeartIcon,
-            value: filteredDonations.length,
-            label: "Campagnes trouvées",
-            color: "red",
-            bgColor: "bg-linear-to-br from-red-50 to-pink-50",
-            iconColor: "text-red-600",
-            borderColor: "border-red-100"
-          },
-          {
-            icon: CurrencyDollarIcon,
-            value: stats.totalAmount,
-            label: "Montant total collecté",
-            color: "green",
-            bgColor: "bg-linear-to-br from-green-50 to-emerald-50",
-            iconColor: "text-green-600",
-            borderColor: "border-green-100",
-            format: "currency"
-          },
-          {
-            icon: UsersIcon,
-            value: stats.totalDonors,
-            label: "Donateurs",
-            color: "blue",
-            bgColor: "bg-linear-to-br from-blue-50 to-indigo-50",
-            iconColor: "text-blue-600",
-            borderColor: "border-blue-100"
-          },
-          {
-            icon: ChartBarIcon,
-            value: stats.completedCampaigns,
-            label: "Objectifs atteints",
-            color: "purple",
-            bgColor: "bg-linear-to-br from-purple-50 to-pink-50",
-            iconColor: "text-purple-600",
-            borderColor: "border-purple-100"
-          }
-        ].map((stat, index) => (
-          <motion.div 
-            key={stat.label} 
-            className={`${stat.bgColor} rounded-xl p-6 border ${stat.borderColor} shadow-sm hover:shadow-md transition-all duration-300`}
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, delay: 0.5 + index * 0.1 }}
-            whileHover={{ y: -4 }}
-          >
-            <div className="flex items-center justify-between mb-3">
-              <div className={`${stat.bgColor} p-3 rounded-lg`}>
-                <stat.icon className={`h-6 w-6 ${stat.iconColor}`} />
-              </div>
-            </div>
-            <p className="text-2xl font-bold text-gray-900 mb-1">
-              {stat.format === 'currency' ? formatAmount(stat.value) : stat.value}
-            </p>
-            <p className="text-sm text-gray-600">{stat.label}</p>
-          </motion.div>
-        ))}
       </motion.div>
 
       {/* Liste des donations */}
