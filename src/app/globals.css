@@ -1,6 +1,55 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 @import "tailwindcss";
 
+/* Configuration Tailwind CSS v4 avec @theme */
+@theme {
+  /* Polices */
+  --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-display: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  
+  /* Couleurs personnalisées */
+  --color-personnal-gray: #F4F4F2;
+  
+  /* Tailles de police personnalisées */
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;
+  --font-size-2xl: 1.5rem;
+  --font-size-3xl: 1.875rem;
+  --font-size-4xl: 2.25rem;
+  --font-size-5xl: 3rem;
+  --font-size-6xl: 3.75rem;
+  --font-size-7xl: 4.5rem;
+  --font-size-8xl: 6rem;
+  --font-size-9xl: 8rem;
+  
+  /* Hauteurs de ligne */
+  --line-height-xs: 1.5;
+  --line-height-sm: 1.6;
+  --line-height-base: 1.7;
+  --line-height-lg: 1.7;
+  --line-height-xl: 1.6;
+  --line-height-2xl: 1.5;
+  --line-height-3xl: 1.4;
+  --line-height-4xl: 1.3;
+  --line-height-5xl: 1.2;
+  --line-height-6xl: 1.1;
+  --line-height-7xl: 1.1;
+  --line-height-8xl: 1;
+  --line-height-9xl: 1;
+  
+  /* Poids de police */
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-extrabold: 800;
+  --font-weight-black: 900;
+}
+
 /* Configuration globale des polices sans-serif */
 * {
   font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
@@ -17,23 +66,19 @@ body {
 
 /* Typography improvements */
 h1, h2, h3, h4, h5, h6 {
-  font-weight: 700;
   letter-spacing: -0.025em;
-  line-height: 1.2;
 }
 
 h1 {
   font-size: clamp(2.25rem, 5vw, 4.5rem);
   font-weight: 800;
+  line-height: 1.2;
 }
 
 h2 {
   font-size: clamp(1.875rem, 4vw, 3rem);
   font-weight: 700;
-}
-
-h3 {
-  font-size: clamp(1.5rem, 3vw, 2.25rem);
+  line-height: 1.2;
 }
 
 p {

@@ -7,6 +7,7 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
+  
   // Exposer les variables d'environnement (IMPORTANT pour Hostinger)
   env: {
     MONGODB_URI: process.env.MONGODB_URI,
@@ -21,6 +22,8 @@ const nextConfig = {
     CLOUDINARY_API_KEY: process.env.CLOUDINARY_API_KEY,
     CLOUDINARY_API_SECRET: process.env.CLOUDINARY_API_SECRET,
   },
+  
+  // Configuration des images optimisée
   images: {
     remotePatterns: [
       {
@@ -36,20 +39,41 @@ const nextConfig = {
         pathname: '/**',
       },
     ],
+    formats: ['image/avif', 'image/webp'],
+    minimumCacheTTL: 60,
   },
+  
   // Optimisations pour améliorer les performances
   experimental: {
-    optimizePackageImports: ['react-icons', '@heroicons/react'],
+    optimizePackageImports: ['react-icons', '@heroicons/react', 'framer-motion'],
   },
+  
+  // Configuration de compression
+  compress: true,
+  
   // Optimiser les performances de développement
   webpack: (config, { dev, isServer }) => {
+    // Optimisations pour le développement
     if (dev && !isServer) {
       config.watchOptions = {
         poll: 1000,
         aggregateTimeout: 300,
       };
     }
+    
+    // Optimisations générales
+    config.optimization = {
+      ...config.optimization,
+      moduleIds: 'deterministic',
+    };
+    
     return config;
+  },
+  
+  // Configuration du cache pour Next.js
+  onDemandEntries: {
+    maxInactiveAge: 25 * 1000,
+    pagesBufferLength: 2,
   },
 };
 
