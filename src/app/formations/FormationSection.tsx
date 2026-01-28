@@ -492,7 +492,7 @@ const FormationSection: React.FC = () => {
                   </>
                 ) : (
                   <div className="p-6 flex gap-6">
-                    <div className="relative h-40 w-40 flex-shrink-0 rounded-xl overflow-hidden">
+                    <div className="relative h-40 w-40 shrink-0 rounded-xl overflow-hidden">
                       {formation.imageUrl ? (
                         <Image
                           src={formation.imageUrl}

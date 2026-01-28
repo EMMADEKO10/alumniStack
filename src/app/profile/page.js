@@ -164,7 +164,7 @@ export default function ProfilePage() {
         
             <div className="grid md:grid-cols-2 gap-6">
               <div className="flex items-start gap-4 p-4 rounded-lg bg-gray-50 border border-gray-200">
-                <div className="w-10 h-10 rounded-full bg-red-100 flex items-center justify-center flex-shrink-0">
+                <div className="w-10 h-10 rounded-full bg-red-100 flex items-center justify-center shrink-0">
                   <FaUser className="text-red-600" />
                 </div>
                 <div>
@@ -176,7 +176,7 @@ export default function ProfilePage() {
               </div>
               
               <div className="flex items-start gap-4 p-4 rounded-lg bg-gray-50 border border-gray-200">
-                <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0">
+                <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center shrink-0">
                   <FaIdCard className="text-blue-900" />
                 </div>
                 <div>
@@ -188,7 +188,7 @@ export default function ProfilePage() {
               </div>
               
               <div className="flex items-start gap-4 p-4 rounded-lg bg-gray-50 border border-gray-200">
-                <div className="w-10 h-10 rounded-full bg-cyan-100 flex items-center justify-center flex-shrink-0">
+                <div className="w-10 h-10 rounded-full bg-cyan-100 flex items-center justify-center shrink-0">
                   <FaEnvelope className="text-cyan-600" />
                 </div>
                 <div>
@@ -198,7 +198,7 @@ export default function ProfilePage() {
               </div>
               
               <div className="flex items-start gap-4 p-4 rounded-lg bg-gray-50 border border-gray-200">
-                <div className="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center flex-shrink-0">
+                <div className="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center shrink-0">
                   <FaUserTag className="text-gray-900" />
                 </div>
                 <div>
@@ -241,7 +241,7 @@ export default function ProfilePage() {
                       ></div>
                     </div>
                   </div>
-                  <div className="flex-shrink-0">
+                  <div className="shrink-0">
                     <div className="w-24 h-24 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
                       <span className="text-4xl font-bold">{alumniProfile.status.completionPercentage}%</span>
                     </div>
@@ -363,7 +363,7 @@ export default function ProfilePage() {
                     onClick={() => router.push('/communities')}
                     className="group flex items-center gap-4 p-6 bg-cyan-50 hover:bg-cyan-100 border-2 border-cyan-200 hover:border-cyan-400 rounded-xl transition-all duration-200 text-left shadow-md hover:shadow-xl hover:-translate-y-1"
                   >
-                    <div className="w-14 h-14 rounded-full bg-cyan-600 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                    <div className="w-14 h-14 rounded-full bg-cyan-600 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
                       <FaUsers className="text-white text-2xl" />
                     </div>
                     <div>
@@ -376,7 +376,7 @@ export default function ProfilePage() {
                     onClick={() => router.push('/profile/complete')}
                     className="group flex items-center gap-4 p-6 bg-red-50 hover:bg-red-100 border-2 border-red-200 hover:border-red-400 rounded-xl transition-all duration-200 text-left shadow-md hover:shadow-xl hover:-translate-y-1"
                   >
-                    <div className="w-14 h-14 rounded-full bg-red-600 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                    <div className="w-14 h-14 rounded-full bg-red-600 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
                       <FaEdit className="text-white text-2xl" />
                     </div>
                     <div>

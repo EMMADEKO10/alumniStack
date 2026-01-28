@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, ChangeEvent, FormEvent } from "react";
+import Image from "next/image";
 import { 
   HeartIcon, 
   CurrencyDollarIcon, 
@@ -325,20 +326,13 @@ const DonationForm: React.FC<DonationFormProps> = ({ onSubmit, loading = false, 
               <div className="mt-3">
                 <p className="text-sm font-medium text-gray-700 mb-2">Aperçu:</p>
                 <div className="relative w-32 h-24 border border-gray-200 rounded-lg overflow-hidden">
-                  <img
+                  <Image
                     src={imagePreview}
                     alt="Aperçu"
-                    className="w-full h-full object-cover"
-                    onError={(e) => {
-                      const target = e.target as HTMLImageElement;
-                      target.style.display = 'none';
-                      const nextSibling = target.nextSibling as HTMLElement;
-                      if (nextSibling) nextSibling.style.display = 'flex';
-                    }}
+                    fill
+                    className="object-cover"
+                    unoptimized={imagePreview.startsWith('data:')}
                   />
-                  <div className="absolute inset-0 bg-gray-100 flex items-center justify-center hidden">
-                    <PhotoIcon className="h-8 w-8 text-gray-400" />
-                  </div>
                 </div>
               </div>
             )}

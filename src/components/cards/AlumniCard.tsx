@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
+import Image from 'next/image';
 import { PublicAlumniProfile } from '../../types/alumni';
 import { 
   FaGraduationCap, 
@@ -89,7 +90,7 @@ const AlumniModal: React.FC<{
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.2 }}
-          className="fixed inset-0 bg-black/70 backdrop-blur-sm z-[9999] flex items-center justify-center p-4"
+          className="fixed inset-0 bg-black/70 backdrop-blur-sm z-9999 flex items-center justify-center p-4"
           onClick={onClose}
         >
           <motion.div
@@ -110,12 +111,13 @@ const AlumniModal: React.FC<{
               </button>
               
               <div className="flex items-center space-x-6">
-                <div className="w-24 h-24 bg-white/20 rounded-2xl flex items-center justify-center text-white font-bold text-2xl backdrop-blur-sm">
+                <div className="w-24 h-24 relative bg-white/20 rounded-2xl flex items-center justify-center text-white font-bold text-2xl backdrop-blur-sm overflow-hidden">
                   {alumni.personalInfo.profilePicture ? (
-                    <img 
+                    <Image 
                       src={alumni.personalInfo.profilePicture} 
                       alt={`${alumni.personalInfo.firstName} ${alumni.personalInfo.lastName}`}
-                      className="w-full h-full rounded-2xl object-cover"
+                      fill
+                      className="object-cover"
                     />
                   ) : (
                     getInitials(alumni.personalInfo.firstName, alumni.personalInfo.lastName)
@@ -359,12 +361,13 @@ const AlumniCard: React.FC<AlumniCardProps> = ({ alumni, onClick }) => {
         <div className="p-6 relative">
         {/* Header avec photo et nom */}
           <div className="flex items-start space-x-4 mb-4">
-            <div className={`w-16 h-16 bg-linear-to-br ${getFacultyColor(alumni.academicInfo.facultyId)} rounded-2xl flex items-center justify-center text-white font-bold text-lg shadow-lg group-hover:shadow-xl transition-shadow`}>
+            <div className={`w-16 h-16 relative bg-linear-to-br ${getFacultyColor(alumni.academicInfo.facultyId)} rounded-2xl flex items-center justify-center text-white font-bold text-lg shadow-lg group-hover:shadow-xl transition-shadow overflow-hidden`}>
             {alumni.personalInfo.profilePicture ? (
-              <img 
+              <Image 
                 src={alumni.personalInfo.profilePicture} 
                 alt={`${alumni.personalInfo.firstName} ${alumni.personalInfo.lastName}`}
-                  className="w-full h-full rounded-2xl object-cover"
+                fill
+                className="object-cover"
               />
             ) : (
               getInitials(alumni.personalInfo.firstName, alumni.personalInfo.lastName)

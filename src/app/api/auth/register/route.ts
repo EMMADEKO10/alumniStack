@@ -19,19 +19,22 @@ interface User {
   createdAt: Date;
 }
 
-// Vérification de la variable d'environnement en mode développement uniquement
-let uri = process.env.MONGODB_URI;
-
-// Fallback pour le développement
-if (!uri && process.env.NODE_ENV === 'development') {
-  console.warn('Variable MONGODB_URI non définie, utilisation de l\'URI par défaut pour le développement');
-  uri =process.env.MONGODB_URI;
-} else if (!uri) {
-  throw new Error('Veuillez définir la variable d\'environnement MONGODB_URI');
-}
+// Vérification de la variable d'environnement au moment de l'utilisation
+const getMongoUri = () => {
+  const uri = process.env.MONGODB_URI;
+  if (!uri) {
+    if (process.env.NODE_ENV === 'development') {
+      console.warn('Variable MONGODB_URI non définie en développement');
+      return process.env.MONGODB_URI || ""; // Devrait être défini dans .env
+    }
+    throw new Error('Veuillez définir la variable d\'environnement MONGODB_URI');
+  }
+  return uri;
+};
 
 export async function POST(request: Request) {
   try {
+    const uri = getMongoUri();
     // Vérifier que la requête est bien au format JSON
     let requestData: RegisterData;
     try {
@@ -57,7 +60,7 @@ export async function POST(request: Request) {
     const normalizedEmail = String(email).trim().toLowerCase();
 
     // Création d'une nouvelle instance pour chaque requête
-    const client = new MongoClient(uri!);
+    const client = new MongoClient(uri);
 
     try {
       await client.connect();

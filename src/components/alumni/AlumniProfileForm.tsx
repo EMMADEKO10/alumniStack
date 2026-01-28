@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useSession } from 'next-auth/react';
+import Image from 'next/image';
 import { 
   AlumniProfile, 
   DEGREE_LEVELS, 
@@ -257,13 +258,15 @@ const AlumniProfileForm: React.FC<AlumniProfileFormProps> = ({
         
         <div className="flex flex-col md:flex-row gap-6 items-start">
           {/* Aperçu de l'image */}
-          <div className="flex-shrink-0">
-            <div className="w-32 h-32 rounded-full overflow-hidden bg-gray-200 border-4 border-white shadow-lg">
+          <div className="shrink-0">
+            <div className="w-32 h-32 relative rounded-full overflow-hidden bg-gray-200 border-4 border-white shadow-lg">
               {profileImageUrl ? (
-                <img 
+                <Image 
                   src={profileImageUrl} 
                   alt="Aperçu du profil" 
-                  className="w-full h-full object-cover"
+                  fill
+                  className="object-cover"
+                  unoptimized={profileImageUrl.startsWith('data:')}
                 />
               ) : (
                 <div className="w-full h-full flex items-center justify-center bg-linear-to-br from-red-100 to-cyan-100">

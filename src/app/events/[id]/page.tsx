@@ -488,15 +488,15 @@ const EventDetailPage: React.FC = () => {
                 </h3>
                 <div className="space-y-3">
                   <div className="flex items-start gap-3 text-sm p-3 bg-linear-to-br from-gray-50 to-gray-100 rounded-lg">
-                    <ClockIcon className="h-5 w-5 text-gray-500 flex-shrink-0" />
+                    <ClockIcon className="h-5 w-5 text-gray-500 shrink-0" />
                     <span className="text-gray-700">Durée estimée : 3-4 heures</span>
                   </div>
                   <div className="flex items-start gap-3 text-sm p-3 bg-linear-to-br from-gray-50 to-gray-100 rounded-lg">
-                    <GlobeAltIcon className="h-5 w-5 text-gray-500 flex-shrink-0" />
+                    <GlobeAltIcon className="h-5 w-5 text-gray-500 shrink-0" />
                     <span className="text-gray-700">Langue : Français</span>
                   </div>
                   <div className="flex items-start gap-3 text-sm p-3 bg-linear-to-br from-gray-50 to-gray-100 rounded-lg">
-                    <BookmarkIcon className="h-5 w-5 text-gray-500 flex-shrink-0" />
+                    <BookmarkIcon className="h-5 w-5 text-gray-500 shrink-0" />
                     <span className="text-gray-700">Gratuit pour les membres</span>
                   </div>
                 </div>

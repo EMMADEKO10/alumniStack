@@ -2,6 +2,7 @@
 
 import { useState, ChangeEvent, FormEvent } from 'react';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 
 interface StoryFormData {
   title: string;
@@ -183,7 +184,15 @@ export default function StoryForm({ storyId }: { storyId?: string }) {
           <input type="file" accept="image/*" onChange={handleImageChange}
             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
           {imagePreview && (
-            <img src={imagePreview} alt="Aperçu" className="w-32 h-32 object-cover rounded-md border mt-3" />
+            <div className="relative w-32 h-32 mt-3">
+              <Image 
+                src={imagePreview} 
+                alt="Aperçu" 
+                fill 
+                className="object-cover rounded-md border" 
+                unoptimized={imagePreview.startsWith('data:')}
+              />
+            </div>
           )}
           <div className="border-t pt-3 mt-3">
             <label htmlFor="image" className="block text-sm font-medium text-gray-700 mb-1">Ou URL de l'image</label>

@@ -502,7 +502,7 @@ const OpportunityDetailPage: React.FC = () => {
                   <ul className="space-y-2">
                     {opportunity.requirements.map((requirement, index) => (
                       <li key={index} className="flex items-start gap-3">
-                        <CheckCircleIcon className="h-5 w-5 text-green-600 mt-0.5 flex-shrink-0" />
+                        <CheckCircleIcon className="h-5 w-5 text-green-600 mt-0.5 shrink-0" />
                         <span className="text-gray-700">{requirement}</span>
                       </li>
                     ))}
@@ -589,15 +589,15 @@ const OpportunityDetailPage: React.FC = () => {
                 </h3>
                 <div className="space-y-3">
                   <div className="flex items-start gap-3 text-sm p-3 bg-gray-50 rounded-lg">
-                    <DocumentTextIcon className="h-5 w-5 text-gray-500 mt-0.5 flex-shrink-0" />
+                    <DocumentTextIcon className="h-5 w-5 text-gray-500 mt-0.5 shrink-0" />
                     <span className="text-gray-700">CV et lettre de motivation requis</span>
                   </div>
                   <div className="flex items-start gap-3 text-sm p-3 bg-gray-50 rounded-lg">
-                    <ClockIcon className="h-5 w-5 text-gray-500 mt-0.5 flex-shrink-0" />
+                    <ClockIcon className="h-5 w-5 text-gray-500 mt-0.5 shrink-0" />
                     <span className="text-gray-700">Réponse sous 1-2 semaines</span>
                   </div>
                   <div className="flex items-start gap-3 text-sm p-3 bg-gray-50 rounded-lg">
-                    <BookmarkIcon className="h-5 w-5 text-gray-500 mt-0.5 flex-shrink-0" />
+                    <BookmarkIcon className="h-5 w-5 text-gray-500 mt-0.5 shrink-0" />
                     <span className="text-gray-700">Référence: <span className="font-mono font-semibold">{opportunity._id.substring(0, 8)}</span></span>
                   </div>
                 </div>

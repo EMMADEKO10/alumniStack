@@ -2,6 +2,7 @@
 
 import { useState, ChangeEvent, FormEvent } from 'react';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 
 interface FormData {
   title: string;
@@ -315,8 +316,14 @@ export default function OpportunityForm() {
             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           {imagePreview && (
-            <div className="mt-2">
-              <img src={imagePreview} alt="Aperçu" className="w-32 h-32 object-cover rounded" />
+            <div className="mt-2 relative w-32 h-32">
+              <Image 
+                src={imagePreview} 
+                alt="Aperçu" 
+                fill 
+                className="object-cover rounded" 
+                unoptimized={imagePreview.startsWith('data:')}
+              />
             </div>
           )}
         </div>

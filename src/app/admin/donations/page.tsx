@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { 
   PlusIcon, 
   HeartIcon, 
@@ -393,11 +394,12 @@ const DonationsAdminPage: React.FC = () => {
                   </div>
 
                   {donation.image && (
-                    <div className="ml-6 flex-shrink-0">
-                      <img
+                    <div className="ml-6 shrink-0 relative w-24 h-24">
+                      <Image
                         src={donation.image}
                         alt={donation.title}
-                        className="w-24 h-18 object-cover rounded-lg"
+                        fill
+                        className="object-cover rounded-lg"
                       />
                     </div>
                   )}

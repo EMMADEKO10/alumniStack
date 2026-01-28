@@ -53,6 +53,7 @@ const DonationsPage = () => {
   const [sortBy, setSortBy] = useState("date");
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const [categoryFilter, setCategoryFilter] = useState("all");
+  const [isPaying, setIsPaying] = useState<string | null>(null);
 
   useEffect(() => {
     fetchDonations();
@@ -227,9 +228,38 @@ const DonationsPage = () => {
     }
   };
 
-  const handleDonate = (donationId: string) => {
-    // TODO: Implémenter la logique de donation
-    console.log('Donation pour:', donationId);
+  const handleDonate = async (donationId: string) => {
+    const amount = window.prompt("Entrez le montant de votre don (USD):", "10");
+    if (!amount || isNaN(parseFloat(amount))) return;
+
+    const phoneNumber = window.prompt("Entrez votre numéro de téléphone (Format: +243xxx...):", "+243810000001");
+    if (!phoneNumber) return;
+
+    setIsPaying(donationId);
+    try {
+      const response = await fetch('/api/donations/pay', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          amount: parseFloat(amount),
+          donationId,
+          phoneNumber,
+          customerName: "Donateur LAU"
+        }),
+      });
+
+      const data = await response.json();
+      if (data.paymentUrl) {
+        window.location.href = data.paymentUrl;
+      } else {
+        alert("Erreur: " + (data.error || "Impossible d'initialiser le paiement"));
+      }
+    } catch (err) {
+      console.error('Erreur de paiement:', err);
+      alert("Une erreur est survenue lors de la connexion au service de paiement.");
+    } finally {
+      setIsPaying(null);
+    }
   };
 
   const getStats = (): DonationStats => {
@@ -539,9 +569,18 @@ const DonationsPage = () => {
                     <div className="shrink-0">
                       <button
                         onClick={() => handleDonate(donation._id)}
-                        className="bg-red-600 text-white px-6 py-2 rounded-lg hover:bg-red-700 transition-colors font-medium"
+                        disabled={isPaying === donation._id}
+                        className={`bg-red-600 text-white px-6 py-2 rounded-lg hover:bg-red-700 transition-colors font-medium flex items-center ${isPaying === donation._id ? 'opacity-70 cursor-wait' : ''}`}
                       >
-                        Donner
+                        {isPaying === donation._id ? (
+                          <>
+                            <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                            </svg>
+                            ...
+                          </>
+                        ) : 'Donner'}
                       </button>
                     </div>
                   </div>
@@ -557,6 +596,7 @@ const DonationsPage = () => {
                   isActive={donation.isActive}
                   createdAt={donation.createdAt}
                   onDonate={handleDonate}
+                  isLoading={isPaying === donation._id}
                 />
               )}
             </motion.div>

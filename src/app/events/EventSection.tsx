@@ -451,16 +451,16 @@ const EventSection: React.FC = () => {
                       {/* Infos */}
                       <div className="space-y-2.5 mb-4 pt-4 border-t border-gray-100">
                         <div className="flex items-center text-gray-700 text-sm gap-3">
-                          <MapPinIcon className="h-4 w-4 text-red-600 flex-shrink-0" />
+                          <MapPinIcon className="h-4 w-4 text-red-600 shrink-0" />
                           <span className="line-clamp-1">{event.location}</span>
                         </div>
                         <div className="flex items-center text-gray-700 text-sm gap-3">
-                          <ClockIcon className="h-4 w-4 text-red-600 flex-shrink-0" />
+                          <ClockIcon className="h-4 w-4 text-red-600 shrink-0" />
                           <span>{dateInfo.time}</span>
                         </div>
                         {event.maxParticipants && (
                           <div className="flex items-center text-gray-700 text-sm gap-3">
-                            <UsersIcon className="h-4 w-4 text-red-600 flex-shrink-0" />
+                            <UsersIcon className="h-4 w-4 text-red-600 shrink-0" />
                             <span>{event.participants?.length || 0}/{event.maxParticipants}</span>
                           </div>
                         )}
@@ -481,7 +481,7 @@ const EventSection: React.FC = () => {
                   </>
                 ) : (
                   <div className="p-6 flex gap-6 flex-1">
-                    <div className="relative h-40 w-40 flex-shrink-0 rounded-xl overflow-hidden">
+                    <div className="relative h-40 w-40 shrink-0 rounded-xl overflow-hidden">
                       {event.imageUrl ? (
                         <Image
                           src={event.imageUrl}
