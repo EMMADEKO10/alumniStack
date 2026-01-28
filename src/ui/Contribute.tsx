@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { FaArrowRight, FaHeart, FaChartLine } from 'react-icons/fa';
+import { FaArrowRight, FaHeart } from 'react-icons/fa';
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 
@@ -140,11 +140,11 @@ const Contribute: React.FC = () => {
   };
 
   return (
-    <section className="py-20 bg-gradient-to-b from-white via-red-50/30 to-white relative overflow-hidden">
+    <section className="py-20 bg-linear-to-b from-white via-red-50/30 to-white relative overflow-hidden">
       {/* Décorations de fond */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div
-          className="absolute -top-24 -left-24 w-96 h-96 bg-gradient-to-br from-red-200/20 to-pink-200/20 rounded-full blur-3xl"
+          className="absolute -top-24 -left-24 w-96 h-96 bg-linear-to-br from-red-200/20 to-pink-200/20 rounded-full blur-3xl"
           animate={{
             x: [0, 50, 0],
             y: [0, 30, 0],
@@ -156,7 +156,7 @@ const Contribute: React.FC = () => {
           }}
         />
         <motion.div
-          className="absolute bottom-0 -right-24 w-96 h-96 bg-gradient-to-br from-pink-200/20 to-red-200/20 rounded-full blur-3xl"
+          className="absolute bottom-0 -right-24 w-96 h-96 bg-linear-to-br from-pink-200/20 to-red-200/20 rounded-full blur-3xl"
           animate={{
             x: [0, -30, 0],
             y: [0, 50, 0],
@@ -178,11 +178,11 @@ const Contribute: React.FC = () => {
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-red-100 to-pink-100 rounded-full mb-4">
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-linear-to-r from-red-100 to-pink-100 rounded-full mb-4">
             <span className="typography-small font-semibold text-red-600">Soutenez-nous</span>
           </div>
           <h2 className="typography-heading-1 text-gray-900 mb-4">
-            Faites la <span className="bg-gradient-to-r from-red-600 via-rose-600 to-red-500 bg-clip-text text-transparent">différence</span>
+            Faites la <span className="bg-linear-to-r from-red-600 via-rose-600 to-red-500 bg-clip-text text-transparent">différence</span>
           </h2>
           <p className="typography-body text-gray-600 max-w-2xl mx-auto">
             Votre générosité aide à bâtir l&apos;avenir de l&apos;éducation 
@@ -235,7 +235,7 @@ const Contribute: React.FC = () => {
                   <Link href={`/donations`}>
                     <div className="h-full bg-white rounded-2xl overflow-hidden border border-gray-200 shadow-lg hover:shadow-2xl transition-all duration-300 relative">
                       {/* Effet de brillance au survol */}
-                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 z-10" />
+                      <div className="absolute inset-0 bg-linear-to-r from-transparent via-white/10 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 z-10" />
                       
                       {/* Image */}
                       <div className="relative h-48 w-full overflow-hidden">
@@ -273,7 +273,7 @@ const Contribute: React.FC = () => {
                           </div>
                           <div className="w-full bg-gray-200 rounded-full h-2 overflow-hidden">
                             <motion.div
-                              className="bg-gradient-to-r from-red-500 to-rose-600 h-full rounded-full"
+                              className="bg-linear-to-r from-red-500 to-rose-600 h-full rounded-full"
                               initial={{ width: 0 }}
                               whileInView={{ width: `${progress}%` }}
                               transition={{ duration: 1, delay: 0.2 + index * 0.1 }}
@@ -294,7 +294,7 @@ const Contribute: React.FC = () => {
                         </div>
 
                         {/* Bouton d'action */}
-                        <div className="inline-flex items-center gap-2 px-5 py-3 bg-gradient-to-r from-red-500 to-rose-600 text-white rounded-lg font-semibold typography-small group-hover:gap-4 transition-all duration-300 shadow-md hover:shadow-lg w-full justify-center">
+                        <div className="inline-flex items-center gap-2 px-5 py-3 bg-linear-to-r from-red-500 to-rose-600 text-white rounded-lg font-semibold typography-small group-hover:gap-4 transition-all duration-300 shadow-md hover:shadow-lg w-full justify-center">
                           <span>Contribuer</span>
                           <FaArrowRight />
                         </div>

@@ -56,13 +56,13 @@ const Testimonials: React.FC = () => {
             <FaQuoteLeft className="mr-1.5 sm:mr-2 text-xs sm:text-sm" />
             Témoignages
           </div>
-          <h2 className="text-sm sm:text-base md:text-lg font-medium text-gray-900 mb-3 sm:mb-4 px-4 tracking-tight leading-tight">
+          <h2 className="typography-heading-1 font-bold text-gray-900 mb-4 px-4">
             Ce que disent nos
             <span className="block bg-linear-to-r from-red-600 to-red-700 bg-clip-text text-transparent mt-1">
               Alumni
             </span>
           </h2>
-          <p className="text-xs sm:text-sm lg:text-base text-gray-600 max-w-2xl mx-auto px-4 leading-relaxed">
+          <p className="typography-body text-gray-600 max-w-2xl mx-auto px-4">
             Découvrez comment le réseau LAU a transformé la carrière de milliers d&apos;anciens étudiants.
           </p>
         </motion.div>
@@ -90,7 +90,7 @@ const Testimonials: React.FC = () => {
             </div>
 
             {/* Quote */}
-            <blockquote className="text-base sm:text-lg lg:text-xl text-gray-700 text-center leading-relaxed mb-6 sm:mb-8 font-normal px-2 sm:px-4 italic">
+            <blockquote className="typography-heading-2 text-gray-700 text-center mb-8 font-normal px-4 italic leading-relaxed">
               &ldquo;{testimonials[activeTestimonial].quote}&rdquo;
             </blockquote>
 
@@ -101,16 +101,16 @@ const Testimonials: React.FC = () => {
                   {testimonials[activeTestimonial].avatar}
                 </div>
                 <div className="text-left">
-                  <h4 className="text-base sm:text-lg font-bold text-gray-900">
+                  <h4 className="typography-card-title text-gray-900">
                     {testimonials[activeTestimonial].name}
                   </h4>
-                  <p className="text-xs sm:text-sm text-gray-600 leading-tight">
+                  <p className="typography-small text-gray-600 leading-tight">
                     {testimonials[activeTestimonial].role}
                   </p>
-                  <p className="text-xs sm:text-sm text-gray-500 leading-tight">
+                  <p className="typography-small text-gray-500 leading-tight">
                     {testimonials[activeTestimonial].company}
                   </p>
-                  <p className="text-xs sm:text-sm text-red-600 font-medium mt-0.5">
+                  <p className="typography-tiny text-red-600 font-medium mt-0.5">
                     {testimonials[activeTestimonial].promo}
                   </p>
                 </div>

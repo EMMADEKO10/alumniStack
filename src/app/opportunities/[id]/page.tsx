@@ -251,7 +251,7 @@ const OpportunityDetailPage: React.FC = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100">
+      <div className="min-h-screen bg-linear-to-br from-gray-50 via-white to-gray-100">
         <div className="pt-32">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             {/* Skeleton bouton retour */}
@@ -321,7 +321,7 @@ const OpportunityDetailPage: React.FC = () => {
   const applicantsCount = opportunity.applicants?.length || 0;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100">
+    <div className="min-h-screen bg-linear-to-br from-gray-50 via-white to-gray-100">
       {/* Espacement pour le header fixe */}
       <div className="pt-32">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -346,13 +346,13 @@ const OpportunityDetailPage: React.FC = () => {
                 priority
               />
             ) : (
-              <div className="w-full h-full bg-gradient-to-br from-red-500 via-rose-500 to-red-600 flex items-center justify-center">
+              <div className="w-full h-full bg-linear-to-br from-red-500 via-rose-500 to-red-600 flex items-center justify-center">
                 <BriefcaseIcon className="h-32 w-32 text-white opacity-50" />
               </div>
             )}
             
             {/* Overlay gradient */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
+            <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/40 to-transparent"></div>
             
             {/* Contenu sur l'image */}
             <div className="absolute inset-0 flex flex-col justify-end p-8">
@@ -433,7 +433,7 @@ const OpportunityDetailPage: React.FC = () => {
             <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-sm border border-gray-200 p-8">
               {/* Informations clés en grille */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8 pb-8 border-b border-gray-200">
-                <div className="flex items-start gap-4 p-4 bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl border border-green-100">
+                <div className="flex items-start gap-4 p-4 bg-linear-to-br from-green-50 to-emerald-50 rounded-xl border border-green-100">
                   <div className="bg-white p-3 rounded-lg shadow-sm">
                     <MapPinIcon className="h-6 w-6 text-green-600" />
                   </div>
@@ -443,7 +443,7 @@ const OpportunityDetailPage: React.FC = () => {
                   </div>
                 </div>
                 
-                <div className="flex items-start gap-4 p-4 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl border border-blue-100">
+                <div className="flex items-start gap-4 p-4 bg-linear-to-br from-blue-50 to-indigo-50 rounded-xl border border-blue-100">
                   <div className="bg-white p-3 rounded-lg shadow-sm">
                     <CurrencyDollarIcon className="h-6 w-6 text-blue-600" />
                   </div>
@@ -453,7 +453,7 @@ const OpportunityDetailPage: React.FC = () => {
                   </div>
                 </div>
                 
-                <div className="flex items-start gap-4 p-4 bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl border border-purple-100">
+                <div className="flex items-start gap-4 p-4 bg-linear-to-br from-purple-50 to-pink-50 rounded-xl border border-purple-100">
                   <div className="bg-white p-3 rounded-lg shadow-sm">
                     <CalendarIcon className="h-6 w-6 text-purple-600" />
                   </div>
@@ -470,7 +470,7 @@ const OpportunityDetailPage: React.FC = () => {
                   </div>
                 </div>
                 
-                <div className="flex items-start gap-4 p-4 bg-gradient-to-br from-orange-50 to-red-50 rounded-xl border border-orange-100">
+                <div className="flex items-start gap-4 p-4 bg-linear-to-br from-orange-50 to-red-50 rounded-xl border border-orange-100">
                   <div className="bg-white p-3 rounded-lg shadow-sm">
                     <UserGroupIcon className="h-6 w-6 text-orange-600" />
                   </div>
@@ -519,7 +519,7 @@ const OpportunityDetailPage: React.FC = () => {
               <div className="mb-6">
                 {!deadlineInfo.isExpired ? (
                   <>
-                    <div className="mb-4 p-4 bg-gradient-to-br from-green-50 to-emerald-50 border border-green-200 rounded-xl">
+                    <div className="mb-4 p-4 bg-linear-to-br from-green-50 to-emerald-50 border border-green-200 rounded-xl">
                       <div className="flex items-center gap-2">
                         <CheckCircleIcon className="h-6 w-6 text-green-600" />
                         <p className="text-green-800 font-semibold">Candidatures ouvertes</p>
@@ -530,15 +530,15 @@ const OpportunityDetailPage: React.FC = () => {
                       onClick={handleApply}
                       className={`w-full py-4 px-4 rounded-xl font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-lg ${
                         hasApplied
-                          ? "bg-gradient-to-r from-green-600 to-emerald-600 text-white"
-                          : "bg-gradient-to-r from-red-600 to-rose-600 text-white hover:from-red-700 hover:to-rose-700"
+                          ? "bg-linear-to-r from-green-600 to-emerald-600 text-white"
+                          : "bg-linear-to-r from-red-600 to-rose-600 text-white hover:from-red-700 hover:to-rose-700"
                       }`}
                     >
                       {hasApplied ? "✓ Candidature envoyée" : "Postuler maintenant"}
                     </button>
                   </>
                 ) : (
-                  <div className="p-4 bg-gradient-to-br from-red-50 to-orange-50 border border-red-200 rounded-xl">
+                  <div className="p-4 bg-linear-to-br from-red-50 to-orange-50 border border-red-200 rounded-xl">
                     <div className="flex items-center gap-2">
                       <ExclamationTriangleIcon className="h-6 w-6 text-red-600" />
                       <p className="text-red-800 font-semibold">Date limite dépassée</p>
@@ -558,7 +558,7 @@ const OpportunityDetailPage: React.FC = () => {
                     {opportunity.contactEmail && (
                       <a 
                         href={`mailto:${opportunity.contactEmail}`}
-                        className="flex items-center gap-3 p-3 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-lg hover:from-blue-100 hover:to-indigo-100 transition-all duration-300 group"
+                        className="flex items-center gap-3 p-3 bg-linear-to-br from-blue-50 to-indigo-50 rounded-lg hover:from-blue-100 hover:to-indigo-100 transition-all duration-300 group"
                       >
                         <EnvelopeIcon className="h-5 w-5 text-blue-600 group-hover:scale-110 transition-transform" />
                         <span className="text-sm text-blue-700 font-medium group-hover:underline">
@@ -569,7 +569,7 @@ const OpportunityDetailPage: React.FC = () => {
                     {opportunity.contactPhone && (
                       <a 
                         href={`tel:${opportunity.contactPhone}`}
-                        className="flex items-center gap-3 p-3 bg-gradient-to-br from-green-50 to-emerald-50 rounded-lg hover:from-green-100 hover:to-emerald-100 transition-all duration-300 group"
+                        className="flex items-center gap-3 p-3 bg-linear-to-br from-green-50 to-emerald-50 rounded-lg hover:from-green-100 hover:to-emerald-100 transition-all duration-300 group"
                       >
                         <PhoneIcon className="h-5 w-5 text-green-600 group-hover:scale-110 transition-transform" />
                         <span className="text-sm text-green-700 font-medium group-hover:underline">

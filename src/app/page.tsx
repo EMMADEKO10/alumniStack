@@ -3,33 +3,32 @@ import Features from "../ui/Features";
 import Testimonials from "../ui/Testimonials";
 import Events from "../ui/Events";
 import Contribute from "../ui/Contribute";
-// import Newsletter from "../ui/Newsletter";
+import About from "../ui/About";
+import Stats from "../ui/Stats";
 
 export default function Home() {
   return (
     <main className="overflow-hidden">
-      {/* Hero Section - Première impression */}
+      {/* Hero Section - Première impression immersive */}
       <Hero />
-       {/* Contribute Section - Appel aux dons */}
-      <Contribute />
-      {/* Events Section - Engagement communautaire */}
+      
+      {/* Features Section - Proposition de valeur (Carousel interactif) */}
+      <Features />
+
+      {/* About Section - Notre histoire et mission */}
+      <About />
+
+      {/* Stats Section - Preuve de l'impact et crédibilité globale */}
+      <Stats />
+      
+      {/* Events Section - Engagement communautaire et actualité */}
       <Events />
       
-      {/* Features Section - Présentation des fonctionnalités */}
-      <Features />
+      {/* Contribute Section - Appel à l'action et philanthropie */}
+      <Contribute />
       
-      {/* Stats Section - Impact et crédibilité */}
-      {/* <Stats /> */}
-      
-      {/* Testimonials Section - Preuve sociale */}
+      {/* Testimonials Section - Preuve sociale par les pairs */}
       <Testimonials />
-      
-      
-      {/* About Section - Information sur l'organisation */}
-      {/* <About /> */}
-      
-      {/* Newsletter Section - Capture d'audience */}
-      {/* <Newsletter /> */}
     </main>
   );
 }

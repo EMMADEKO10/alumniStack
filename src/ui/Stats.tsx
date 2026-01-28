@@ -75,7 +75,7 @@ const Stats: React.FC = () => {
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-20 left-20 w-96 h-96 bg-red-500/10 rounded-full filter blur-3xl"></div>
         <div className="absolute bottom-20 right-20 w-96 h-96 bg-blue-500/10 rounded-full filter blur-3xl"></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-purple-500/5 rounded-full filter blur-3xl"></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-200 h-200 bg-purple-500/5 rounded-full filter blur-3xl"></div>
       </div>
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
@@ -91,13 +91,13 @@ const Stats: React.FC = () => {
           <div className="inline-flex items-center px-4 py-2 bg-white/10 border border-white/20 rounded-full text-white text-sm font-medium mb-6">
             📊 Impact LAU
           </div>
-          <h2 className="text-4xl lg:text-5xl font-bold mb-6">
+          <h2 className="typography-heading-1 font-bold mb-6">
             Notre impact en
             <span className="block bg-linear-to-r from-red-400 to-red-600 bg-clip-text text-transparent">
               chiffres
             </span>
           </h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+          <p className="typography-body text-gray-300 max-w-3xl mx-auto">
             Découvrez l&apos;ampleur de notre réseau et l&apos;impact concret que nous créons 
             pour notre communauté d&apos;alumni.
           </p>
@@ -135,10 +135,10 @@ const Stats: React.FC = () => {
                 </div>
 
                 {/* Label */}
-                <h3 className="text-xl font-bold text-white mb-2">
+                <h3 className="typography-card-title text-white mb-2">
                   {stat.label}
                 </h3>
-                <p className="text-gray-400 text-sm">
+                <p className="typography-small text-gray-400">
                   {stat.description}
                 </p>
 

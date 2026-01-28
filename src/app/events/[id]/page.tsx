@@ -173,7 +173,7 @@ const EventDetailPage: React.FC = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100">
+      <div className="min-h-screen bg-linear-to-br from-gray-50 via-white to-gray-100">
         <div className="pt-32">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             {/* Skeleton bouton retour */}
@@ -249,7 +249,7 @@ const EventDetailPage: React.FC = () => {
   const availableSpots = event.maxParticipants ? event.maxParticipants - participantsCount : null;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100">
+    <div className="min-h-screen bg-linear-to-br from-gray-50 via-white to-gray-100">
       {/* Espacement pour le header fixe */}
       <div className="pt-32">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -274,13 +274,13 @@ const EventDetailPage: React.FC = () => {
                 priority
               />
             ) : (
-              <div className="w-full h-full bg-gradient-to-br from-red-400 via-orange-500 to-red-600 flex items-center justify-center">
+              <div className="w-full h-full bg-linear-to-br from-red-400 via-orange-500 to-red-600 flex items-center justify-center">
                 <CalendarIcon className="h-32 w-32 text-white opacity-50" />
               </div>
             )}
             
             {/* Overlay gradient */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
+            <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/40 to-transparent"></div>
             
             {/* Contenu sur l'image */}
             <div className="absolute inset-0 flex flex-col justify-end p-8">
@@ -366,7 +366,7 @@ const EventDetailPage: React.FC = () => {
             <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-sm border border-gray-200 p-8">
               {/* Informations clés en grille */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8 pb-8 border-b border-gray-200">
-                <div className="flex items-start gap-4 p-4 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl border border-blue-100">
+                <div className="flex items-start gap-4 p-4 bg-linear-to-br from-blue-50 to-indigo-50 rounded-xl border border-blue-100">
                   <div className="bg-white p-3 rounded-lg shadow-sm">
                     <CalendarIcon className="h-6 w-6 text-blue-600" />
                   </div>
@@ -377,7 +377,7 @@ const EventDetailPage: React.FC = () => {
                   </div>
                 </div>
                 
-                <div className="flex items-start gap-4 p-4 bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl border border-green-100">
+                <div className="flex items-start gap-4 p-4 bg-linear-to-br from-green-50 to-emerald-50 rounded-xl border border-green-100">
                   <div className="bg-white p-3 rounded-lg shadow-sm">
                     <MapPinIcon className="h-6 w-6 text-green-600" />
                   </div>
@@ -388,7 +388,7 @@ const EventDetailPage: React.FC = () => {
                 </div>
                 
                 {event.organizer && (
-                  <div className="flex items-start gap-4 p-4 bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl border border-purple-100">
+                  <div className="flex items-start gap-4 p-4 bg-linear-to-br from-purple-50 to-pink-50 rounded-xl border border-purple-100">
                     <div className="bg-white p-3 rounded-lg shadow-sm">
                       <UserIcon className="h-6 w-6 text-purple-600" />
                     </div>
@@ -400,7 +400,7 @@ const EventDetailPage: React.FC = () => {
                 )}
                 
                 {event.maxParticipants && (
-                  <div className="flex items-start gap-4 p-4 bg-gradient-to-br from-orange-50 to-red-50 rounded-xl border border-orange-100">
+                  <div className="flex items-start gap-4 p-4 bg-linear-to-br from-orange-50 to-red-50 rounded-xl border border-orange-100">
                     <div className="bg-white p-3 rounded-lg shadow-sm">
                       <UsersIcon className="h-6 w-6 text-orange-600" />
                     </div>
@@ -438,14 +438,14 @@ const EventDetailPage: React.FC = () => {
                 {!isEventPast ? (
                   <>
                     {availableSpots !== null && availableSpots > 0 ? (
-                      <div className="mb-4 p-4 bg-gradient-to-br from-green-50 to-emerald-50 border border-green-200 rounded-xl">
+                      <div className="mb-4 p-4 bg-linear-to-br from-green-50 to-emerald-50 border border-green-200 rounded-xl">
                         <div className="flex items-center justify-between mb-3">
                           <span className="text-sm font-semibold text-gray-700">Places disponibles</span>
                           <span className="text-lg font-bold text-green-600">{availableSpots}</span>
                         </div>
                         <div className="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
                           <div 
-                            className="bg-gradient-to-r from-green-500 to-emerald-500 h-3 rounded-full transition-all duration-500" 
+                            className="bg-linear-to-r from-green-500 to-emerald-500 h-3 rounded-full transition-all duration-500" 
                             style={{ width: `${((participantsCount) / (event.maxParticipants || 1)) * 100}%` }}
                           ></div>
                         </div>
@@ -454,7 +454,7 @@ const EventDetailPage: React.FC = () => {
                         </p>
                       </div>
                     ) : availableSpots === 0 ? (
-                      <div className="mb-4 p-4 bg-gradient-to-br from-red-50 to-orange-50 border border-red-200 rounded-xl">
+                      <div className="mb-4 p-4 bg-linear-to-br from-red-50 to-orange-50 border border-red-200 rounded-xl">
                         <p className="text-red-600 font-semibold text-center">Événement complet</p>
                       </div>
                     ) : null}
@@ -464,17 +464,17 @@ const EventDetailPage: React.FC = () => {
                       disabled={availableSpots === 0}
                       className={`w-full py-4 px-4 rounded-xl font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-lg ${
                         isRegistered
-                          ? "bg-gradient-to-r from-green-600 to-emerald-600 text-white"
+                          ? "bg-linear-to-r from-green-600 to-emerald-600 text-white"
                           : availableSpots === 0
                           ? "bg-gray-300 text-gray-500 cursor-not-allowed"
-                          : "bg-gradient-to-r from-red-600 to-orange-600 text-white hover:from-red-700 hover:to-orange-700"
+                          : "bg-linear-to-r from-red-600 to-orange-600 text-white hover:from-red-700 hover:to-orange-700"
                       }`}
                     >
                       {isRegistered ? "✓ Inscrit à l'événement" : availableSpots === 0 ? "Complet" : "S'inscrire maintenant"}
                     </button>
                   </>
                 ) : (
-                  <div className="p-4 bg-gradient-to-br from-gray-50 to-gray-100 border border-gray-200 rounded-xl">
+                  <div className="p-4 bg-linear-to-br from-gray-50 to-gray-100 border border-gray-200 rounded-xl">
                     <p className="text-gray-600 font-semibold text-center">Événement terminé</p>
                   </div>
                 )}
@@ -487,15 +487,15 @@ const EventDetailPage: React.FC = () => {
                   Informations pratiques
                 </h3>
                 <div className="space-y-3">
-                  <div className="flex items-start gap-3 text-sm p-3 bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg">
+                  <div className="flex items-start gap-3 text-sm p-3 bg-linear-to-br from-gray-50 to-gray-100 rounded-lg">
                     <ClockIcon className="h-5 w-5 text-gray-500 flex-shrink-0" />
                     <span className="text-gray-700">Durée estimée : 3-4 heures</span>
                   </div>
-                  <div className="flex items-start gap-3 text-sm p-3 bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg">
+                  <div className="flex items-start gap-3 text-sm p-3 bg-linear-to-br from-gray-50 to-gray-100 rounded-lg">
                     <GlobeAltIcon className="h-5 w-5 text-gray-500 flex-shrink-0" />
                     <span className="text-gray-700">Langue : Français</span>
                   </div>
-                  <div className="flex items-start gap-3 text-sm p-3 bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg">
+                  <div className="flex items-start gap-3 text-sm p-3 bg-linear-to-br from-gray-50 to-gray-100 rounded-lg">
                     <BookmarkIcon className="h-5 w-5 text-gray-500 flex-shrink-0" />
                     <span className="text-gray-700">Gratuit pour les membres</span>
                   </div>

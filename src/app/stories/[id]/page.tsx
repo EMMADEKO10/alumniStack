@@ -61,7 +61,7 @@ export default function StoryDetailPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-cyan-50/30">
+      <div className="min-h-screen bg-linear-to-br from-gray-50 via-white to-cyan-50/30">
         <div className="max-w-6xl mx-auto px-4 pt-8">
           <div className="pt-32 pb-16">
             {/* Skeleton bouton retour */}
@@ -102,7 +102,7 @@ export default function StoryDetailPage() {
 
   if (error || !story) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-cyan-50/30">
+      <div className="min-h-screen bg-linear-to-br from-gray-50 via-white to-cyan-50/30">
         <div className="max-w-6xl mx-auto px-4 pt-8">
           <motion.button
             initial={{ opacity: 0, x: -20 }}
@@ -130,7 +130,7 @@ export default function StoryDetailPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-cyan-50/30">
+    <div className="min-h-screen bg-linear-to-br from-gray-50 via-white to-cyan-50/30">
       {/* Background Decorations */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-20 -left-20 w-72 h-72 bg-red-100 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse"></div>
@@ -230,9 +230,9 @@ export default function StoryDetailPage() {
               priority 
             />
           ) : (
-            <div className="w-full h-full bg-gradient-to-br from-red-400 via-rose-500 to-red-600" />
+            <div className="w-full h-full bg-linear-to-br from-red-400 via-rose-500 to-red-600" />
           )}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
+          <div className="absolute inset-0 bg-linear-to-t from-black/70 via-black/30 to-transparent"></div>
           
           {/* Category Badge */}
           {story.category && (
@@ -347,7 +347,7 @@ export default function StoryDetailPage() {
               </div>
 
               {/* CTA Card */}
-              <div className="bg-gradient-to-br from-red-600 to-rose-600 rounded-2xl shadow-xl p-6 text-white">
+              <div className="bg-linear-to-br from-red-600 to-rose-600 rounded-2xl shadow-xl p-6 text-white">
                 <h3 className="font-bold mb-3 text-lg">Inspiré par cette histoire?</h3>
                 <p className="text-sm text-red-100 mb-4 leading-relaxed">
                   Rejoignez notre communauté et partagez votre propre parcours inspirant.

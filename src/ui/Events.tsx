@@ -104,23 +104,29 @@ const Events: React.FC = () => {
   };
 
   return (
-    <section className="py-16 md:py-20 bg-linear-to-br from-slate-50 via-white to-slate-100">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6">
+    <section className="py-20 bg-linear-to-b from-white via-slate-50 to-white relative overflow-hidden">
+      {/* Décorations de fond */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-linear-to-bl from-red-50/50 to-transparent rounded-full blur-3xl" />
+        <div className="absolute bottom-0 left-0 w-1/4 h-1/4 bg-linear-to-tr from-slate-100/50 to-transparent rounded-full blur-3xl" />
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
         <motion.div
-          initial={{ opacity: 0, y: 16 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-12 md:mb-16"
+          className="text-center mb-16"
         >
-          <div className="inline-flex items-center px-3 py-1.5 bg-red-50 text-red-600 border border-red-100 rounded-full text-xs font-semibold mb-5 uppercase tracking-wide">
-            <FaCalendarAlt className="mr-2" />
-            Événements à venir
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-linear-to-r from-red-100 to-pink-100 rounded-full mb-6">
+            <FaCalendarAlt className="text-red-600" />
+            <span className="typography-small font-semibold text-red-600 uppercase tracking-wider">Programme</span>
           </div>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-slate-900 mb-4 leading-tight tracking-tight">
-            Explorez les prochains rendez-vous de la communauté
+          <h2 className="typography-heading-1 text-slate-900 mb-6 font-extrabold">
+            Explorez les prochains <span className="bg-linear-to-r from-red-600 via-rose-600 to-red-500 bg-clip-text text-transparent">rendez-vous</span> de la communauté
           </h2>
-          <p className="text-base md:text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed">
+          <p className="typography-body text-slate-600 max-w-2xl mx-auto">
             Des conférences inspirantes, des ateliers pratiques et des moments de networking exclusifs pour les alumni LAU.
           </p>
         </motion.div>
@@ -189,10 +195,10 @@ const Events: React.FC = () => {
                         <div className="inline-flex items-center px-3 py-1 bg-white/10 rounded-full text-xs font-semibold mb-3 uppercase tracking-wide">
                           {spotlightEvent.type}
                         </div>
-                        <h3 className="text-2xl md:text-3xl lg:text-4xl font-extrabold leading-tight tracking-tight">
+                        <h3 className="typography-heading-2 font-extrabold leading-tight tracking-tight text-white">
                           {spotlightEvent.title}
                         </h3>
-                        <p className="text-sm md:text-base text-white/80 mt-3 max-w-2xl leading-relaxed">
+                        <p className="typography-small text-white/80 mt-3 max-w-2xl leading-relaxed">
                           {spotlightEvent.description}
                         </p>
                         <div className="mt-4 flex flex-wrap items-center gap-4 text-sm text-white/80">
@@ -271,16 +277,16 @@ const Events: React.FC = () => {
                       </div>
                     </div>
                   </div>
-                  <div className="p-6 space-y-4">
-                    <div>
-                      <h3 className="text-lg font-semibold text-slate-900 group-hover:text-red-600 transition-colors">
+                  <div className="p-6">
+                    <div className="mb-4">
+                      <h3 className="typography-card-title text-slate-900 group-hover:text-red-600 transition-colors mb-2 line-clamp-1">
                         {event.title}
                       </h3>
-                      <p className="mt-2 text-sm text-slate-600 line-clamp-3">
+                      <p className="typography-small text-slate-600 line-clamp-2">
                         {event.description}
                       </p>
                     </div>
-                    <div className="flex flex-wrap gap-3 text-sm text-slate-500">
+                    <div className="flex flex-wrap gap-4 text-xs font-medium text-slate-500 mb-4">
                       <span className="inline-flex items-center">
                         <FaClock className="mr-2 text-red-500/80" />
                         {formatDate(event.date)}
@@ -320,14 +326,14 @@ const Events: React.FC = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="mt-12 text-center"
+          className="mt-16 text-center"
         >
           <Link
             href="/events"
-            className="inline-flex items-center gap-2 rounded-lg border border-red-500 px-6 py-3 text-sm md:text-base font-semibold text-red-600 hover:bg-red-500 hover:text-white transition-all duration-300"
+            className="inline-flex items-center gap-3 px-8 py-4 bg-white border-2 border-red-600 text-red-600 rounded-xl font-bold typography-body hover:bg-red-600 hover:text-white transition-all duration-300 shadow-lg hover:shadow-xl group"
           >
-            Voir tous les événements
-            <FaArrowRight />
+            <span>Voir tous les événements</span>
+            <FaArrowRight className="group-hover:translate-x-1 transition-transform" />
           </Link>
         </motion.div>
       </div>

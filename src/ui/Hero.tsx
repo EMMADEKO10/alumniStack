@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { motion } from "framer-motion";
 import { FaGraduationCap, FaUsers, FaCalendarAlt, FaBriefcase, FaArrowRight, FaPlay } from "react-icons/fa";
 
@@ -24,11 +24,11 @@ const Hero: React.FC = () => {
   const [loopNum, setLoopNum] = useState(0);
   const [typingSpeed, setTypingSpeed] = useState(100);
 
-  const fullPhrases = [
+  const fullPhrases = useMemo(() => [
     "Bâtissez l'avenir de votre université",
     "Rejoignez la communauté d'alumni LAU",
     "Développez votre réseau professionnel"
-  ];
+  ], []);
 
   useEffect(() => {
     const handleType = () => {
@@ -89,13 +89,13 @@ const Hero: React.FC = () => {
     }
 
     return (
-      <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white tracking-tight leading-tight min-h-[80px] sm:min-h-[100px] flex items-center">
+      <h1 className="typography-heading-1 font-extrabold text-white tracking-tight leading-tight min-h-24 sm:min-h-32 flex items-center">
         <span className="relative">
           {content}
           <motion.span
             animate={{ opacity: [1, 0] }}
             transition={{ duration: 0.5, repeat: Infinity, ease: "linear" }}
-            className="inline-block w-[4px] h-[0.8em] ml-2 bg-red-500 align-middle"
+            className="inline-block w-1 h-[0.8em] ml-2 bg-red-500 align-middle"
           />
         </span>
       </h1>

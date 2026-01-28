@@ -1,7 +1,9 @@
 'use client';
 
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
+import React, { useState, useEffect, useCallback } from "react";
 import { 
   FaUsers, 
   FaCalendarAlt, 
@@ -10,94 +12,119 @@ import {
   FaHandHoldingHeart, 
   FaNetworkWired,
   FaArrowRight,
+  FaArrowLeft,
   FaBookOpen
 } from "react-icons/fa";
 
 const Features: React.FC = () => {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [direction, setDirection] = useState(0);
+
   const features = [
     {
-      icon: <FaUsers className="text-4xl" />,
+      icon: <FaUsers className="text-3xl md:text-4xl" />,
       title: "Réseau Alumni",
-      description: "Connectez-vous avec plus de 100,000 anciens étudiants à travers le monde entier.",
+      description: "Connectez-vous avec plus de 100,000 anciens étudiants à travers le monde entier pour partager expertises et opportunités.",
       link: "/community",
-      color: "from-blue-500 to-blue-600",
-      bgColor: "bg-blue-50",
+      color: "from-blue-600 to-blue-800",
+      image: "/lau/Auditoire_LAU.jpg",
       stats: "100K+ membres"
     },
     {
-      icon: <FaBriefcase className="text-4xl" />,
+      icon: <FaBriefcase className="text-3xl md:text-4xl" />,
       title: "Opportunités Carrière",
-      description: "Découvrez des offres d'emploi exclusives partagées par notre communauté.",
+      description: "Accédez à un marché de l'emploi privilégié avec des offres exclusives partagées par les leaders de notre communauté.",
       link: "/opportunities", 
-      color: "from-green-500 to-green-600",
-      bgColor: "bg-green-50",
+      color: "from-green-600 to-green-800",
+      image: "/lau/communication_technologie_de_l_info.jpg",
       stats: "2K+ opportunités"
     },
     {
-      icon: <FaCalendarAlt className="text-4xl" />,
-      title: "Événements Alumni",
-      description: "Participez à des événements, conférences et retrouvailles organisés régulièrement.",
+      icon: <FaCalendarAlt className="text-3xl md:text-4xl" />,
+      title: "Événements Prestige",
+      description: "Participez à des sommets, des forums de networking et des galas de retrouvailles organisés dans les capitales mondiales.",
       link: "/events",
-      color: "from-purple-500 to-purple-600", 
-      bgColor: "bg-purple-50",
+      color: "from-purple-600 to-purple-800", 
+      image: "/lau/hiro_leadership_academy.jpg",
       stats: "500+ événements/an"
     },
     {
-      icon: <FaGraduationCap className="text-4xl" />,
-      title: "Formations Continue",
-      description: "Accédez à des formations professionnelles pour développer vos compétences.",
+      icon: <FaGraduationCap className="text-3xl md:text-4xl" />,
+      title: "Executive Education",
+      description: "Développez votre leadership avec nos programmes certifiants conçus pour les cadres et entrepreneurs alumni.",
       link: "/formations",
-      color: "from-orange-500 to-orange-600",
-      bgColor: "bg-orange-50", 
+      color: "from-orange-600 to-orange-800",
+      image: "/lau/leadership_et_gouvernance.jpg",
       stats: "200+ formations"
     },
     {
-      icon: <FaHandHoldingHeart className="text-4xl" />,
-      title: "Contribuer & Donner",
-      description: "Soutenez les projets de l'université et aidez les nouveaux étudiants.",
+      icon: <FaHandHoldingHeart className="text-3xl md:text-4xl" />,
+      title: "Mécénat & Impact",
+      description: "Soutenez le fonds de bourses d'excellence et financez les projets innovants portés par les futurs talents de la LAU.",
       link: "/donations",
-      color: "from-red-500 to-red-600",
-      bgColor: "bg-red-50",
+      color: "from-red-600 to-red-800",
+      image: "/lau/collation.jpg",
       stats: "€2M+ collectés"
     },
     {
-      icon: <FaBookOpen className="text-4xl" />,
-      title: "Histoires Inspirantes",
-      description: "Partagez votre parcours et inspirez la prochaine génération d'étudiants.",
+      icon: <FaBookOpen className="text-3xl md:text-4xl" />,
+      title: "Chroniques de Succès",
+      description: "Découvrez les parcours inspirants de nos diplômés qui redéfinissent le leadership dans leurs domaines respectifs.",
       link: "/stories",
-      color: "from-indigo-500 to-indigo-600",
-      bgColor: "bg-indigo-50",
+      color: "from-indigo-600 to-indigo-800",
+      image: "/lau/Etudiants_finalistes.jpg",
       stats: "1K+ histoires"
     }
   ];
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2
-      }
-    }
-  };
+  const paginate = useCallback((newDirection: number) => {
+    setDirection(newDirection);
+    setActiveIndex((prevIndex) => (prevIndex + newDirection + features.length) % features.length);
+  }, [features.length]);
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 50 },
-    visible: {
+  useEffect(() => {
+    const timer = setInterval(() => {
+      paginate(1);
+    }, 8000);
+    return () => clearInterval(timer);
+  }, [paginate]);
+
+  const variants = {
+    enter: (direction: number) => ({
+      x: direction > 0 ? 1000 : -1000,
+      opacity: 0,
+      scale: 0.95
+    }),
+    center: {
+      zIndex: 1,
+      x: 0,
       opacity: 1,
-      y: 0,
+      scale: 1,
       transition: {
-        duration: 0.6,
-        ease: [0.25, 0.1, 0.25, 1] as [number, number, number, number]
+        duration: 0.8,
+        ease: [0.16, 1, 0.3, 1]
       }
-    }
+    },
+    exit: (direction: number) => ({
+      zIndex: 0,
+      x: direction < 0 ? 1000 : -1000,
+      opacity: 0,
+      scale: 0.95,
+      transition: {
+        duration: 0.8,
+        ease: [0.16, 1, 0.3, 1]
+      }
+    })
   };
 
   return (
-    <section className="py-20 bg-linear-to-br from-gray-50 to-white">
-      <div className="max-w-7xl mx-auto px-6">
-        
-        {/* Header */}
+    <section className="py-24 bg-slate-50 relative overflow-hidden">
+      {/* Background patterns */}
+      <div className="absolute inset-0 opacity-[0.03] pointer-events-none">
+        <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(#000_1px,transparent_1px)] bg-size-[40px_40px]" />
+      </div>
+
+      <div className="max-w-7xl mx-auto px-6 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -105,98 +132,164 @@ const Features: React.FC = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <div className="inline-flex items-center px-4 py-2 bg-red-50 text-red-600 rounded-full text-sm font-medium mb-6 border border-red-100">
+          <div className="inline-flex items-center px-4 py-2 bg-red-50 text-red-700 rounded-full text-sm font-bold mb-6 border border-red-100 uppercase tracking-widest">
             <FaNetworkWired className="mr-2" />
-            Fonctionnalités principales
+            Écosystème LAU
           </div>
-          <h2 className="text-sm md:text-base lg:text-lg font-medium text-gray-900 mb-6 tracking-tight leading-tight">
-            Tout ce dont vous avez besoin pour
-            <span className="block bg-linear-to-r from-red-600 to-red-700 bg-clip-text text-transparent mt-1">
-              rester connecté
+          <h2 className="typography-heading-1 font-extrabold text-slate-900 mb-6">
+            Une plateforme conçue pour votre 
+            <span className="block bg-linear-to-r from-red-600 to-red-800 bg-clip-text text-transparent mt-2">
+              ascension professionnelle
             </span>
           </h2>
-          <p className="text-sm md:text-base text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            Notre plateforme offre tous les outils nécessaires pour maintenir et développer 
-            votre réseau professionnel alumni.
-          </p>
         </motion.div>
 
-        {/* Features Grid */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-        >
-          {features.map((feature, index) => (
+        {/* Carousel Container */}
+        <div className="relative h-137.5 md:h-150 w-full">
+          <AnimatePresence initial={false} custom={direction}>
             <motion.div
-              key={index}
-              variants={itemVariants}
-              className="group relative"
+              key={activeIndex}
+              custom={direction}
+              variants={variants}
+              initial="enter"
+              animate="center"
+              exit="exit"
+              className="absolute inset-0 w-full h-full"
             >
-              <Link href={feature.link}>
-                <div className={`${feature.bgColor} rounded-2xl p-8 h-full transition-all duration-300 hover:shadow-xl hover:scale-105 border border-gray-100 relative overflow-hidden`}>
-                  
-                  {/* Background Pattern */}
-                  <div className="absolute top-0 right-0 w-32 h-32 opacity-10">
-                    <div className={`w-full h-full bg-linear-to-br ${feature.color} rounded-full transform translate-x-16 -translate-y-16`}></div>
-                  </div>
+              <div className="relative w-full h-full rounded-[2.5rem] overflow-hidden shadow-2xl border border-white/20">
+                {/* Background Image with Overlay */}
+                <Image
+                  src={features[activeIndex].image}
+                  alt={features[activeIndex].title}
+                  fill
+                  className="object-cover transform scale-105 group-hover:scale-110 transition-transform duration-[10s]"
+                />
+                <div className="absolute inset-0 bg-linear-to-r from-slate-900 via-slate-900/80 to-transparent md:to-slate-900/20" />
+                
+                {/* Content Overlay */}
+                <div className="absolute inset-0 flex items-center px-8 md:px-20 lg:px-24">
+                  <div className="max-w-2xl space-y-6 md:space-y-8">
+                    <motion.div
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.3 }}
+                      className="inline-flex items-center px-4 py-1.5 bg-white/10 backdrop-blur-md rounded-full text-white/90 text-sm font-semibold border border-white/20"
+                    >
+                      <span className="w-2 h-2 rounded-full bg-red-500 mr-2 animate-pulse" />
+                      {features[activeIndex].stats}
+                    </motion.div>
 
-                  {/* Stats Badge */}
-                  <div className="absolute top-4 right-4">
-                    <span className="text-xs font-semibold text-gray-500 bg-white/80 px-2 py-1 rounded-full">
-                      {feature.stats}
-                    </span>
-                  </div>
+                    <div className="space-y-4">
+                      <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.4 }}
+                        className={`w-16 h-16 md:w-20 md:h-20 bg-linear-to-br ${features[activeIndex].color} text-white rounded-2xl flex items-center justify-center shadow-xl mb-6`}
+                      >
+                        {features[activeIndex].icon}
+                      </motion.div>
+                      
+                      <motion.h3
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.5 }}
+                        className="typography-heading-1 text-white font-black leading-none"
+                      >
+                        {features[activeIndex].title}
+                      </motion.h3>
+                      
+                      <motion.p
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.6 }}
+                        className="typography-body text-slate-200 max-w-lg leading-relaxed md:text-xl"
+                      >
+                        {features[activeIndex].description}
+                      </motion.p>
+                    </div>
 
-                  {/* Icon */}
-                  <div className={`inline-flex items-center justify-center w-16 h-16 bg-linear-to-br ${feature.color} text-white rounded-xl mb-6 group-hover:scale-110 transition-transform duration-300`}>
-                    {feature.icon}
-                  </div>
-
-                  {/* Content */}
-                  <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-red-600 transition-colors tracking-tight">
-                    {feature.title}
-                  </h3>
-                  <p className="text-gray-600 mb-6 leading-relaxed text-sm">
-                    {feature.description}
-                  </p>
-
-                  {/* CTA */}
-                  <div className="flex items-center text-red-600 font-semibold group-hover:translate-x-2 transition-transform duration-300">
-                    <span>Découvrir</span>
-                    <FaArrowRight className="ml-2 text-sm" />
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.7 }}
+                    >
+                      <Link
+                        href={features[activeIndex].link}
+                        className="inline-flex items-center gap-3 px-8 py-4 bg-white text-slate-900 font-bold rounded-xl hover:bg-red-600 hover:text-white transition-all duration-300 shadow-xl group/btn"
+                      >
+                        <span>Découvrir maintenant</span>
+                        <FaArrowRight className="group-hover/btn:translate-x-1 transition-transform" />
+                      </Link>
+                    </motion.div>
                   </div>
                 </div>
-              </Link>
+              </div>
             </motion.div>
-          ))}
-        </motion.div>
+          </AnimatePresence>
 
-        {/* Bottom CTA */}
+          {/* Navigation Controls */}
+          <div className="absolute -bottom-16 left-0 right-0 flex items-center justify-between md:px-4">
+            {/* Indicators */}
+            <div className="flex gap-2">
+              {features.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => {
+                    setDirection(index > activeIndex ? 1 : -1);
+                    setActiveIndex(index);
+                  }}
+                  className={`h-2.5 rounded-full transition-all duration-500 ${
+                    index === activeIndex ? "w-12 bg-red-600" : "w-2.5 bg-slate-300 hover:bg-slate-400"
+                  }`}
+                  aria-label={`Aller à la slide ${index + 1}`}
+                />
+              ))}
+            </div>
+
+            {/* Arrows */}
+            <div className="flex gap-4">
+              <button
+                onClick={() => paginate(-1)}
+                className="w-14 h-14 rounded-full border-2 border-slate-200 flex items-center justify-center text-slate-600 hover:border-red-600 hover:text-red-600 hover:bg-red-50 transition-all duration-300 shadow-lg bg-white"
+                aria-label="Slide précédente"
+              >
+                <FaArrowLeft />
+              </button>
+              <button
+                onClick={() => paginate(1)}
+                className="w-14 h-14 rounded-full bg-red-600 flex items-center justify-center text-white hover:bg-red-700 transition-all duration-300 shadow-xl shadow-red-500/20"
+                aria-label="Slide suivante"
+              >
+                <FaArrowRight />
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom CTA Section */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="text-center mt-16"
+          className="mt-32"
         >
-          <div className="bg-linear-to-r from-red-600 to-red-700 rounded-2xl p-10 md:p-12 text-white shadow-2xl">
-            <h3 className="text-2xl md:text-3xl font-extrabold mb-4 tracking-tight">
-              Prêt à rejoindre la communauté LAU ?
-            </h3>
-            <p className="text-red-50 mb-8 max-w-2xl mx-auto leading-relaxed text-base">
-              Inscrivez-vous aujourd&apos;hui et commencez à bénéficier de tous 
-              les avantages de notre réseau alumni.
-            </p>
-            <Link
-              href="/register"
-              className="inline-flex items-center px-8 py-4 bg-white text-red-600 font-semibold rounded-xl shadow-lg hover:bg-gray-50 transform hover:scale-105 transition-all duration-300 text-base"
-            >
-              Commencer maintenant
-              <FaArrowRight className="ml-2" />
-            </Link>
+          <div className="relative rounded-3xl overflow-hidden py-12 px-8 text-center border border-red-100 bg-white shadow-xl">
+            <div className="relative z-10">
+              <h3 className="typography-heading-2 font-bold text-slate-900 mb-4">
+                Prêt à rejoindre l&apos;élite des Alumni ?
+              </h3>
+              <p className="typography-body text-slate-600 mb-8 max-w-2xl mx-auto">
+                Ne restez pas en marge de ce réseau d&apos;excellence. Rejoignez-nous pour donner une nouvelle dimension à votre carrière.
+              </p>
+              <Link
+                href="/register"
+                className="inline-flex items-center px-10 py-4 bg-red-600 text-white font-black rounded-xl shadow-2xl hover:bg-red-700 transform hover:scale-105 transition-all duration-500 uppercase tracking-widest text-sm md:text-base"
+              >
+                S&apos;inscrire aujourd&apos;hui
+                <FaArrowRight className="ml-3" />
+              </Link>
+            </div>
           </div>
         </motion.div>
       </div>
