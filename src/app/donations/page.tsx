@@ -401,51 +401,6 @@ const DonationsPage = () => {
         </p>
       </motion.div>
 
-      {/* Grille de fonctionnalités */}
-      <motion.div 
-        className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 relative z-10"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.2 }}
-      >
-        {[
-          {
-            icon: FaHeart,
-            title: "Impact Direct",
-            description: "Votre don a un impact immédiat sur la vie de nos étudiants et la qualité de notre enseignement."
-          },
-          {
-            icon: FaUniversity,
-            title: "Projets Variés",
-            description: "Soutenez des projets d'infrastructure, de recherche, ou des programmes de bourses d'excellence."
-          },
-          {
-            icon: FaCheck,
-            title: "Transparence Totale",
-            description: "Suivez en temps réel la progression de chaque campagne et l'utilisation des fonds collectés."
-          }
-        ].map((feature, index) => (
-          <motion.div
-            key={index}
-            className="bg-white/80 backdrop-blur-sm rounded-xl p-6 border border-gray-200 hover:shadow-lg transition-all duration-300 group"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
-            whileHover={{ y: -8 }}
-          >
-            <div className="bg-linear-to-br from-red-50 to-pink-50 w-14 h-14 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
-              <feature.icon className="text-2xl text-red-600" />
-            </div>
-            <h3 className="text-lg font-semibold text-gray-900 mb-2">
-              {feature.title}
-            </h3>
-            <p className="text-gray-600 text-sm">
-              {feature.description}
-            </p>
-          </motion.div>
-        ))}
-      </motion.div>
-
       {/* Barre de recherche et filtres */}
       <motion.div 
         className="bg-white/80 backdrop-blur-sm rounded-xl shadow-sm border border-gray-200 p-6 mb-8 relative z-10"
@@ -781,6 +736,54 @@ const DonationsPage = () => {
           </div>
         </div>
       </motion.div>
+
+      {/* Grille de fonctionnalités d'impact (Déplacée en bas) */}
+      <motion.div 
+        className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-16 relative z-10"
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        viewport={{ once: true }}
+      >
+        {[
+          {
+            icon: FaHeart,
+            title: "Impact Direct",
+            description: "Votre don a un impact immédiat sur la vie de nos étudiants et la qualité de notre enseignement."
+          },
+          {
+            icon: FaUniversity,
+            title: "Projets Variés",
+            description: "Soutenez des projets d'infrastructure, de recherche, ou des programmes de bourses d'excellence."
+          },
+          {
+            icon: FaCheck,
+            title: "Transparence Totale",
+            description: "Suivez en temps réel la progression de chaque campagne et l'utilisation des fonds collectés."
+          }
+        ].map((feature, index) => (
+          <motion.div
+            key={index}
+            className="bg-white/80 backdrop-blur-sm rounded-none p-6 border border-gray-200 hover:shadow-lg transition-all duration-300 group"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: index * 0.1 }}
+            whileHover={{ y: -8 }}
+            viewport={{ once: true }}
+          >
+            <div className="bg-linear-to-br from-red-50 to-pink-50 w-14 h-14 rounded-none flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+              <feature.icon className="text-2xl text-red-600" />
+            </div>
+            <h3 className="text-lg font-semibold text-gray-900 mb-2 font-sans">
+              {feature.title}
+            </h3>
+            <p className="text-gray-600 text-sm">
+              {feature.description}
+            </p>
+          </motion.div>
+        ))}
+      </motion.div>
+
     </div>
   );
 };
