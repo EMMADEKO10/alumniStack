@@ -179,12 +179,12 @@ const Contribute: React.FC = () => {
           viewport={{ once: true }}
         >
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-red-100 to-pink-100 rounded-full mb-4">
-            <span className="text-sm font-semibold text-red-600">Soutenez-nous</span>
+            <span className="typography-small font-semibold text-red-600">Soutenez-nous</span>
           </div>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+          <h2 className="typography-heading-1 text-gray-900 mb-4">
             Faites la <span className="bg-gradient-to-r from-red-600 via-rose-600 to-red-500 bg-clip-text text-transparent">différence</span>
           </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+          <p className="typography-body text-gray-600 max-w-2xl mx-auto">
             Votre générosité aide à bâtir l&apos;avenir de l&apos;éducation 
           </p>
         </motion.div>
@@ -246,7 +246,7 @@ const Contribute: React.FC = () => {
                           className="object-cover group-hover:scale-110 transition-transform duration-300"
                         />
                         {donation.category && (
-                          <div className="absolute top-3 right-3 px-3 py-1 bg-white/90 backdrop-blur-sm rounded-full text-xs font-semibold text-gray-700">
+                          <div className="absolute top-3 right-3 px-3 py-1 bg-white/90 backdrop-blur-sm rounded-full typography-tiny font-semibold text-gray-700">
                             {donation.category}
                           </div>
                         )}
@@ -254,16 +254,16 @@ const Contribute: React.FC = () => {
 
                       {/* Contenu */}
                       <div className="p-6">
-                        <h3 className="font-bold text-gray-900 mb-2 line-clamp-1" style={{ fontSize: 'clamp(1.05rem, 2vw, 1.15rem)', lineHeight: '1.4' }}>
+                        <h3 className="typography-card-title text-gray-900 mb-2 line-clamp-1">
                           {donation.title}
                         </h3>
-                        <p className="text-gray-600 text-sm mb-4 line-clamp-2 leading-relaxed">
+                        <p className="typography-small text-gray-600 mb-4 line-clamp-2">
                           {donation.description}
                         </p>
 
                         {/* Barre de progression */}
                         <div className="mb-4">
-                          <div className="flex justify-between text-sm mb-2">
+                          <div className="flex justify-between typography-small mb-2">
                             <span className="font-semibold text-gray-900">
                               {formatAmount(donation.currentAmount)}
                             </span>
@@ -281,11 +281,11 @@ const Contribute: React.FC = () => {
                             />
                           </div>
                           <div className="flex justify-between items-center mt-2">
-                            <span className="text-xs text-gray-500">
+                            <span className="typography-tiny text-gray-500">
                               Objectif: {formatAmount(donation.targetAmount)}
                             </span>
                             {donation.donorCount && (
-                              <span className="text-xs text-gray-500 flex items-center gap-1">
+                              <span className="typography-tiny text-gray-500 flex items-center gap-1">
                                 <FaHeart className="text-red-500" />
                                 {donation.donorCount} donateurs
                               </span>
@@ -294,9 +294,9 @@ const Contribute: React.FC = () => {
                         </div>
 
                         {/* Bouton d'action */}
-                        <div className="inline-flex items-center gap-2 px-5 py-3 bg-gradient-to-r from-red-500 to-rose-600 text-white rounded-lg font-semibold text-sm group-hover:gap-4 transition-all duration-300 shadow-md hover:shadow-lg w-full justify-center">
+                        <div className="inline-flex items-center gap-2 px-5 py-3 bg-gradient-to-r from-red-500 to-rose-600 text-white rounded-lg font-semibold typography-small group-hover:gap-4 transition-all duration-300 shadow-md hover:shadow-lg w-full justify-center">
                           <span>Contribuer</span>
-                          <FaArrowRight className="text-sm" />
+                          <FaArrowRight />
                         </div>
                       </div>
                     </div>
@@ -317,7 +317,7 @@ const Contribute: React.FC = () => {
         >
           <Link href="/donations">
             <motion.button
-              className="inline-flex items-center gap-3 px-8 py-4 bg-white border-2 border-red-600 text-red-600 rounded-xl font-bold text-base hover:bg-red-600 hover:text-white transition-all duration-300 shadow-lg hover:shadow-xl"
+              className="inline-flex items-center gap-3 px-8 py-4 bg-white border-2 border-red-600 text-red-600 rounded-xl font-bold typography-body hover:bg-red-600 hover:text-white transition-all duration-300 shadow-lg hover:shadow-xl"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
