@@ -19,6 +19,40 @@ const Hero: React.FC = () => {
   ];
 
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [displayText, setDisplayText] = useState("");
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [loopNum, setLoopNum] = useState(0);
+  const [typingSpeed, setTypingSpeed] = useState(100);
+
+  const fullPhrases = [
+    "Bâtissez l'avenir de votre université",
+    "Rejoignez la communauté d'alumni LAU",
+    "Développez votre réseau professionnel"
+  ];
+
+  useEffect(() => {
+    const handleType = () => {
+      const i = loopNum % fullPhrases.length;
+      const fullText = fullPhrases[i];
+
+      setDisplayText(isDeleting 
+        ? fullText.substring(0, displayText.length - 1) 
+        : fullText.substring(0, displayText.length + 1)
+      );
+
+      setTypingSpeed(isDeleting ? 40 : 80);
+
+      if (!isDeleting && displayText === fullText) {
+        setTimeout(() => setIsDeleting(true), 2500);
+      } else if (isDeleting && displayText === "") {
+        setIsDeleting(false);
+        setLoopNum(loopNum + 1);
+      }
+    };
+
+    const timer = setTimeout(handleType, typingSpeed);
+    return () => clearTimeout(timer);
+  }, [displayText, isDeleting, loopNum, typingSpeed, fullPhrases]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -27,6 +61,46 @@ const Hero: React.FC = () => {
 
     return () => clearInterval(interval);
   }, [heroImages.length]);
+
+  const renderTitle = () => {
+    // Liste des mots à mettre en dégradé (UI/UX professionnel)
+    const highlights = ["communauté", "réseau", "avenir"];
+    let content: React.ReactNode = displayText;
+
+    for (const word of highlights) {
+      if (displayText.toLowerCase().includes(word)) {
+        const regex = new RegExp(`(${word})`, 'i');
+        const parts = displayText.split(regex);
+        content = (
+          <>
+            {parts.map((part, index) => 
+              regex.test(part) ? (
+                <span key={index} className="bg-linear-to-r from-red-400 to-red-600 bg-clip-text text-transparent">
+                  {part}
+                </span>
+              ) : (
+                <span key={index}>{part}</span>
+              )
+            )}
+          </>
+        );
+        break;
+      }
+    }
+
+    return (
+      <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white tracking-tight leading-tight min-h-[80px] sm:min-h-[100px] flex items-center">
+        <span className="relative">
+          {content}
+          <motion.span
+            animate={{ opacity: [1, 0] }}
+            transition={{ duration: 0.5, repeat: Infinity, ease: "linear" }}
+            className="inline-block w-[4px] h-[0.8em] ml-2 bg-red-500 align-middle"
+          />
+        </span>
+      </h1>
+    );
+  };
 
   return (
     <div className="relative min-h-screen flex items-center overflow-hidden pt-20 lg:pt-24">
@@ -106,13 +180,7 @@ const Hero: React.FC = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="space-y-4"
           >
-            <h1 className="text-4xl sm:text-5xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight leading-tight">
-              Rejoignez une
-              <span className="block text-5xl sm:text-5xl md:text-5xl lg:text-6xl bg-linear-to-r from-red-400 to-red-600 bg-clip-text text-transparent mt-1 sm:mt-2">
-                communauté
-              </span>
-              d&apos;exception
-            </h1>
+            {renderTitle()}
             <p className="text-sm md:text-base lg:text-lg text-gray-200 leading-relaxed max-w-2xl font-normal">
               Connectez-vous avec plus de <strong className="text-white font-semibold">20,000 alumni</strong> 
               {' '}à travers le monde. Développez votre carrière, créez des partenariats et 
@@ -138,11 +206,9 @@ const Hero: React.FC = () => {
             <Link
               href="/donations"
               className="group inline-flex items-center justify-center px-6 sm:px-8 py-3.5 sm:py-4 bg-linear-to-r from-red-600 to-red-700 text-white font-semibold rounded-xl shadow-lg hover:from-red-700 hover:to-red-800 transform hover:scale-105 transition-all duration-300 text-sm sm:text-base"
-            >
-              Faire un don
+            > Faire un don
               <FaArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
-            </Link>
-            
+            </Link>            
           </motion.div>
 
           {/* Social Proof */}
