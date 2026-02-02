@@ -42,7 +42,13 @@ export async function GET(request: Request) {
       }
 
       // 3) Déplacer de pendingUsers -> users (upsert sécurisé)
-      const { _id, verificationToken, verificationExpires, ...userData } = pending as any;
+      const { _id, verificationToken, verificationExpires, ...userData } = pending as { 
+        _id: import('mongodb').ObjectId; 
+        verificationToken: string; 
+        verificationExpires: Date; 
+        email: string;
+        [key: string]: unknown 
+      };
 
       // Assurer unicité par email
       const existingByEmail = await db.collection('users').findOne({ email: pending.email });

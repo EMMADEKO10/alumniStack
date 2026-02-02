@@ -2,10 +2,21 @@ import { NextResponse } from 'next/server';
 import { connectDB } from '../../../../lib/mongodb';
 import { ObjectId } from 'mongodb';
 
+interface PaymentBody {
+  amount: string | number;
+  donationId: string;
+  customerName?: string;
+  phoneNumber?: string;
+  customerEmail?: string;
+  paymentMethod?: string;
+  provider?: string;
+  walletID?: string;
+}
+
 export async function POST(req: Request) {
   console.log('--- NOUVELLE TENTATIVE DE PAIEMENT ---');
   try {
-    const body = await req.json();
+    const body = await req.json() as PaymentBody;
     const { amount, donationId, customerName, phoneNumber, customerEmail, paymentMethod = 'MOBILEMONEY', provider, walletID } = body;
 
     console.log('Paramètres reçus:', { amount, donationId, paymentMethod });
@@ -14,12 +25,14 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: 'Montant et ID de donation requis' }, { status: 400 });
     }
 
+    const finalAmount = typeof amount === 'string' ? parseFloat(amount) : amount;
+
     // 1. Connexion DB avec timeout court
     console.log('1. Connexion MongoDB...');
     const dbPromise = connectDB();
     const { db } = await Promise.race([
       dbPromise,
-      new Promise<any>((_, reject) => setTimeout(() => reject(new Error('Timeout MongoDB')), 8000))
+      new Promise<Awaited<ReturnType<typeof connectDB>>>((_, reject) => setTimeout(() => reject(new Error('Timeout MongoDB')), 8000))
     ]);
     console.log('✓ MongoDB connecté');
 
@@ -43,7 +56,7 @@ export async function POST(req: Request) {
         emailAddress: process.env.ARAKA_EMAIL,
         password: process.env.ARAKA_PASSWORD,
       }),
-    }).catch(err => {
+    }).catch((err: Error) => {
       console.error('Erreur réseau / Login Araka:', err.message);
       throw new Error('Impossible de contacter le serveur Araka Pay (Vérifiez votre connexion internet)');
     });
@@ -54,7 +67,7 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: `Araka Pay: Erreur d'authentification (${loginResponse.status})` }, { status: 500 });
     }
 
-    const loginData = await loginResponse.json();
+    const loginData = (await loginResponse.json()) as { token: string };
     const token = loginData.token;
     console.log('✓ Login Araka réussi');
 
@@ -66,26 +79,23 @@ export async function POST(req: Request) {
     const transactionReference = `AUA${Date.now()}`;
     const appUrl = (process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000').replace(/\/$/, '');
 
-    const paymentRequest: any = {
+    const paymentRequest = {
       order: {
         paymentPageId: paymentPageId,
         customerFullName: customerName || 'Donateur LAU',
         customerPhoneNumber: cleanPhone,
         customerEmailAddress: customerEmail || 'donor@launiversity.cd',
         transactionReference: transactionReference,
-        amount: parseFloat(amount),
+        amount: finalAmount,
         currency: 'USD',
         redirectURL: `${appUrl}/donations/success?transactionId=${transactionReference}`,
       },
       paymentChannel: {
         channel: paymentMethod,
+        provider: provider as string | undefined,
+        walletID: cleanWalletID as string | undefined,
       }
     };
-
-    if (paymentMethod === 'MOBILEMONEY') {
-      paymentRequest.paymentChannel.provider = provider;
-      paymentRequest.paymentChannel.walletID = cleanWalletID;
-    }
 
     console.log('3. Envoi requête de paiement à Araka Pay...');
     // Log du corps de la requête pour débogage (sans infos sensibles)
@@ -109,7 +119,7 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: 'Araka Pay a refusé la requête de paiement' }, { status: 500 });
     }
 
-    const data = await response.json();
+    const data = (await response.json()) as { transactionId: string; paymentPage: string };
     console.log('✓ Transaction Araka créée:', data.transactionId);
     
     // 5. Enregistrer la transaction
@@ -118,7 +128,7 @@ export async function POST(req: Request) {
       transactionId: data.transactionId,
       transactionReference,
       donationId: new ObjectId(donationId),
-      amount: parseFloat(amount),
+      amount: finalAmount,
       status: 'PENDING',
       method: paymentMethod,
       provider: provider || 'CARD',
@@ -133,11 +143,12 @@ export async function POST(req: Request) {
       success: true
     });
 
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('--- ERREUR CRITIQUE API PAY ---');
     console.error(error);
+    const errorMessage = error instanceof Error ? error.message : 'Une erreur imprévue est survenue au niveau du serveur.';
     return NextResponse.json({ 
-      error: error.message || 'Une erreur imprévue est survenue au niveau du serveur.' 
+      error: errorMessage 
     }, { status: 500 });
   }
 }

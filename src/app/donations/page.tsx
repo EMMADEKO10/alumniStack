@@ -288,12 +288,13 @@ const DonationsPage = () => {
         alert("Erreur: " + errorMsg);
         setIsPaying(null); // Reset manually if error alert shown
       }
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error('Erreur de paiement:', err);
-      if (err.name === 'AbortError') {
+      const error = err as Error;
+      if (error.name === 'AbortError') {
         alert("Le délai d'attente a été dépassé. Vérifiez votre connexion.");
       } else {
-        alert("Une erreur est survenue lors de la connexion au service de paiement : " + err.message);
+        alert("Une erreur est survenue lors de la connexion au service de paiement : " + (error.message || "Erreur inconnue"));
       }
       setIsPaying(null);
     } finally {

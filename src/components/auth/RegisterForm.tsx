@@ -70,25 +70,30 @@ export default function RegisterForm({ onSuccess }: RegisterFormProps) {
         // Nouveau compte créé, rediriger immédiatement
         router.push('/verify-email');
       }
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error("Erreur d'inscription:", error);
       
-      if (error.response?.status === 409) {
-        // Conflit - compte existe déjà
-        const errorMsg = error.response.data.error || '';
-        if (errorMsg.includes('déjà utilisé') || errorMsg.includes('compte vérifié')) {
-          setError('Cet email est déjà associé à un compte actif. Veuillez vous connecter.');
+      if (axios.isAxiosError(error)) {
+        if (error.response?.status === 409) {
+          // Conflit - compte existe déjà
+          const errorData = error.response.data as { error?: string };
+          const errorMsg = errorData.error || '';
+          if (errorMsg.includes('déjà utilisé') || errorMsg.includes('compte vérifié')) {
+            setError('Cet email est déjà associé à un compte actif. Veuillez vous connecter.');
+          } else {
+            setError(errorMsg);
+          }
+        } else if (error.response?.data?.error) {
+          setError(error.response.data.error as string);
+        } else if (error.code === 'ERR_NETWORK') {
+          setError('Impossible de se connecter au serveur. Veuillez vérifier votre connexion internet.');
+        } else if (error.code === 'ERR_BAD_REQUEST') {
+          setError('Requête invalide. Veuillez vérifier les informations saisies.');
         } else {
-          setError(errorMsg);
+          setError("Une erreur est survenue lors de l'inscription. Veuillez réessayer plus tard.");
         }
-      } else if (error.response?.data?.error) {
-        setError(error.response.data.error);
-      } else if (error.code === 'ERR_NETWORK') {
-        setError('Impossible de se connecter au serveur. Veuillez vérifier votre connexion internet.');
-      } else if (error.code === 'ERR_BAD_REQUEST') {
-        setError('Requête invalide. Veuillez vérifier les informations saisies.');
       } else {
-        setError("Une erreur est survenue lors de l'inscription. Veuillez réessayer plus tard.");
+        setError('Une erreur est survenue lors de l\'inscription. Veuillez réessayer plus tard.');
       }
     } finally {
       setLoading(false);
