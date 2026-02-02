@@ -1,11 +1,30 @@
 import { NextResponse } from 'next/server';
-import clientPromise from '@/lib/mongodb';
+import { connectDB } from '@/lib/mongodb';
 import crypto from 'crypto';
 import { sendEmail } from '@/utils/sendEmails';
 
 export async function POST(req: Request) {
   try {
-    const { email } = await req.json();
+    const contentType = req.headers.get('content-type') || '';
+    if (!contentType.includes('application/json')) {
+      return NextResponse.json(
+        { message: 'Le format de la requête doit être du JSON.' },
+        { status: 400 }
+      );
+    }
+
+    let body;
+    try {
+      body = await req.json();
+    } catch (e) {
+      console.error('Erreur parsing JSON:', e);
+      return NextResponse.json(
+        { message: 'Corps de requête JSON invalide.' },
+        { status: 400 }
+      );
+    }
+
+    const { email } = body;
 
     if (!email) {
       return NextResponse.json(
@@ -14,8 +33,7 @@ export async function POST(req: Request) {
       );
     }
 
-    const client = await clientPromise;
-    const db = client.db();
+    const { db } = await connectDB();
 
     // Vérifier si l'utilisateur existe
     const user = await db.collection('users').findOne({ email: email.toLowerCase().trim() });

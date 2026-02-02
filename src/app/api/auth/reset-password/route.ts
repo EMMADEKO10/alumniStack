@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import clientPromise from '@/lib/mongodb';
+import { connectDB } from '@/lib/mongodb';
 import bcrypt from 'bcryptjs';
 
 export async function POST(req: Request) {
@@ -13,8 +13,7 @@ export async function POST(req: Request) {
       );
     }
 
-    const client = await clientPromise;
-    const db = client.db();
+    const { db } = await connectDB();
 
     // Trouver l'utilisateur avec le token valide et non expiré
     const user = await db.collection('users').findOne({
