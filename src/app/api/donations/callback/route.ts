@@ -7,47 +7,56 @@ export async function POST(req: Request) {
     const body = await req.json();
     console.log('Araka Webhook Received:', body);
 
-    // 1. Extraire les données de la notification
-    // La structure dépend de la réponse d'Araka (souvent status, transaction_id, metadata)
-    const { status, amount, metadata, transaction_id } = body;
+    // 1. Extraire les données de la notification (Structure Araka Pay v2)
+    const { status, transactionId, amount } = body;
 
     // 2. Vérifier si le paiement a réussi
-    if (status === 'SUCCESS' || status === 'COMPLETED' || status === 'successful') {
-      const donationId = metadata?.donationId;
+    if (status === 'APPROVED') {
+      const { db } = await connectDB();
 
-      if (donationId) {
-        const { db } = await connectDB();
+      // 3. Trouver la transaction en attente
+      const transaction = await db.collection('transactions').findOne({ 
+        transactionId: transactionId,
+        status: 'PENDING'
+      });
 
-        // 3. Vérifier si cette transaction a déjà été traitée (idempotence)
-        const existingTx = await db.collection('transactions').findOne({ transactionId: transaction_id });
-        if (existingTx) {
-          console.log(`Transaction ${transaction_id} déjà traitée.`);
-          return NextResponse.json({ received: true, already_processed: true });
+      if (!transaction) {
+        console.log(`Transaction ${transactionId} non trouvée ou déjà traitée.`);
+        return NextResponse.json({ received: true, message: 'Already processed or not found' });
+      }
+
+      const donationId = transaction.donationId;
+
+      // 4. Mettre à jour le montant actuel de la donation
+      const updateResult = await db.collection('donations').updateOne(
+        { _id: new ObjectId(donationId) },
+        { 
+          $inc: { currentAmount: parseFloat(amount || transaction.amount) },
+          $set: { updatedAt: new Date() }
         }
+      );
 
-        // 4. Mettre à jour le montant actuel de la donation
-        const updateResult = await db.collection('donations').updateOne(
-          { _id: new ObjectId(donationId) },
+      if (updateResult.modifiedCount > 0) {
+        console.log(`Donation ${donationId} mise à jour avec +${amount || transaction.amount}`);
+        
+        // 5. Mettre à jour le statut de la transaction
+        await db.collection('transactions').updateOne(
+          { _id: transaction._id },
           { 
-            $inc: { currentAmount: parseFloat(amount) },
-            $set: { updatedAt: new Date() }
+            $set: { 
+              status: 'SUCCESS',
+              updatedAt: new Date(),
+              rawCallback: body 
+            }
           }
         );
-
-        if (updateResult.modifiedCount > 0) {
-          console.log(`Donation ${donationId} mise à jour avec +${amount}`);
-          
-          // 5. Enregistrer la transaction
-          await db.collection('transactions').insertOne({
-            transactionId: transaction_id,
-            donationId: new ObjectId(donationId),
-            amount: parseFloat(amount),
-            status: 'SUCCESS',
-            date: new Date(),
-            customerInfo: body.customer
-          });
-        }
       }
+    } else if (status === 'DECLINED' || status === 'CANCELLED') {
+      const { db } = await connectDB();
+      await db.collection('transactions').updateOne(
+        { transactionId: transactionId },
+        { $set: { status: status, updatedAt: new Date() } }
+      );
     }
 
     // Toujours répondre à Araka pour confirmer la réception du webhook

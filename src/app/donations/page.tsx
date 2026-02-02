@@ -232,11 +232,27 @@ const DonationsPage = () => {
     const amount = window.prompt("Entrez le montant de votre don (USD):", "10");
     if (!amount || isNaN(parseFloat(amount))) return;
 
-    const phoneNumber = window.prompt("Entrez votre numéro de téléphone (Format: +243xxx...):", "+243810000001");
-    if (!phoneNumber) return;
+    const method = window.confirm("Souhaitez-vous payer par Mobile Money ? (Annuler pour Carte Bancaire)") ? "MOBILEMONEY" : "CARD";
+    
+    let phoneNumber = "";
+    let provider = "";
+    let walletID = "";
+
+    if (method === "MOBILEMONEY") {
+      provider = window.prompt("Entrez votre opérateur (ORANGE, MPESA, AIRTEL) :", "ORANGE")?.toUpperCase() || "ORANGE";
+      walletID = window.prompt("Entrez votre numéro de téléphone Mobile Money :", "+243810000001") || "";
+      if (!walletID) return;
+      phoneNumber = walletID;
+    } else {
+      phoneNumber = window.prompt("Entrez votre numéro de contact :", "+243810000001") || "";
+    }
+
+    const customerName = window.prompt("Entrez votre nom complet :", "Donateur LAU") || "Anonyme";
 
     setIsPaying(donationId);
     try {
+      console.log('Initiation du don pour:', donationId);
+      
       const response = await fetch('/api/donations/pay', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -244,21 +260,46 @@ const DonationsPage = () => {
           amount: parseFloat(amount),
           donationId,
           phoneNumber,
-          customerName: "Donateur LAU"
+          customerName,
+          paymentMethod: method,
+          provider: method === "MOBILEMONEY" ? provider : undefined,
+          walletID: method === "MOBILEMONEY" ? walletID : undefined
         }),
       });
 
-      const data = await response.json();
-      if (data.paymentUrl) {
-        window.location.href = data.paymentUrl;
-      } else {
-        alert("Erreur: " + (data.error || "Impossible d'initialiser le paiement"));
+      let data;
+      try {
+        data = await response.json();
+      } catch (jsonErr) {
+        console.error('Erreur parsing JSON:', jsonErr);
+        throw new Error("Réponse du serveur invalide ou vide.");
       }
-    } catch (err) {
+
+      if (data.paymentUrl) {
+        // Redirection pour carte ou confirmation mobile
+        console.log('Redirection vers:', data.paymentUrl);
+        window.location.href = data.paymentUrl;
+      } else if (data.success && method === "MOBILEMONEY") {
+        alert("Paiement initié ! Veuillez valider sur votre téléphone. Une fois validé, vous recevrez une confirmation.");
+        window.location.href = `/donations/success?transactionId=${data.transactionId}`;
+      } else {
+        const errorMsg = data.error || "Impossible d'initialiser le paiement";
+        console.error('Erreur API:', errorMsg);
+        alert("Erreur: " + errorMsg);
+        setIsPaying(null); // Reset manually if error alert shown
+      }
+    } catch (err: any) {
       console.error('Erreur de paiement:', err);
-      alert("Une erreur est survenue lors de la connexion au service de paiement.");
-    } finally {
+      if (err.name === 'AbortError') {
+        alert("Le délai d'attente a été dépassé. Vérifiez votre connexion.");
+      } else {
+        alert("Une erreur est survenue lors de la connexion au service de paiement : " + err.message);
+      }
       setIsPaying(null);
+    } finally {
+      // Note: isPaying is set to null in catch/else branches to ensure it resets 
+      // even if redirect takes time or alert blocks.
+      setTimeout(() => setIsPaying(null), 5000); // Fail-safe fallback
     }
   };
 
