@@ -101,7 +101,7 @@ export default function LoginForm({ onSuccess }: LoginFormProps) {
             <label htmlFor="password" className="block text-sm font-medium text-gray-700">
               Mot de passe
             </label>
-            <Link href="#" className="text-sm text-cyan-600 hover:text-cyan-700 font-medium">
+            <Link href="/forgot-password" title="Réinitialiser mon mot de passe" className="text-sm text-cyan-600 hover:text-cyan-700 font-medium">
               Mot de passe oublié?
             </Link>
           </div>
