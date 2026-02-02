@@ -282,26 +282,26 @@ const FormationSection: React.FC = () => {
   return (
     <div className="max-w-7xl mx-auto px-4 pt-12 pb-16">
       {/* Barre de recherche et filtres */}
-      <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6 mb-10">
+      <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-4 sm:p-6 mb-6 sm:mb-10">
         <div className="flex flex-col lg:flex-row gap-4 items-center justify-between">
-          <div className="relative flex-1 max-w-md">
+          <div className="relative flex-1 w-full lg:max-w-md">
             <MagnifyingGlassIcon className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
             <input
               type="text"
               placeholder="Rechercher une formation..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-12 pr-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all hover:border-gray-300"
+              className="w-full pl-11 pr-4 py-2.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all hover:border-gray-300 text-sm sm:text-base sm:pl-12 sm:py-3"
             />
           </div>
 
-          <div className="flex flex-wrap gap-3">
-            <div className="flex items-center gap-2">
-              <FunnelIcon className="h-5 w-5 text-gray-600" />
+          <div className="flex flex-wrap gap-2 sm:gap-3 w-full lg:w-auto justify-start">
+            <div className="flex items-center gap-2 w-full sm:w-auto">
+              <FunnelIcon className="h-5 w-5 text-gray-600 hidden sm:block" />
               <select
                 value={filterLevel}
                 onChange={(e) => setFilterLevel(e.target.value)}
-                className="px-4 py-2 border border-gray-200 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm font-medium hover:border-gray-300 transition-all"
+                className="flex-1 sm:flex-none px-3 sm:px-4 py-2 border border-gray-200 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent text-xs sm:text-sm font-medium hover:border-gray-300 transition-all bg-white"
               >
                 <option value="all">Tous niveaux</option>
                 {getLevels().map((level) => (
@@ -313,7 +313,7 @@ const FormationSection: React.FC = () => {
             <select
               value={filterCategory}
               onChange={(e) => setFilterCategory(e.target.value)}
-              className="px-4 py-2 border border-gray-200 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm font-medium hover:border-gray-300 transition-all"
+              className="flex-1 sm:flex-none px-3 sm:px-4 py-2 border border-gray-200 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent text-xs sm:text-sm font-medium hover:border-gray-300 transition-all bg-white"
             >
               <option value="all">Toutes catégories</option>
               {getCategories().map((category) => (
@@ -324,14 +324,14 @@ const FormationSection: React.FC = () => {
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value)}
-              className="px-4 py-2 border border-gray-200 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm font-medium hover:border-gray-300 transition-all"
+              className="flex-1 sm:flex-none px-3 sm:px-4 py-2 border border-gray-200 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent text-xs sm:text-sm font-medium hover:border-gray-300 transition-all bg-white"
             >
-              <option value="startDate">Date de début</option>
+              <option value="startDate">Date</option>
               <option value="title">Titre</option>
               <option value="price">Prix</option>
             </select>
 
-            <div className="flex border border-gray-200 rounded-xl overflow-hidden bg-gray-50">
+            <div className="hidden sm:flex border border-gray-200 rounded-xl overflow-hidden bg-gray-50">
               <button
                 onClick={() => setViewMode("grid")}
                 className={`px-4 py-2 text-sm font-medium transition-all ${
@@ -358,49 +358,49 @@ const FormationSection: React.FC = () => {
       </div>
 
       {/* Statistiques */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-        <div className="bg-linear-to-br from-purple-50 to-indigo-50 rounded-xl border border-purple-100 p-4 flex items-center gap-3">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 mb-8">
+        <div className="bg-linear-to-br from-purple-50 to-indigo-50 rounded-xl border border-purple-100 p-3 sm:p-4 flex items-center gap-3">
           <div className="bg-purple-100 rounded-lg p-2">
-            <AcademicCapIcon className="h-6 w-6 text-purple-600" />
+            <AcademicCapIcon className="h-5 w-5 sm:h-6 sm:w-6 text-purple-600" />
           </div>
           <div>
-            <p className="text-2xl font-bold text-gray-900">{filteredFormations.length}</p>
-            <p className="text-xs text-gray-600">Formations</p>
+            <p className="text-xl sm:text-2xl font-bold text-gray-900">{filteredFormations.length}</p>
+            <p className="text-[10px] sm:text-xs text-gray-600 uppercase font-semibold">Formations</p>
           </div>
         </div>
-        <div className="bg-linear-to-br from-blue-50 to-cyan-50 rounded-xl border border-blue-100 p-4 flex items-center gap-3">
+        <div className="bg-linear-to-br from-blue-50 to-cyan-50 rounded-xl border border-blue-100 p-3 sm:p-4 flex items-center gap-3">
           <div className="bg-blue-100 rounded-lg p-2">
-            <TagIcon className="h-6 w-6 text-blue-600" />
+            <TagIcon className="h-5 w-5 sm:h-6 sm:w-6 text-blue-600" />
           </div>
           <div>
-            <p className="text-2xl font-bold text-gray-900">{getCategories().length}</p>
-            <p className="text-xs text-gray-600">Catégories</p>
+            <p className="text-xl sm:text-2xl font-bold text-gray-900">{getCategories().length}</p>
+            <p className="text-[10px] sm:text-xs text-gray-600 uppercase font-semibold">Catégories</p>
           </div>
         </div>
-        <div className="bg-linear-to-br from-green-50 to-emerald-50 rounded-xl border border-green-100 p-4 flex items-center gap-3">
+        <div className="bg-linear-to-br from-green-50 to-emerald-50 rounded-xl border border-green-100 p-3 sm:p-4 flex items-center gap-3">
           <div className="bg-green-100 rounded-lg p-2">
-            <UserGroupIcon className="h-6 w-6 text-green-600" />
+            <UserGroupIcon className="h-5 w-5 sm:h-6 sm:w-6 text-green-600" />
           </div>
           <div>
-            <p className="text-2xl font-bold text-gray-900">{getLevels().length}</p>
-            <p className="text-xs text-gray-600">Niveaux</p>
+            <p className="text-xl sm:text-2xl font-bold text-gray-900">{getLevels().length}</p>
+            <p className="text-[10px] sm:text-xs text-gray-600 uppercase font-semibold">Niveaux</p>
           </div>
         </div>
       </div>
 
       {/* Liste des formations */}
       {filteredFormations.length === 0 ? (
-        <div className="text-center py-16">
-          <div className="bg-gray-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
-            <AcademicCapIcon className="h-8 w-8 text-gray-400" />
+        <div className="text-center py-12 sm:py-16">
+          <div className="bg-gray-100 rounded-full w-12 h-12 sm:w-16 sm:h-16 flex items-center justify-center mx-auto mb-4">
+            <AcademicCapIcon className="h-6 w-6 sm:h-8 sm:w-8 text-gray-400" />
           </div>
-          <h3 className="text-lg font-semibold text-gray-900">Aucune formation trouvée</h3>
-          <p className="mt-2 text-gray-500 text-sm">Essayez de modifier vos critères de recherche.</p>
+          <h3 className="text-base sm:text-lg font-semibold text-gray-900">Aucune formation trouvée</h3>
+          <p className="mt-2 text-gray-500 text-xs sm:text-sm px-4">Essayez de modifier vos critères de recherche.</p>
         </div>
       ) : (
         <div className={`${
           viewMode === "grid" 
-            ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" 
+            ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6" 
             : "space-y-4"
         }`}>
           {filteredFormations.map((formation) => {
@@ -409,11 +409,11 @@ const FormationSection: React.FC = () => {
               <div 
                 key={formation._id} 
                 onClick={() => router.push(`/formations/${formation._id}`)}
-                className="group bg-white rounded-2xl border border-gray-200 overflow-hidden hover:border-purple-300 hover:shadow-xl transition-all duration-300 cursor-pointer"
+                className="group bg-white rounded-2xl border border-gray-200 overflow-hidden hover:border-purple-300 hover:shadow-xl transition-all duration-300 cursor-pointer flex flex-col h-full"
               >
                 {viewMode === "grid" ? (
                   <>
-                    <div className="relative h-56 w-full overflow-hidden">
+                    <div className="relative h-48 sm:h-56 w-full overflow-hidden">
                       {formation.imageUrl ? (
                         <Image
                           src={formation.imageUrl}
@@ -424,105 +424,101 @@ const FormationSection: React.FC = () => {
                         />
                       ) : (
                         <div className="w-full h-full bg-linear-to-br from-purple-100 via-indigo-50 to-purple-50 flex items-center justify-center group-hover:from-purple-200 transition-colors duration-300">
-                          <AcademicCapIcon className="h-20 w-20 text-purple-200" />
+                          <AcademicCapIcon className="h-16 w-16 sm:h-20 sm:w-20 text-purple-200" />
                         </div>
                       )}
                       <div className="absolute inset-0 bg-linear-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                       
-                      <div className="absolute top-4 right-4">
-                        <div className="bg-purple-600 text-white rounded-xl p-2.5 shadow-lg transform group-hover:scale-110 transition-transform duration-300">
-                          <p className="text-xs font-semibold uppercase tracking-wider">{dateInfo.month}</p>
-                          <p className="text-xl font-bold leading-tight">{dateInfo.day}</p>
+                      <div className="absolute top-3 right-3 sm:top-4 sm:right-4">
+                        <div className="bg-purple-600 text-white rounded-xl p-2 sm:p-2.5 shadow-lg transform group-hover:scale-110 transition-transform duration-300 min-w-14 text-center">
+                          <p className="text-[10px] font-semibold uppercase tracking-wider">{dateInfo.month}</p>
+                          <p className="text-lg sm:text-xl font-bold leading-tight">{dateInfo.day}</p>
                         </div>
                       </div>
                     </div>
                     
-                    <div className="p-6 flex flex-col">
-                      <div className="flex gap-2 mb-3">
-                        <span className={`inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold border ${getLevelColor(formation.level)}`}>
+                    <div className="p-4 sm:p-6 flex flex-col flex-1">
+                      <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-3">
+                        <span className={`inline-flex items-center gap-1 px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full text-[10px] sm:text-xs font-semibold border ${getLevelColor(formation.level)}`}>
                           <SignalIcon className="h-3 w-3" />
                           {formation.level}
                         </span>
-                        <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold bg-purple-50 text-purple-700 border border-purple-200">
+                        <span className="inline-flex items-center gap-1 px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full text-[10px] sm:text-xs font-semibold bg-purple-50 text-purple-700 border border-purple-200">
                           <TagIcon className="h-3 w-3" />
                           {formation.category}
                         </span>
                       </div>
 
-                      <h3 className="text-lg font-bold text-gray-900 mb-2 line-clamp-2 group-hover:text-purple-600 transition-colors">
+                      <h3 className="text-base sm:text-lg font-bold text-gray-900 mb-2 line-clamp-2 group-hover:text-purple-600 transition-colors">
                         {formation.title}
                       </h3>
-                      <p className="text-gray-600 text-sm mb-4 line-clamp-2">
+                      <p className="text-gray-600 text-xs sm:text-sm mb-4 line-clamp-2">
                         {formation.description}
                       </p>
 
-                      <div className="space-y-2.5 mb-4 pt-4 border-t border-gray-100">
-                        <div className="flex items-center justify-between text-sm">
-                          <span className="flex items-center text-gray-700 gap-2">
-                            <AcademicCapIcon className="h-4 w-4 text-purple-600" />
-                            {formation.instructor}
-                          </span>
-                        </div>
-                        <div className="flex items-center justify-between text-sm">
-                          <span className="flex items-center text-gray-700 gap-2">
-                            <ClockIcon className="h-4 w-4 text-purple-600" />
-                            {formation.duration}
-                          </span>
-                          <span className="font-bold text-purple-600">{formation.price}</span>
-                        </div>
-                        {formation.maxParticipants && (
-                          <div className="flex items-center text-gray-700 text-sm gap-2">
-                            <UserGroupIcon className="h-4 w-4 text-purple-600" />
-                            <span>{formation.participants?.length || 0}/{formation.maxParticipants}</span>
+                      <div className="mt-auto">
+                        <div className="space-y-2 mb-4 pt-4 border-t border-gray-100">
+                          <div className="flex items-center justify-between text-xs sm:text-sm">
+                            <span className="flex items-center text-gray-700 gap-2 truncate">
+                              <AcademicCapIcon className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-purple-600 shrink-0" />
+                              <span className="truncate">{formation.instructor}</span>
+                            </span>
                           </div>
-                        )}
-                      </div>
+                          <div className="flex items-center justify-between text-xs sm:text-sm">
+                            <span className="flex items-center text-gray-700 gap-2">
+                              <ClockIcon className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-purple-600 shrink-0" />
+                              {formation.duration}
+                            </span>
+                            <span className="font-bold text-purple-600">{formation.price}</span>
+                          </div>
+                        </div>
 
-                      <button 
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          router.push(`/formations/${formation._id}`);
-                        }}
-                        className="relative z-10 w-full bg-red-600 text-white py-3 px-4 rounded-xl hover:bg-red-700 transition-all duration-300 font-semibold flex items-center justify-center gap-2 group/btn shadow-lg hover:shadow-xl"
-                      >
-                        En savoir plus
-                        <ArrowRightIcon className="h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
-                      </button>
+                        <button 
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            router.push(`/formations/${formation._id}`);
+                          }}
+                          className="relative z-10 w-full bg-red-600 text-white py-2.5 sm:py-3 px-4 rounded-xl hover:bg-red-700 transition-all duration-300 font-semibold flex items-center justify-center gap-2 group/btn shadow-md hover:shadow-xl text-sm sm:text-base"
+                        >
+                          En savoir plus
+                          <ArrowRightIcon className="h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
+                        </button>
+                      </div>
                     </div>
                   </>
                 ) : (
-                  <div className="p-6 flex gap-6">
-                    <div className="relative h-40 w-40 shrink-0 rounded-xl overflow-hidden">
+                  <div className="p-4 sm:p-6 flex flex-col sm:flex-row gap-4 sm:gap-6">
+                    <div className="relative h-32 w-full sm:h-40 sm:w-40 shrink-0 rounded-xl overflow-hidden">
                       {formation.imageUrl ? (
                         <Image
                           src={formation.imageUrl}
                           alt={formation.title}
                           fill
                           className="object-cover group-hover:scale-110 transition-transform duration-500"
-                          sizes="160px"
+                          sizes="(max-width: 640px) 100vw, 160px"
                         />
                       ) : (
                         <div className="w-full h-full bg-linear-to-br from-purple-100 to-indigo-50 flex items-center justify-center">
-                          <AcademicCapIcon className="h-12 w-12 text-purple-200" />
+                          <AcademicCapIcon className="h-10 w-10 sm:h-12 sm:w-12 text-purple-200" />
                         </div>
                       )}
                     </div>
                     <div className="flex-1 flex flex-col justify-between">
                       <div>
                         <div className="flex gap-2 mb-2">
-                          <span className={`inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold border ${getLevelColor(formation.level)}`}>
+                          <span className={`inline-flex items-center gap-1 px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full text-[10px] sm:text-xs font-semibold border ${getLevelColor(formation.level)}`}>
                             {formation.level}
                           </span>
-                          <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold bg-purple-50 text-purple-700 border border-purple-200">
+                          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full text-[10px] sm:text-xs font-semibold bg-purple-50 text-purple-700 border border-purple-200">
                             {formation.category}
                           </span>
                         </div>
-                        <h3 className="text-lg font-bold text-gray-900 mb-2 group-hover:text-purple-600 transition-colors">
+                        <h3 className="text-base sm:text-lg font-bold text-gray-900 mb-2 group-hover:text-purple-600 transition-colors">
                           {formation.title}
                         </h3>
-                        <div className="flex gap-4 text-sm text-gray-600">
+                        <div className="flex gap-3 sm:gap-4 text-xs sm:text-sm text-gray-600">
                           <span className="flex items-center gap-1">
-                            <ClockIcon className="h-4 w-4 text-purple-600" />
+                            <ClockIcon className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-purple-600" />
                             {formation.duration}
                           </span>
                           <span className="font-bold text-purple-600">{formation.price}</span>
@@ -533,7 +529,7 @@ const FormationSection: React.FC = () => {
                           e.stopPropagation();
                           router.push(`/formations/${formation._id}`);
                         }}
-                        className="relative z-10 self-start mt-4 px-6 py-2 bg-red-600 text-white rounded-xl hover:bg-red-700 transition-all duration-300 font-semibold text-sm flex items-center gap-2 shadow-md hover:shadow-lg"
+                        className="relative z-10 self-start mt-4 px-4 sm:px-6 py-2 bg-red-600 text-white rounded-xl hover:bg-red-700 transition-all duration-300 font-semibold text-xs sm:text-sm flex items-center gap-2 shadow-md hover:shadow-lg"
                       >
                         En savoir plus
                         <ArrowRightIcon className="h-3 w-3" />

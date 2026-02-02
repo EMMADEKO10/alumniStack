@@ -58,52 +58,52 @@ const Page: React.FC = () => {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6"
+            className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-3 mb-6"
           >
-            <div className="bg-white/80 backdrop-blur-sm rounded-lg p-4 shadow-md border border-red-100">
-              <div className="flex items-center gap-3">
-                <div className="p-2 bg-red-100 rounded-lg">
-                  <FaCalendarAlt className="text-red-600 text-xl" />
+            <div className="bg-white/80 backdrop-blur-sm rounded-lg p-3 sm:p-4 shadow-md border border-red-100">
+              <div className="flex items-center gap-2 sm:gap-3">
+                <div className="p-1.5 sm:p-2 bg-red-100 rounded-lg shrink-0">
+                  <FaCalendarAlt className="text-red-600 text-lg sm:text-xl" />
                 </div>
                 <div>
-                  <p className="text-2xl font-bold text-gray-900">{stats.total}</p>
-                  <p className="text-xs text-gray-600">Événements</p>
+                  <p className="text-xl sm:text-2xl font-bold text-gray-900 leading-tight">{stats.total}</p>
+                  <p className="text-[10px] sm:text-xs text-gray-600 truncate">Événements</p>
                 </div>
               </div>
             </div>
 
-            <div className="bg-white/80 backdrop-blur-sm rounded-lg p-4 shadow-md border border-blue-100">
-              <div className="flex items-center gap-3">
-                <div className="p-2 bg-blue-100 rounded-lg">
-                  <FaMapMarkerAlt className="text-blue-600 text-xl" />
+            <div className="bg-white/80 backdrop-blur-sm rounded-lg p-3 sm:p-4 shadow-md border border-blue-100">
+              <div className="flex items-center gap-2 sm:gap-3">
+                <div className="p-1.5 sm:p-2 bg-blue-100 rounded-lg shrink-0">
+                  <FaMapMarkerAlt className="text-blue-600 text-lg sm:text-xl" />
                 </div>
                 <div>
-                  <p className="text-2xl font-bold text-gray-900">{stats.locations}</p>
-                  <p className="text-xs text-gray-600">Lieux</p>
+                  <p className="text-xl sm:text-2xl font-bold text-gray-900 leading-tight">{stats.locations}</p>
+                  <p className="text-[10px] sm:text-xs text-gray-600 truncate">Lieux</p>
                 </div>
               </div>
             </div>
 
-            <div className="bg-white/80 backdrop-blur-sm rounded-lg p-4 shadow-md border border-green-100">
-              <div className="flex items-center gap-3">
-                <div className="p-2 bg-green-100 rounded-lg">
-                  <FaClock className="text-green-600 text-xl" />
+            <div className="bg-white/80 backdrop-blur-sm rounded-lg p-3 sm:p-4 shadow-md border border-green-100">
+              <div className="flex items-center gap-2 sm:gap-3">
+                <div className="p-1.5 sm:p-2 bg-green-100 rounded-lg shrink-0">
+                  <FaClock className="text-green-600 text-lg sm:text-xl" />
                 </div>
                 <div>
-                  <p className="text-2xl font-bold text-gray-900">{stats.upcoming}</p>
-                  <p className="text-xs text-gray-600">À venir</p>
+                  <p className="text-xl sm:text-2xl font-bold text-gray-900 leading-tight">{stats.upcoming}</p>
+                  <p className="text-[10px] sm:text-xs text-gray-600 truncate">À venir</p>
                 </div>
               </div>
             </div>
 
-            <div className="bg-white/80 backdrop-blur-sm rounded-lg p-4 shadow-md border border-purple-100">
-              <div className="flex items-center gap-3">
-                <div className="p-2 bg-purple-100 rounded-lg">
-                  <FaStar className="text-purple-600 text-xl" />
+            <div className="bg-white/80 backdrop-blur-sm rounded-lg p-3 sm:p-4 shadow-md border border-purple-100">
+              <div className="flex items-center gap-2 sm:gap-3">
+                <div className="p-1.5 sm:p-2 bg-purple-100 rounded-lg shrink-0">
+                  <FaStar className="text-purple-600 text-lg sm:text-xl" />
                 </div>
                 <div>
-                  <p className="text-2xl font-bold text-gray-900">{Object.keys(stats.types).length}</p>
-                  <p className="text-xs text-gray-600">Catégories</p>
+                  <p className="text-xl sm:text-2xl font-bold text-gray-900 leading-tight">{Object.keys(stats.types).length}</p>
+                  <p className="text-[10px] sm:text-xs text-gray-600 truncate">Catégories</p>
                 </div>
               </div>
             </div>
@@ -112,7 +112,7 @@ const Page: React.FC = () => {
       </div>
 
       {/* Header Section */}
-      <div className="relative z-10 pt-4 sm:pt-6 lg:pt-8 pb-8 sm:pb-10 lg:pb-12">
+      <div className="relative z-10 pt-4 sm:pt-6 lg:pt-8 pb-8 sm:pb-10 lg:pb-12 text-center">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
           {/* Badge */}
@@ -122,7 +122,7 @@ const Page: React.FC = () => {
             transition={{ duration: 0.6 }}
             className="flex justify-center mb-4"
           >
-            <div className="inline-flex items-center px-4 py-2 bg-white/80 backdrop-blur-sm border border-red-100 text-red-700 rounded-full text-sm font-medium shadow-md hover:shadow-lg transition-shadow">
+            <div className="inline-flex items-center px-4 py-2 bg-white/80 backdrop-blur-sm border border-red-100 text-red-700 rounded-full text-xs sm:text-sm font-medium shadow-md hover:shadow-lg transition-shadow">
               <FaCalendarAlt className="mr-2 text-red-600" />
               Événements Alumni
             </div>
@@ -133,17 +133,17 @@ const Page: React.FC = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-center mb-6"
+            className="mb-8"
           >
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 leading-tight">
+            <h1 className="text-2xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 leading-tight">
               Rejoignez
-              <span className="block bg-linear-to-r from-red-600 via-rose-600 to-red-500 bg-clip-text text-transparent mt-2">
+              <span className="block bg-linear-to-r from-red-600 via-rose-600 to-red-500 bg-clip-text text-transparent mt-1 sm:mt-2">
                 Nos Événements
               </span>
             </h1>
-            <p className="text-base sm:text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed px-4">
+            <p className="text-sm sm:text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed px-2 sm:px-4">
               Connectez-vous avec la communauté Alumni à travers des événements 
-              enrichissants. Networking, formations, conférences et bien plus encore 
+              enrichissants. Networking, conférences et bien plus encore 
               pour développer votre réseau professionnel.
             </p>
           </motion.div>
@@ -153,40 +153,40 @@ const Page: React.FC = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl mx-auto mt-8"
+            className="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4 max-w-4xl mx-auto mt-8"
           >
-            <div className="bg-white/60 backdrop-blur-sm rounded-lg p-4 border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
-              <div className="flex items-start gap-3">
-                <div className="p-2 bg-red-100 rounded-lg">
+            <div className="bg-white/60 backdrop-blur-sm rounded-xl p-3 sm:p-4 border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
+              <div className="flex items-center sm:items-start gap-3 text-left">
+                <div className="p-2 bg-red-100 rounded-lg shrink-0">
                   <FaUsers className="text-red-600" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-gray-900 mb-1">Networking</h3>
-                  <p className="text-sm text-gray-600">Rencontrez des professionnels et alumni</p>
+                  <h3 className="font-semibold text-gray-900 text-sm sm:text-base">Networking</h3>
+                  <p className="text-[10px] sm:text-sm text-gray-600">Rencontrez des pros et alumni</p>
                 </div>
               </div>
             </div>
 
-            <div className="bg-white/60 backdrop-blur-sm rounded-lg p-4 border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
-              <div className="flex items-start gap-3">
-                <div className="p-2 bg-blue-100 rounded-lg">
+            <div className="bg-white/60 backdrop-blur-sm rounded-xl p-3 sm:p-4 border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
+              <div className="flex items-center sm:items-start gap-3 text-left">
+                <div className="p-2 bg-blue-100 rounded-lg shrink-0">
                   <FaCalendarAlt className="text-blue-600" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-gray-900 mb-1">Événements Variés</h3>
-                  <p className="text-sm text-gray-600">Conférences, ateliers et formations</p>
+                  <h3 className="font-semibold text-gray-900 text-sm sm:text-base">Variété</h3>
+                  <p className="text-[10px] sm:text-sm text-gray-600">Conférences et ateliers</p>
                 </div>
               </div>
             </div>
 
-            <div className="bg-white/60 backdrop-blur-sm rounded-lg p-4 border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
-              <div className="flex items-start gap-3">
-                <div className="p-2 bg-green-100 rounded-lg">
+            <div className="bg-white/60 backdrop-blur-sm rounded-xl p-3 sm:p-4 border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
+              <div className="flex items-center sm:items-start gap-3 text-left">
+                <div className="p-2 bg-green-100 rounded-lg shrink-0">
                   <FaClock className="text-green-600" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-gray-900 mb-1">Inscriptions Faciles</h3>
-                  <p className="text-sm text-gray-600">Réservez votre place en un clic</p>
+                  <h3 className="font-semibold text-gray-900 text-sm sm:text-base">Facilité</h3>
+                  <p className="text-[10px] sm:text-sm text-gray-600">Inscription en un clic</p>
                 </div>
               </div>
             </div>

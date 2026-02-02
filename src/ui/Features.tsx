@@ -1,6 +1,6 @@
 'use client';
 
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, Variants } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
 import React, { useState, useEffect, useCallback } from "react";
@@ -83,7 +83,7 @@ const Features: React.FC = () => {
     return () => clearInterval(timer);
   }, [paginate]);
 
-  const variants = {
+  const variants: Variants = {
     enter: (direction: number) => ({
       x: direction > 0 ? 1000 : -1000,
       opacity: 0,
@@ -124,19 +124,19 @@ const Features: React.FC = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="text-center mb-16"
+          className="text-center mb-10 sm:mb-16"
         >
-          <div className="inline-flex items-center px-4 py-2 bg-red-50 text-red-700 rounded-none text-sm font-bold mb-6 border border-red-100 uppercase tracking-widest">
+          <div className="inline-flex items-center px-4 py-2 bg-red-50 text-red-700 rounded-lg text-[10px] sm:text-xs font-bold mb-6 border border-red-100 uppercase tracking-widest">
             <FaNetworkWired className="mr-2" />
             Écosystème LAU
           </div>
-          <h2 className="typography-heading-2 font-black text-slate-900 mb-6">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-900 mb-4 sm:mb-6 leading-tight px-4 sm:px-0">
             Une plateforme conçue pour votre <span className="bg-linear-to-r from-red-600 to-red-800 bg-clip-text text-transparent">ascension professionnelle</span>
           </h2>
         </motion.div>
 
         {/* Carousel Container */}
-        <div className="relative h-137.5 md:h-150 w-full">
+        <div className="relative h-120 sm:h-137.5 md:h-150 w-full">
           <AnimatePresence initial={false} custom={direction}>
             <motion.div
               key={activeIndex}
@@ -159,8 +159,8 @@ const Features: React.FC = () => {
                 <div className="absolute inset-0 bg-linear-to-r from-slate-900 via-slate-900/80 to-transparent md:to-slate-900/20" />
                 
                 {/* Content Overlay */}
-                <div className="absolute inset-0 flex items-center px-8 md:px-20 lg:px-24">
-                  <div className="max-w-2xl space-y-6 md:space-y-8">
+                <div className="absolute inset-0 flex items-center px-6 sm:px-12 md:px-20 lg:px-24">
+                  <div className="max-w-2xl space-y-6 sm:space-y-8">
                     
 
                     <div className="space-y-4">
@@ -168,16 +168,18 @@ const Features: React.FC = () => {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.4 }}
-                        className={`w-16 h-16 md:w-20 md:h-20 bg-linear-to-br ${features[activeIndex].color} text-white rounded-none flex items-center justify-center shadow-xl mb-6`}
+                        className={`w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 bg-linear-to-br ${features[activeIndex].color} text-white rounded-2xl flex items-center justify-center shadow-xl mb-4 sm:mb-6`}
                       >
-                        {features[activeIndex].icon}
+                        <div className="scale-75 sm:scale-90 md:scale-100">
+                          {features[activeIndex].icon}
+                        </div>
                       </motion.div>
                       
                       <motion.h3
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.5 }}
-                        className="typography-heading-1 text-white font-black leading-none"
+                        className="text-2xl sm:text-3xl lg:text-5xl text-white font-black leading-tight sm:leading-none"
                       >
                         {features[activeIndex].title}
                       </motion.h3>
@@ -186,7 +188,7 @@ const Features: React.FC = () => {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.6 }}
-                        className="typography-body text-slate-200 max-w-lg leading-relaxed md:text-xl"
+                        className="text-sm sm:text-base md:text-lg lg:text-xl text-slate-200 max-w-lg leading-relaxed"
                       >
                         {features[activeIndex].description}
                       </motion.p>
@@ -199,10 +201,10 @@ const Features: React.FC = () => {
                     >
                       <Link
                         href={features[activeIndex].link}
-                        className="inline-flex items-center gap-3 px-8 py-4 bg-white text-slate-900 font-bold rounded-none hover:bg-red-600 hover:text-white transition-all duration-300 shadow-xl group/btn"
+                        className="inline-flex items-center gap-3 px-6 py-3.5 sm:px-8 sm:py-4 bg-white text-slate-900 font-bold rounded-xl hover:bg-red-600 hover:text-white transition-all duration-300 shadow-xl group/btn active:scale-95"
                       >
-                        <span>Découvrir maintenant</span>
-                        <FaArrowRight className="group-hover/btn:translate-x-1 transition-transform" />
+                        <span className="text-sm sm:text-base">Découvrir maintenant</span>
+                        <FaArrowRight className="text-xs group-hover/btn:translate-x-1 transition-transform" />
                       </Link>
                     </motion.div>
                   </div>

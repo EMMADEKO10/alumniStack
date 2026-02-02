@@ -76,9 +76,9 @@ const OpportunityCard: React.FC<OpportunityCardProps> = ({ opportunity }) => {
       className="bg-white rounded-none shadow-md overflow-hidden hover:shadow-2xl transition-all duration-300 border border-gray-100 h-full flex flex-col"
     >
       {/* Image */}
-      <div className="relative h-48 w-full overflow-hidden group">
+      <div className="relative h-40 sm:h-48 w-full overflow-hidden group">
         <Image 
-          className="object-cover transition-transform duration-300 group-hover:scale-110" 
+          className="object-cover transition-transform duration-500 group-hover:scale-110" 
           fill 
           src={opportunity.imageUrl || "/graduation.jpg"} 
           alt={opportunity.title} 
@@ -86,24 +86,24 @@ const OpportunityCard: React.FC<OpportunityCardProps> = ({ opportunity }) => {
         <div className="absolute inset-0 bg-linear-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
         
         {/* Badges en haut */}
-        <div className="absolute top-4 left-4 flex gap-2">
-          <span className={`px-3 py-1 text-xs font-semibold rounded-none shadow-lg ${getTypeColor(opportunity.type)}`}>
+        <div className="absolute top-3 left-3 flex flex-wrap gap-2">
+          <span className={`px-2 py-1 text-[10px] sm:text-xs font-bold rounded-md shadow-md ${getTypeColor(opportunity.type)}`}>
             {opportunity.type}
           </span>
           {daysRemaining !== null && daysRemaining <= 7 && daysRemaining > 0 && (
-            <span className="px-3 py-1 text-xs font-semibold rounded-none bg-orange-500 text-white shadow-lg animate-pulse">
+            <span className="px-2 py-1 text-[10px] sm:text-xs font-bold rounded-md bg-orange-500 text-white shadow-md animate-pulse">
               {daysRemaining}j restants
             </span>
           )}
           {daysRemaining !== null && daysRemaining <= 0 && (
-            <span className="px-3 py-1 text-xs font-semibold rounded-none bg-red-500 text-white shadow-lg">
+            <span className="px-2 py-1 text-[10px] sm:text-xs font-bold rounded-md bg-red-500 text-white shadow-md">
               Expiré
             </span>
           )}
         </div>
 
-        {/* Overlay hover avec icone */}
-        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+        {/* Overlay hover avec icone (Uniquement sur desktop) */}
+        <div className="hidden sm:flex absolute inset-0 items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
           <motion.div
             initial={{ scale: 0 }}
             whileHover={{ scale: 1 }}
@@ -115,75 +115,62 @@ const OpportunityCard: React.FC<OpportunityCardProps> = ({ opportunity }) => {
       </div>
 
       {/* Contenu */}
-      <div className="p-6 flex-1 flex flex-col">
+      <div className="p-4 sm:p-6 flex-1 flex flex-col">
         {/* Entreprise */}
-        <div className="flex items-center gap-2 mb-3">
-          <BuildingOfficeIcon className="h-5 w-5 text-red-600" />
-          <span className="text-red-600 font-semibold text-sm">{opportunity.company}</span>
+        <div className="flex items-center gap-2 mb-2">
+          <BuildingOfficeIcon className="h-4 w-4 sm:h-5 sm:w-5 text-red-600" />
+          <span className="text-red-700 font-bold text-xs sm:text-sm uppercase tracking-wide">{opportunity.company}</span>
         </div>
 
         {/* Titre */}
-        <h3 className="text-xl font-bold text-gray-900 mb-3 line-clamp-2 hover:text-red-600 transition-colors">
+        <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2 sm:mb-3 line-clamp-2 hover:text-red-600 transition-colors leading-tight">
           {opportunity.title}
         </h3>
         
         {/* Description */}
-        <p className="text-gray-600 text-sm mb-4 line-clamp-3 flex-1">
+        <p className="text-gray-600 text-xs sm:text-sm mb-4 line-clamp-3 flex-1 leading-relaxed">
           {opportunity.description}
         </p>
 
         {/* Informations détaillées */}
-        <div className="space-y-2.5 mb-5">
-          <div className="flex items-center text-sm text-gray-700">
-            <MapPinIcon className="h-4 w-4 mr-2 text-gray-500 shrink-0" />
+        <div className="space-y-2 mb-4">
+          <div className="flex items-center text-xs sm:text-sm text-gray-700">
+            <MapPinIcon className="h-3.5 w-3.5 sm:h-4 sm:w-4 mr-2 text-gray-400 shrink-0" />
             <span className="truncate">{opportunity.location}</span>
           </div>
           
-          <div className="flex items-center text-sm text-gray-700">
-            <CurrencyDollarIcon className="h-4 w-4 mr-2 text-gray-500 shrink-0" />
+          <div className="flex items-center text-xs sm:text-sm text-gray-700">
+            <CurrencyDollarIcon className="h-3.5 w-3.5 sm:h-4 sm:w-4 mr-2 text-gray-400 shrink-0" />
             <span className="truncate">{formatSalary(opportunity.salary)}</span>
           </div>
           
           {opportunity.deadline && (
-            <div className="flex items-center text-sm text-gray-700">
-              <CalendarIcon className="h-4 w-4 mr-2 text-gray-500 shrink-0" />
+            <div className="flex items-center text-xs sm:text-sm text-gray-700">
+              <CalendarIcon className="h-3.5 w-3.5 sm:h-4 sm:w-4 mr-2 text-gray-400 shrink-0" />
               <span className="truncate">Échéance: {formatDeadline(opportunity.deadline)}</span>
-            </div>
-          )}
-
-          {daysRemaining !== null && daysRemaining > 0 && (
-            <div className="flex items-center text-sm text-gray-700">
-              <ClockIcon className="h-4 w-4 mr-2 text-gray-500 shrink-0" />
-              <span className={`font-medium ${
-                daysRemaining <= 3 ? 'text-red-600' : 
-                daysRemaining <= 7 ? 'text-orange-600' : 
-                'text-green-600'
-              }`}>
-                {daysRemaining} jour{daysRemaining > 1 ? 's' : ''} restant{daysRemaining > 1 ? 's' : ''}
-              </span>
             </div>
           )}
         </div>
 
-        {/* Bouton d'action */}
+        {/* Bouton d'action responsive */}
         <motion.button
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
           onClick={() => router.push(`/opportunities/${opportunity._id}`)}
-          className="w-full bg-linear-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-semibold py-3 px-4 rounded-none transition-all duration-200 shadow-md hover:shadow-lg flex items-center justify-center gap-2 group"
+          className="w-full bg-linear-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-bold py-2.5 sm:py-3 px-4 rounded-lg transition-all duration-200 shadow-sm hover:shadow-md flex items-center justify-center gap-2 group active:scale-95"
         >
-          Voir les détails
+          <span className="text-sm">Voir les détails</span>
           <ArrowRightIcon className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
         </motion.button>
       </div>
 
       {/* Footer avec metadata */}
-      <div className="px-6 py-3 bg-gray-50 border-t border-gray-100">
-        <div className="flex justify-between items-center text-xs text-gray-500">
-          <span>ID: {opportunity._id.substring(0, 8)}</span>
+      <div className="px-4 sm:px-6 py-3 bg-gray-50 border-t border-gray-100">
+        <div className="flex justify-between items-center text-[10px] text-gray-400 uppercase tracking-widest font-medium">
+          <span>#{opportunity._id.substring(0, 6)}</span>
           {opportunity.createdAt && (
             <span>
-              Publié le {new Date(opportunity.createdAt).toLocaleDateString('fr-FR')}
+              {new Date(opportunity.createdAt).toLocaleDateString('fr-FR')}
             </span>
           )}
         </div>

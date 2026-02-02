@@ -121,12 +121,12 @@ const Events: React.FC = () => {
         >
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-linear-to-r from-red-100 to-pink-100 rounded-full mb-6">
             <FaCalendarAlt className="text-red-600" />
-            <span className="typography-small font-semibold text-red-600 uppercase tracking-wider">Programme</span>
+            <span className="text-[10px] sm:text-xs font-semibold text-red-600 uppercase tracking-wider">Programme</span>
           </div>
-          <h2 className="typography-heading-2 text-slate-900 mb-6 font-black leading-tight">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl text-slate-900 mb-4 sm:mb-6 font-black leading-tight px-2">
             Explorez les prochains <span className="bg-linear-to-r from-red-600 via-rose-600 to-red-500 bg-clip-text text-transparent italic">rendez-vous</span> de la communauté
           </h2>
-          <p className="typography-body text-slate-600 max-w-2xl mx-auto md:text-xl">
+          <p className="text-sm sm:text-base md:text-lg lg:text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed px-4">
             Des conférences inspirantes, des ateliers pratiques et des moments de networking exclusifs pour les alumni LAU.
           </p>
         </motion.div>
@@ -180,28 +180,28 @@ const Events: React.FC = () => {
                   />
                 </div>
                 <div className="absolute inset-0 bg-linear-to-r from-slate-900/90 via-slate-900/70 to-slate-900/40" />
-                <div className="relative px-6 py-10 md:px-10 md:py-12 lg:px-14">
-                  <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
-                    <div className="flex items-start gap-4">
-                      <div className="flex flex-col items-center justify-center rounded-2xl bg-white/15 px-4 py-3 text-center">
-                        <span className="text-xs uppercase tracking-widest text-white/70">
+                <div className="relative px-4 py-8 sm:px-10 sm:py-12 lg:px-14">
+                  <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 sm:gap-8">
+                    <div className="flex flex-col sm:flex-row items-start gap-4 sm:gap-6">
+                      <div className="flex flex-row sm:flex-col items-center justify-center rounded-2xl bg-white/15 px-4 py-2 sm:px-5 sm:py-4 text-center gap-2 sm:gap-0 min-w-20">
+                        <span className="text-[10px] sm:text-xs uppercase tracking-widest text-white/70">
                           {formatDayBadge(spotlightEvent.date).month}
                         </span>
-                        <span className="text-2xl font-bold">
+                        <span className="text-xl sm:text-3xl font-bold">
                           {formatDayBadge(spotlightEvent.date).day}
                         </span>
                       </div>
-                      <div>
-                        <div className="inline-flex items-center px-3 py-1 bg-white/10 rounded-full text-xs font-semibold mb-3 uppercase tracking-wide">
+                      <div className="flex-1 min-w-0">
+                        <div className="inline-flex items-center px-3 py-1 bg-white/10 rounded-full text-[10px] sm:text-xs font-semibold mb-3 uppercase tracking-wide">
                           {spotlightEvent.type}
                         </div>
-                        <h3 className="typography-heading-2 font-extrabold leading-tight tracking-tight text-white">
+                        <h3 className="text-xl sm:text-2xl lg:text-3xl font-extrabold leading-tight tracking-tight text-white mb-3">
                           {spotlightEvent.title}
                         </h3>
-                        <p className="typography-small text-white/80 mt-3 max-w-2xl leading-relaxed">
+                        <p className="text-xs sm:text-sm text-white/80 max-w-2xl leading-relaxed line-clamp-3 sm:line-clamp-none">
                           {spotlightEvent.description}
                         </p>
-                        <div className="mt-4 flex flex-wrap items-center gap-4 text-sm text-white/80">
+                        <div className="mt-4 flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 text-xs sm:text-sm text-white/80">
                           <span className="inline-flex items-center">
                             <FaCalendarAlt className="mr-2 text-red-300" />
                             {formatDate(spotlightEvent.date)}
@@ -210,22 +210,16 @@ const Events: React.FC = () => {
                             <FaMapMarkerAlt className="mr-2 text-red-300" />
                             {spotlightEvent.location}
                           </span>
-                          {spotlightEvent.organizer && (
-                            <span className="inline-flex items-center">
-                              <FaUsers className="mr-2 text-red-300" />
-                              {spotlightEvent.organizer}
-                            </span>
-                          )}
                         </div>
                       </div>
                     </div>
-                    <div className="flex flex-col items-stretch gap-3 min-w-48">
+                    <div className="flex flex-col items-stretch gap-3 min-w-48 pt-4 sm:pt-0 border-t border-white/10 sm:border-t-0">
                       {spotlightEvent.maxParticipants && (
-                        <div className="rounded-none bg-white/10 px-4 py-3 text-sm text-white/80 border border-white/10">
+                        <div className="rounded-xl bg-white/10 px-4 py-3 text-xs sm:text-sm text-white/80 border border-white/10">
                           <div className="font-semibold text-white">
                             {spotlightEvent.maxParticipants} places disponibles
                           </div>
-                          <div>
+                          <div className="text-[10px] sm:text-xs opacity-80">
                             {spotlightEvent.participants
                               ? `${spotlightEvent.participants?.length} inscrits`
                               : "Ouvert aux inscriptions"}
@@ -234,11 +228,11 @@ const Events: React.FC = () => {
                       )}
                       <Link
                         href={`/events/${spotlightEvent._id}`}
-                        className="inline-flex items-center justify-center gap-2 rounded-none bg-white text-slate-900 font-semibold py-3 px-6 hover:bg-slate-100 transition-colors"
+                        className="inline-flex items-center justify-center gap-2 rounded-xl bg-white text-slate-900 font-bold py-3 sm:py-3.5 px-6 hover:bg-slate-100 transition-colors shadow-lg active:scale-95"
                       >
-                        <FaTicketAlt />
-                        Découvrir l&apos;événement
-                        <FaArrowRight className="transition-transform group-hover:translate-x-1" />
+                        <FaTicketAlt className="text-red-600" />
+                        <span className="text-sm">Découvrir l&apos;événement</span>
+                        <FaArrowRight className="text-xs ml-1" />
                       </Link>
                     </div>
                   </div>

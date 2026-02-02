@@ -174,25 +174,25 @@ const DonationCard = ({
       </div>
 
       {/* Contenu */}
-      <div className="p-6">
+      <div className="p-4 sm:p-6">
         {/* Titre et description */}
         <div className="mb-4">
-          <h3 className="text-lg font-semibold text-gray-900 mb-2 line-clamp-2 group-hover:text-red-600 transition-colors font-sans">
+          <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-1.5 line-clamp-2 group-hover:text-red-600 transition-colors font-sans leading-snug">
             {title}
           </h3>
-          <p className="text-gray-600 text-sm line-clamp-3 leading-relaxed">
+          <p className="text-gray-600 text-xs sm:text-sm line-clamp-2 sm:line-clamp-3 leading-relaxed">
             {description}
           </p>
         </div>
 
         {/* Métriques principales */}
         <div className="mb-4">
-          <div className="flex justify-between items-center mb-3">
-            <div className="flex items-center text-sm text-gray-600">
-              <FaBullseye className="mr-2 text-red-500" />
-              <span className="font-medium">Progression</span>
+          <div className="flex justify-between items-center mb-2.5">
+            <div className="flex items-center text-xs sm:text-sm text-gray-600 font-medium">
+              <FaBullseye className="mr-1.5 text-red-500" />
+              <span>Progression</span>
             </div>
-            <span className="text-lg font-bold text-red-600">
+            <span className="text-base sm:text-lg font-bold text-red-600">
               {Math.round(progressPercentage)}%
             </span>
           </div>
@@ -212,26 +212,26 @@ const DonationCard = ({
         </div>
 
         {/* Montants et statistiques */}
-        <div className="grid grid-cols-2 gap-3 mb-4">
-          <div className="text-center p-3 bg-green-50 rounded-lg border border-green-100">
-            <div className="flex items-center justify-center mb-1">
-              <CurrencyDollarIcon className="h-4 w-4 text-green-600 mr-1" />
-              <p className="text-xs text-green-700 font-medium">Collecté</p>
+        <div className="grid grid-cols-2 gap-2 sm:gap-3 mb-4">
+          <div className="text-center p-2 sm:p-3 bg-green-50 rounded-lg border border-green-100">
+            <div className="flex items-center justify-center mb-0.5 sm:mb-1">
+              <CurrencyDollarIcon className="h-3 w-3 sm:h-4 sm:w-4 text-green-600 mr-1" />
+              <p className="text-[10px] sm:text-xs text-green-700 font-medium uppercase tracking-tight">Collecté</p>
             </div>
-            <p className="font-bold text-green-600">{formatAmount(currentAmount)}</p>
+            <p className="font-bold text-sm sm:text-base text-green-600">{formatAmount(currentAmount)}</p>
           </div>
           
-          <div className="text-center p-3 bg-blue-50 rounded-lg border border-blue-100">
-            <div className="flex items-center justify-center mb-1">
-              <FaBullseye className="text-blue-600 text-xs mr-1" />
-              <p className="text-xs text-blue-700 font-medium">Objectif</p>
+          <div className="text-center p-2 sm:p-3 bg-blue-50 rounded-lg border border-blue-100">
+            <div className="flex items-center justify-center mb-0.5 sm:mb-1">
+              <FaBullseye className="text-blue-600 text-[10px] sm:text-xs mr-1" />
+              <p className="text-[10px] sm:text-xs text-blue-700 font-medium uppercase tracking-tight">Objectif</p>
             </div>
-            <p className="font-bold text-blue-600">{formatAmount(targetAmount)}</p>
+            <p className="font-bold text-sm sm:text-base text-blue-600">{formatAmount(targetAmount)}</p>
           </div>
         </div>
 
         {/* Informations supplémentaires */}
-        <div className="space-y-2 mb-4 text-sm text-gray-600">
+        <div className="space-y-2 mb-5 text-xs sm:text-sm text-gray-600">
           <div className="flex items-center justify-between">
             <div className="flex items-center">
               <UsersIcon className="h-4 w-4 mr-2 text-gray-400" />
@@ -257,7 +257,7 @@ const DonationCard = ({
         <motion.button
           onClick={handleDonate}
           disabled={!isActive || isLoading}
-          className={`w-full py-3 px-4 rounded-lg font-medium text-sm transition-all duration-300 flex items-center justify-center relative overflow-hidden ${
+          className={`w-full py-3 sm:py-3.5 px-4 rounded-lg font-bold text-sm transition-all duration-300 flex items-center justify-center relative overflow-hidden active:scale-95 sm:active:scale-[0.98] ${
             isActive && !isCompleted && !isLoading
               ? 'bg-red-600 hover:bg-red-700 text-white shadow-md hover:shadow-lg'
               : isLoading
@@ -277,14 +277,14 @@ const DonationCard = ({
               transition={{ duration: 0.6 }}
             />
           )}
-          <div className="flex items-center relative z-10">
+          <div className="flex items-center relative z-10 text-xs sm:text-sm">
             {isLoading ? (
               <>
-                <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <svg className="animate-spin -ml-1 mr-2 sm:mr-3 h-4 w-4 sm:h-5 sm:w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                   <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                   <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                 </svg>
-                Traitement en cours...
+                Traitement...
               </>
             ) : isCompleted ? (
               <>
@@ -293,8 +293,8 @@ const DonationCard = ({
               </>
             ) : isActive ? (
               <>
-                <FaHeart className="mr-2" />
-                Faire un don
+                <FaHeart className="mr-2 animate-pulse" />
+                Soutenir ce projet
               </>
             ) : (
               <>

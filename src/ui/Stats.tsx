@@ -104,7 +104,7 @@ const Stats: React.FC = () => {
         </motion.div>
 
         {/* Stats Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {stats.map((stat, index) => (
             <motion.div
               key={index}
@@ -114,14 +114,16 @@ const Stats: React.FC = () => {
               transition={{ duration: 0.6, delay: index * 0.1 }}
               className="group relative"
             >
-              <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 hover:bg-white/10 transition-all duration-300 relative overflow-hidden">
+              <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 sm:p-8 hover:bg-white/10 transition-all duration-300 relative overflow-hidden">
                 
                 {/* Background Glow */}
                 <div className={`absolute inset-0 bg-linear-to-br ${stat.color} opacity-0 group-hover:opacity-10 transition-opacity duration-300 rounded-2xl`}></div>
                 
                 {/* Icon */}
-                <div className={`inline-flex items-center justify-center w-16 h-16 bg-linear-to-br ${stat.color} text-white rounded-xl mb-6 group-hover:scale-110 transition-transform duration-300`}>
-                  {stat.icon}
+                <div className={`inline-flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 bg-linear-to-br ${stat.color} text-white rounded-xl mb-6 group-hover:scale-110 transition-transform duration-300`}>
+                  <div className="scale-75 sm:scale-100">
+                    {stat.icon}
+                  </div>
                 </div>
 
                 {/* Animated Number */}

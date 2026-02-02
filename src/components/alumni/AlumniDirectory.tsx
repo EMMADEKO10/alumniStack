@@ -361,22 +361,22 @@ const AlumniDirectory: React.FC<AlumniDirectoryProps> = ({ onAlumniSelect }) => 
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="text-center mb-12 mt-8"
+            className="text-center mb-8 sm:mb-12 mt-4 sm:mt-8"
           >
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
               <span className="text-gray-900">Découvrez </span>
               <span className="text-red-600">
                 Notre Communauté
               </span>
             </h1>
-            <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-              Connectez-vous avec les diplômés de Leadership AcademiaUniversity (LAU) à travers le monde
+            <p className="text-base sm:text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed px-4">
+              Connectez-vous avec les diplômés de Leadership Academia University (LAU) à travers le monde
             </p>
           </motion.div>
 
           {/* Grille de fonctionnalités - Palette LAU */}
           <motion.div 
-            className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12"
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-12"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
@@ -412,14 +412,14 @@ const AlumniDirectory: React.FC<AlumniDirectoryProps> = ({ onAlumniSelect }) => 
             ].map((feature, index) => (
               <motion.div
                 key={index}
-                className={`bg-linear-to-br ${feature.gradient} backdrop-blur-sm rounded-xl p-6 border ${feature.border} hover:shadow-lg transition-all duration-300 group`}
+                className={`bg-linear-to-br ${feature.gradient} backdrop-blur-sm rounded-xl p-6 border ${feature.border} hover:shadow-lg transition-all duration-300 group ${index === 2 ? 'sm:col-span-2 lg:col-span-1' : ''}`}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
                 whileHover={{ y: -8 }}
               >
-                <div className={`bg-linear-to-br ${feature.iconBg} w-14 h-14 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}>
-                  <feature.icon className={`text-2xl ${feature.iconColor}`} />
+                <div className={`bg-linear-to-br ${feature.iconBg} w-12 h-12 sm:w-14 sm:h-14 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}>
+                  <feature.icon className={`text-xl sm:text-2xl ${feature.iconColor}`} />
                 </div>
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">
                   {feature.title}
@@ -436,7 +436,7 @@ const AlumniDirectory: React.FC<AlumniDirectoryProps> = ({ onAlumniSelect }) => 
             variants={staggerChildren}
             initial="initial"
             animate="animate"
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8"
+            className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-8"
           >
             {[
               {

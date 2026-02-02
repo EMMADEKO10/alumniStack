@@ -303,7 +303,7 @@ const OpportunitySection: React.FC = () => {
   }
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-8">
+    <div className="max-w-7xl mx-auto px-4 py-4 sm:py-8">
       {/* Statistiques */}
       <AnimatePresence>
         {showStats && (
@@ -313,35 +313,35 @@ const OpportunitySection: React.FC = () => {
             exit={{ opacity: 0, height: 0 }}
             className="mb-6 overflow-hidden"
           >
-            <div className="bg-linear-to-r from-red-50 to-rose-50 rounded-xl p-6 border border-red-100">
+            <div className="bg-linear-to-r from-red-50 to-rose-50 rounded-xl p-4 sm:p-6 border border-red-100">
               <div className="flex justify-between items-center mb-4">
-                <h3 className="text-lg font-bold text-gray-900 flex items-center gap-2">
+                <h3 className="text-base sm:text-lg font-bold text-gray-900 flex items-center gap-2">
                   <ChartBarIcon className="h-5 w-5 text-red-600" />
                   Statistiques des opportunités
                 </h3>
                 <button
                   onClick={() => setShowStats(false)}
-                  className="text-gray-500 hover:text-gray-700"
+                  className="text-gray-500 hover:text-gray-700 p-1"
                 >
                   <XMarkIcon className="h-5 w-5" />
                 </button>
               </div>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <div className="bg-white rounded-lg p-4 shadow-sm">
-                  <p className="text-sm text-gray-600">Total</p>
-                  <p className="text-2xl font-bold text-red-600">{stats.total}</p>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
+                <div className="bg-white rounded-lg p-3 sm:p-4 shadow-sm border border-red-50 text-center sm:text-left">
+                  <p className="text-[10px] sm:text-sm text-gray-500 uppercase font-semibold">Total</p>
+                  <p className="text-xl sm:text-2xl font-bold text-red-600 leading-tight">{stats.total}</p>
                 </div>
-                <div className="bg-white rounded-lg p-4 shadow-sm">
-                  <p className="text-sm text-gray-600">Localisations</p>
-                  <p className="text-2xl font-bold text-blue-600">{stats.locations}</p>
+                <div className="bg-white rounded-lg p-3 sm:p-4 shadow-sm border border-blue-50 text-center sm:text-left">
+                  <p className="text-[10px] sm:text-sm text-gray-500 uppercase font-semibold">Villes</p>
+                  <p className="text-xl sm:text-2xl font-bold text-blue-600 leading-tight">{stats.locations}</p>
                 </div>
-                <div className="bg-white rounded-lg p-4 shadow-sm">
-                  <p className="text-sm text-gray-600">Types</p>
-                  <p className="text-2xl font-bold text-green-600">{Object.keys(stats.types).length}</p>
+                <div className="bg-white rounded-lg p-3 sm:p-4 shadow-sm border border-green-50 text-center sm:text-left">
+                  <p className="text-[10px] sm:text-sm text-gray-500 uppercase font-semibold">Types</p>
+                  <p className="text-xl sm:text-2xl font-bold text-green-600 leading-tight">{Object.keys(stats.types).length}</p>
                 </div>
-                <div className="bg-white rounded-lg p-4 shadow-sm">
-                  <p className="text-sm text-gray-600">CDI</p>
-                  <p className="text-2xl font-bold text-purple-600">{stats.types['CDI'] || 0}</p>
+                <div className="bg-white rounded-lg p-3 sm:p-4 shadow-sm border border-purple-50 text-center sm:text-left">
+                  <p className="text-[10px] sm:text-sm text-gray-500 uppercase font-semibold">CDI</p>
+                  <p className="text-xl sm:text-2xl font-bold text-purple-600 leading-tight">{stats.types['CDI'] || 0}</p>
                 </div>
               </div>
             </div>
@@ -350,42 +350,42 @@ const OpportunitySection: React.FC = () => {
       </AnimatePresence>
 
       {/* En-tête avec recherche et filtres */}
-      <div className="mb-8">
-        <div className="flex flex-col gap-4">
+      <div className="mb-6 sm:mb-8">
+        <div className="flex flex-col gap-3 sm:gap-4">
           {/* Barre de recherche et boutons d'action */}
-          <div className="flex flex-col sm:flex-row gap-3">
+          <div className="flex flex-col sm:flex-row gap-2.5 sm:gap-3">
             <div className="flex-1 relative">
               <MagnifyingGlassIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
               <input
                 type="text"
-                placeholder="Rechercher par titre, entreprise, localisation..."
+                placeholder="Titre, entreprise, ville..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-10 pr-10 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-600 focus:border-transparent shadow-sm"
+                className="w-full pl-10 pr-10 py-2.5 sm:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-600 focus:border-transparent shadow-sm text-sm sm:text-base transition-all"
               />
               {searchTerm && (
                 <button
                   onClick={() => setSearchTerm("")}
-                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 p-1"
                 >
                   <XMarkIcon className="h-5 w-5" />
                 </button>
               )}
             </div>
-            <div className="flex gap-2">
+            <div className="flex gap-2 w-full sm:w-auto">
               <button
                 onClick={() => setShowFilters(!showFilters)}
-                className="flex items-center gap-2 px-4 py-3 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition shadow-sm"
+                className={`flex-1 sm:flex-none flex items-center justify-center gap-2 px-3 sm:px-4 py-2.5 sm:py-3 border rounded-lg transition shadow-sm text-sm font-medium ${showFilters ? 'bg-red-50 border-red-200 text-red-700' : 'bg-white border-gray-300 text-gray-700 hover:bg-gray-50'}`}
               >
                 <AdjustmentsHorizontalIcon className="h-5 w-5" />
-                <span className="hidden sm:inline">Filtres</span>
+                Filtres
               </button>
               <button
                 onClick={() => setShowStats(!showStats)}
-                className="flex items-center gap-2 px-4 py-3 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition shadow-sm"
+                className={`flex-1 sm:flex-none flex items-center justify-center gap-2 px-3 sm:px-4 py-2.5 sm:py-3 border rounded-lg transition shadow-sm text-sm font-medium ${showStats ? 'bg-red-50 border-red-200 text-red-700' : 'bg-white border-gray-300 text-gray-700 hover:bg-gray-50'}`}
               >
                 <ChartBarIcon className="h-5 w-5" />
-                <span className="hidden sm:inline">Stats</span>
+                Stats
               </button>
             </div>
           </div>
@@ -399,15 +399,15 @@ const OpportunitySection: React.FC = () => {
                 exit={{ opacity: 0, height: 0 }}
                 className="overflow-hidden"
               >
-                <div className="bg-linear-to-r from-gray-50 to-red-50 rounded-none p-4 border border-gray-200">
-                  <div className="flex flex-wrap gap-3">
+                <div className="bg-white rounded-lg p-4 sm:p-5 border border-gray-200 shadow-md">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                     {/* Filtre par type */}
-                    <div className="flex-1 min-w-48">
-                      <label className="block text-sm font-medium text-gray-700 mb-1">Type de contrat</label>
+                    <div>
+                      <label className="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-1.5">Contrat</label>
                       <select
                         value={filterType}
                         onChange={(e) => setFilterType(e.target.value)}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-white shadow-sm"
+                        className="w-full px-3 py-2 sm:py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-600 focus:border-transparent bg-white shadow-sm text-sm"
                       >
                         {getUniqueTypes().map(type => (
                           <option key={type} value={type}>
@@ -418,28 +418,28 @@ const OpportunitySection: React.FC = () => {
                     </div>
 
                     {/* Filtre par localisation */}
-                    <div className="flex-1 min-w-48">
-                      <label className="block text-sm font-medium text-gray-700 mb-1">Localisation</label>
+                    <div>
+                      <label className="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-1.5">Localisation</label>
                       <select
                         value={filterLocation}
                         onChange={(e) => setFilterLocation(e.target.value)}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-white shadow-sm"
+                        className="w-full px-3 py-2 sm:py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-600 focus:border-transparent bg-white shadow-sm text-sm"
                       >
                         {getUniqueLocations().map(location => (
                           <option key={location} value={location}>
-                            {location === "all" ? "Toutes les localisations" : location}
+                            {location === "all" ? "Toutes les villes" : location}
                           </option>
                         ))}
                       </select>
                     </div>
 
                     {/* Tri */}
-                    <div className="flex-1 min-w-48">
-                      <label className="block text-sm font-medium text-gray-700 mb-1">Trier par</label>
+                    <div>
+                      <label className="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-1.5">Trier par</label>
                       <select
                         value={sortBy}
                         onChange={(e) => setSortBy(e.target.value)}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-white shadow-sm"
+                        className="w-full px-3 py-2 sm:py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-600 focus:border-transparent bg-white shadow-sm text-sm"
                       >
                         <option value="createdAt">Plus récentes</option>
                         <option value="title">Alphabétique</option>
@@ -451,19 +451,17 @@ const OpportunitySection: React.FC = () => {
 
                     {/* Mode d'affichage */}
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">Affichage</label>
+                      <label className="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-1.5 text-center sm:text-left">Affichage</label>
                       <div className="flex border border-gray-300 rounded-lg overflow-hidden shadow-sm">
                         <button
                           onClick={() => setViewMode("grid")}
-                          className={`px-4 py-2 transition ${viewMode === "grid" ? "bg-red-600 text-white" : "bg-white text-gray-700 hover:bg-gray-50"}`}
-                          title="Grille"
+                          className={`flex-1 py-2 sm:py-2.5 transition flex justify-center items-center ${viewMode === "grid" ? "bg-red-600 text-white" : "bg-white text-gray-700 hover:bg-gray-50"}`}
                         >
                           <Squares2X2Icon className="h-5 w-5" />
                         </button>
                         <button
                           onClick={() => setViewMode("list")}
-                          className={`px-4 py-2 transition ${viewMode === "list" ? "bg-red-600 text-white" : "bg-white text-gray-700 hover:bg-gray-50"}`}
-                          title="Liste"
+                          className={`flex-1 py-2 sm:py-2.5 transition flex justify-center items-center ${viewMode === "list" ? "bg-red-600 text-white" : "bg-white text-gray-700 hover:bg-gray-50"}`}
                         >
                           <ListBulletIcon className="h-5 w-5" />
                         </button>

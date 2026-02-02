@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from "react";
+import Image from "next/image";
 import DonationCard from "../../components/cards/DonationCard";
 import { motion } from "framer-motion";
 import { 
@@ -412,7 +413,7 @@ const DonationsPage = () => {
   }
 
   return (
-    <div className="max-w-7xl mx-auto px-4 pt-32 pb-16 relative">
+    <div className="max-w-7xl mx-auto px-4 pt-20 sm:pt-32 pb-16 relative">
       {/* Décorations de fond */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div
@@ -448,46 +449,46 @@ const DonationsPage = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
       >
-        <h1 className="text-4xl md:text-5xl font-bold mb-4">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
           <span className="text-gray-900">Soutenez </span>
           <span className="bg-linear-to-r from-red-600 via-rose-600 to-red-500 bg-clip-text text-transparent">
             Notre Mission
           </span>
         </h1>
-        <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
+        <p className="text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
           Merci d&apos;avoir envisagé un don au Leadership AcademiaUniversity (LAU). Votre générosité nous aide à bâtir l&apos;avenir de l&apos;éducation.
         </p>
       </motion.div>
 
       {/* Barre de recherche et filtres */}
       <motion.div 
-        className="bg-white/80 backdrop-blur-sm rounded-xl shadow-sm border border-gray-200 p-6 mb-8 relative z-10"
+        className="bg-white/80 backdrop-blur-sm rounded-xl shadow-sm border border-gray-200 p-4 sm:p-6 mb-8 relative z-10"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.6 }}
       >
         <div className="flex flex-col lg:flex-row gap-4 items-center justify-between">
           {/* Recherche */}
-          <div className="relative flex-1 max-w-md">
+          <div className="relative flex-1 w-full lg:max-w-md">
             <MagnifyingGlassIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
             <input
               type="text"
               placeholder="Rechercher une campagne..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all"
+              className="w-full pl-10 pr-4 py-2.5 sm:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all text-sm sm:text-base"
             />
           </div>
 
           {/* Filtres et tri */}
-          <div className="flex flex-wrap gap-3">
+          <div className="flex flex-wrap items-center justify-center sm:justify-end gap-2 sm:gap-3 w-full lg:w-auto">
             {/* Filtre par catégorie */}
-            <div className="flex items-center gap-2">
-              <FunnelIcon className="h-5 w-5 text-gray-500" />
+            <div className="flex items-center gap-2 flex-1 sm:flex-none min-w-35">
+              <FunnelIcon className="h-4 w-4 sm:h-5 sm:w-5 text-gray-500 hidden sm:block" />
               <select
                 value={categoryFilter}
                 onChange={(e) => setCategoryFilter(e.target.value)}
-                className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent text-sm sm:text-base"
               >
                 <option value="all">Toutes les catégories</option>
                 {getCategories().map((category) => (
@@ -502,19 +503,19 @@ const DonationsPage = () => {
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value)}
-              className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
+              className="flex-1 sm:flex-none min-w-30 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent text-sm sm:text-base"
             >
-              <option value="date">Trier par date</option>
-              <option value="title">Trier par titre</option>
-              <option value="amount">Trier par montant</option>
-              <option value="progress">Trier par progression</option>
+              <option value="date">Date</option>
+              <option value="title">Titre</option>
+              <option value="amount">Montant</option>
+              <option value="progress">Progression</option>
             </select>
 
             {/* Mode d'affichage */}
-            <div className="flex border border-gray-300 rounded-lg overflow-hidden">
+            <div className="flex border border-gray-300 rounded-lg overflow-hidden shrink-0">
               <button
                 onClick={() => setViewMode("grid")}
-                className={`px-4 py-2 text-sm font-medium ${
+                className={`px-3 sm:px-4 py-2 text-xs sm:text-sm font-medium ${
                   viewMode === "grid"
                     ? "bg-red-600 text-white"
                     : "bg-white text-gray-700 hover:bg-gray-50"
@@ -524,7 +525,7 @@ const DonationsPage = () => {
               </button>
               <button
                 onClick={() => setViewMode("list")}
-                className={`px-4 py-2 text-sm font-medium ${
+                className={`px-3 sm:px-4 py-2 text-xs sm:text-sm font-medium ${
                   viewMode === "list"
                     ? "bg-red-600 text-white"
                     : "bg-white text-gray-700 hover:bg-gray-50"
@@ -537,7 +538,7 @@ const DonationsPage = () => {
         </div>
 
         {/* Filtres par statut */}
-        <div className="flex flex-wrap gap-2 mt-4">
+        <div className="flex flex-wrap gap-2 mt-4 justify-center sm:justify-start">
           {[
             { key: 'all', label: 'Toutes', count: donations.length },
             { key: 'active', label: 'Actives', count: stats.activeCampaigns },
@@ -546,9 +547,9 @@ const DonationsPage = () => {
             <button
               key={filterOption.key}
               onClick={() => setFilter(filterOption.key as "all" | "active" | "completed")}
-              className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
+              className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm font-medium transition-all ${
                 filter === filterOption.key
-                  ? 'bg-red-600 text-white'
+                  ? 'bg-red-600 text-white shadow-sm'
                   : 'bg-gray-100 text-gray-600 hover:bg-red-50 hover:text-red-600'
               }`}
             >
@@ -589,30 +590,34 @@ const DonationsPage = () => {
               className={viewMode === "list" ? "bg-white/80 backdrop-blur-sm rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition-shadow duration-200" : ""}
             >
               {viewMode === "list" ? (
-                <div className="p-6">
-                  <div className="flex items-center gap-6">
-                    <div className="shrink-0 w-24 h-24 bg-linear-to-br from-red-100 to-red-200 rounded-lg flex items-center justify-center">
-                      <HeartIcon className="h-8 w-8 text-red-600" />
+                <div className="p-4 sm:p-6">
+                  <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6">
+                    <div className="shrink-0 w-full sm:w-24 h-48 sm:h-24 bg-linear-to-br from-red-100 to-red-200 rounded-lg flex items-center justify-center overflow-hidden relative">
+                      {donation.image ? (
+                        <Image src={donation.image} alt={donation.title} fill className="object-cover" />
+                      ) : (
+                        <HeartIcon className="h-8 w-8 text-red-600" />
+                      )}
                     </div>
-                    <div className="flex-1">
-                      <h3 className="text-lg font-semibold text-gray-900 mb-2">{donation.title}</h3>
-                      <p className="text-gray-600 text-sm mb-2 line-clamp-2">{donation.description}</p>
-                      <div className="flex items-center gap-4 text-sm text-gray-500">
+                    <div className="flex-1 text-center sm:text-left">
+                      <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-2">{donation.title}</h3>
+                      <p className="text-gray-600 text-xs sm:text-sm mb-3 line-clamp-2">{donation.description}</p>
+                      <div className="flex flex-wrap items-center justify-center sm:justify-start gap-3 sm:gap-4 text-xs sm:text-sm text-gray-500">
                         <div className="flex items-center">
-                          <CurrencyDollarIcon className="h-4 w-4 mr-1" />
+                          <CurrencyDollarIcon className="h-4 w-4 mr-1 text-red-500" />
                           <span>{formatAmount(donation.currentAmount)} / {formatAmount(donation.targetAmount)}</span>
                         </div>
                         <div className="flex items-center">
-                          <UsersIcon className="h-4 w-4 mr-1" />
+                          <UsersIcon className="h-4 w-4 mr-1 text-red-500" />
                           <span>{donation.donorCount || 0} donateurs</span>
                         </div>
                       </div>
                     </div>
-                    <div className="shrink-0">
+                    <div className="shrink-0 w-full sm:w-auto mt-2 sm:mt-0">
                       <button
                         onClick={() => handleDonate(donation._id)}
                         disabled={isPaying === donation._id}
-                        className={`bg-red-600 text-white px-6 py-2 rounded-lg hover:bg-red-700 transition-colors font-medium flex items-center ${isPaying === donation._id ? 'opacity-70 cursor-wait' : ''}`}
+                        className={`w-full sm:w-auto bg-red-600 text-white px-6 py-2.5 rounded-lg hover:bg-red-700 transition-colors text-sm font-medium flex items-center justify-center ${isPaying === donation._id ? 'opacity-70 cursor-wait' : ''}`}
                       >
                         {isPaying === donation._id ? (
                           <>
@@ -648,90 +653,102 @@ const DonationsPage = () => {
 
       {/* Section d'informations sur les dons */}
       <motion.div 
-        className="bg-linear-to-br from-red-50 via-white to-red-50 rounded-xl p-8 mt-12 relative z-10 border border-red-100 shadow-lg"
+        className="bg-linear-to-br from-red-50 via-white to-red-50 rounded-xl p-6 sm:p-8 mt-12 relative z-10 border border-red-100 shadow-lg"
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
         viewport={{ once: true }}
       >
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
           {/* Comment faire un don */}
           <div>
             <div className="flex items-center mb-6">
-              <div className="bg-red-100 rounded-full p-3 mr-4">
-                <FaHeart className="text-red-600 text-xl" />
+              <div className="bg-red-100 rounded-full p-2.5 sm:p-3 mr-4">
+                <FaHeart className="text-red-600 text-lg sm:text-xl" />
               </div>
-              <h2 className="text-2xl font-bold text-gray-900 font-sans">
+              <h2 className="text-xl sm:text-2xl font-bold text-gray-900 font-sans">
                 Comment faire un don
               </h2>
             </div>
             
             <div className="space-y-4 text-gray-700">
               <div className="flex items-start space-x-3">
-                <div className="bg-red-100 rounded-full p-2 mt-1">
-                  <FaCheck className="text-red-600 text-sm" />
+                <div className="bg-red-100 rounded-full p-1.5 sm:p-2 mt-1 shrink-0">
+                  <FaCheck className="text-red-600 text-[10px] sm:text-sm" />
                 </div>
-                <p className="text-sm">
-                  <strong>Donations en ligne :</strong> Utilisez nos formulaires sécurisés pour les donations par carte de crédit.
+                <p className="text-sm sm:text-base">
+                  <strong className="text-gray-900 font-semibold block sm:inline">Donations en ligne :</strong> Utilisez nos formulaires sécurisés pour les donations par carte de crédit.
                 </p>
               </div>
               <div className="flex items-start space-x-3">
-                <div className="bg-red-100 rounded-full p-2 mt-1">
-                  <FaCheck className="text-red-600 text-sm" />
+                <div className="bg-red-100 rounded-full p-1.5 sm:p-2 mt-1 shrink-0">
+                  <FaCheck className="text-red-600 text-[10px] sm:text-sm" />
                 </div>
-                <p className="text-sm">
-                  <strong>Donations planifiées :</strong> Contactez notre équipe pour explorer les options de dons.
+                <p className="text-sm sm:text-base">
+                  <strong className="text-gray-900 font-semibold block sm:inline">Donations planifiées :</strong> Contactez notre équipe pour explorer les options de dons.
                 </p>
               </div>
               <div className="flex items-start space-x-3">
-                <div className="bg-red-100 rounded-full p-2 mt-1">
-                  <FaCheck className="text-red-600 text-sm" />
+                <div className="bg-red-100 rounded-full p-1.5 sm:p-2 mt-1 shrink-0">
+                  <FaCheck className="text-red-600 text-[10px] sm:text-sm" />
                 </div>
-                <p className="text-sm">
-                  <strong>Support personnalisé :</strong> Notre équipe vous accompagne dans votre démarche.
+                <p className="text-sm sm:text-base">
+                  <strong className="text-gray-900 font-semibold block sm:inline">Support personnalisé :</strong> Notre équipe vous accompagne dans votre démarche.
                 </p>
               </div>
             </div>
           </div>
 
           {/* Coordonnées */}
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-            <div className="flex items-center mb-4">
-              <div className="bg-green-100 rounded-full p-3 mr-4">
-                <FaUniversity className="text-green-600 text-lg" />
+          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-5 sm:p-6">
+            <div className="flex items-center mb-5">
+              <div className="bg-green-100 rounded-full p-2.5 sm:p-3 mr-4">
+                <FaUniversity className="text-green-600 text-base sm:text-lg" />
               </div>
-              <h3 className="text-lg font-bold text-gray-900 font-sans">
+              <h3 className="text-lg sm:text-xl font-bold text-gray-900 font-sans">
                 Nos coordonnées
               </h3>
             </div>
             
-            <div className="space-y-4">
+            <div className="space-y-5">
               <div>
-                <h4 className="font-semibold text-gray-900 mb-2 flex items-center text-sm">
+                <h4 className="font-semibold text-gray-900 mb-2.5 flex items-center text-sm sm:text-base">
                   <FaUniversity className="text-red-600 mr-2" />
                   Comptes bancaires
                 </h4>
-                <div className="space-y-1 text-xs text-gray-600 pl-6">
-                  <p className="flex justify-between"><strong>Rawbank:</strong> <span className="font-mono">1234567890123456</span></p>
-                  <p className="flex justify-between"><strong>EquityBCDC:</strong> <span className="font-mono">9876543210987654</span></p>
+                <div className="space-y-2 text-[11px] sm:text-xs text-gray-600 sm:pl-6 overflow-x-auto">
+                  <p className="flex justify-between items-center gap-2 min-w-50">
+                    <strong className="shrink-0 font-medium">Rawbank:</strong> 
+                    <span className="font-mono bg-gray-50 px-2 py-1 rounded">1234567890123456</span>
+                  </p>
+                  <p className="flex justify-between items-center gap-2 min-w-50">
+                    <strong className="shrink-0 font-medium">EquityBCDC:</strong> 
+                    <span className="font-mono bg-gray-50 px-2 py-1 rounded">9876543210987654</span>
+                  </p>
                 </div>
               </div>
 
               <div>
-                <h4 className="font-semibold text-gray-900 mb-2 flex items-center text-sm">
+                <h4 className="font-semibold text-gray-900 mb-2.5 flex items-center text-sm sm:text-base">
                   <FaMobile className="text-green-600 mr-2" />
                   Mobile Money
                 </h4>
-                <div className="space-y-1 text-xs text-gray-600 pl-6">
-                  <p className="flex justify-between"><strong>Mpesa:</strong> <span className="font-mono">+243 000 000 000</span></p>
-                  <p className="flex justify-between"><strong>Orange Money:</strong> <span className="font-mono">+243 111 111 111</span></p>
+                <div className="space-y-2 text-[11px] sm:text-xs text-gray-600 sm:pl-6">
+                  <p className="flex justify-between items-center bg-gray-50 p-2 rounded">
+                    <strong className="font-medium">Mpesa:</strong> 
+                    <span className="font-mono">+243 000 000 000</span>
+                  </p>
+                  <p className="flex justify-between items-center bg-gray-50 p-2 rounded">
+                    <strong className="font-medium">Orange Money:</strong> 
+                    <span className="font-mono">+243 111 111 111</span>
+                  </p>
                 </div>
               </div>
             </div>
 
-            <div className="mt-4 p-3 bg-linear-to-r from-green-50 to-blue-50 border border-green-200 rounded-lg">
-              <p className="text-xs text-green-800">
-                📧 Confirmez votre don par email à <strong>dons@lau.org</strong>
+            <div className="mt-5 p-3.5 bg-linear-to-r from-green-50 to-blue-50 border border-green-200 rounded-lg">
+              <p className="text-xs text-green-800 leading-relaxed text-center sm:text-left">
+                📧 Confirmez votre don par email à <strong className="whitespace-nowrap">dons@lau.org</strong>
               </p>
             </div>
           </div>

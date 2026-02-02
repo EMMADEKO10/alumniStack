@@ -98,20 +98,20 @@ const AlumniModal: React.FC<{
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.95, opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="bg-white rounded-2xl w-full max-w-4xl max-h-[90vh] overflow-hidden shadow-2xl"
+            className="bg-white rounded-2xl w-full max-w-4xl max-h-[90vh] overflow-hidden shadow-2xl flex flex-col"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Header du modal */}
-            <div className={`bg-linear-to-r ${getFacultyColor(alumni.academicInfo.facultyId)} p-6 text-white relative`}>
+            <div className={`bg-linear-to-r ${getFacultyColor(alumni.academicInfo.facultyId)} p-4 sm:p-6 text-white relative shrink-0`}>
               <button
                 onClick={onClose}
-                className="absolute top-4 right-4 text-white/80 hover:text-white transition-colors p-2 rounded-full hover:bg-white/20"
+                className="absolute top-4 right-4 text-white/80 hover:text-white transition-colors p-2 rounded-full hover:bg-white/20 z-10"
               >
                 <FaTimes className="w-5 h-5" />
               </button>
               
-              <div className="flex items-center space-x-6">
-                <div className="w-24 h-24 relative bg-white/20 rounded-2xl flex items-center justify-center text-white font-bold text-2xl backdrop-blur-sm overflow-hidden">
+              <div className="flex flex-col sm:flex-row items-center sm:items-start space-y-4 sm:space-y-0 sm:space-x-6 text-center sm:text-left">
+                <div className="w-20 h-20 sm:w-24 sm:h-24 relative bg-white/20 rounded-2xl flex items-center justify-center text-white font-bold text-xl sm:text-2xl backdrop-blur-sm shadow-inner overflow-hidden">
                   {alumni.personalInfo.profilePicture ? (
                     <Image 
                       src={alumni.personalInfo.profilePicture} 
@@ -123,14 +123,14 @@ const AlumniModal: React.FC<{
                     getInitials(alumni.personalInfo.firstName, alumni.personalInfo.lastName)
                   )}
                 </div>
-                <div>
-                  <h2 className="text-3xl font-bold mb-2">
+                <div className="flex-1 min-w-0">
+                  <h2 className="text-xl sm:text-3xl font-bold mb-1 sm:mb-2 truncate">
                     {alumni.personalInfo.firstName} {alumni.personalInfo.lastName}
                   </h2>
-                  <p className="text-white/90 text-lg mb-1">
+                  <p className="text-white/90 text-sm sm:text-lg mb-0.5 sm:mb-1 font-medium">
                     {alumni.professionalInfo.currentPosition?.jobTitle || 'Diplômé'}
                   </p>
-                  <p className="text-white/80">
+                  <p className="text-white/80 text-xs sm:text-base">
                     {alumni.professionalInfo.currentPosition?.company || 'Non spécifié'}
                   </p>
                 </div>
@@ -138,34 +138,34 @@ const AlumniModal: React.FC<{
             </div>
 
             {/* Contenu du modal avec scroll */}
-            <div className="overflow-y-auto max-h-[calc(90vh-160px)]">
-              <div className="p-8 space-y-8">
+            <div className="overflow-y-auto flex-1">
+              <div className="p-4 sm:p-8 space-y-6 sm:space-y-8">
                 
                 {/* Informations personnelles */}
                 <div>
-                  <h3 className="flex items-center text-xl font-bold text-gray-900 mb-4">
+                  <h3 className="flex items-center text-lg sm:text-xl font-bold text-gray-900 mb-3 sm:mb-4">
                     <FaUser className="w-5 h-5 mr-3 text-red-600" />
                     Informations personnelles
                   </h3>
-                  <div className="bg-gray-50 rounded-xl p-6">
+                  <div className="bg-gray-50 rounded-xl p-4 sm:p-6">
                     {alumni.personalInfo.bio && (
-                      <div className="mb-4">
-                        <h4 className="font-semibold text-gray-900 mb-2">Biographie</h4>
-                        <p className="text-gray-600 leading-relaxed">
+                      <div className="mb-4 last:mb-0">
+                        <h4 className="text-sm font-semibold text-gray-900 mb-1 sm:mb-2">Biographie</h4>
+                        <p className="text-sm text-gray-600 leading-relaxed">
                           {alumni.personalInfo.bio}
                         </p>
                       </div>
                     )}
                     {alumni.personalInfo.email && (
-                      <div className="mb-4">
-                        <h4 className="font-semibold text-gray-900 mb-2">Email</h4>
-                        <p className="text-gray-600">{alumni.personalInfo.email}</p>
+                      <div className="mb-4 last:mb-0">
+                        <h4 className="text-sm font-semibold text-gray-900 mb-1 sm:mb-2">Email</h4>
+                        <p className="text-sm text-gray-600 truncate">{alumni.personalInfo.email}</p>
                       </div>
                     )}
                     {alumni.contactInfo?.currentAddress && (
-                      <div>
-                        <h4 className="font-semibold text-gray-900 mb-2">Localisation</h4>
-                        <p className="text-gray-600">
+                      <div className="last:mb-0">
+                        <h4 className="text-sm font-semibold text-gray-900 mb-1 sm:mb-2">Localisation</h4>
+                        <p className="text-sm text-gray-600">
                           {alumni.contactInfo.currentAddress.city}, {alumni.contactInfo.currentAddress.country}
                         </p>
                       </div>
@@ -175,24 +175,24 @@ const AlumniModal: React.FC<{
 
                 {/* Informations académiques */}
                 <div>
-                  <h3 className="flex items-center text-xl font-bold text-gray-900 mb-4">
+                  <h3 className="flex items-center text-lg sm:text-xl font-bold text-gray-900 mb-3 sm:mb-4">
                     <FaGraduationCap className="w-5 h-5 mr-3 text-red-600" />
                     Informations académiques
                   </h3>
-                  <div className="bg-gray-50 rounded-xl p-6">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="bg-gray-50 rounded-xl p-4 sm:p-6">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                       <div>
-                        <h4 className="font-semibold text-gray-900 mb-2">Faculté</h4>
-                        <p className="text-gray-600">{getFacultyName(alumni.academicInfo.facultyId)}</p>
+                        <h4 className="text-sm font-semibold text-gray-900 mb-1 sm:mb-2">Faculté</h4>
+                        <p className="text-sm text-gray-600">{getFacultyName(alumni.academicInfo.facultyId)}</p>
                       </div>
                       <div>
-                        <h4 className="font-semibold text-gray-900 mb-2">Promotion</h4>
-                        <p className="text-gray-600">{alumni.academicInfo.graduationYear}</p>
+                        <h4 className="text-sm font-semibold text-gray-900 mb-1 sm:mb-2">Promotion</h4>
+                        <p className="text-sm text-gray-600">{alumni.academicInfo.graduationYear}</p>
                       </div>
                       {alumni.academicInfo.degreeTitle && (
-                        <div className="md:col-span-2">
-                          <h4 className="font-semibold text-gray-900 mb-2">Diplôme</h4>
-                          <p className="text-gray-600">{alumni.academicInfo.degreeTitle}</p>
+                        <div className="sm:col-span-2">
+                          <h4 className="text-sm font-semibold text-gray-900 mb-1 sm:mb-2">Diplôme</h4>
+                          <p className="text-sm text-gray-600">{alumni.academicInfo.degreeTitle}</p>
                         </div>
                       )}
                     </div>
@@ -358,10 +358,10 @@ const AlumniCard: React.FC<AlumniCardProps> = ({ alumni, onClick }) => {
         {/* Badge de faculté */}
         <div className={`absolute top-0 right-0 w-20 h-20 bg-linear-to-br ${getFacultyColor(alumni.academicInfo.facultyId)} rounded-bl-full opacity-10 group-hover:opacity-20 transition-opacity`}></div>
         
-        <div className="p-6 relative">
+        <div className="p-4 sm:p-6 relative">
         {/* Header avec photo et nom */}
-          <div className="flex items-start space-x-4 mb-4">
-            <div className={`w-16 h-16 relative bg-linear-to-br ${getFacultyColor(alumni.academicInfo.facultyId)} rounded-2xl flex items-center justify-center text-white font-bold text-lg shadow-lg group-hover:shadow-xl transition-shadow overflow-hidden`}>
+          <div className="flex items-start space-x-3 sm:space-x-4 mb-3 sm:mb-4">
+            <div className={`w-12 h-12 sm:w-16 sm:h-16 shrink-0 relative bg-linear-to-br ${getFacultyColor(alumni.academicInfo.facultyId)} rounded-xl sm:rounded-2xl flex items-center justify-center text-white font-bold text-base sm:text-lg shadow-md group-hover:shadow-lg transition-shadow overflow-hidden`}>
             {alumni.personalInfo.profilePicture ? (
               <Image 
                 src={alumni.personalInfo.profilePicture} 
@@ -374,18 +374,18 @@ const AlumniCard: React.FC<AlumniCardProps> = ({ alumni, onClick }) => {
             )}
           </div>
           <div className="flex-1 min-w-0">
-              <h3 className="text-xl font-bold text-gray-900 mb-1 leading-tight group-hover:text-red-600 transition-colors">
+              <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-0.5 sm:mb-1 leading-tight group-hover:text-red-600 transition-colors truncate">
               {alumni.personalInfo.firstName} {alumni.personalInfo.lastName}
             </h3>
-              <div className="flex items-center text-gray-600 mb-2">
-                <FaUserTie className="w-3 h-3 mr-2" />
-                <span className="text-sm font-medium truncate">
+              <div className="flex items-center text-gray-600 mb-1 sm:mb-2">
+                <FaUserTie className="w-3 h-3 mr-1.5 sm:mr-2 shrink-0" />
+                <span className="text-xs sm:text-sm font-medium truncate">
               {alumni.professionalInfo.currentPosition?.jobTitle || 'Diplômé'}
                 </span>
           </div>
               <div className="flex items-center text-gray-500">
-                <FaBuilding className="w-3 h-3 mr-2" />
-                <span className="text-sm truncate">
+                <FaBuilding className="w-3 h-3 mr-1.5 sm:mr-2 shrink-0" />
+                <span className="text-xs sm:text-sm truncate">
                   {alumni.professionalInfo.currentPosition?.company || 'Non spécifié'}
             </span>
           </div>
@@ -393,22 +393,22 @@ const AlumniCard: React.FC<AlumniCardProps> = ({ alumni, onClick }) => {
           </div>
 
           {/* Informations académiques */}
-          <div className="bg-gray-50 rounded-xl p-4 mb-4 group-hover:bg-gray-100 transition-colors">
-            <div className="flex items-center justify-between mb-2">
+          <div className="bg-gray-50 rounded-xl p-3 sm:p-4 mb-3 sm:mb-4 group-hover:bg-gray-100 transition-colors">
+            <div className="flex items-center justify-between mb-1.5 sm:mb-2">
               <div className="flex items-center text-gray-600">
-                <FaGraduationCap className="w-4 h-4 mr-2" />
-                <span className="text-sm font-medium">Faculté</span>
+                <FaGraduationCap className="w-3.5 h-3.5 sm:w-4 sm:h-4 mr-2" />
+                <span className="text-xs sm:text-sm font-medium">Faculté</span>
               </div>
-              <span className="text-sm font-semibold text-gray-900">
+              <span className="text-xs sm:text-sm font-semibold text-gray-900">
                 {getFacultyName(alumni.academicInfo.facultyId)}
               </span>
             </div>
             <div className="flex items-center justify-between">
               <div className="flex items-center text-gray-600">
-                <FaCalendarAlt className="w-4 h-4 mr-2" />
-                <span className="text-sm font-medium">Promotion</span>
+                <FaCalendarAlt className="w-3.5 h-3.5 sm:w-4 sm:h-4 mr-2" />
+                <span className="text-xs sm:text-sm font-medium">Promotion</span>
         </div>
-              <span className="text-sm font-semibold text-gray-900">
+              <span className="text-xs sm:text-sm font-semibold text-gray-900">
                 {alumni.academicInfo.graduationYear}
               </span>
             </div>
@@ -416,22 +416,22 @@ const AlumniCard: React.FC<AlumniCardProps> = ({ alumni, onClick }) => {
 
         {/* Compétences */}
         {alumni.professionalInfo.skills && alumni.professionalInfo.skills.length > 0 && (
-          <div className="mb-4">
-              <div className="flex items-center mb-2">
-                <FaTools className="w-4 h-4 mr-2 text-gray-600" />
-                <span className="text-sm font-medium text-gray-600">Compétences</span>
+          <div className="mb-3 sm:mb-4">
+              <div className="flex items-center mb-1.5 sm:mb-2 text-gray-600">
+                <FaTools className="w-3.5 h-3.5 sm:w-4 sm:h-4 mr-2" />
+                <span className="text-xs sm:text-sm font-medium">Compétences</span>
               </div>
             <div className="flex flex-wrap gap-1">
                 {alumni.professionalInfo.skills.slice(0, 2).map((skill, index) => (
                 <span 
                   key={index}
-                    className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-linear-to-r ${getFacultyColor(alumni.academicInfo.facultyId)} text-white shadow-sm`}
+                    className={`inline-flex items-center px-2 py-0.5 sm:px-3 sm:py-1 rounded-full text-[10px] sm:text-xs font-medium bg-linear-to-r ${getFacultyColor(alumni.academicInfo.facultyId)} text-white shadow-sm`}
                 >
                   {skill}
                 </span>
               ))}
                 {alumni.professionalInfo.skills.length > 2 && (
-                  <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-gray-200 text-gray-700">
+                  <span className="inline-flex items-center px-2 py-0.5 sm:px-3 sm:py-1 rounded-full text-[10px] sm:text-xs font-medium bg-gray-200 text-gray-700">
                     +{alumni.professionalInfo.skills.length - 2}
                 </span>
               )}
@@ -441,8 +441,8 @@ const AlumniCard: React.FC<AlumniCardProps> = ({ alumni, onClick }) => {
 
           {/* Bio courte */}
         {alumni.personalInfo.bio && (
-          <div className="mb-4">
-              <p className="text-sm text-gray-600 leading-relaxed">
+          <div className="mb-3 sm:mb-4">
+              <p className="text-xs sm:text-sm text-gray-600 leading-relaxed line-clamp-2 sm:line-clamp-none">
                 {truncateText(alumni.personalInfo.bio, 80)}
             </p>
           </div>
@@ -450,17 +450,17 @@ const AlumniCard: React.FC<AlumniCardProps> = ({ alumni, onClick }) => {
 
           {/* Localisation */}
           {alumni.contactInfo?.currentAddress && (
-            <div className="flex items-center text-gray-500 mb-4">
-              <FaMapMarkerAlt className="w-3 h-3 mr-2" />
-              <span className="text-sm">
+            <div className="flex items-center text-gray-500 mb-3 sm:mb-4">
+              <FaMapMarkerAlt className="w-3 h-3 mr-1.5 sm:mr-2 shrink-0" />
+              <span className="text-xs sm:text-sm truncate">
                 {alumni.contactInfo.currentAddress.city}, {alumni.contactInfo.currentAddress.country}
               </span>
             </div>
           )}
 
           {/* Actions */}
-        <div className="flex items-center justify-between pt-4 border-t border-gray-200">
-          <div className="flex space-x-3">
+        <div className="flex items-center justify-between pt-3 sm:pt-4 border-t border-gray-200">
+          <div className="flex space-x-2.5 sm:space-x-3">
             {alumni.personalInfo.linkedinUrl && (
               <a 
                 href={alumni.personalInfo.linkedinUrl}
@@ -495,9 +495,9 @@ const AlumniCard: React.FC<AlumniCardProps> = ({ alumni, onClick }) => {
           </div>
             <button
               onClick={handleViewDetails}
-              className="flex items-center space-x-2 text-red-600 hover:text-red-700 font-medium text-sm transition-all duration-200 hover:scale-105 transform"
+              className="flex items-center space-x-1.5 sm:space-x-2 text-red-600 hover:text-red-700 font-bold text-xs sm:text-sm transition-all duration-200 active:scale-95 transform"
             >
-              <FaEye className="w-4 h-4" />
+              <FaEye className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
               <span>Voir plus</span>
             </button>
           </div>
