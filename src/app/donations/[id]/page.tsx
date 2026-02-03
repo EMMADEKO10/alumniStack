@@ -93,14 +93,14 @@ export default function DonationDetailPage() {
   const remainingAmount = Math.max(donation.targetAmount - donation.currentAmount, 0);
 
   return (
-    <div className="min-h-screen bg-gray-50 pt-24 pb-16">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gray-50 pt-24 pb-16 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto">
         
         {/* Navigation Breadcrumb */}
-        <div className="flex items-center gap-2 text-sm text-gray-500 mb-8">
+        <div className="flex items-center gap-2 text-xs font-bold text-gray-400 uppercase tracking-widest mb-8">
           <Link href="/donations" className="hover:text-red-600 transition-colors">Donations</Link>
-          <span>/</span>
-          <span className="text-gray-900 font-medium truncate">{donation.title}</span>
+          <span className="text-gray-300">/</span>
+          <span className="text-gray-900 truncate max-w-[200px] sm:max-w-md">{donation.title}</span>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -109,8 +109,8 @@ export default function DonationDetailPage() {
           <div className="lg:col-span-2 space-y-8">
             
             {/* Header / Image Section */}
-            <div className="bg-white rounded-3xl overflow-hidden shadow-sm border border-gray-100">
-              <div className="relative h-96 w-full">
+            <div className="bg-white rounded-3xl overflow-hidden shadow-xl border border-gray-100">
+              <div className="relative h-72 sm:h-96 w-full">
                 <Image 
                   src={donation.image || '/lau/felicitations_finalistes.jpg'} 
                   alt={donation.title} 
@@ -118,178 +118,214 @@ export default function DonationDetailPage() {
                   className="object-cover"
                 />
                 <div className="absolute top-6 left-6 flex gap-2">
-                  <span className={`px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider shadow-sm ${
+                  <span className={`px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest shadow-lg ${
                     donation.isActive ? 'bg-green-500 text-white' : 'bg-gray-500 text-white'
                   }`}>
                     {donation.isActive ? 'Active' : 'Terminée'}
                   </span>
                   {donation.category && (
-                    <span className="px-4 py-1.5 rounded-full bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold uppercase tracking-wider shadow-sm">
+                    <span className="px-4 py-1.5 rounded-full bg-white/95 backdrop-blur-sm text-gray-900 text-[10px] font-black uppercase tracking-widest shadow-lg border border-gray-100">
                       {donation.category}
                     </span>
                   )}
                 </div>
               </div>
-              <div className="p-8">
-                <h1 className="text-3xl font-black text-gray-900 mb-6 leading-tight">
+              <div className="p-6 sm:p-10">
+                <h1 className="text-3xl sm:text-4xl font-black text-gray-900 mb-6 leading-tight">
                   {donation.title}
                 </h1>
                 
-                <div className="flex flex-wrap gap-6 mb-8 text-sm text-gray-500">
-                  <div className="flex items-center gap-2 bg-gray-50 px-4 py-2 rounded-xl">
-                    <MapPinIcon className="h-4 w-4 text-red-500" />
-                    <span className="font-semibold text-gray-700">{donation.location || 'Leadership Academy'}</span>
+                <div className="flex flex-wrap gap-4 mb-10">
+                  <div className="flex items-center gap-2 bg-gray-50 px-4 py-2.5 rounded-2xl border border-gray-100">
+                    <MapPinIcon className="h-4 w-4 text-red-600" />
+                    <span className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">{donation.location || 'Leadership Academy'}</span>
                   </div>
-                  <div className="flex items-center gap-2 bg-gray-50 px-4 py-2 rounded-xl">
-                    <CalendarIcon className="h-4 w-4 text-red-500" />
-                    <span className="font-semibold text-gray-700">Publié le {new Date(donation.createdAt).toLocaleDateString('fr-FR')}</span>
+                  <div className="flex items-center gap-2 bg-gray-50 px-4 py-2.5 rounded-2xl border border-gray-100">
+                    <CalendarIcon className="h-4 w-4 text-red-600" />
+                    <span className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">Publié le {new Date(donation.createdAt).toLocaleDateString('fr-FR')}</span>
                   </div>
-                  <div className="flex items-center gap-2 bg-gray-50 px-4 py-2 rounded-xl">
-                    <TagIcon className="h-4 w-4 text-red-500" />
-                    <span className="font-semibold text-gray-700">Priorité {donation.priority || 'Normale'}</span>
+                  <div className="flex items-center gap-2 bg-gray-50 px-4 py-2.5 rounded-2xl border border-gray-100">
+                    <TagIcon className="h-4 w-4 text-red-600" />
+                    <span className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">Priorité {donation.priority || 'Normale'}</span>
                   </div>
                 </div>
 
-                <div className="prose prose-red max-w-none text-gray-600 leading-relaxed text-lg">
+                <div className="prose prose-red max-w-none text-gray-600 leading-relaxed text-base sm:text-lg font-medium">
                   {donation.description}
                 </div>
               </div>
             </div>
 
             {/* Contributors Section */}
-            <div className="bg-white rounded-3xl p-8 shadow-sm border border-gray-100">
-              <div className="flex items-center justify-between mb-8">
-                <h2 className="text-2xl font-bold text-gray-900 flex items-center gap-3">
-                  <UsersIcon className="h-6 w-6 text-red-600" />
-                  Contributeurs ({donation.contributors?.length || 0})
-                </h2>
-              </div>
-
-              <div className="space-y-4">
-                {donation.contributors && donation.contributors.length > 0 ? (
-                  donation.contributors.map((contrib) => (
-                    <div 
-                      key={contrib._id} 
-                      className={`flex items-center justify-between p-4 rounded-2xl border transition-all ${
-                        contrib.isMe ? 'bg-red-50 border-red-200 ring-1 ring-red-200' : 'bg-gray-50 border-gray-100'
-                      }`}
-                    >
-                      <div className="flex items-center gap-4">
-                        <div className={`h-12 w-12 rounded-full flex items-center justify-center font-bold text-lg ${
-                          contrib.isMe ? 'bg-red-600 text-white' : 'bg-gray-200 text-gray-400'
-                        }`}>
-                          {contrib.customerName.charAt(0)}
-                        </div>
-                        <div>
-                          <p className={`font-bold ${contrib.isMe ? 'text-red-900' : 'text-gray-900'}`}>
-                            {contrib.customerName} {contrib.isMe && <span className="text-[10px] bg-red-600 text-white px-2 py-0.5 rounded-full ml-2 uppercase">Moi</span>}
-                          </p>
-                          <p className="text-xs text-gray-500 uppercase tracking-widest font-medium">
-                            {new Date(contrib.createdAt).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })}
-                          </p>
-                        </div>
-                      </div>
-                      <div className="text-right">
-                        <p className={`text-lg font-black ${contrib.isMe ? 'text-red-600' : 'text-gray-900'}`}>
-                          +{contrib.amount}$
-                        </p>
-                        <p className="text-[10px] text-gray-400 font-bold uppercase tracking-tighter">Contribution validée</p>
-                      </div>
+            <div className="bg-white rounded-3xl p-6 sm:p-10 shadow-xl border border-gray-100 overflow-hidden relative">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-red-50 rounded-bl-full opacity-50 -z-0" />
+              
+              <div className="relative z-10">
+                <div className="flex items-center justify-between mb-10">
+                  <h2 className="text-2xl font-black text-gray-900 flex items-center gap-3">
+                    <div className="h-10 w-10 bg-red-100 rounded-xl flex items-center justify-center">
+                      <UsersIcon className="h-6 w-6 text-red-600" />
                     </div>
-                  ))
-                ) : (
-                  <div className="text-center py-12 bg-gray-50 rounded-2xl border-2 border-dashed border-gray-200">
-                    <HeartIcon className="h-12 w-12 text-gray-300 mx-auto mb-4" />
-                    <p className="text-gray-500 font-medium">Soyez le premier à contribuer !</p>
-                  </div>
-                )}
+                    Contributeurs ({donation.contributors?.length || 0})
+                  </h2>
+                </div>
+
+                <div className="space-y-4">
+                  {donation.contributors && donation.contributors.length > 0 ? (
+                    donation.contributors.map((contrib) => (
+                      <div 
+                        key={contrib._id} 
+                        className={`flex items-center justify-between p-5 rounded-2xl border-2 transition-all ${
+                          contrib.isMe ? 'bg-red-50 border-red-600 ring-4 ring-red-100' : 'bg-gray-50 border-transparent hover:border-gray-100'
+                        }`}
+                      >
+                        <div className="flex items-center gap-5">
+                          <div className={`h-14 w-14 rounded-2xl flex items-center justify-center font-black text-xl shadow-lg transition-transform hover:scale-105 ${
+                            contrib.isMe ? 'bg-red-600 text-white' : 'bg-white text-gray-400 border border-gray-100'
+                          }`}>
+                            {contrib.customerName.charAt(0)}
+                          </div>
+                          <div>
+                            <p className={`font-black tracking-tight text-lg ${contrib.isMe ? 'text-red-900' : 'text-gray-900'}`}>
+                              {contrib.customerName} {contrib.isMe && <span className="text-[9px] bg-red-600 text-white px-2.5 py-1 rounded-full ml-2 uppercase font-black tracking-widest">Moi</span>}
+                            </p>
+                            <p className="text-[10px] text-gray-400 uppercase tracking-[0.2em] font-black mt-1">
+                              {new Date(contrib.createdAt).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })}
+                            </p>
+                          </div>
+                        </div>
+                        <div className="text-right">
+                          <p className={`text-xl font-black ${contrib.isMe ? 'text-red-600' : 'text-gray-900'}`}>
+                            +{contrib.amount}$
+                          </p>
+                          <p className="text-[9px] text-gray-400 font-black uppercase tracking-widest mt-1">Validé</p>
+                        </div>
+                      </div>
+                    ))
+                  ) : (
+                    <div className="text-center py-16 bg-gray-50 rounded-3xl border-2 border-dashed border-gray-200">
+                      <HeartIcon className="h-14 w-14 text-gray-200 mx-auto mb-4" />
+                      <p className="text-gray-400 font-bold uppercase tracking-widest text-sm text-center px-6">Soyez le premier à soutenir cette cause</p>
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
 
           </div>
 
           {/* Sidebar (Right) */}
-          <div className="space-y-6">
+          <div className="space-y-8">
             
             {/* Donation Progress Card */}
-            <div className="bg-white rounded-3xl p-8 shadow-xl border border-gray-100 sticky top-28">
-              <div className="mb-6">
-                <div className="flex items-end justify-between mb-4">
+            <div className="bg-white rounded-3xl p-8 shadow-2xl border border-gray-100 sticky top-28 overflow-hidden">
+              <div className="absolute top-0 left-0 w-full h-2 bg-gray-100">
+                <motion.div 
+                  initial={{ width: 0 }}
+                  animate={{ width: `${progress}%` }}
+                  transition={{ duration: 1, ease: "easeOut" }}
+                  className="h-full bg-red-600"
+                />
+              </div>
+
+              <div className="mb-8 pt-4">
+                <div className="flex items-end justify-between mb-6">
                   <div>
-                    <span className="text-4xl font-black text-gray-900">{donation.currentAmount}$</span>
-                    <span className="text-gray-400 ml-2 font-bold uppercase text-xs tracking-widest">Récoltés</span>
+                    <span className="text-5xl font-black text-gray-900">{donation.currentAmount}$</span>
+                    <p className="text-gray-400 font-black uppercase text-[10px] tracking-[0.3em] mt-2">Déjà récoltés</p>
                   </div>
                   <div className="text-right">
-                    <span className="text-sm font-black text-red-600 bg-red-50 px-3 py-1 rounded-lg">{progress}%</span>
+                    <span className="text-xs font-black text-red-600 bg-red-50 px-3 py-1.5 rounded-xl border border-red-100">{progress}%</span>
                   </div>
                 </div>
                 
-                <div className="h-4 w-full bg-gray-100 rounded-full overflow-hidden mb-4">
+                <div className="h-4 w-full bg-gray-50 rounded-full overflow-hidden mb-6 border border-gray-100">
                   <motion.div 
                     initial={{ width: 0 }}
                     animate={{ width: `${progress}%` }}
-                    transition={{ duration: 1, ease: "easeOut" }}
-                    className="h-full bg-linear-to-r from-red-600 to-rose-500 rounded-full"
+                    transition={{ duration: 1.5, ease: "easeOut" }}
+                    className="h-full bg-linear-to-r from-red-600 via-rose-600 to-red-500 rounded-full"
                   />
                 </div>
                 
-                <div className="flex justify-between text-xs font-bold text-gray-500 uppercase tracking-wider">
-                  <span>Objectif: {donation.targetAmount}$</span>
-                  <span className="text-red-600">Restant: {remainingAmount}$</span>
+                <div className="flex justify-between items-center text-[10px] font-black text-gray-400 uppercase tracking-widest">
+                  <span className="flex items-center gap-1.5">
+                    <div className="h-2 w-2 rounded-full bg-gray-300" />
+                    Cible: {donation.targetAmount}$
+                  </span>
+                  <span className="flex items-center gap-1.5 text-red-600">
+                    Reste: {remainingAmount}$
+                    <div className="h-2 w-2 rounded-full bg-red-600 animate-pulse" />
+                  </span>
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-4 mb-8">
-                <div className="bg-gray-50 p-4 rounded-2xl text-center">
-                  <p className="text-2xl font-black text-gray-900">{donation.donorCount || 0}</p>
-                  <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Donateurs</p>
+              <div className="grid grid-cols-2 gap-4 mb-10">
+                <div className="bg-gray-50 p-5 rounded-2xl text-center border border-gray-100 transition-colors hover:bg-gray-100/50">
+                  <p className="text-3xl font-black text-gray-900">{donation.donorCount || 0}</p>
+                  <p className="text-[9px] font-black text-gray-400 uppercase tracking-widest mt-2">Généreux donateurs</p>
                 </div>
-                <div className="bg-gray-50 p-4 rounded-2xl text-center">
-                  <p className="text-2xl font-black text-gray-900">{remainingAmount <= 0 ? 0 : Math.ceil(remainingAmount / 10)}</p>
-                  <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Dons de 10$ requis</p>
+                <div className="bg-gray-50 p-5 rounded-2xl text-center border border-gray-100 transition-colors hover:bg-gray-100/50">
+                  <p className="text-3xl font-black text-gray-900">{remainingAmount <= 0 ? 0 : Math.ceil(remainingAmount / 10)}</p>
+                  <p className="text-[9px] font-black text-gray-400 uppercase tracking-widest mt-2">Dons de 10$ requis</p>
                 </div>
               </div>
 
               {donation.isActive ? (
                 <Link 
                   href={`/donations/${donation._id}/pay`}
-                  className="w-full bg-red-600 text-white py-5 rounded-2xl font-black text-lg flex items-center justify-center gap-3 hover:bg-red-700 transition-all shadow-lg shadow-red-200 group"
+                  className="w-full bg-red-600 text-white py-6 rounded-2xl font-black text-lg flex items-center justify-center gap-3 hover:bg-red-700 transition-all shadow-xl shadow-red-100 group active:scale-95"
                 >
                   <HeartIcon className="h-6 w-6 fill-white group-hover:scale-110 transition-transform" />
-                  FAIRE UN DON
+                  SOUTENIR LE PROJET
                 </Link>
               ) : (
-                <div className="w-full bg-gray-100 text-gray-400 py-5 rounded-2xl font-black text-lg flex items-center justify-center gap-3 cursor-not-allowed">
-                  CAMPAGNE TERMINÉE
+                <div className="w-full bg-gray-100 text-gray-400 py-6 rounded-2xl font-black text-lg flex items-center justify-center gap-3 cursor-not-allowed">
+                  CAMPAGNE TERMINEE
                   <CheckCircleIcon className="h-6 w-6" />
                 </div>
               )}
 
-              <p className="mt-6 text-[10px] text-gray-400 font-bold uppercase tracking-tighter text-center leading-relaxed">
-                Paiement sécurisé par Araka Pay.<br />Vos données sont chiffrées et protégées.
-              </p>
+              <div className="mt-8 pt-8 border-t border-gray-50 text-center">
+                <div className="flex items-center justify-center gap-4 opacity-30 mb-4">
+                    <Image src="/icon_pay/svg/Orange_Money-Logo.wine.svg" alt="Orange" width={40} height={20} className="grayscale" />
+                    <Image src="/icon_pay/svg/M-PESA logo - Brandlogos.net.svg" alt="Mpesa" width={40} height={20} className="grayscale" />
+                    <Image src="/icon_pay/svg/Visa_Inc.-Logo.wine.svg" alt="Visa" width={40} height={20} className="grayscale" />
+                </div>
+                <p className="text-[9px] text-gray-400 font-black uppercase tracking-tighter leading-relaxed">
+                  Paiement 100% sécurisé via Araka Pay<br />Développement communautaire LAU
+                </p>
+              </div>
             </div>
 
-            {/* Info Box */}
-            <div className="bg-linear-to-br from-gray-900 to-gray-800 rounded-3xl p-8 text-white">
-              <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
-                <BanknotesIcon className="h-6 w-6 text-red-500" />
-                Impact de votre don
+            {/* Impact Info Box */}
+            <div className="bg-gray-900 rounded-3xl p-8 text-white relative overflow-hidden group">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-red-600/10 rounded-full blur-3xl -mr-16 -mt-16 group-hover:bg-red-600/20 transition-colors" />
+              
+              <h3 className="text-lg font-black mb-6 flex items-center gap-3 relative z-10">
+                <div className="h-8 w-8 bg-red-600 rounded-lg flex items-center justify-center">
+                    <BanknotesIcon className="h-5 w-5 text-white" />
+                </div>
+                IMPACT DE VOTRE DON
               </h3>
-              <ul className="space-y-4 text-gray-300 text-sm font-medium">
-                <li className="flex gap-3">
-                  <CheckCircleIcon className="h-5 w-5 text-red-500 shrink-0" />
-                  <span>Soutien direct à l&apos;infrastructure universitaire</span>
+              <ul className="space-y-5 relative z-10">
+                <li className="flex gap-4">
+                  <CheckCircleIcon className="h-5 w-5 text-red-500 shrink-0 mt-0.5" />
+                  <span className="text-xs font-bold text-gray-300 leading-relaxed uppercase tracking-wide">Soutien direct à l&apos;infrastructure universitaire</span>
                 </li>
-                <li className="flex gap-3">
-                  <CheckCircleIcon className="h-5 w-5 text-red-500 shrink-0" />
-                  <span>Amélioration des conditions d&apos;étude</span>
+                <li className="flex gap-4">
+                  <CheckCircleIcon className="h-5 w-5 text-red-500 shrink-0 mt-0.5" />
+                  <span className="text-xs font-bold text-gray-300 leading-relaxed uppercase tracking-wide">Amélioration des conditions d&apos;étude</span>
                 </li>
-                <li className="flex gap-3">
-                  <CheckCircleIcon className="h-5 w-5 text-red-500 shrink-0" />
-                  <span>Transparence totale sur l&apos;utilisation des fonds</span>
+                <li className="flex gap-4">
+                  <CheckCircleIcon className="h-5 w-5 text-red-500 shrink-0 mt-0.5" />
+                  <span className="text-xs font-bold text-gray-300 leading-relaxed uppercase tracking-wide">Transparence totale sur l&apos;utilisation des fonds</span>
                 </li>
               </ul>
+              
+              <div className="mt-8 pt-8 border-t border-white/10 relative z-10 text-center">
+                 <p className="text-[10px] font-black text-gray-500 uppercase tracking-widest">Leadership Academy University</p>
+              </div>
             </div>
           </div>
 
