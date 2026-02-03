@@ -267,7 +267,7 @@ const DonationsPage = () => {
 
   if (loading) {
     return (
-      <div className="max-w-7xl mx-auto px-4 pt-24 pb-16">
+      <div className="max-w-7xl mx-auto px-4 pt-32 pb-16">
         {/* Skeleton Titre principal */}
         <div className="text-center mb-12 mt-8 animate-pulse">
           <div className="h-12 bg-gray-200 rounded-lg w-3/4 mx-auto mb-4"></div>
@@ -328,7 +328,7 @@ const DonationsPage = () => {
 
   if (error) {
     return (
-      <div className="max-w-7xl mx-auto px-4 pt-24 pb-16">
+      <div className="max-w-7xl mx-auto px-4 pt-32 pb-16">
         <div className="bg-red-50 border border-red-200 rounded-lg p-6 text-center">
           <p className="text-red-600 font-medium">Erreur : {error}</p>
           <motion.button
@@ -345,7 +345,7 @@ const DonationsPage = () => {
   }
 
   return (
-    <div className="max-w-7xl mx-auto px-4 pt-16 sm:pt-20 lg:pt-24 pb-16 relative">
+    <div className="max-w-7xl mx-auto px-4 pt-24 sm:pt-28 lg:pt-32 pb-16 relative">
       {/* Décorations de fond */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div
