@@ -59,7 +59,7 @@ const Footer: React.FC = () => {
       </div>
 
       <Container>
-        <div className="relative z-10 pt-16 pb-8">
+        <div className="relative z-10 pt-10 pb-6">
           {/* Main footer content */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
             

@@ -35,7 +35,7 @@ const Testimonials: React.FC = () => {
   };
 
   return (
-    <section className="py-10 sm:py-12 lg:py-14 bg-linear-to-br from-red-50 via-white to-orange-50 relative overflow-hidden">
+    <section className="py-8 sm:py-10 lg:py-12 bg-linear-to-br from-red-50 via-white to-orange-50 relative overflow-hidden">
       {/* Background Decorations */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-20 -left-20 w-40 h-40 sm:w-60 sm:h-60 lg:w-72 lg:h-72 bg-red-100 rounded-full mix-blend-multiply filter blur-xl opacity-50 animate-pulse"></div>

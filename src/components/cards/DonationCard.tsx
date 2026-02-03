@@ -1,12 +1,14 @@
 'use client';
 
 import Image from "next/image";
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { 
   FaHeart, 
   FaBullseye, 
   FaCheckCircle,
-  FaExclamationCircle
+  FaExclamationCircle,
+  FaArrowRight
 } from "react-icons/fa";
 import { 
   UsersIcon, 
@@ -103,7 +105,7 @@ const DonationCard = ({
       transition={{ duration: 0.3 }}
     >
       {/* Image avec overlay et badges */}
-      <div className="relative h-48 w-full overflow-hidden">
+      <Link href={`/donations/${_id}`} className="block relative h-48 w-full overflow-hidden">
         <Image 
           className="object-cover transition-transform duration-500 group-hover:scale-105" 
           fill 
@@ -171,15 +173,17 @@ const DonationCard = ({
             {Math.round(progressPercentage)}%
           </div>
         </div>
-      </div>
+      </Link>
 
       {/* Contenu */}
       <div className="p-4 sm:p-6">
         {/* Titre et description */}
         <div className="mb-4">
-          <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-1.5 line-clamp-2 group-hover:text-red-600 transition-colors font-sans leading-snug">
-            {title}
-          </h3>
+          <Link href={`/donations/${_id}`}>
+            <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-1.5 line-clamp-2 group-hover:text-red-600 transition-colors font-sans leading-snug">
+              {title}
+            </h3>
+          </Link>
           <p className="text-gray-600 text-xs sm:text-sm line-clamp-2 sm:line-clamp-3 leading-relaxed">
             {description}
           </p>
@@ -251,6 +255,17 @@ const DonationCard = ({
               <span>Créé le {formatDate(createdAt)}</span>
             </div>
           )}
+        </div>
+
+        {/* Lien vers les détails */}
+        <div className="mb-4 text-center">
+          <Link 
+            href={`/donations/${_id}`}
+            className="text-xs sm:text-sm font-bold text-gray-500 hover:text-red-600 transition-colors flex items-center justify-center gap-1.5"
+          >
+            <span>Voir l'impact et les contributeurs</span>
+            <FaArrowRight className="h-2.5 w-2.5" />
+          </Link>
         </div>
 
         {/* Bouton d'action */}

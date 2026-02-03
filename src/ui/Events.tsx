@@ -104,7 +104,7 @@ const Events: React.FC = () => {
   };
 
   return (
-    <section className="py-12 sm:py-16 bg-linear-to-b from-white via-slate-50 to-white relative overflow-hidden">
+    <section className="py-8 sm:py-10 bg-linear-to-b from-white via-slate-50 to-white relative overflow-hidden">
       {/* Décorations de fond */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-linear-to-bl from-red-50/50 to-transparent rounded-full blur-3xl" />

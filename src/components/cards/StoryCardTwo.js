@@ -121,7 +121,7 @@ const StoryCardTwo = ({ title, description, image, category, date, featured, rea
           className="group/btn relative w-full bg-linear-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-semibold py-3.5 px-6 rounded-xl transition-all duration-300 flex items-center justify-center space-x-2 overflow-hidden shadow-md hover:shadow-lg"
         >
           {/* Shine effect */}
-          <div className="absolute inset-0 bg-linear-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] group-hover/btn:translate-x-[100%] transition-transform duration-700" />
+          <div className="absolute inset-0 bg-linear-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover/btn:translate-x-full transition-transform duration-700" />
           
           <FaBookOpen className="text-sm relative z-10" />
           <span className="relative z-10">Lire l&apos;histoire</span>

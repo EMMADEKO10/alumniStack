@@ -7,7 +7,7 @@ import { FaArrowRight, FaUniversity, FaQuoteLeft } from "react-icons/fa";
 
 const About: React.FC = () => {
   return (
-    <section className="py-16 bg-white relative overflow-hidden">
+    <section className="py-10 bg-white relative overflow-hidden">
       {/* Background Decorations */}
       <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 w-96 h-96 bg-red-50 rounded-full blur-3xl opacity-50" />
       <div className="absolute bottom-0 left-0 translate-y-1/2 -translate-x-1/2 w-96 h-96 bg-slate-50 rounded-full blur-3xl opacity-50" />

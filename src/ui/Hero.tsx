@@ -103,7 +103,7 @@ const Hero: React.FC = () => {
   };
 
   return (
-    <div className="relative min-h-screen flex items-center overflow-hidden pt-20 lg:pt-24">
+    <div className="relative min-h-screen flex items-center overflow-hidden pt-16 lg:pt-20">
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0">
         {heroImages.map((image, index) => (

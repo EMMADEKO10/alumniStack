@@ -112,7 +112,7 @@ const Features: React.FC = () => {
   };
 
   return (
-    <section className="py-12 sm:py-16 bg-slate-50 relative overflow-hidden">
+    <section className="py-8 sm:py-10 bg-slate-50 relative overflow-hidden">
       {/* Background patterns */}
       <div className="absolute inset-0 opacity-[0.03] pointer-events-none">
         <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(#000_1px,transparent_1px)] bg-size-[40px_40px]" />

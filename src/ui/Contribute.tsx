@@ -232,7 +232,7 @@ const Contribute: React.FC = () => {
                   whileHover={{ y: -8 }}
                   className="group"
                 >
-                  <Link href={`/donations`}>
+                  <Link href={`/donations/${donation._id}`}>
                     <div className="h-full bg-white rounded-none overflow-hidden border border-gray-200 shadow-lg hover:shadow-2xl transition-all duration-300 relative">
                       {/* Effet de brillance au survol */}
                       <div className="absolute inset-0 bg-linear-to-r from-transparent via-white/10 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 z-10" />

@@ -69,7 +69,7 @@ const Stats: React.FC = () => {
   ];
 
   return (
-    <section ref={ref} className="py-20 bg-linear-to-br from-gray-900 via-gray-800 to-black text-white relative overflow-hidden">
+    <section ref={ref} className="py-10 bg-linear-to-br from-gray-900 via-gray-800 to-black text-white relative overflow-hidden">
       
       {/* Background Decorations */}
       <div className="absolute inset-0 overflow-hidden">
@@ -86,7 +86,7 @@ const Stats: React.FC = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="text-center mb-16"
+          className="text-center mb-10"
         >
           <div className="inline-flex items-center px-4 py-2 bg-white/10 border border-white/20 rounded-full text-white text-sm font-medium mb-6">
             📊 Impact LAU

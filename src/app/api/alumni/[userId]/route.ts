@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { connectDB } from '../../../../lib/mongodb';
+import { connectDB } from '@/lib/mongodb';
 import { getServerSession } from 'next-auth';
 
 // GET - Récupérer le profil alumni d'un utilisateur spécifique

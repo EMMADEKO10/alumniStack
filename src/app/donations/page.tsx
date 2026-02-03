@@ -2,6 +2,8 @@
 
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import DonationCard from "../../components/cards/DonationCard";
 import { motion } from "framer-motion";
 import { 
@@ -45,6 +47,7 @@ interface DonationStats {
 }
 
 const DonationsPage = () => {
+  const router = useRouter();
   const [donations, setDonations] = useState<Donation[]>([]);
   const [filteredDonations, setFilteredDonations] = useState<Donation[]>([]);
   const [loading, setLoading] = useState(true);
@@ -229,80 +232,9 @@ const DonationsPage = () => {
     }
   };
 
-  const handleDonate = async (donationId: string) => {
-    const amount = window.prompt("Entrez le montant de votre don (USD):", "10");
-    if (!amount || isNaN(parseFloat(amount))) return;
-
-    const method = window.confirm("Souhaitez-vous payer par Mobile Money ? (Annuler pour Carte Bancaire)") ? "MOBILEMONEY" : "CARD";
-    
-    let phoneNumber = "";
-    let provider = "";
-    let walletID = "";
-
-    if (method === "MOBILEMONEY") {
-      provider = window.prompt("Entrez votre opérateur (ORANGE, MPESA, AIRTEL) :", "ORANGE")?.toUpperCase() || "ORANGE";
-      walletID = window.prompt("Entrez votre numéro de téléphone Mobile Money :", "+243810000001") || "";
-      if (!walletID) return;
-      phoneNumber = walletID;
-    } else {
-      phoneNumber = window.prompt("Entrez votre numéro de contact :", "+243810000001") || "";
-    }
-
-    const customerName = window.prompt("Entrez votre nom complet :", "Donateur LAU") || "Anonyme";
-
+  const handleDonate = (donationId: string) => {
     setIsPaying(donationId);
-    try {
-      console.log('Initiation du don pour:', donationId);
-      
-      const response = await fetch('/api/donations/pay', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          amount: parseFloat(amount),
-          donationId,
-          phoneNumber,
-          customerName,
-          paymentMethod: method,
-          provider: method === "MOBILEMONEY" ? provider : undefined,
-          walletID: method === "MOBILEMONEY" ? walletID : undefined
-        }),
-      });
-
-      let data;
-      try {
-        data = await response.json();
-      } catch (jsonErr) {
-        console.error('Erreur parsing JSON:', jsonErr);
-        throw new Error("Réponse du serveur invalide ou vide.");
-      }
-
-      if (data.paymentUrl) {
-        // Redirection pour carte ou confirmation mobile
-        console.log('Redirection vers:', data.paymentUrl);
-        window.location.href = data.paymentUrl;
-      } else if (data.success && method === "MOBILEMONEY") {
-        alert("Paiement initié ! Veuillez valider sur votre téléphone. Une fois validé, vous recevrez une confirmation.");
-        window.location.href = `/donations/success?transactionId=${data.transactionId}`;
-      } else {
-        const errorMsg = data.error || "Impossible d'initialiser le paiement";
-        console.error('Erreur API:', errorMsg);
-        alert("Erreur: " + errorMsg);
-        setIsPaying(null); // Reset manually if error alert shown
-      }
-    } catch (err: unknown) {
-      console.error('Erreur de paiement:', err);
-      const error = err as Error;
-      if (error.name === 'AbortError') {
-        alert("Le délai d'attente a été dépassé. Vérifiez votre connexion.");
-      } else {
-        alert("Une erreur est survenue lors de la connexion au service de paiement : " + (error.message || "Erreur inconnue"));
-      }
-      setIsPaying(null);
-    } finally {
-      // Note: isPaying is set to null in catch/else branches to ensure it resets 
-      // even if redirect takes time or alert blocks.
-      setTimeout(() => setIsPaying(null), 5000); // Fail-safe fallback
-    }
+    router.push(`/donations/${donationId}/pay`);
   };
 
   const getStats = (): DonationStats => {
@@ -592,17 +524,22 @@ const DonationsPage = () => {
               {viewMode === "list" ? (
                 <div className="p-4 sm:p-6">
                   <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6">
-                    <div className="shrink-0 w-full sm:w-24 h-48 sm:h-24 bg-linear-to-br from-red-100 to-red-200 rounded-lg flex items-center justify-center overflow-hidden relative">
+                    <Link href={`/donations/${donation._id}`} className="shrink-0 w-full sm:w-24 h-48 sm:h-24 bg-linear-to-br from-red-100 to-red-200 rounded-lg flex items-center justify-center overflow-hidden relative">
                       {donation.image ? (
                         <Image src={donation.image} alt={donation.title} fill className="object-cover" />
                       ) : (
                         <HeartIcon className="h-8 w-8 text-red-600" />
                       )}
-                    </div>
+                    </Link>
                     <div className="flex-1 text-center sm:text-left">
-                      <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-2">{donation.title}</h3>
+                      <Link href={`/donations/${donation._id}`}>
+                        <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-2 hover:text-red-600 transition-colors">{donation.title}</h3>
+                      </Link>
                       <p className="text-gray-600 text-xs sm:text-sm mb-3 line-clamp-2">{donation.description}</p>
                       <div className="flex flex-wrap items-center justify-center sm:justify-start gap-3 sm:gap-4 text-xs sm:text-sm text-gray-500">
+                        <Link href={`/donations/${donation._id}`} className="text-red-600 font-bold hover:underline flex items-center">
+                          Voir détails
+                        </Link>
                         <div className="flex items-center">
                           <CurrencyDollarIcon className="h-4 w-4 mr-1 text-red-500" />
                           <span>{formatAmount(donation.currentAmount)} / {formatAmount(donation.targetAmount)}</span>

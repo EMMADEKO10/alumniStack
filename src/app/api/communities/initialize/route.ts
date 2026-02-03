@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { initializeCommunities, resetCommunities } from '../../../../scripts/initializeCommunities';
+import { initializeCommunities, resetCommunities } from '@/scripts/initializeCommunities';
 
 export async function POST(request: Request) {
   try {
