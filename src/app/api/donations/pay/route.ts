@@ -88,6 +88,7 @@ export async function POST(req: Request) {
         transactionReference: transactionReference,
         amount: finalAmount,
         currency: 'USD',
+        callbackURL: `${appUrl}/api/donations/callback`,
         redirectURL: `${appUrl}/donations/success?transactionId=${transactionReference}`,
       },
       paymentChannel: {

@@ -7,16 +7,20 @@ export async function POST(req: Request) {
     const body = await req.json();
     console.log('Araka Webhook Received:', body);
 
-    // 1. Extraire les données de la notification (Structure Araka Pay v2)
-    const { status, transactionId, amount } = body;
+    // 1. Extraire les données de la notification (Structure Araka Pay)
+    const { status, transactionId, transactionReference, amount } = body;
+    const ref = transactionId || transactionReference;
 
     // 2. Vérifier si le paiement a réussi
-    if (status === 'APPROVED') {
+    if (status === 'APPROVED' || status === 'SUCCESSFUL') {
       const { db } = await connectDB();
 
-      // 3. Trouver la transaction en attente
+      // 3. Trouver la transaction en attente (on vérifie par ID ou par Référence)
       const transaction = await db.collection('transactions').findOne({ 
-        transactionId: transactionId,
+        $or: [
+          { transactionId: ref },
+          { transactionReference: ref }
+        ],
         status: 'PENDING'
       });
 
