@@ -59,97 +59,25 @@ const OpportunityDetailPage: React.FC = () => {
             {
               _id: "demo1",
               title: "Développeur Full Stack",
-              description: "Rejoignez notre équipe en tant que développeur Full Stack et participez à la conception, au développement et à la maintenance de nos applications Web. Vous travaillerez avec des technologies modernes dans un environnement agile et collaboratif.\n\nResponsabilités principales :\n• Développement d'applications web avec React et Node.js\n• Conception et implémentation d'APIs REST\n• Collaboration avec l'équipe UX/UI pour l'intégration des designs\n• Maintenance et optimisation des performances\n• Participation aux revues de code et aux sessions de planification\n• Veille technologique et proposition d'améliorations\n\nCe poste offre une excellente opportunité de croissance professionnelle dans une entreprise innovante du secteur tech. Vous bénéficierez d'une formation continue et d'un environnement de travail stimulant avec des projets variés et challengeants.",
+              description: "Rejoignez notre équipe en tant que développeur Full Stack et participez à la conception, au développement et à la maintenance de nos applications Web.",
               company: "TechCorp",
-              location: "Paris, France (Télétravail partiel possible)",
+              location: "Paris, France",
               type: "CDI",
-              salary: "45 000 - 55 000 € brut/an",
-              requirements: [
-                "Master en informatique ou équivalent",
-                "3+ années d'expérience en développement web",
-                "Maîtrise de JavaScript, React, Node.js",
-                "Connaissance des bases de données (SQL/NoSQL)",
-                "Expérience avec Git et méthodologies Agile",
-                "Anglais technique (lecture de documentation)",
-                "Bon esprit d'équipe et capacité d'adaptation"
-              ],
-              deadline: new Date("2024-03-15"),
-              contactEmail: "recrutement@techcorp.com",
-              contactPhone: "+33 1 23 45 67 89",
+              salary: "45 000 - 55 000 €",
+              deadline: new Date("2026-12-15"),
               imageUrl: "/graduation.jpg",
-              applicants: new Array(23).fill({}),
               createdAt: new Date()
             },
             {
               _id: "demo2",
               title: "Spécialiste en Marketing Digital",
-              description: "Nous recherchons un spécialiste en marketing numérique pour élaborer et exécuter des stratégies de marketing en ligne innovantes pour nos clients. Vous serez responsable de la gestion complète des campagnes digitales et de l'analyse des performances.\n\nVos missions :\n• Élaboration de stratégies marketing digitales personnalisées\n• Gestion des campagnes publicitaires sur Google Ads et réseaux sociaux\n• Création et optimisation de contenu pour différentes plateformes\n• Analyse des performances et reporting détaillé\n• Veille concurrentielle et identification de nouvelles opportunités\n• Formation et accompagnement des équipes clients\n\nUn poste idéal pour quelqu'un de créatif, analytique et passionné par les dernières tendances du marketing digital. Vous évoluerez dans une agence dynamique avec des clients variés et des projets stimulants.",
+              description: "Nous recherchons un spécialiste en marketing numérique.",
               company: "DigitalAgency",
               location: "Lyon, France",
               type: "CDD",
-              salary: "40 000 - 50 000 € brut/an",
-              requirements: [
-                "Formation en marketing digital ou communication",
-                "2+ années d'expérience en marketing digital",
-                "Maîtrise des outils Google (Analytics, Ads, Search Console)",
-                "Connaissance des réseaux sociaux professionnels",
-                "Compétences en SEO/SEA",
-                "Créativité et sens de l'analyse",
-                "Excellent relationnel client"
-              ],
-              deadline: new Date("2024-02-28"),
-              contactEmail: "jobs@digitalagency.fr",
-              contactPhone: "+33 4 56 78 90 12",
+              salary: "40 000 - 50 000 €",
+              deadline: new Date("2026-11-28"),
               imageUrl: "/graduation.jpg",
-              applicants: new Array(15).fill({}),
-              createdAt: new Date()
-            },
-            {
-              _id: "demo3",
-              title: "Consultant en Finance",
-              description: "Poste de consultant junior en finance d'entreprise. Excellente opportunité pour débuter votre carrière dans le conseil financier au sein d'un cabinet reconnu. Vous accompagnerez nos clients dans leurs décisions stratégiques et financières.\n\nVos responsabilités :\n• Analyse financière des entreprises clientes\n• Préparation de business plans et modèles financiers\n• Assistance dans les opérations de fusion-acquisition\n• Évaluation d'entreprises et d'actifs\n• Présentation des résultats aux clients\n• Participation aux missions de due diligence\n\nCe stage peut déboucher sur une embauche en CDI selon les performances. Une formation complète sera dispensée et vous serez encadré par des consultants seniors expérimentés. Parfait pour acquérir une solide expérience en finance d'entreprise.",
-              company: "Finance Conseil",
-              location: "Marseille, France",
-              type: "Stage",
-              salary: "1 200 € / mois + tickets restaurant",
-              requirements: [
-                "Master 2 en finance ou école de commerce",
-                "Stage précédent en banque ou finance",
-                "Maîtrise d'Excel et outils financiers",
-                "Connaissance des normes comptables",
-                "Rigueur et capacité d'analyse",
-                "Anglais courant",
-                "Disponibilité 6 mois minimum"
-              ],
-              deadline: new Date("2024-04-10"),
-              contactEmail: "stage@financeconseil.fr",
-              contactPhone: "+33 4 91 23 45 67",
-              imageUrl: "/graduation.jpg",
-              applicants: new Array(8).fill({}),
-              createdAt: new Date()
-            },
-            {
-              _id: "demo4",
-              title: "Développeur Frontend React",
-              description: "Développeur frontend spécialisé en React pour créer des interfaces utilisateur modernes et responsive. Mission freelance pour un projet e-commerce innovant avec une équipe tech expérimentée.\n\nObjectifs de la mission :\n• Développement d'une nouvelle plateforme e-commerce\n• Intégration d'APIs REST et GraphQL\n• Optimisation des performances frontend\n• Implémentation de tests unitaires et d'intégration\n• Collaboration avec l'équipe UX/UI\n• Documentation technique\n\nMission de 6 mois renouvelable, avec possibilité d'extension selon l'avancement du projet. Environnement de travail flexible avec équipe dispersée en remote. Technologies utilisées : React, TypeScript, Next.js, Tailwind CSS.",
-              company: "WebTech Solutions",
-              location: "Toulouse, France (100% Remote)",
-              type: "Freelance",
-              salary: "400 - 600 € / jour TJM",
-              requirements: [
-                "5+ années d'expérience React",
-                "Expertise TypeScript et Next.js",
-                "Maîtrise des outils modernes (Webpack, Vite)",
-                "Expérience avec les tests (Jest, Cypress)",
-                "Connaissance des API REST et GraphQL",
-                "Portfolio de réalisations récentes",
-                "Statut freelance actif"
-              ],
-              deadline: new Date("2024-03-30"),
-              contactEmail: "freelance@webtech.com",
-              contactPhone: "+33 5 34 56 78 90",
-              imageUrl: "/graduation.jpg",
-              applicants: new Array(12).fill({}),
               createdAt: new Date()
             }
           ];
@@ -161,12 +89,23 @@ const OpportunityDetailPage: React.FC = () => {
             setError("Opportunité non trouvée");
           }
         } else {
-          const response = await fetch(`/api/opportunities/${opportunityId}`);
-          if (!response.ok) {
-            throw new Error("Opportunité non trouvée");
+          const controller = new AbortController();
+          const timeoutId = setTimeout(() => controller.abort(), 8000);
+
+          try {
+            const response = await fetch(`/api/opportunities/${opportunityId}`, { signal: controller.signal });
+            clearTimeout(timeoutId);
+
+            if (!response.ok) {
+              throw new Error("Opportunité non trouvée");
+            }
+            const data = await response.json();
+            setOpportunity(data);
+          } catch (fetchErr) {
+            console.error("Fetch error or timeout:", fetchErr);
+            // Fallback sur une démo si l'API est trop lente ou échoue
+            throw fetchErr; // Passé au catch parent
           }
-          const data = await response.json();
-          setOpportunity(data);
         }
       } catch (err) {
         console.error("Erreur lors de la récupération de l'opportunité:", err);
@@ -363,7 +302,7 @@ const OpportunityDetailPage: React.FC = () => {
                 </div>
               </div>
               
-              <h1 className="text-4xl md:text-5xl font-bold text-white mb-3 drop-shadow-lg">
+              <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-3 drop-shadow-lg leading-tight">
                 {opportunity.title}
               </h1>
               

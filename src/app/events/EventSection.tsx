@@ -338,36 +338,36 @@ const EventSection: React.FC = () => {
       </div>
 
       {/* Statistiques compactes */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 mb-8">
-        <div className="bg-linear-to-br from-red-50 to-orange-50 rounded-xl border border-red-100 p-3 sm:p-4 flex items-center gap-3">
-          <div className="bg-red-100 rounded-lg p-2">
+      <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4 mb-8">
+        <div className="bg-linear-to-br from-red-50 to-orange-50 rounded-xl border border-red-100 p-3 sm:p-4 flex items-center gap-2 sm:gap-3">
+          <div className="bg-red-100 rounded-lg p-1.5 sm:p-2">
             <CalendarIcon className="h-5 w-5 sm:h-6 sm:w-6 text-red-600" />
           </div>
-          <div>
-            <p className="text-xl sm:text-2xl font-bold text-gray-900">{filteredEvents.length}</p>
-            <p className="text-[10px] sm:text-xs text-gray-600 uppercase font-semibold">Événements</p>
+          <div className="min-w-0">
+            <p className="text-lg sm:text-2xl font-bold text-gray-900 leading-none">{filteredEvents.length}</p>
+            <p className="text-[10px] sm:text-xs text-gray-600 uppercase font-semibold mt-0.5 truncate">Événements</p>
           </div>
         </div>
-        <div className="bg-linear-to-br from-blue-50 to-cyan-50 rounded-xl border border-blue-100 p-3 sm:p-4 flex items-center gap-3">
-          <div className="bg-blue-100 rounded-lg p-2">
+        <div className="bg-linear-to-br from-blue-50 to-cyan-50 rounded-xl border border-blue-100 p-3 sm:p-4 flex items-center gap-2 sm:gap-3">
+          <div className="bg-blue-100 rounded-lg p-1.5 sm:p-2">
             <MapPinIcon className="h-5 w-5 sm:h-6 sm:w-6 text-blue-600" />
           </div>
-          <div>
-            <p className="text-xl sm:text-2xl font-bold text-gray-900 leading-tight">
+          <div className="min-w-0">
+            <p className="text-lg sm:text-2xl font-bold text-gray-900 leading-none">
               {[...new Set(filteredEvents.map(e => e.location).filter(Boolean))].length}
             </p>
-            <p className="text-[10px] sm:text-xs text-gray-600 uppercase font-semibold">Lieux</p>
+            <p className="text-[10px] sm:text-xs text-gray-600 uppercase font-semibold mt-0.5 truncate">Lieux</p>
           </div>
         </div>
-        <div className="bg-linear-to-br from-purple-50 to-pink-50 rounded-xl border border-purple-100 p-3 sm:p-4 flex items-center gap-3">
-          <div className="bg-purple-100 rounded-lg p-2">
+        <div className="bg-linear-to-br from-purple-50 to-pink-50 rounded-xl border border-purple-100 p-3 sm:p-4 flex items-center gap-2 sm:gap-3 col-span-2 sm:col-span-1">
+          <div className="bg-purple-100 rounded-lg p-1.5 sm:p-2">
             <TagIcon className="h-5 w-5 sm:h-6 sm:w-6 text-purple-600" />
           </div>
-          <div>
-            <p className="text-xl sm:text-2xl font-bold text-gray-900 leading-tight">
+          <div className="min-w-0 flex flex-col justify-center">
+            <p className="text-lg sm:text-2xl font-bold text-gray-900 leading-none">
               {getEventTypes().length}
             </p>
-            <p className="text-[10px] sm:text-xs text-gray-600 uppercase font-semibold">Types</p>
+            <p className="text-[10px] sm:text-xs text-gray-600 uppercase font-semibold mt-0.5 truncate">Types</p>
           </div>
         </div>
       </div>

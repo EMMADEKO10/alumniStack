@@ -140,7 +140,7 @@ const Contribute: React.FC = () => {
   };
 
   return (
-    <section className="py-16 bg-linear-to-b from-white via-red-50/30 to-white relative overflow-hidden">
+    <section className="py-12 sm:py-16 bg-linear-to-b from-white via-red-50/30 to-white relative overflow-hidden">
       {/* Décorations de fond */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div
@@ -172,7 +172,7 @@ const Contribute: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 relative z-10">
         {/* En-tête de section */}
         <motion.div
-          className="text-center mb-16"
+          className="text-center mb-10 sm:mb-12"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}

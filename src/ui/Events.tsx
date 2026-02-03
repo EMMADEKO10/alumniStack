@@ -104,7 +104,7 @@ const Events: React.FC = () => {
   };
 
   return (
-    <section className="py-16 bg-linear-to-b from-white via-slate-50 to-white relative overflow-hidden">
+    <section className="py-12 sm:py-16 bg-linear-to-b from-white via-slate-50 to-white relative overflow-hidden">
       {/* Décorations de fond */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-linear-to-bl from-red-50/50 to-transparent rounded-full blur-3xl" />
@@ -117,13 +117,13 @@ const Events: React.FC = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-12"
+          className="text-center mb-8 sm:mb-10"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-linear-to-r from-red-100 to-pink-100 rounded-full mb-6">
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-linear-to-r from-red-100 to-pink-100 rounded-full mb-4 sm:mb-6">
             <FaCalendarAlt className="text-red-600" />
             <span className="text-[10px] sm:text-xs font-semibold text-red-600 uppercase tracking-wider">Programme</span>
           </div>
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl text-slate-900 mb-4 sm:mb-6 font-black leading-tight px-2">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl text-slate-900 mb-3 sm:mb-4 font-black leading-tight px-2">
             Explorez les prochains <span className="bg-linear-to-r from-red-600 via-rose-600 to-red-500 bg-clip-text text-transparent italic">rendez-vous</span> de la communauté
           </h2>
           <p className="text-sm sm:text-base md:text-lg lg:text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed px-4">

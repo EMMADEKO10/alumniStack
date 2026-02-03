@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { useParams, useRouter } from "next/navigation";
 import Image from "next/image";
 import {
@@ -44,6 +44,24 @@ const FormationDetailPage: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [isEnrolled, setIsEnrolled] = useState(false);
   const [showShareMenu, setShowShareMenu] = useState(false);
+  const [currentStudents, setCurrentStudents] = useState(0);
+  const [daysUntilStart, setDaysUntilStart] = useState(0);
+
+  const getDaysUntilStart = useCallback(() => {
+    if (!formation) return 0;
+    const now = new Date();
+    const start = new Date(formation.startDate);
+    const diffTime = start.getTime() - now.getTime();
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    return diffDays;
+  }, [formation]);
+
+  useEffect(() => {
+    if (formation) {
+      setCurrentStudents(Math.floor(Math.random() * (formation.maxStudents || 20)));
+      setDaysUntilStart(getDaysUntilStart());
+    }
+  }, [formation, getDaysUntilStart]);
 
   useEffect(() => {
     const fetchFormation = async () => {
@@ -164,14 +182,6 @@ const FormationDetailPage: React.FC = () => {
     return new Date() > new Date(formation!.endDate);
   };
 
-  const getDaysUntilStart = () => {
-    const now = new Date();
-    const start = new Date(formation!.startDate);
-    const diffTime = start.getTime() - now.getTime();
-    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-    return diffDays;
-  };
-
   const handleEnroll = () => {
     setIsEnrolled(!isEnrolled);
   };
@@ -210,13 +220,13 @@ const FormationDetailPage: React.FC = () => {
   if (loading) {
     return (
       <div className="min-h-screen bg-linear-to-br from-gray-50 via-white to-gray-100">
-        <div className="pt-32">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="pt-20 sm:pt-28 lg:pt-32">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-8">
             {/* Skeleton bouton retour */}
-            <div className="h-6 w-48 bg-gray-200 rounded mb-8 animate-pulse"></div>
+            <div className="h-4 sm:h-6 w-32 sm:w-48 bg-gray-200 rounded mb-4 sm:mb-8 animate-pulse"></div>
 
             {/* Skeleton Hero */}
-            <div className="relative h-96 w-full rounded-2xl bg-gray-200 mb-8 animate-pulse"></div>
+            <div className="relative h-64 sm:h-80 md:h-96 w-full rounded-2xl bg-gray-200 mb-6 sm:mb-8 animate-pulse"></div>
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
               {/* Skeleton contenu principal */}
@@ -279,20 +289,17 @@ const FormationDetailPage: React.FC = () => {
     );
   }
 
-  const currentStudents = Math.floor(Math.random() * (formation.maxStudents || 20)); // Simulation
-  const daysUntilStart = getDaysUntilStart();
-
   return (
     <div className="min-h-screen bg-linear-to-br from-gray-50 via-white to-gray-100">
       {/* Espacement pour le header fixe */}
-      <div className="pt-32">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="pt-20 sm:pt-28 lg:pt-32">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-8">
           {/* Bouton de retour */}
           <button
             onClick={() => router.back()}
-            className="flex items-center text-red-600 hover:text-red-700 mb-4 sm:mb-8 transition-colors font-medium group text-sm sm:text-base"
+            className="flex items-center text-red-600 hover:text-red-700 mb-4 sm:mb-8 transition-colors font-medium group text-xs sm:text-sm"
           >
-            <ArrowLeftIcon className="h-4 w-4 sm:h-5 sm:w-5 mr-2 transform group-hover:-translate-x-1 transition-transform" />
+            <ArrowLeftIcon className="h-4 w-4 sm:h-5 sm:w-5 mr-1.5 sm:mr-2 transform group-hover:-translate-x-1 transition-transform" />
             Retour aux formations
           </button>
 
@@ -319,16 +326,16 @@ const FormationDetailPage: React.FC = () => {
             {/* Contenu sur l'image */}
             <div className="absolute inset-0 flex flex-col justify-end p-4 sm:p-6 md:p-8">
               <div className="flex items-center gap-2 sm:gap-4 mb-3 sm:mb-4">
-                <div className={`inline-flex items-center px-3 py-1 sm:px-4 sm:py-2 rounded-full text-xs sm:text-sm font-semibold border-2 backdrop-blur-sm ${getLevelColor(formation.level)} bg-white/90`}>
+                <div className={`inline-flex items-center px-3 py-1 sm:px-4 sm:py-2 rounded-full text-[10px] sm:text-xs font-semibold border-2 backdrop-blur-sm ${getLevelColor(formation.level)} bg-white/90`}>
                   <ChartBarIcon className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
                   {formation.level}
                 </div>
-                <div className="bg-linear-to-r from-red-600 to-rose-600 text-white px-3 py-1 sm:px-5 sm:py-2 rounded-full font-bold text-base sm:text-lg shadow-lg backdrop-blur-sm">
+                <div className="bg-linear-to-r from-red-600 to-rose-600 text-white px-2.5 py-1 sm:px-4 sm:py-2 rounded-full font-bold text-sm sm:text-base shadow-lg backdrop-blur-sm">
                   {formatPrice(formation.price)}
                 </div>
               </div>
               
-              <h1 className="text-2xl sm:text-3xl md:text-5xl font-bold text-white mb-2 sm:mb-3 drop-shadow-lg leading-tight">
+              <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-2 sm:mb-3 drop-shadow-lg leading-tight">
                 {formation.title}
               </h1>
               
@@ -444,8 +451,8 @@ const FormationDetailPage: React.FC = () => {
 
               {/* Description */}
               <div className="mb-6 sm:mb-8">
-                <h2 className="text-lg sm:text-xl font-semibold text-gray-900 mb-3 sm:mb-4">À propos de cette formation</h2>
-                <div className="prose max-w-none text-sm sm:text-base">
+                <h2 className="text-base sm:text-lg font-semibold text-gray-900 mb-3 sm:mb-4">À propos de cette formation</h2>
+                <div className="prose max-w-none text-xs sm:text-sm">
                   {formation.description.split('\n').map((paragraph, index) => (
                     paragraph.trim() && (
                       <p key={index} className="text-gray-700 mb-3 sm:mb-4 leading-relaxed">
@@ -458,7 +465,7 @@ const FormationDetailPage: React.FC = () => {
 
               {/* Avantages */}
               <div className="mb-4 sm:mb-8">
-                <h2 className="text-lg sm:text-xl font-semibold text-gray-900 mb-3 sm:mb-4">Ce qui est inclus</h2>
+                <h2 className="text-base sm:text-lg font-semibold text-gray-900 mb-3 sm:mb-4">Ce qui est inclus</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
                   {[
                     "Accès aux supports de cours",
@@ -470,7 +477,7 @@ const FormationDetailPage: React.FC = () => {
                   ].map((item, idx) => (
                     <div key={idx} className="flex items-start gap-2.5 sm:gap-3">
                       <CheckCircleIcon className="h-4 w-4 sm:h-5 sm:w-5 text-green-600 mt-0.5 shrink-0" />
-                      <span className="text-gray-700 text-sm sm:text-base">{item}</span>
+                      <span className="text-gray-700 text-xs sm:text-sm">{item}</span>
                     </div>
                   ))}
                 </div>
@@ -484,10 +491,10 @@ const FormationDetailPage: React.FC = () => {
               {/* Prix et inscription */}
               <div className="mb-6">
                 <div className="text-center mb-5 sm:mb-6 p-4 sm:p-6 bg-linear-to-br from-red-50 to-rose-50 rounded-xl border border-red-100">
-                  <p className="text-3xl sm:text-4xl font-bold bg-linear-to-r from-red-600 to-rose-600 bg-clip-text text-transparent mb-1 sm:mb-2">
+                  <p className="text-2xl sm:text-3xl font-bold bg-linear-to-r from-red-600 to-rose-600 bg-clip-text text-transparent mb-1 sm:mb-2">
                     {formatPrice(formation.price)}
                   </p>
-                  <p className="text-xs sm:text-sm text-gray-600 font-medium">Prix total de la formation</p>
+                  <p className="text-[10px] sm:text-xs text-gray-600 font-medium uppercase tracking-wider">Prix total de la formation</p>
                 </div>
                 
                 {!isFormationEnded() ? (
@@ -535,7 +542,7 @@ const FormationDetailPage: React.FC = () => {
                         <button
                           onClick={handleEnroll}
                           disabled={!!(formation.maxStudents && currentStudents >= formation.maxStudents)}
-                          className={`w-full py-3.5 sm:py-4 px-4 rounded-xl font-bold text-base sm:text-lg transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-lg ${
+                          className={`w-full py-3 sm:py-3.5 px-4 rounded-xl font-bold text-sm sm:text-base transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-lg ${
                             isEnrolled
                               ? "bg-linear-to-r from-green-600 to-emerald-600 text-white"
                               : formation.maxStudents && currentStudents >= formation.maxStudents
@@ -543,25 +550,25 @@ const FormationDetailPage: React.FC = () => {
                               : "bg-linear-to-r from-red-600 to-rose-600 text-white hover:from-red-700 hover:to-rose-700"
                           }`}
                         >
-                          {isEnrolled ? "✓ Inscrit à la formation" : 
-                           formation.maxStudents && currentStudents >= formation.maxStudents ? "Formation complète" : 
-                           "S'inscrire maintenant"}
+                          {isEnrolled ? "✓ Inscrit" : 
+                           formation.maxStudents && currentStudents >= formation.maxStudents ? "Complet" : 
+                           "S'inscrire"}
                         </button>
                       </>
                     ) : (
                       <div className="p-3 sm:p-4 bg-linear-to-br from-blue-50 to-indigo-50 border border-blue-200 rounded-xl">
                         <div className="flex items-center justify-center gap-2 mb-3">
                           <PlayCircleIcon className="h-5 w-5 sm:h-6 sm:w-6 text-blue-600" />
-                          <p className="text-blue-800 font-semibold text-sm sm:text-base">Formation en cours</p>
+                          <p className="text-blue-800 font-semibold text-xs sm:text-sm">Formation en cours</p>
                         </div>
-                        <button className="w-full py-2.5 sm:py-3 px-4 bg-linear-to-r from-blue-600 to-indigo-600 text-white rounded-xl hover:from-blue-700 hover:to-indigo-700 transition-all duration-300 font-semibold transform hover:scale-105 text-sm sm:text-base">
+                        <button className="w-full py-2 sm:py-2.5 px-4 bg-linear-to-r from-blue-600 to-indigo-600 text-white rounded-xl hover:from-blue-700 hover:to-indigo-700 transition-all duration-300 font-semibold transform hover:scale-105 text-xs sm:text-sm">
                           Accéder au contenu
                         </button>
                       </div>
                     )}
                   </>
                 ) : (
-                  <div className="p-3 sm:p-4 bg-linear-to-br from-gray-50 to-gray-100 border border-gray-200 rounded-xl text-sm sm:text-base">
+                  <div className="p-3 sm:p-4 bg-linear-to-br from-gray-50 to-gray-100 border border-gray-200 rounded-xl text-xs sm:text-sm">
                     <p className="text-gray-600 font-semibold text-center">Formation terminée</p>
                   </div>
                 )}
@@ -573,20 +580,20 @@ const FormationDetailPage: React.FC = () => {
                   <AcademicCapIcon className="h-4 w-4 sm:h-5 sm:w-5 text-indigo-600" />
                   Instructeur
                 </h3>
-                <div className="flex items-center sm:items-start gap-3 p-3 sm:p-4 bg-linear-to-br from-indigo-50 to-purple-50 rounded-xl text-sm sm:text-base">
-                  <div className="w-10 h-10 sm:w-14 sm:h-14 bg-linear-to-br from-indigo-600 to-purple-600 rounded-full flex items-center justify-center shadow-md shrink-0">
-                    <span className="text-white font-bold text-sm sm:text-xl">
+                <div className="flex items-center sm:items-start gap-3 p-3 sm:p-4 bg-linear-to-br from-indigo-50 to-purple-50 rounded-xl text-xs sm:text-sm">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-linear-to-br from-indigo-600 to-purple-600 rounded-full flex items-center justify-center shadow-md shrink-0">
+                    <span className="text-white font-bold text-xs sm:text-lg">
                       {formation.instructor.split(' ').map(n => n[0]).join('')}
                     </span>
                   </div>
                   <div>
-                    <p className="font-bold text-gray-900 text-sm sm:text-base">{formation.instructor}</p>
-                    <p className="text-xs sm:text-sm text-gray-600 mb-1 sm:mb-2">Expert formateur</p>
+                    <p className="font-bold text-gray-900 text-xs sm:text-sm">{formation.instructor}</p>
+                    <p className="text-[10px] sm:text-xs text-gray-600 mb-1 sm:mb-2">Expert formateur</p>
                     <div className="flex items-center gap-0.5 sm:gap-1">
                       {[...Array(5)].map((_, i) => (
                         <StarIcon key={i} className="h-3 w-3 sm:h-4 sm:w-4 text-yellow-400 fill-current" />
                       ))}
-                      <span className="text-[10px] sm:text-xs text-gray-600 ml-1 font-semibold">(4.9/5)</span>
+                      <span className="text-[9px] sm:text-[10px] text-gray-600 ml-1 font-semibold">(4.9/5)</span>
                     </div>
                   </div>
                 </div>
@@ -605,7 +612,7 @@ const FormationDetailPage: React.FC = () => {
                     { icon: BookmarkIcon, text: `Niveau ${formation.level.toLowerCase()}`, color: "text-gray-500" },
                     { icon: CurrencyEuroIcon, text: "Paiement en 3x possible", color: "text-gray-500" }
                   ].map((item, idx) => (
-                    <div key={idx} className="flex items-start gap-2.5 sm:gap-3 text-xs sm:text-sm p-2.5 sm:p-3 bg-linear-to-br from-gray-50 to-gray-100 rounded-lg">
+                    <div key={idx} className="flex items-start gap-2.5 sm:gap-3 text-[10px] sm:text-xs p-2.5 sm:p-3 bg-linear-to-br from-gray-50 to-gray-100 rounded-lg">
                       <item.icon className={`h-4 w-4 sm:h-5 sm:w-5 ${item.color} shrink-0`} />
                       <span className="text-gray-700">{item.text}</span>
                     </div>

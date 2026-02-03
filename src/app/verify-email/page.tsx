@@ -29,7 +29,7 @@ export default function VerifyEmailPage() {
         <div className="absolute bottom-0 left-1/3 w-96 h-96 bg-blue-100/20 rounded-full blur-3xl"></div>
       </div>
 
-      <div className="pt-32 pb-16 relative z-10">
+      <div className="pt-20 sm:pt-24 pb-12 relative z-10">
         <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}

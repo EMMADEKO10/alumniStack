@@ -50,7 +50,7 @@ const Testimonials: React.FC = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="text-center mb-8 sm:mb-12 lg:mb-16"
+          className="text-center mb-10 sm:mb-12"
         >
           <div className="inline-flex items-center px-3 py-1.5 sm:px-4 sm:py-2 bg-red-100 text-red-700 rounded-full text-xs sm:text-sm font-medium mb-3 sm:mb-4">
             <FaQuoteLeft className="mr-1.5 sm:mr-2 text-xs sm:text-sm" />

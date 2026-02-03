@@ -112,7 +112,7 @@ const Features: React.FC = () => {
   };
 
   return (
-    <section className="py-24 bg-slate-50 relative overflow-hidden">
+    <section className="py-12 sm:py-16 bg-slate-50 relative overflow-hidden">
       {/* Background patterns */}
       <div className="absolute inset-0 opacity-[0.03] pointer-events-none">
         <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(#000_1px,transparent_1px)] bg-size-[40px_40px]" />
@@ -124,7 +124,7 @@ const Features: React.FC = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="text-center mb-10 sm:mb-16"
+          className="text-center mb-10 sm:mb-12"
         >
           <div className="inline-flex items-center px-4 py-2 bg-red-50 text-red-700 rounded-lg text-[10px] sm:text-xs font-bold mb-6 border border-red-100 uppercase tracking-widest">
             <FaNetworkWired className="mr-2" />

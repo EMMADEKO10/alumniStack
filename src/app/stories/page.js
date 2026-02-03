@@ -74,7 +74,7 @@ const Page = () => {
       </div>
 
       {/* Header Section */}
-      <div className="relative z-10 pt-32 pb-8 sm:pb-10 lg:pb-12">
+      <div className="relative z-10 pt-16 sm:pt-20 lg:pt-24 pb-8 sm:pb-10 lg:pb-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
           {/* Badge */}
@@ -97,13 +97,13 @@ const Page = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="text-center mb-6"
           >
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 leading-tight">
-              Découvrez
-              <span className="block bg-linear-to-r from-red-600 via-rose-600 to-red-500 bg-clip-text text-transparent mt-2">
+            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-4 leading-tight">
+              Découvrez{" "}
+              <span className="bg-linear-to-r from-red-600 via-rose-600 to-red-500 bg-clip-text text-transparent">
                 Nos Histoires Inspirantes
               </span>
             </h1>
-            <p className="text-base sm:text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed px-4 mb-6">
+            <p className="text-sm sm:text-base lg:text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed px-4 mb-6">
               Plongez dans les parcours exceptionnels de nos alumni qui transforment 
               le monde. Des récits inspirants d&apos;entrepreneuriat, de leadership et d&apos;impact social.
             </p>
@@ -143,6 +143,7 @@ const Page = () => {
                   placeholder="Rechercher une histoire..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
+                  suppressHydrationWarning
                   className="w-full pl-12 pr-10 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all duration-300 shadow-sm"
                 />
                 {searchTerm && (
@@ -246,22 +247,6 @@ const Page = () => {
         className="relative z-10 py-12 pb-16"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {regularStories.length > 0 && (
-            <motion.div
-              initial={{ y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.6 }}
-              className="text-center mb-10"
-            >
-              <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-3">
-                Toutes les Histoires
-              </h2>
-              <p className="text-base text-gray-600">
-                {regularStories.length} histoire{regularStories.length > 1 ? "s" : ""} {regularStories.length > 1 ? "trouvées" : "trouvée"}
-              </p>
-            </motion.div>
-          )}
-
           {error && (
             <motion.div
               initial={{ opacity: 0 }}

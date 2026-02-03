@@ -226,21 +226,6 @@ const FormationSection: React.FC = () => {
           </div>
         </div>
 
-        {/* Skeleton pour statistiques */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-          {[1, 2, 3].map((i) => (
-            <div key={i} className="bg-white rounded-xl border border-gray-100 p-4 animate-pulse">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-gray-200 rounded-lg"></div>
-                <div className="flex-1">
-                  <div className="h-8 w-12 bg-gray-200 rounded mb-2"></div>
-                  <div className="h-3 w-20 bg-gray-200 rounded"></div>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-
         {/* Skeleton pour cartes de formations */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {[1, 2, 3, 4, 5, 6].map((i) => (
@@ -291,17 +276,17 @@ const FormationSection: React.FC = () => {
               placeholder="Rechercher une formation..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-11 pr-4 py-2.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all hover:border-gray-300 text-sm sm:text-base sm:pl-12 sm:py-3"
+              className="w-full pl-11 pr-4 py-2 border border-gray-200 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all hover:border-gray-300 text-sm sm:text-base sm:pl-12 sm:py-2.5"
             />
           </div>
 
           <div className="flex flex-wrap gap-2 sm:gap-3 w-full lg:w-auto justify-start">
-            <div className="flex items-center gap-2 w-full sm:w-auto">
-              <FunnelIcon className="h-5 w-5 text-gray-600 hidden sm:block" />
+            <div className="flex items-center gap-2 flex-1 sm:flex-none">
+              <FunnelIcon className="h-4 w-4 text-gray-600 hidden sm:block" />
               <select
                 value={filterLevel}
                 onChange={(e) => setFilterLevel(e.target.value)}
-                className="flex-1 sm:flex-none px-3 sm:px-4 py-2 border border-gray-200 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent text-xs sm:text-sm font-medium hover:border-gray-300 transition-all bg-white"
+                className="w-full sm:w-auto px-3 sm:px-4 py-2 border border-gray-200 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent text-xs sm:text-sm font-medium hover:border-gray-300 transition-all bg-white"
               >
                 <option value="all">Tous niveaux</option>
                 {getLevels().map((level) => (
@@ -357,37 +342,6 @@ const FormationSection: React.FC = () => {
         </div>
       </div>
 
-      {/* Statistiques */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 mb-8">
-        <div className="bg-linear-to-br from-purple-50 to-indigo-50 rounded-xl border border-purple-100 p-3 sm:p-4 flex items-center gap-3">
-          <div className="bg-purple-100 rounded-lg p-2">
-            <AcademicCapIcon className="h-5 w-5 sm:h-6 sm:w-6 text-purple-600" />
-          </div>
-          <div>
-            <p className="text-xl sm:text-2xl font-bold text-gray-900">{filteredFormations.length}</p>
-            <p className="text-[10px] sm:text-xs text-gray-600 uppercase font-semibold">Formations</p>
-          </div>
-        </div>
-        <div className="bg-linear-to-br from-blue-50 to-cyan-50 rounded-xl border border-blue-100 p-3 sm:p-4 flex items-center gap-3">
-          <div className="bg-blue-100 rounded-lg p-2">
-            <TagIcon className="h-5 w-5 sm:h-6 sm:w-6 text-blue-600" />
-          </div>
-          <div>
-            <p className="text-xl sm:text-2xl font-bold text-gray-900">{getCategories().length}</p>
-            <p className="text-[10px] sm:text-xs text-gray-600 uppercase font-semibold">Catégories</p>
-          </div>
-        </div>
-        <div className="bg-linear-to-br from-green-50 to-emerald-50 rounded-xl border border-green-100 p-3 sm:p-4 flex items-center gap-3">
-          <div className="bg-green-100 rounded-lg p-2">
-            <UserGroupIcon className="h-5 w-5 sm:h-6 sm:w-6 text-green-600" />
-          </div>
-          <div>
-            <p className="text-xl sm:text-2xl font-bold text-gray-900">{getLevels().length}</p>
-            <p className="text-[10px] sm:text-xs text-gray-600 uppercase font-semibold">Niveaux</p>
-          </div>
-        </div>
-      </div>
-
       {/* Liste des formations */}
       {filteredFormations.length === 0 ? (
         <div className="text-center py-12 sm:py-16">
@@ -430,43 +384,43 @@ const FormationSection: React.FC = () => {
                       <div className="absolute inset-0 bg-linear-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                       
                       <div className="absolute top-3 right-3 sm:top-4 sm:right-4">
-                        <div className="bg-purple-600 text-white rounded-xl p-2 sm:p-2.5 shadow-lg transform group-hover:scale-110 transition-transform duration-300 min-w-14 text-center">
-                          <p className="text-[10px] font-semibold uppercase tracking-wider">{dateInfo.month}</p>
-                          <p className="text-lg sm:text-xl font-bold leading-tight">{dateInfo.day}</p>
+                        <div className="bg-purple-600 text-white rounded-xl p-1.5 sm:p-2 shadow-lg transform group-hover:scale-110 transition-transform duration-300 min-w-12 text-center">
+                          <p className="text-[8px] sm:text-[9px] font-semibold uppercase tracking-wider">{dateInfo.month}</p>
+                          <p className="text-base sm:text-lg font-bold leading-tight">{dateInfo.day}</p>
                         </div>
                       </div>
                     </div>
                     
-                    <div className="p-4 sm:p-6 flex flex-col flex-1">
-                      <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-3">
-                        <span className={`inline-flex items-center gap-1 px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full text-[10px] sm:text-xs font-semibold border ${getLevelColor(formation.level)}`}>
-                          <SignalIcon className="h-3 w-3" />
+                    <div className="p-3 sm:p-5 flex flex-col flex-1">
+                      <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-2 sm:mb-3">
+                        <span className={`inline-flex items-center gap-1 px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-full text-[9px] sm:text-[10px] font-semibold border ${getLevelColor(formation.level)}`}>
+                          <SignalIcon className="h-2.5 w-2.5" />
                           {formation.level}
                         </span>
-                        <span className="inline-flex items-center gap-1 px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full text-[10px] sm:text-xs font-semibold bg-purple-50 text-purple-700 border border-purple-200">
-                          <TagIcon className="h-3 w-3" />
+                        <span className="inline-flex items-center gap-1 px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-full text-[9px] sm:text-[10px] font-semibold bg-purple-50 text-purple-700 border border-purple-200">
+                          <TagIcon className="h-2.5 w-2.5" />
                           {formation.category}
                         </span>
                       </div>
 
-                      <h3 className="text-base sm:text-lg font-bold text-gray-900 mb-2 line-clamp-2 group-hover:text-purple-600 transition-colors">
+                      <h3 className="text-sm sm:text-base font-bold text-gray-900 mb-1.5 line-clamp-2 group-hover:text-purple-600 transition-colors">
                         {formation.title}
                       </h3>
-                      <p className="text-gray-600 text-xs sm:text-sm mb-4 line-clamp-2">
+                      <p className="text-gray-600 text-[11px] sm:text-xs mb-3 line-clamp-2">
                         {formation.description}
                       </p>
 
                       <div className="mt-auto">
-                        <div className="space-y-2 mb-4 pt-4 border-t border-gray-100">
-                          <div className="flex items-center justify-between text-xs sm:text-sm">
+                        <div className="space-y-1.5 mb-3 pt-3 border-t border-gray-100">
+                          <div className="flex items-center justify-between text-[11px] sm:text-xs">
                             <span className="flex items-center text-gray-700 gap-2 truncate">
-                              <AcademicCapIcon className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-purple-600 shrink-0" />
+                              <AcademicCapIcon className="h-3 w-3 sm:h-3.5 sm:w-3.5 text-purple-600 shrink-0" />
                               <span className="truncate">{formation.instructor}</span>
                             </span>
                           </div>
-                          <div className="flex items-center justify-between text-xs sm:text-sm">
+                          <div className="flex items-center justify-between text-[11px] sm:text-xs">
                             <span className="flex items-center text-gray-700 gap-2">
-                              <ClockIcon className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-purple-600 shrink-0" />
+                              <ClockIcon className="h-3 w-3 sm:h-3.5 sm:w-3.5 text-purple-600 shrink-0" />
                               {formation.duration}
                             </span>
                             <span className="font-bold text-purple-600">{formation.price}</span>
@@ -478,10 +432,10 @@ const FormationSection: React.FC = () => {
                             e.stopPropagation();
                             router.push(`/formations/${formation._id}`);
                           }}
-                          className="relative z-10 w-full bg-red-600 text-white py-2.5 sm:py-3 px-4 rounded-xl hover:bg-red-700 transition-all duration-300 font-semibold flex items-center justify-center gap-2 group/btn shadow-md hover:shadow-xl text-sm sm:text-base"
+                          className="relative z-10 w-full bg-red-600 text-white py-2 sm:py-2.5 px-4 rounded-xl hover:bg-red-700 transition-all duration-300 font-semibold flex items-center justify-center gap-2 group/btn shadow-md hover:shadow-xl text-xs sm:text-sm"
                         >
-                          En savoir plus
-                          <ArrowRightIcon className="h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
+                          Détails
+                          <ArrowRightIcon className="h-3.5 w-3.5 group-hover/btn:translate-x-1 transition-transform" />
                         </button>
                       </div>
                     </div>

@@ -413,7 +413,7 @@ const DonationsPage = () => {
   }
 
   return (
-    <div className="max-w-7xl mx-auto px-4 pt-20 sm:pt-32 pb-16 relative">
+    <div className="max-w-7xl mx-auto px-4 pt-16 sm:pt-20 lg:pt-24 pb-16 relative">
       {/* Décorations de fond */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div
@@ -444,19 +444,19 @@ const DonationsPage = () => {
 
       {/* Titre principal avec gradient */}
       <motion.div 
-        className="text-center mb-12 mt-8 relative z-10"
+        className="text-center mb-8 relative z-10"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
       >
-        <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
+        <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-3">
           <span className="text-gray-900">Soutenez </span>
           <span className="bg-linear-to-r from-red-600 via-rose-600 to-red-500 bg-clip-text text-transparent">
             Notre Mission
           </span>
         </h1>
-        <p className="text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
-          Merci d&apos;avoir envisagé un don au Leadership AcademiaUniversity (LAU). Votre générosité nous aide à bâtir l&apos;avenir de l&apos;éducation.
+        <p className="text-sm sm:text-base lg:text-lg text-gray-600 max-w-3xl mx-auto px-4">
+          Merci d&apos;avoir envisagé un don au Leadership Academia University (LAU). Votre générosité nous aide à bâtir l&apos;avenir de l&apos;éducation.
         </p>
       </motion.div>
 

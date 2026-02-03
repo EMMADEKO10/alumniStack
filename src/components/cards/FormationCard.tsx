@@ -82,12 +82,12 @@ const FormationCard: React.FC<FormationCardProps> = ({ formation }) => {
       </div>
 
       {/* Contenu */}
-      <div className="p-6">
-        <h3 className="text-xl font-bold text-gray-900 mb-2 line-clamp-2">
+      <div className="p-4 sm:p-5">
+        <h3 className="text-base sm:text-lg font-bold text-gray-900 mb-1.5 sm:mb-2 line-clamp-2">
           {formation.title}
         </h3>
         
-        <p className="text-gray-600 text-sm mb-4 line-clamp-3">
+        <p className="text-gray-600 text-xs sm:text-sm mb-3 sm:mb-4 line-clamp-3">
           {formation.description}
         </p>
 

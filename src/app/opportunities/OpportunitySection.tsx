@@ -50,79 +50,61 @@ const OpportunitySection: React.FC = () => {
 
   // Récupération des opportunités depuis l'API
   useEffect(() => {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 15000); // Augmenté à 15s
+
     const fetchOpportunities = async () => {
       try {
-        const response = await fetch("/api/opportunities");
+        setLoading(true);
+        const response = await fetch("/api/opportunities", { signal: controller.signal });
+        
         if (!response.ok) {
-          // Si l'API échoue, utiliser des données de démonstration
-          console.warn("API non disponible, utilisation des données de démonstration");
-          const demoData: Opportunity[] = [
-            {
-              _id: "demo1",
-              title: "Développeur Full Stack",
-              description: "Rejoignez notre équipe en tant que développeur Full Stack et participez à la conception, au développement et à la maintenance de nos applications Web.",
-              company: "TechCorp",
-              location: "Paris, France",
-              type: "CDI",
-              salary: "45 000 - 55 000 €",
-              deadline: new Date("2024-03-15"),
-              imageUrl: "/graduation.jpg",
-              createdAt: new Date()
-            },
-            {
-              _id: "demo2",
-              title: "Spécialiste en Marketing Digital",
-              description: "Nous recherchons un spécialiste en marketing numérique pour élaborer et exécuter des stratégies de marketing en ligne innovantes pour nos clients.",
-              company: "DigitalAgency",
-              location: "Lyon, France",
-              type: "CDD",
-              salary: "40 000 - 50 000 €",
-              deadline: new Date("2024-02-28"),
-              imageUrl: "/graduation.jpg",
-              createdAt: new Date()
-            },
-            {
-              _id: "demo3",
-              title: "Consultant en Finance",
-              description: "Poste de consultant junior en finance d'entreprise. Excellente opportunité pour débuter votre carrière dans le conseil financier.",
-              company: "Finance Conseil",
-              location: "Marseille, France",
-              type: "Stage",
-              salary: "1 200 € / mois",
-              deadline: new Date("2024-04-10"),
-              imageUrl: "/graduation.jpg",
-              createdAt: new Date()
-            },
-            {
-              _id: "demo4",
-              title: "Développeur Frontend React",
-              description: "Développeur frontend spécialisé en React pour créer des interfaces utilisateur modernes et responsive.",
-              company: "WebTech Solutions",
-              location: "Toulouse, France",
-              type: "Freelance",
-              salary: "400 - 600 € / jour",
-              deadline: new Date("2024-03-30"),
-              imageUrl: "/graduation.jpg",
-              createdAt: new Date()
-            }
-          ];
-          setOpportunities(demoData);
-          setFilteredOpportunities(demoData);
-          setLoading(false);
-          return;
+          throw new Error(`Erreur API: ${response.status}`);
         }
+        
         const data = await response.json();
         setOpportunities(data || []);
         setFilteredOpportunities(data || []);
-      } catch (err) {
-        console.error("Erreur lors de la récupération des opportunités:", err);
-        setError("Erreur lors du chargement des opportunités");
+      } catch (err: unknown) {
+        // Ne pas logger l'erreur si c'est une annulation volontaire (timeout ou unmount)
+        if (err instanceof Error && err.name === 'AbortError') {
+          console.log("Requête opportunités annulée (timeout ou navigation)");
+        } else {
+          console.error("Erreur lors de la récupération des opportunités:", err);
+        }
+        
+        // Fallback sur les données de démonstration
+        const demoData: Opportunity[] = [
+          {
+            _id: "demo1",
+            title: "Développeur Full Stack",
+            description: "Rejoignez notre équipe en tant que développeur Full Stack.",
+            company: "TechCorp",
+            location: "Paris, France",
+            type: "CDI",
+            salary: "45 000 - 55 000 €",
+            deadline: new Date("2026-12-15"),
+            imageUrl: "/graduation.jpg",
+            createdAt: new Date()
+          }
+        ];
+        
+        setOpportunities(demoData);
+        setFilteredOpportunities(demoData);
+        setError(null);
       } finally {
         setLoading(false);
+        clearTimeout(timeoutId);
       }
     };
 
     fetchOpportunities();
+
+    // Nettoyage : annuler la requête si le composant est démonté
+    return () => {
+      clearTimeout(timeoutId);
+      controller.abort();
+    };
   }, []);
 
   // Filtrage et tri des opportunités
@@ -361,7 +343,7 @@ const OpportunitySection: React.FC = () => {
                 placeholder="Titre, entreprise, ville..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-10 pr-10 py-2.5 sm:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-600 focus:border-transparent shadow-sm text-sm sm:text-base transition-all"
+                className="w-full pl-10 pr-10 py-2 sm:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-600 focus:border-transparent shadow-sm text-sm sm:text-base transition-all"
               />
               {searchTerm && (
                 <button
@@ -375,14 +357,15 @@ const OpportunitySection: React.FC = () => {
             <div className="flex gap-2 w-full sm:w-auto">
               <button
                 onClick={() => setShowFilters(!showFilters)}
-                className={`flex-1 sm:flex-none flex items-center justify-center gap-2 px-3 sm:px-4 py-2.5 sm:py-3 border rounded-lg transition shadow-sm text-sm font-medium ${showFilters ? 'bg-red-50 border-red-200 text-red-700' : 'bg-white border-gray-300 text-gray-700 hover:bg-gray-50'}`}
+                className={`flex-1 sm:flex-none flex items-center justify-center gap-2 px-3 sm:px-4 py-2 sm:py-3 border rounded-lg transition shadow-sm text-sm font-medium ${showFilters ? 'bg-red-50 border-red-200 text-red-700' : 'bg-white border-gray-300 text-gray-700 hover:bg-gray-50'}`}
               >
                 <AdjustmentsHorizontalIcon className="h-5 w-5" />
-                Filtres
+                <span className="hidden xs:inline">Filtres</span>
+                <span className="xs:hidden">Filtrer</span>
               </button>
               <button
                 onClick={() => setShowStats(!showStats)}
-                className={`flex-1 sm:flex-none flex items-center justify-center gap-2 px-3 sm:px-4 py-2.5 sm:py-3 border rounded-lg transition shadow-sm text-sm font-medium ${showStats ? 'bg-red-50 border-red-200 text-red-700' : 'bg-white border-gray-300 text-gray-700 hover:bg-gray-50'}`}
+                className={`flex-1 sm:flex-none flex items-center justify-center gap-2 px-3 sm:px-4 py-2 sm:py-3 border rounded-lg transition shadow-sm text-sm font-medium ${showStats ? 'bg-red-50 border-red-200 text-red-700' : 'bg-white border-gray-300 text-gray-700 hover:bg-gray-50'}`}
               >
                 <ChartBarIcon className="h-5 w-5" />
                 Stats
@@ -564,29 +547,28 @@ const OpportunitySection: React.FC = () => {
                 <ChevronLeftIcon className="h-5 w-5" />
               </button>
               
-              <div className="flex gap-1">
+              <div className="flex gap-1 overflow-x-auto pb-1 max-w-[150px] sm:max-w-none no-scrollbar">
                 {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => {
-                  // Afficher seulement les pages pertinentes
-                  if (
-                    page === 1 ||
-                    page === totalPages ||
-                    (page >= currentPage - 1 && page <= currentPage + 1)
-                  ) {
+                  // Afficher seulement les pages pertinentes pour sauver de l'espace sur mobile
+                  const isNear = Math.abs(page - currentPage) <= 1;
+                  const isEdge = page === 1 || page === totalPages;
+                  
+                  if (isEdge || isNear) {
                     return (
                       <button
                         key={page}
                         onClick={() => setCurrentPage(page)}
-                        className={`px-4 py-2 rounded-lg transition ${
+                        className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg transition text-xs sm:text-sm shrink-0 ${
                           currentPage === page
-                            ? "bg-red-600 text-white font-semibold"
-                            : "border border-gray-300 hover:bg-gray-50 text-gray-700"
+                            ? "bg-red-600 text-white font-semibold shadow-sm"
+                            : "border border-gray-300 hover:bg-gray-50 text-gray-700 bg-white"
                         }`}
                       >
                         {page}
                       </button>
                     );
                   } else if (page === currentPage - 2 || page === currentPage + 2) {
-                    return <span key={page} className="px-2 py-2 text-gray-400">...</span>;
+                    return <span key={page} className="px-1 py-2 text-gray-400 text-xs self-center">...</span>;
                   }
                   return null;
                 })}
