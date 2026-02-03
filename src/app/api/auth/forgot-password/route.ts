@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
-import { connectDB } from '@/lib/mongodb';
+import { connectDB } from '../../../../lib/mongodb';
 import crypto from 'crypto';
-import { sendEmail } from '@/utils/sendEmails';
+import { sendEmail } from '../../../../utils/sendEmails';
 
 export async function POST(req: Request) {
   try {

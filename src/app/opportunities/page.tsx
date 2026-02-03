@@ -1,58 +1,10 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { motion } from "framer-motion";
-import { FaLightbulb, FaBriefcase, FaMapMarkerAlt, FaClock, FaUsers } from "react-icons/fa";
+import { FaLightbulb, FaBriefcase, FaMapMarkerAlt, FaClock } from "react-icons/fa";
 import OpportunitySection from "./OpportunitySection";
 
 const Page: React.FC = () => {
-  const [stats, setStats] = useState({
-    total: 0,
-    types: {} as Record<string, number>,
-    locations: 0,
-    active: 0,
-  });
-
-  useEffect(() => {
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 20000); // 20s pour les stats
-
-    const fetchStats = async () => {
-      try {
-        const response = await fetch("/api/opportunities", { signal: controller.signal });
-
-        if (response.ok) {
-          const data = await response.json();
-          const types = data.reduce((acc: Record<string, number>, opp: { type: string; isActive?: boolean }) => {
-            acc[opp.type] = (acc[opp.type] || 0) + 1;
-            return acc;
-          }, {});
-          
-          setStats({
-            total: data.length,
-            types,
-            locations: new Set(data.map((o: { location: string }) => o.location)).size,
-            active: data.filter((o: { isActive?: boolean }) => o.isActive !== false).length,
-          });
-        }
-      } catch (error: unknown) {
-        if (error instanceof Error && error.name === 'AbortError') {
-          // Annulation silencieuse
-        } else {
-          console.error("Erreur lors de la récupération des statistiques", error);
-        }
-      } finally {
-        clearTimeout(timeoutId);
-      }
-    };
-
-    fetchStats();
-
-    return () => {
-      clearTimeout(timeoutId);
-      controller.abort();
-    };
-  }, []);
-
   return (
     <div className="min-h-screen bg-linear-to-br from-gray-50 via-white to-red-50">
       {/* Background Decorations */}
