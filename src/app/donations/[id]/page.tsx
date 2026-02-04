@@ -93,7 +93,7 @@ export default function DonationDetailPage() {
   const remainingAmount = Math.max(donation.targetAmount - donation.currentAmount, 0);
 
   return (
-    <div className="min-h-screen bg-gray-50 pt-24 pb-16 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gray-50 pt-32 sm:pt-40 pb-16 px-6 sm:px-12 lg:px-20">
       <div className="max-w-7xl mx-auto">
         
         {/* Navigation Breadcrumb */}
@@ -115,7 +115,7 @@ export default function DonationDetailPage() {
                   src={donation.image || '/lau/felicitations_finalistes.jpg'} 
                   alt={donation.title} 
                   fill 
-                  className="object-cover"
+                  className="object-cover object-top"
                 />
                 <div className="absolute top-6 left-6 flex gap-2">
                   <span className={`px-4 py-1.5 rounded-full text-[10px] font-bold shadow-lg ${
