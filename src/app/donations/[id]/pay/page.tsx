@@ -247,12 +247,12 @@ export default function DonationPaymentPage() {
                         <label className="block text-sm font-medium text-gray-700 mb-6">
                           Choisissez le montant de votre don (USD)
                         </label>
-                        <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 mb-8">
+                        <div className="grid grid-cols-3 sm:grid-cols-3 gap-2 sm:gap-4 mb-6">
                           {PRESET_AMOUNTS.map((val) => (
                             <button
                               key={val}
                               onClick={() => setAmount(val.toString())}
-                              className={`py-4 rounded-xl text-base font-semibold transition-all ${
+                              className={`py-2.5 sm:py-4 rounded-lg sm:rounded-xl text-sm sm:text-base font-semibold transition-all ${
                                 amount === val.toString() 
                                   ? 'bg-red-600 text-white shadow-md' 
                                   : 'bg-gray-50 text-gray-600 hover:bg-white hover:border-gray-200 border border-transparent'
@@ -264,20 +264,20 @@ export default function DonationPaymentPage() {
                         </div>
 
                         <div className="relative">
-                          <div className="flex items-center gap-4 mb-4">
+                          <div className="flex items-center gap-3 mb-3">
                             <div className="h-px bg-gray-100 grow"></div>
-                            <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Ou montant personnalisé</span>
+                            <span className="text-[9px] font-bold text-gray-400 uppercase tracking-widest text-center">Ou montant personnalisé</span>
                             <div className="h-px bg-gray-100 grow"></div>
                           </div>
                           <div className="relative">
                             <input
                               type="number"
-                              placeholder="Saisir un autre montant"
+                              placeholder="Autre montant"
                               value={PRESET_AMOUNTS.includes(Number(amount)) && amount !== '' ? '' : amount}
                               onChange={(e) => setAmount(e.target.value)}
-                              className="w-full py-4 px-4 bg-gray-50 rounded-xl text-base font-semibold focus:ring-2 focus:ring-red-600 outline-none border border-gray-100 focus:bg-white text-center transition-all"
+                              className="w-full py-2.5 sm:py-4 px-4 bg-gray-50 rounded-lg sm:rounded-xl text-sm sm:text-base font-semibold focus:ring-2 focus:ring-red-600 outline-none border border-gray-100 focus:bg-white text-center transition-all"
                             />
-                            <span className="absolute right-6 top-1/2 -translate-y-1/2 text-gray-400">$</span>
+                            <span className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 text-xs">$</span>
                           </div>
                         </div>
                       </div>
