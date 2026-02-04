@@ -288,7 +288,7 @@ export default function DonationPaymentModal({ isOpen, onClose, donation }: Dona
                       <button
                         onClick={handleNext}
                         disabled={!method}
-                        className="flex-[2] bg-red-600 hover:bg-red-700 disabled:opacity-50 text-white py-4 rounded-2xl font-bold flex items-center justify-center gap-2"
+                        className="flex-2 bg-red-600 hover:bg-red-700 disabled:opacity-50 text-white py-4 rounded-2xl font-bold flex items-center justify-center gap-2"
                       >
                         Continuer
                         <ArrowRightIcon className="h-5 w-5" />
@@ -370,7 +370,7 @@ export default function DonationPaymentModal({ isOpen, onClose, donation }: Dona
                       <button
                         onClick={handleSubmit}
                         disabled={isLoading || (method?.type === 'MOBILEMONEY' && !phoneNumber)}
-                        className="flex-[2] bg-red-600 hover:bg-red-700 disabled:opacity-50 text-white py-4 rounded-2xl font-bold flex items-center justify-center gap-2"
+                        className="flex-2 bg-red-600 hover:bg-red-700 disabled:opacity-50 text-white py-4 rounded-2xl font-bold flex items-center justify-center gap-2"
                       >
                         {isLoading ? (
                           <div className="h-5 w-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />

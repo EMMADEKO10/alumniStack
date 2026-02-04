@@ -78,6 +78,7 @@ export async function POST(req: Request) {
     const cleanWalletID = (walletID || '').replace(/[\+\s]/g, '') || cleanPhone;
     const transactionReference = `AUA${Date.now()}`;
     const appUrl = (process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000').replace(/\/$/, '');
+    console.log('URLs de retour calculées:', { appUrl, callback: `${appUrl}/api/donations/callback` });
 
     const paymentRequest = {
       order: {
@@ -117,7 +118,11 @@ export async function POST(req: Request) {
     if (!response.ok) {
       const errorData = await response.text();
       console.error('Erreur Araka Request:', errorData);
-      return NextResponse.json({ error: 'Araka Pay a refusé la requête de paiement' }, { status: 500 });
+      return NextResponse.json({ 
+        error: 'Araka Pay a refusé la requête de paiement', 
+        details: errorData,
+        statusCode: response.status 
+      }, { status: 500 });
     }
 
     const data = (await response.json()) as { transactionId: string; paymentPage: string };
