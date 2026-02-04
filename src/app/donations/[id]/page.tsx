@@ -93,8 +93,8 @@ export default function DonationDetailPage() {
   const remainingAmount = Math.max(donation.targetAmount - donation.currentAmount, 0);
 
   return (
-    <div className="min-h-screen bg-gray-50 pt-32 sm:pt-40 pb-16 px-6 sm:px-12 lg:px-20">
-      <div className="max-w-7xl mx-auto">
+    <div className="min-h-screen bg-gray-50 pt-32 sm:pt-40 pb-16 px-4">
+      <div className="max-w-6xl mx-auto">
         
         {/* Navigation Breadcrumb */}
         <div className="flex items-center gap-2 text-xs font-bold text-gray-900 mb-8">
@@ -150,7 +150,7 @@ export default function DonationDetailPage() {
                   </div>
                 </div>
 
-                <div className="prose prose-red max-w-none text-black leading-relaxed text-sm sm:text-base font-normal text-justify">
+                <div className="prose prose-sm prose-red max-w-none text-black leading-relaxed font-normal text-justify whitespace-pre-line">
                   {donation.description}
                 </div>
               </div>
