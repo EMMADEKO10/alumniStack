@@ -97,10 +97,10 @@ export default function DonationDetailPage() {
       <div className="max-w-7xl mx-auto">
         
         {/* Navigation Breadcrumb */}
-        <div className="flex items-center gap-2 text-xs font-bold text-gray-400 uppercase tracking-widest mb-8">
+        <div className="flex items-center gap-2 text-xs font-bold text-gray-900 mb-8">
           <Link href="/donations" className="hover:text-red-600 transition-colors">Donations</Link>
           <span className="text-gray-300">/</span>
-          <span className="text-gray-900 truncate max-w-50 sm:max-w-md">{donation.title}</span>
+          <span className="truncate max-w-50 sm:max-w-md">{donation.title}</span>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -118,39 +118,39 @@ export default function DonationDetailPage() {
                   className="object-cover"
                 />
                 <div className="absolute top-6 left-6 flex gap-2">
-                  <span className={`px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest shadow-lg ${
+                  <span className={`px-4 py-1.5 rounded-full text-[10px] font-bold shadow-lg ${
                     donation.isActive ? 'bg-green-500 text-white' : 'bg-gray-500 text-white'
                   }`}>
                     {donation.isActive ? 'Active' : 'Terminée'}
                   </span>
                   {donation.category && (
-                    <span className="px-4 py-1.5 rounded-full bg-white/95 backdrop-blur-sm text-gray-900 text-[10px] font-black uppercase tracking-widest shadow-lg border border-gray-100">
+                    <span className="px-4 py-1.5 rounded-full bg-white/95 backdrop-blur-sm text-gray-900 text-[10px] font-bold shadow-lg border border-gray-100">
                       {donation.category}
                     </span>
                   )}
                 </div>
               </div>
               <div className="p-6 sm:p-10">
-                <h1 className="text-2xl sm:text-3xl font-black text-gray-900 mb-6 leading-tight">
+                <h1 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6 leading-tight">
                   {donation.title}
                 </h1>
                 
                 <div className="flex flex-wrap gap-4 mb-10">
                   <div className="flex items-center gap-2 bg-gray-50 px-4 py-2.5 rounded-2xl border border-gray-100">
                     <MapPinIcon className="h-4 w-4 text-red-600" />
-                    <span className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">{donation.location || 'Leadership Academy'}</span>
+                    <span className="text-[10px] font-bold text-gray-900">{donation.location || 'Leadership Academy'}</span>
                   </div>
                   <div className="flex items-center gap-2 bg-gray-50 px-4 py-2.5 rounded-2xl border border-gray-100">
                     <CalendarIcon className="h-4 w-4 text-red-600" />
-                    <span className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">Publié le {new Date(donation.createdAt).toLocaleDateString('fr-FR')}</span>
+                    <span className="text-[10px] font-bold text-gray-900">Publié le {new Date(donation.createdAt).toLocaleDateString('fr-FR')}</span>
                   </div>
                   <div className="flex items-center gap-2 bg-gray-50 px-4 py-2.5 rounded-2xl border border-gray-100">
                     <TagIcon className="h-4 w-4 text-red-600" />
-                    <span className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">Priorité {donation.priority || 'Normale'}</span>
+                    <span className="text-[10px] font-bold text-gray-900">Priorité {donation.priority || 'Normale'}</span>
                   </div>
                 </div>
 
-                <div className="prose prose-red max-w-none text-gray-600 leading-relaxed text-sm sm:text-base font-medium">
+                <div className="prose prose-red max-w-none text-black leading-relaxed text-sm sm:text-base font-normal text-justify">
                   {donation.description}
                 </div>
               </div>
@@ -162,7 +162,7 @@ export default function DonationDetailPage() {
               
               <div className="relative z-10">
                 <div className="flex items-center justify-between mb-10">
-                  <h2 className="text-xl font-black text-gray-900 flex items-center gap-3">
+                  <h2 className="text-xl font-bold text-gray-900 flex items-center gap-3">
                     <div className="h-10 w-10 bg-red-100 rounded-xl flex items-center justify-center">
                       <UsersIcon className="h-6 w-6 text-red-600" />
                     </div>
@@ -180,32 +180,32 @@ export default function DonationDetailPage() {
                         }`}
                       >
                         <div className="flex items-center gap-5">
-                          <div className={`h-12 w-12 rounded-2xl flex items-center justify-center font-black text-lg shadow-lg transition-transform hover:scale-105 ${
+                          <div className={`h-12 w-12 rounded-2xl flex items-center justify-center font-bold text-lg shadow-lg transition-transform hover:scale-105 ${
                             contrib.isMe ? 'bg-red-600 text-white' : 'bg-white text-gray-400 border border-gray-100'
                           }`}>
                             {contrib.customerName.charAt(0)}
                           </div>
                           <div>
-                            <p className={`font-black tracking-tight text-base ${contrib.isMe ? 'text-red-900' : 'text-gray-900'}`}>
-                              {contrib.customerName} {contrib.isMe && <span className="text-[9px] bg-red-600 text-white px-2.5 py-1 rounded-full ml-2 uppercase font-black tracking-widest">Moi</span>}
+                            <p className={`font-semibold tracking-tight text-base ${contrib.isMe ? 'text-red-900' : 'text-gray-900'}`}>
+                              {contrib.customerName} {contrib.isMe && <span className="text-[9px] bg-red-600 text-white px-2.5 py-1 rounded-full ml-2 font-bold tracking-wide">Moi</span>}
                             </p>
-                            <p className="text-[10px] text-gray-400 uppercase tracking-[0.2em] font-black mt-1">
+                            <p className="text-[10px] text-gray-900 font-normal mt-1">
                               {new Date(contrib.createdAt).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })}
                             </p>
                           </div>
                         </div>
                         <div className="text-right">
-                          <p className={`text-lg font-black ${contrib.isMe ? 'text-red-600' : 'text-gray-900'}`}>
+                          <p className={`text-lg font-bold ${contrib.isMe ? 'text-red-600' : 'text-gray-900'}`}>
                             +{contrib.amount}$
                           </p>
-                          <p className="text-[9px] text-gray-400 font-black uppercase tracking-widest mt-1">Validé</p>
+                          <p className="text-[9px] text-gray-900 font-normal mt-1">Validé</p>
                         </div>
                       </div>
                     ))
                   ) : (
                     <div className="text-center py-16 bg-gray-50 rounded-3xl border-2 border-dashed border-gray-200">
                       <HeartIcon className="h-14 w-14 text-gray-200 mx-auto mb-4" />
-                      <p className="text-gray-400 font-bold uppercase tracking-widest text-sm text-center px-6">Soyez le premier à soutenir cette cause</p>
+                      <p className="text-gray-400 font-medium text-sm text-center px-6">Soyez le premier à soutenir cette cause</p>
                     </div>
                   )}
                 </div>
@@ -232,10 +232,10 @@ export default function DonationDetailPage() {
                 <div className="flex items-end justify-between mb-6">
                   <div>
                     <span className="text-xl font-bold text-gray-900 tracking-tight">{donation.currentAmount}$</span>
-                    <p className="typography-tiny font-bold uppercase tracking-widest text-gray-400 mt-1">Déjà récoltés</p>
+                    <p className="typography-tiny font-medium text-black mt-1">Déjà récoltés</p>
                   </div>
                   <div className="text-right">
-                    <span className="typography-tiny font-bold text-red-600 bg-red-50 px-2 py-1 rounded-lg border border-red-100">{progress}%</span>
+                    <span className="typography-tiny font-medium text-red-600 bg-red-50 px-2 py-1 rounded-lg border border-red-100">{progress}%</span>
                   </div>
                 </div>
                 
@@ -248,7 +248,7 @@ export default function DonationDetailPage() {
                   />
                 </div>
                 
-                <div className="flex justify-between items-center typography-tiny font-bold text-gray-400 uppercase tracking-widest">
+                <div className="flex justify-between items-center typography-tiny font-medium text-black">
                   <span className="flex items-center gap-1.5">
                     <div className="h-1.5 w-1.5 rounded-full bg-gray-300" />
                     Cible: {donation.targetAmount}$
@@ -263,11 +263,11 @@ export default function DonationDetailPage() {
               <div className="grid grid-cols-2 gap-3 mb-8">
                 <div className="bg-gray-50 p-4 rounded-2xl text-center border border-gray-100 transition-colors hover:bg-gray-100/50">
                   <p className="text-lg font-bold text-gray-900">{donation.donorCount || 0}</p>
-                  <p className="typography-tiny font-bold text-gray-400 uppercase tracking-widest mt-1">Généreux donateurs</p>
+                  <p className="typography-tiny font-normal text-black mt-1">Généreux donateurs</p>
                 </div>
                 <div className="bg-gray-50 p-4 rounded-2xl text-center border border-gray-100 transition-colors hover:bg-gray-100/50">
                   <p className="text-lg font-bold text-gray-900">{remainingAmount <= 0 ? 0 : Math.ceil(remainingAmount / 10)}</p>
-                  <p className="typography-tiny font-bold text-gray-400 uppercase tracking-widest mt-1">Dons de 10$ requis</p>
+                  <p className="typography-tiny font-normal text-black mt-1">Dons de 10$ requis</p>
                 </div>
               </div>
 
@@ -276,7 +276,6 @@ export default function DonationDetailPage() {
                   href={`/donations/${donation._id}/pay`}
                   className="w-full bg-red-600 text-white py-4 rounded-xl font-bold text-sm flex items-center justify-center gap-2 hover:bg-red-700 transition-all shadow-lg shadow-red-100 group active:scale-95"
                 >
-                  <HeartIcon className="h-4 w-4 fill-white group-hover:scale-110 transition-transform" />
                   SOUTENIR LE PROJET
                 </Link>
               ) : (
@@ -292,7 +291,7 @@ export default function DonationDetailPage() {
                     <Image src="/icon_pay/svg/M-PESA logo - Brandlogos.net.svg" alt="Mpesa" width={32} height={16} className="grayscale" />
                     <Image src="/icon_pay/svg/Visa_Inc.-Logo.wine.svg" alt="Visa" width={32} height={16} className="grayscale" />
                 </div>
-                <p className="typography-tiny font-bold text-gray-400 uppercase tracking-tight leading-relaxed">
+                <p className="typography-tiny font-normal text-black leading-relaxed">
                   Paiement 100% sécurisé via Araka Pay<br />Développement communautaire LAU
                 </p>
               </div>
@@ -302,29 +301,29 @@ export default function DonationDetailPage() {
             <div className="bg-gray-900 rounded-3xl p-8 text-white relative overflow-hidden group">
               <div className="absolute top-0 right-0 w-32 h-32 bg-red-600/10 rounded-full blur-3xl -mr-16 -mt-16 group-hover:bg-red-600/20 transition-colors" />
               
-              <h3 className="text-base font-black mb-6 flex items-center gap-3 relative z-10">
+              <h3 className="text-base font-bold mb-6 flex items-center gap-3 relative z-10">
                 <div className="h-8 w-8 bg-red-600 rounded-lg flex items-center justify-center">
                     <BanknotesIcon className="h-5 w-5 text-white" />
                 </div>
-                IMPACT DE VOTRE DON
+                Impact de votre don
               </h3>
               <ul className="space-y-5 relative z-10">
                 <li className="flex gap-4">
                   <CheckCircleIcon className="h-5 w-5 text-red-500 shrink-0 mt-0.5" />
-                  <span className="text-xs font-bold text-gray-300 leading-relaxed uppercase tracking-wide">Soutien direct à l&apos;infrastructure universitaire</span>
+                  <span className="text-xs font-normal text-gray-300 leading-relaxed">Soutien direct à l&apos;infrastructure universitaire</span>
                 </li>
                 <li className="flex gap-4">
                   <CheckCircleIcon className="h-5 w-5 text-red-500 shrink-0 mt-0.5" />
-                  <span className="text-xs font-bold text-gray-300 leading-relaxed uppercase tracking-wide">Amélioration des conditions d&apos;étude</span>
+                  <span className="text-xs font-normal text-gray-300 leading-relaxed">Amélioration des conditions d&apos;étude</span>
                 </li>
                 <li className="flex gap-4">
                   <CheckCircleIcon className="h-5 w-5 text-red-500 shrink-0 mt-0.5" />
-                  <span className="text-xs font-bold text-gray-300 leading-relaxed uppercase tracking-wide">Transparence totale sur l&apos;utilisation des fonds</span>
+                  <span className="text-xs font-normal text-gray-300 leading-relaxed">Transparence totale sur l&apos;utilisation des fonds</span>
                 </li>
               </ul>
               
               <div className="mt-8 pt-8 border-t border-white/10 relative z-10 text-center">
-                 <p className="text-[10px] font-black text-gray-500 uppercase tracking-widest">Leadership Academy University</p>
+                 <p className="text-[10px] font-bold text-gray-500 tracking-widest">LEADERSHIP ACADEMY UNIVERSITY</p>
               </div>
             </div>
           </div>
