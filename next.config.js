@@ -21,6 +21,12 @@ const nextConfig = {
     CLOUDINARY_CLOUD_NAME: process.env.CLOUDINARY_CLOUD_NAME,
     CLOUDINARY_API_KEY: process.env.CLOUDINARY_API_KEY,
     CLOUDINARY_API_SECRET: process.env.CLOUDINARY_API_SECRET,
+    // Araka Pay
+    ARAKA_EMAIL: process.env.ARAKA_EMAIL,
+    ARAKA_PASSWORD: process.env.ARAKA_PASSWORD,
+    ARAKA_API_URL: process.env.ARAKA_API_URL,
+    ARAKA_PAYMENT_PAGE_ID: process.env.ARAKA_PAYMENT_PAGE_ID,
+    NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL,
   },
   
   // Configuration des images optimisée
