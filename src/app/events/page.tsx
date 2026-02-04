@@ -17,7 +17,7 @@ const Page: React.FC = () => {
       </div>
 
       {/* Header Section */}
-      <div className="relative z-10 pt-16 sm:pt-20 lg:pt-24 pb-8 sm:pb-10 lg:pb-12 text-center">
+      <div className="relative z-10 pt-32 sm:pt-40 lg:pt-48 pb-8 sm:pb-10 lg:pb-12 text-center">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
           {/* Badge */}
@@ -51,50 +51,6 @@ const Page: React.FC = () => {
               enrichissants. Networking, conférences et bien plus encore 
               pour développer votre réseau professionnel.
             </p>
-          </motion.div>
-
-          {/* Features Grid */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4 max-w-4xl mx-auto mt-8"
-          >
-            <div className="bg-white/60 backdrop-blur-sm rounded-xl p-3 sm:p-4 border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
-              <div className="flex items-center sm:items-start gap-3 text-left">
-                <div className="p-2 bg-red-100 rounded-lg shrink-0">
-                  <FaUsers className="text-red-600" />
-                </div>
-                <div>
-                  <h3 className="font-semibold text-gray-900 text-sm sm:text-base">Networking</h3>
-                  <p className="text-[10px] sm:text-sm text-gray-600">Rencontrez des pros et alumni</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-white/60 backdrop-blur-sm rounded-xl p-3 sm:p-4 border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
-              <div className="flex items-center sm:items-start gap-3 text-left">
-                <div className="p-2 bg-blue-100 rounded-lg shrink-0">
-                  <FaCalendarAlt className="text-blue-600" />
-                </div>
-                <div>
-                  <h3 className="font-semibold text-gray-900 text-sm sm:text-base">Variété</h3>
-                  <p className="text-[10px] sm:text-sm text-gray-600">Conférences et ateliers</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-white/60 backdrop-blur-sm rounded-xl p-3 sm:p-4 border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
-              <div className="flex items-center sm:items-start gap-3 text-left">
-                <div className="p-2 bg-green-100 rounded-lg shrink-0">
-                  <FaClock className="text-green-600" />
-                </div>
-                <div>
-                  <h3 className="font-semibold text-gray-900 text-sm sm:text-base">Facilité</h3>
-                  <p className="text-[10px] sm:text-sm text-gray-600">Inscription en un clic</p>
-                </div>
-              </div>
-            </div>
           </motion.div>
         </div>
       </div>

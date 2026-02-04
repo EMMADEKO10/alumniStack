@@ -212,21 +212,6 @@ const EventSection: React.FC = () => {
           </div>
         </div>
 
-        {/* Skeleton pour statistiques */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-          {[1, 2, 3].map((i) => (
-            <div key={i} className="bg-white rounded-xl border border-gray-100 p-4 animate-pulse">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-gray-200 rounded-lg"></div>
-                <div className="flex-1">
-                  <div className="h-8 w-12 bg-gray-200 rounded mb-2"></div>
-                  <div className="h-3 w-20 bg-gray-200 rounded"></div>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-
         {/* Skeleton pour cartes d'événements */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {[1, 2, 3, 4, 5, 6].map((i) => (
@@ -263,7 +248,7 @@ const EventSection: React.FC = () => {
   }
 
   return (
-    <div className="max-w-7xl mx-auto px-4 pt-12 pb-16">
+    <div className="max-w-7xl mx-auto px-4 pt-6 pb-16">
       {/* Barre de recherche et filtres */}
       <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-4 sm:p-6 mb-6 sm:mb-10">
         <div className="flex flex-col lg:flex-row gap-4 items-center justify-between">
@@ -333,41 +318,6 @@ const EventSection: React.FC = () => {
                 Liste
               </button>
             </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Statistiques compactes */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4 mb-8">
-        <div className="bg-linear-to-br from-red-50 to-orange-50 rounded-xl border border-red-100 p-3 sm:p-4 flex items-center gap-2 sm:gap-3">
-          <div className="bg-red-100 rounded-lg p-1.5 sm:p-2">
-            <CalendarIcon className="h-5 w-5 sm:h-6 sm:w-6 text-red-600" />
-          </div>
-          <div className="min-w-0">
-            <p className="text-lg sm:text-2xl font-bold text-gray-900 leading-none">{filteredEvents.length}</p>
-            <p className="text-[10px] sm:text-xs text-gray-600 uppercase font-semibold mt-0.5 truncate">Événements</p>
-          </div>
-        </div>
-        <div className="bg-linear-to-br from-blue-50 to-cyan-50 rounded-xl border border-blue-100 p-3 sm:p-4 flex items-center gap-2 sm:gap-3">
-          <div className="bg-blue-100 rounded-lg p-1.5 sm:p-2">
-            <MapPinIcon className="h-5 w-5 sm:h-6 sm:w-6 text-blue-600" />
-          </div>
-          <div className="min-w-0">
-            <p className="text-lg sm:text-2xl font-bold text-gray-900 leading-none">
-              {[...new Set(filteredEvents.map(e => e.location).filter(Boolean))].length}
-            </p>
-            <p className="text-[10px] sm:text-xs text-gray-600 uppercase font-semibold mt-0.5 truncate">Lieux</p>
-          </div>
-        </div>
-        <div className="bg-linear-to-br from-purple-50 to-pink-50 rounded-xl border border-purple-100 p-3 sm:p-4 flex items-center gap-2 sm:gap-3 col-span-2 sm:col-span-1">
-          <div className="bg-purple-100 rounded-lg p-1.5 sm:p-2">
-            <TagIcon className="h-5 w-5 sm:h-6 sm:w-6 text-purple-600" />
-          </div>
-          <div className="min-w-0 flex flex-col justify-center">
-            <p className="text-lg sm:text-2xl font-bold text-gray-900 leading-none">
-              {getEventTypes().length}
-            </p>
-            <p className="text-[10px] sm:text-xs text-gray-600 uppercase font-semibold mt-0.5 truncate">Types</p>
           </div>
         </div>
       </div>

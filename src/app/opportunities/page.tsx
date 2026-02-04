@@ -15,7 +15,7 @@ const Page: React.FC = () => {
       </div>
 
       {/* Header Section */}
-      <div className="relative z-10 pt-16 sm:pt-20 lg:pt-24 pb-8 sm:pb-10 lg:pb-12 text-center">
+      <div className="relative z-10 pt-32 sm:pt-40 lg:pt-48 pb-8 sm:pb-10 lg:pb-12 text-center">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
           {/* Badge */}

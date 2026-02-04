@@ -353,7 +353,7 @@ const AlumniDirectory: React.FC<AlumniDirectoryProps> = ({ onAlumniSelect }) => 
       </div>
 
       {/* Espacement pour le header fixe */}
-      <div className="pt-20 lg:pt-24">
+      <div className="pt-32 sm:pt-40 lg:pt-48">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 relative z-10">
           
           {/* Header avec titre harmonisé - Palette LAU */}
