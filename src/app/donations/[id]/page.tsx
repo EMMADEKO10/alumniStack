@@ -231,7 +231,7 @@ export default function DonationDetailPage() {
               <div className="mb-8 pt-4">
                 <div className="flex items-end justify-between mb-6">
                   <div>
-                    <span className="typography-heading-2 text-gray-900">{donation.currentAmount}$</span>
+                    <span className="text-xl font-bold text-gray-900 tracking-tight">{donation.currentAmount}$</span>
                     <p className="typography-tiny font-bold uppercase tracking-widest text-gray-400 mt-1">Déjà récoltés</p>
                   </div>
                   <div className="text-right">
@@ -262,11 +262,11 @@ export default function DonationDetailPage() {
 
               <div className="grid grid-cols-2 gap-3 mb-8">
                 <div className="bg-gray-50 p-4 rounded-2xl text-center border border-gray-100 transition-colors hover:bg-gray-100/50">
-                  <p className="typography-heading-2 text-gray-900">{donation.donorCount || 0}</p>
+                  <p className="text-lg font-bold text-gray-900">{donation.donorCount || 0}</p>
                   <p className="typography-tiny font-bold text-gray-400 uppercase tracking-widest mt-1">Généreux donateurs</p>
                 </div>
                 <div className="bg-gray-50 p-4 rounded-2xl text-center border border-gray-100 transition-colors hover:bg-gray-100/50">
-                  <p className="typography-heading-2 text-gray-900">{remainingAmount <= 0 ? 0 : Math.ceil(remainingAmount / 10)}</p>
+                  <p className="text-lg font-bold text-gray-900">{remainingAmount <= 0 ? 0 : Math.ceil(remainingAmount / 10)}</p>
                   <p className="typography-tiny font-bold text-gray-400 uppercase tracking-widest mt-1">Dons de 10$ requis</p>
                 </div>
               </div>
