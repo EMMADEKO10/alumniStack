@@ -231,11 +231,11 @@ export default function DonationDetailPage() {
               <div className="mb-8 pt-4">
                 <div className="flex items-end justify-between mb-6">
                   <div>
-                    <span className="text-4xl font-black text-gray-900">{donation.currentAmount}$</span>
-                    <p className="text-gray-400 font-black uppercase text-[10px] tracking-[0.3em] mt-2">Déjà récoltés</p>
+                    <span className="typography-heading-2 text-gray-900">{donation.currentAmount}$</span>
+                    <p className="typography-tiny font-bold uppercase tracking-widest text-gray-400 mt-1">Déjà récoltés</p>
                   </div>
                   <div className="text-right">
-                    <span className="text-xs font-black text-red-600 bg-red-50 px-3 py-1.5 rounded-xl border border-red-100">{progress}%</span>
+                    <span className="typography-tiny font-bold text-red-600 bg-red-50 px-2 py-1 rounded-lg border border-red-100">{progress}%</span>
                   </div>
                 </div>
                 
@@ -248,51 +248,51 @@ export default function DonationDetailPage() {
                   />
                 </div>
                 
-                <div className="flex justify-between items-center text-[10px] font-black text-gray-400 uppercase tracking-widest">
+                <div className="flex justify-between items-center typography-tiny font-bold text-gray-400 uppercase tracking-widest">
                   <span className="flex items-center gap-1.5">
-                    <div className="h-2 w-2 rounded-full bg-gray-300" />
+                    <div className="h-1.5 w-1.5 rounded-full bg-gray-300" />
                     Cible: {donation.targetAmount}$
                   </span>
                   <span className="flex items-center gap-1.5 text-red-600">
                     Reste: {remainingAmount}$
-                    <div className="h-2 w-2 rounded-full bg-red-600 animate-pulse" />
+                    <div className="h-1.5 w-1.5 rounded-full bg-red-600 animate-pulse" />
                   </span>
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-4 mb-10">
-                <div className="bg-gray-50 p-5 rounded-2xl text-center border border-gray-100 transition-colors hover:bg-gray-100/50">
-                  <p className="text-2xl font-black text-gray-900">{donation.donorCount || 0}</p>
-                  <p className="text-[9px] font-black text-gray-400 uppercase tracking-widest mt-2">Généreux donateurs</p>
+              <div className="grid grid-cols-2 gap-3 mb-8">
+                <div className="bg-gray-50 p-4 rounded-2xl text-center border border-gray-100 transition-colors hover:bg-gray-100/50">
+                  <p className="typography-heading-2 text-gray-900">{donation.donorCount || 0}</p>
+                  <p className="typography-tiny font-bold text-gray-400 uppercase tracking-widest mt-1">Généreux donateurs</p>
                 </div>
-                <div className="bg-gray-50 p-5 rounded-2xl text-center border border-gray-100 transition-colors hover:bg-gray-100/50">
-                  <p className="text-2xl font-black text-gray-900">{remainingAmount <= 0 ? 0 : Math.ceil(remainingAmount / 10)}</p>
-                  <p className="text-[9px] font-black text-gray-400 uppercase tracking-widest mt-2">Dons de 10$ requis</p>
+                <div className="bg-gray-50 p-4 rounded-2xl text-center border border-gray-100 transition-colors hover:bg-gray-100/50">
+                  <p className="typography-heading-2 text-gray-900">{remainingAmount <= 0 ? 0 : Math.ceil(remainingAmount / 10)}</p>
+                  <p className="typography-tiny font-bold text-gray-400 uppercase tracking-widest mt-1">Dons de 10$ requis</p>
                 </div>
               </div>
 
               {donation.isActive ? (
                 <Link 
                   href={`/donations/${donation._id}/pay`}
-                  className="w-full bg-red-600 text-white py-5 rounded-2xl font-black text-base flex items-center justify-center gap-3 hover:bg-red-700 transition-all shadow-xl shadow-red-100 group active:scale-95"
+                  className="w-full bg-red-600 text-white py-4 rounded-xl font-bold text-sm flex items-center justify-center gap-2 hover:bg-red-700 transition-all shadow-lg shadow-red-100 group active:scale-95"
                 >
-                  <HeartIcon className="h-5 w-5 fill-white group-hover:scale-110 transition-transform" />
+                  <HeartIcon className="h-4 w-4 fill-white group-hover:scale-110 transition-transform" />
                   SOUTENIR LE PROJET
                 </Link>
               ) : (
-                <div className="w-full bg-gray-100 text-gray-400 py-5 rounded-2xl font-black text-base flex items-center justify-center gap-3 cursor-not-allowed">
+                <div className="w-full bg-gray-100 text-gray-400 py-4 rounded-xl font-bold text-sm flex items-center justify-center gap-2 cursor-not-allowed">
                   CAMPAGNE TERMINEE
-                  <CheckCircleIcon className="h-5 w-5" />
+                  <CheckCircleIcon className="h-4 w-4" />
                 </div>
               )}
 
-              <div className="mt-8 pt-8 border-t border-gray-50 text-center">
-                <div className="flex items-center justify-center gap-4 opacity-30 mb-4">
-                    <Image src="/icon_pay/svg/Orange_Money-Logo.wine.svg" alt="Orange" width={40} height={20} className="grayscale" />
-                    <Image src="/icon_pay/svg/M-PESA logo - Brandlogos.net.svg" alt="Mpesa" width={40} height={20} className="grayscale" />
-                    <Image src="/icon_pay/svg/Visa_Inc.-Logo.wine.svg" alt="Visa" width={40} height={20} className="grayscale" />
+              <div className="mt-6 pt-6 border-t border-gray-50 text-center">
+                <div className="flex items-center justify-center gap-4 opacity-30 mb-3">
+                    <Image src="/icon_pay/svg/Orange_Money-Logo.wine.svg" alt="Orange" width={32} height={16} className="grayscale" />
+                    <Image src="/icon_pay/svg/M-PESA logo - Brandlogos.net.svg" alt="Mpesa" width={32} height={16} className="grayscale" />
+                    <Image src="/icon_pay/svg/Visa_Inc.-Logo.wine.svg" alt="Visa" width={32} height={16} className="grayscale" />
                 </div>
-                <p className="text-[9px] text-gray-400 font-black uppercase tracking-tighter leading-relaxed">
+                <p className="typography-tiny font-bold text-gray-400 uppercase tracking-tight leading-relaxed">
                   Paiement 100% sécurisé via Araka Pay<br />Développement communautaire LAU
                 </p>
               </div>
