@@ -170,15 +170,15 @@ export default function DonationPaymentPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 pt-24 pb-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gray-50 pt-32 sm:pt-40 pb-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           
           {/* Left Column: Donation Summary */}
           <div className="lg:col-span-1">
-            <div className="bg-white rounded-3xl shadow-sm overflow-hidden sticky top-28">
+            <div className="bg-white rounded-3xl shadow-sm overflow-hidden sticky top-28 sm:top-40">
               <div className="relative h-48 w-full">
-                <Image src={donation.image} alt={donation.title} fill className="object-cover" />
+                <Image src={donation.image} alt={donation.title} fill className="object-cover object-top" />
                 <div className="absolute inset-0 bg-black/40 flex items-center justify-center p-6 text-center">
                   <h2 className="text-white text-xl font-bold leading-tight">{donation.title}</h2>
                 </div>
@@ -216,11 +216,11 @@ export default function DonationPaymentPage() {
               
               {/* Progress Header */}
               <div className="px-8 py-6 border-b flex justify-between items-center bg-gray-50/50">
-                <h1 className="text-xl font-bold text-gray-900">Finaliser votre don</h1>
+                <h1 className="text-lg font-semibold text-gray-900">Finaliser votre don</h1>
                 <div className="flex items-center gap-2">
                   {[1, 2, 3].map((s) => (
                     <div key={s} className="flex items-center">
-                      <div className={`h-8 w-8 rounded-full flex items-center justify-center text-sm font-bold transition-colors ${
+                      <div className={`h-8 w-8 rounded-full flex items-center justify-center text-sm font-semibold transition-colors ${
                         step === s ? 'bg-red-600 text-white' : 
                         step > s ? 'bg-green-500 text-white' : 'bg-white border-2 border-gray-200 text-gray-400'
                       }`}>
@@ -244,7 +244,7 @@ export default function DonationPaymentPage() {
                       className="space-y-6"
                     >
                       <div>
-                        <label className="block text-sm font-semibold text-gray-700 mb-6">
+                        <label className="block text-sm font-medium text-gray-700 mb-6">
                           Choisissez le montant de votre don (USD)
                         </label>
                         <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 mb-8">
@@ -252,24 +252,32 @@ export default function DonationPaymentPage() {
                             <button
                               key={val}
                               onClick={() => setAmount(val.toString())}
-                              className={`py-6 rounded-2xl text-lg font-bold transition-all ${
+                              className={`py-4 rounded-xl text-base font-semibold transition-all ${
                                 amount === val.toString() 
-                                  ? 'bg-red-600 text-white shadow-lg shadow-red-200 scale-105' 
-                                  : 'bg-gray-50 text-gray-600 hover:bg-gray-100 hover:scale-102'
+                                  ? 'bg-red-600 text-white shadow-md' 
+                                  : 'bg-gray-50 text-gray-600 hover:bg-white hover:border-gray-200 border border-transparent'
                               }`}
                             >
                               {val}$
                             </button>
                           ))}
-                          <div className="relative col-span-2 sm:col-span-1">
+                        </div>
+
+                        <div className="relative">
+                          <div className="flex items-center gap-4 mb-4">
+                            <div className="h-px bg-gray-100 grow"></div>
+                            <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Ou montant personnalisé</span>
+                            <div className="h-px bg-gray-100 grow"></div>
+                          </div>
+                          <div className="relative">
                             <input
                               type="number"
-                              placeholder="Autre"
-                              value={amount}
+                              placeholder="Saisir un autre montant"
+                              value={PRESET_AMOUNTS.includes(Number(amount)) && amount !== '' ? '' : amount}
                               onChange={(e) => setAmount(e.target.value)}
-                              className="w-full py-6 px-4 bg-gray-50 rounded-2xl text-lg font-bold focus:ring-2 focus:ring-red-600 outline-none text-center"
+                              className="w-full py-4 px-4 bg-gray-50 rounded-xl text-base font-semibold focus:ring-2 focus:ring-red-600 outline-none border border-gray-100 focus:bg-white text-center transition-all"
                             />
-                            <span className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400">$</span>
+                            <span className="absolute right-6 top-1/2 -translate-y-1/2 text-gray-400">$</span>
                           </div>
                         </div>
                       </div>
@@ -277,7 +285,7 @@ export default function DonationPaymentPage() {
                       <button
                         onClick={handleNext}
                         disabled={!amount || parseFloat(amount) <= 0}
-                        className="w-full bg-red-600 text-white py-5 rounded-2xl font-bold flex items-center justify-center gap-2 hover:bg-red-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-lg shadow-red-200"
+                        className="w-full bg-red-600 text-white py-5 rounded-2xl font-semibold flex items-center justify-center gap-2 hover:bg-red-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-lg shadow-red-200"
                       >
                         Continuer vers le paiement
                         <ArrowRightIcon className="h-5 w-5" />
@@ -317,19 +325,19 @@ export default function DonationPaymentPage() {
                                 className="object-contain grayscale group-hover:grayscale-0 transition-all" 
                               />
                             </div>
-                            <span className="text-xs font-black uppercase tracking-widest text-gray-500">{m.name}</span>
+                            <span className="text-xs font-semibold uppercase tracking-widest text-gray-500">{m.name}</span>
                           </button>
                         ))}
                       </div>
 
                       <div className="flex gap-4 mt-8">
-                        <button onClick={handleBack} className="flex-1 py-4 px-6 border-2 border-gray-100 rounded-2xl font-bold text-gray-600 hover:bg-gray-50 transition-all">
+                        <button onClick={handleBack} className="flex-1 py-4 px-6 border-2 border-gray-100 rounded-2xl font-semibold text-gray-600 hover:bg-gray-50 transition-all">
                           Retour
                         </button>
                         <button
                           onClick={handleNext}
                           disabled={!method}
-                          className="flex-2 bg-red-600 text-white py-4 px-6 rounded-2xl font-bold flex items-center justify-center gap-2 hover:bg-red-700 disabled:opacity-50 transition-all shadow-lg shadow-red-200"
+                          className="flex-2 bg-red-600 text-white py-4 px-6 rounded-2xl font-semibold flex items-center justify-center gap-2 hover:bg-red-700 disabled:opacity-50 transition-all shadow-lg shadow-red-200"
                         >
                           Suivant
                         </button>
@@ -354,7 +362,7 @@ export default function DonationPaymentPage() {
 
                       <div className="space-y-4">
                         <div>
-                          <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">Votre nom complet</label>
+                          <label className="block text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2">Votre nom complet</label>
                           <input
                             type="text"
                             value={name}
@@ -365,7 +373,7 @@ export default function DonationPaymentPage() {
                         </div>
 
                         <div>
-                          <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">Votre Adresse Email</label>
+                          <label className="block text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2">Votre Adresse Email</label>
                           <input
                             type="email"
                             value={email}
@@ -377,7 +385,7 @@ export default function DonationPaymentPage() {
 
                         {method?.type === 'MOBILEMONEY' && (
                           <div>
-                            <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">Numéro de téléphone {method.name}</label>
+                            <label className="block text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2">Numéro de téléphone {method.name}</label>
                             <div className="relative">
                               <PhoneIcon className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
                               <input
@@ -399,13 +407,13 @@ export default function DonationPaymentPage() {
                       )}
 
                       <div className="flex gap-4">
-                        <button onClick={handleBack} disabled={isLoading} className="flex-1 py-4 border-2 border-gray-100 rounded-2xl font-bold text-gray-600 hover:bg-gray-50 disabled:opacity-50">
+                        <button onClick={handleBack} disabled={isLoading} className="flex-1 py-4 border-2 border-gray-100 rounded-2xl font-semibold text-gray-600 hover:bg-gray-50 disabled:opacity-50">
                           Retour
                         </button>
                         <button
                           onClick={handleSubmit}
                           disabled={isLoading}
-                          className="flex-2 bg-red-600 text-white py-4 rounded-2xl font-bold flex items-center justify-center gap-2 hover:bg-red-700 disabled:opacity-50 transition-all shadow-lg shadow-red-200"
+                          className="flex-2 bg-red-600 text-white py-4 rounded-2xl font-semibold flex items-center justify-center gap-2 hover:bg-red-700 disabled:opacity-50 transition-all shadow-lg shadow-red-200"
                         >
                           {isLoading ? (
                             <div className="h-5 w-5 border-2 border-white border-t-transparent animate-spin rounded-full" />
@@ -430,13 +438,13 @@ export default function DonationPaymentPage() {
                       <div className="h-24 w-24 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-6 scale-110">
                         <CheckCircleIcon className="h-12 w-12" />
                       </div>
-                      <h2 className="text-3xl font-black text-gray-900 mb-4">Merci pour votre don !</h2>
-                      <p className="text-gray-500 max-w-sm mx-auto mb-10 leading-relaxed">
-                        Votre contribution de <span className="text-gray-900 font-bold">{amount} USD</span> pour <span className="text-gray-900 font-bold">{donation.title}</span> a été reçue avec succès.
+                      <h2 className="text-2xl font-bold text-gray-900 mb-4">Merci pour votre don !</h2>
+                      <p className="text-gray-500 max-w-sm mx-auto mb-10 leading-relaxed text-sm">
+                        Votre contribution de <span className="text-gray-900 font-semibold">{amount} USD</span> pour <span className="text-gray-900 font-semibold">{donation.title}</span> a été reçue avec succès.
                       </p>
                       <button
                         onClick={() => router.push('/donations')}
-                        className="bg-gray-900 text-white px-10 py-4 rounded-2xl font-bold hover:bg-black transition-all shadow-xl shadow-gray-200"
+                        className="bg-gray-900 text-white px-10 py-4 rounded-2xl font-semibold hover:bg-black transition-all shadow-xl shadow-gray-200"
                       >
                         Retour aux campagnes
                       </button>
