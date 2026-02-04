@@ -160,8 +160,8 @@ export async function POST(request: Request) {
 
       try {
         // Import dynamique pour compatibilité CJS
-        const { sendEmail } = await import('@/utils/sendEmails.js');
-        const { verificationEmailTemplate, verificationEmailText } = await import('@/utils/emailTemplates.js');
+        const { sendEmail } = await import('../../../../utils/sendEmails.js');
+        const { verificationEmailTemplate, verificationEmailText } = await import('../../../../utils/emailTemplates.js');
         
         const htmlContent = verificationEmailTemplate(verifyUrl, firstName, origin);
         const textContent = verificationEmailText(verifyUrl, firstName);

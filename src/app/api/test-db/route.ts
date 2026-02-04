@@ -16,7 +16,7 @@ export async function GET() {
     }
 
     // Test de la connexion
-    const { connectDB } = await import('@/lib/mongodb');
+    const { connectDB } = await import('../../../lib/mongodb');
     const { db } = await connectDB();
     
     // Test simple de la base

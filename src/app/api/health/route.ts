@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { connectDB } from '@/lib/mongodb';
+import { connectDB } from '../../../lib/mongodb';
 
 /**
  * Route de santé améliorée pour diagnostiquer les problèmes en production

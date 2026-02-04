@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
-import { connectDB } from '@/lib/mongodb';
-import { Community, CommunityType, LEADERSHIP_ACADEMY_FACULTIES, REGIONS, PROFESSIONAL_SECTORS } from '@/types/community';
+import { connectDB } from '../../../lib/mongodb';
+import { Community, CommunityType, LEADERSHIP_ACADEMY_FACULTIES, REGIONS, PROFESSIONAL_SECTORS } from '../../../types/community';
 
 interface CommunityFilter {
   type?: CommunityType;
