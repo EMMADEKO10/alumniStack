@@ -256,7 +256,7 @@ export async function PUT(request: Request) {
     }
 
     // Préparer la mise à jour
-    const updateData: Record<string, unknown> = {
+    const updateData = {
       ...body,
       updatedAt: new Date(),
       lastProfileUpdate: new Date(),
@@ -264,13 +264,13 @@ export async function PUT(request: Request) {
 
     // Traitement des dates
     if (body.personalInfo?.dateOfBirth) {
-      (updateData as any).personalInfo.dateOfBirth = new Date(body.personalInfo.dateOfBirth);
+      updateData.personalInfo.dateOfBirth = new Date(body.personalInfo.dateOfBirth);
     }
     if (body.academicInfo?.graduationDate) {
-      (updateData as any).academicInfo.graduationDate = new Date(body.academicInfo.graduationDate);
+      updateData.academicInfo.graduationDate = new Date(body.academicInfo.graduationDate);
     }
     if (body.professionalInfo?.currentPosition?.startDate) {
-      (updateData as any).professionalInfo.currentPosition.startDate = new Date(body.professionalInfo.currentPosition.startDate);
+      updateData.professionalInfo.currentPosition.startDate = new Date(body.professionalInfo.currentPosition.startDate);
     }
 
     // Fusionner avec le profil existant
