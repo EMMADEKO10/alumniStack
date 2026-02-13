@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { useSession } from 'next-auth/react';
 import { useRouter, usePathname } from 'next/navigation';
 import { FaGraduationCap, FaTimes, FaArrowRight } from 'react-icons/fa';
-import { useAlumniProfile } from '@/hooks/useAlumniProfile';
+import { useAlumniProfile } from '../../hooks/useAlumniProfile';
 
 /**
  * Bannière persistante pour inciter les utilisateurs à compléter leur profil alumni

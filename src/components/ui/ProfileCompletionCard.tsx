@@ -11,7 +11,7 @@ import {
   FaArrowRight,
   FaStar
 } from 'react-icons/fa';
-import { AlumniProfile } from '@/types/alumni';
+import { AlumniProfile } from '../../types/alumni';
 
 interface ProfileCompletionCardProps {
   profile: AlumniProfile | null;

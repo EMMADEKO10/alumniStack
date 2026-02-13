@@ -13,7 +13,7 @@ import {
   FaCheckCircle,
   FaStar
 } from 'react-icons/fa';
-import { useAlumniProfile } from '@/hooks/useAlumniProfile';
+import { useAlumniProfile } from '../../hooks/useAlumniProfile';
 
 /**
  * Modale d'onboarding pour nouveaux utilisateurs
