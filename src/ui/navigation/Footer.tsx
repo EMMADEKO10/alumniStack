@@ -59,25 +59,25 @@ const Footer: React.FC = () => {
       </div>
 
       <Container>
-        <div className="relative z-10 pt-10 pb-6">
+        <div className="relative z-10 pt-6 pb-4 md:pt-10 md:pb-6">
           {/* Main footer content */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6 md:gap-12 md:mb-12">
             
             {/* Brand section */}
-            <div className="lg:col-span-1 space-y-6">
-              <Link href="/" className="flex items-center space-x-3 group">
-                <div className="p-3 bg-linear-to-br from-red-500 to-red-600 rounded-xl shadow-lg group-hover:shadow-red-500/25 transition-all duration-300 group-hover:scale-105">
-                  <FaGraduationCap className="w-6 h-6 text-white" />
+            <div className="lg:col-span-1 space-y-3 md:space-y-6">
+              <Link href="/" className="flex items-center space-x-2 md:space-x-3 group">
+                <div className="p-2 md:p-3 bg-linear-to-br from-red-500 to-red-600 rounded-xl shadow-lg group-hover:shadow-red-500/25 transition-all duration-300 group-hover:scale-105">
+                  <FaGraduationCap className="w-5 h-5 md:w-6 md:h-6 text-white" />
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold bg-linear-to-r from-white to-gray-300 bg-clip-text text-transparent">
+                  <h3 className="text-lg md:text-xl font-bold bg-linear-to-r from-white to-gray-300 bg-clip-text text-transparent">
                     LAU Alumni
                   </h3>
-                  <p className="text-sm text-gray-400">Platform</p>
+                  <p className="text-xs md:text-sm text-gray-400">Platform</p>
                 </div>
               </Link>
               
-              <p className="text-gray-300 leading-relaxed">
+              <p className="text-sm md:text-base text-gray-300 leading-relaxed">
                 La plateforme officielle des anciens étudiants de Leadership Academia University. 
                 Connectez-vous, grandissez et construisez ensemble l&apos;avenir.
               </p>
@@ -96,8 +96,8 @@ const Footer: React.FC = () => {
             </div>
 
             {/* Navigation */}
-            <div className="space-y-6">
-              <h4 className="text-lg font-semibold bg-linear-to-r from-red-400 to-red-500 bg-clip-text text-transparent">
+            <div className="space-y-3 md:space-y-6">
+              <h4 className="text-base md:text-lg font-semibold bg-linear-to-r from-red-400 to-red-500 bg-clip-text text-transparent">
                 Navigation
               </h4>
               <nav className="space-y-3">
@@ -105,7 +105,7 @@ const Footer: React.FC = () => {
                   <Link
                     key={index}
                     href={`/${item.link}`}
-                    className="block text-gray-300 hover:text-white transition-colors duration-200 hover:translate-x-1 transform"
+                    className="block text-sm md:text-base text-gray-300 hover:text-white transition-colors duration-200 hover:translate-x-1 transform"
                   >
                     {item.name}
                   </Link>
@@ -114,16 +114,16 @@ const Footer: React.FC = () => {
             </div>
 
             {/* Services */}
-            <div className="space-y-6">
-              <h4 className="text-lg font-semibold bg-linear-to-r from-blue-400 to-blue-500 bg-clip-text text-transparent">
+            <div className="space-y-3 md:space-y-6">
+              <h4 className="text-base md:text-lg font-semibold bg-linear-to-r from-blue-400 to-blue-500 bg-clip-text text-transparent">
                 Services
               </h4>
-              <nav className="space-y-3">
+              <nav className="space-y-2 md:space-y-3">
                 {services.map((item, index) => (
                   <Link
                     key={index}
                     href={`/${item.link}`}
-                    className="block text-gray-300 hover:text-white transition-colors duration-200 hover:translate-x-1 transform"
+                    className="block text-sm md:text-base text-gray-300 hover:text-white transition-colors duration-200 hover:translate-x-1 transform"
                   >
                     {item.name}
                   </Link>
@@ -132,13 +132,13 @@ const Footer: React.FC = () => {
             </div>
 
             {/* Contact & Newsletter */}
-            <div className="space-y-6">
-              <h4 className="text-lg font-semibold bg-linear-to-r from-green-400 to-green-500 bg-clip-text text-transparent">
+            <div className="space-y-3 md:space-y-6">
+              <h4 className="text-base md:text-lg font-semibold bg-linear-to-r from-green-400 to-green-500 bg-clip-text text-transparent">
                 Restons connectés
               </h4>
               
               {/* Contact info */}
-              <div className="space-y-3">
+              <div className="space-y-2 md:space-y-3">
                 <div className="flex items-center space-x-3 text-gray-300">
                   <FaEnvelope className="w-4 h-4 text-red-400" />
                   <span className="text-sm">contact@lau-alumni.com</span>
@@ -159,10 +159,10 @@ const Footer: React.FC = () => {
           </div>
 
           {/* Social links */}
-          <div className="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-white/10">
-            <div className="mb-6 md:mb-0">
-              <h5 className="text-sm font-medium text-gray-300 mb-3">Suivez-nous</h5>
-              <div className="flex space-x-4">
+          <div className="flex flex-col md:flex-row justify-between items-center pt-4 md:pt-8 border-t border-white/10">
+            <div className="mb-4 md:mb-0">
+              <h5 className="text-xs md:text-sm font-medium text-gray-300 mb-2 md:mb-3">Suivez-nous</h5>
+              <div className="flex space-x-3 md:space-x-4">
                 <SocialLink href="https://twitter.com/lau_alumni" icon={<Twitter />} />
                 <SocialLink href="https://facebook.com/lau.alumni" icon={<Facebook />} />
                 <SocialLink href="https://instagram.com/lau_alumni" icon={<Instagram />} />
@@ -171,12 +171,12 @@ const Footer: React.FC = () => {
             </div>
 
             {/* Legal links */}
-            <div className="flex flex-wrap justify-center md:justify-end gap-4">
+            <div className="flex flex-wrap justify-center md:justify-end gap-2 md:gap-4">
               {legal.map((item, index) => (
                 <Link
                   key={index}
                   href={`/${item.link}`}
-                  className="text-sm text-gray-400 hover:text-white transition-colors duration-200"
+                  className="text-xs md:text-sm text-gray-400 hover:text-white transition-colors duration-200"
                 >
                   {item.name}
                 </Link>
@@ -185,8 +185,8 @@ const Footer: React.FC = () => {
           </div>
 
           {/* Copyright */}
-          <div className="mt-8 pt-8 border-t border-white/10 text-center">
-            <p className="text-sm text-gray-400 flex items-center justify-center space-x-2">
+          <div className="mt-4 pt-4 md:mt-8 md:pt-8 border-t border-white/10 text-center">
+            <p className="text-xs md:text-sm text-gray-400 flex flex-wrap items-center justify-center gap-1 md:gap-2">
               <span>© {new Date().getFullYear()} LAU Alumni Platform.</span>
               <span>Fait avec</span>
               {/* <FaHeart className="w-4 h-4 text-red-400 animate-pulse" /> */}
@@ -213,9 +213,9 @@ const SocialLink: React.FC<{ href: string; icon: React.ReactNode }> = ({ href, i
     href={href}
     target="_blank"
     rel="noopener noreferrer"
-    className="p-3 bg-white/10 rounded-xl hover:bg-white/20 transition-all duration-300 transform hover:scale-110 hover:-translate-y-1 backdrop-blur-sm group"
+    className="p-2 md:p-3 bg-white/10 rounded-lg md:rounded-xl hover:bg-white/20 transition-all duration-300 transform hover:scale-110 hover:-translate-y-1 backdrop-blur-sm group"
   >
-    <div className="w-5 h-5 text-gray-300 group-hover:text-white transition-colors duration-200">
+    <div className="w-4 h-4 md:w-5 md:h-5 text-gray-300 group-hover:text-white transition-colors duration-200">
       {icon}
     </div>
   </a>
