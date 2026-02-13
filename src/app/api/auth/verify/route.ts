@@ -6,6 +6,12 @@ export async function GET(request: Request) {
   const { searchParams } = requestUrl;
   const token = searchParams.get('token');
 
+  console.log('🔐 Vérification email - Début');
+  console.log('  - Token reçu:', token?.substring(0, 10) + '...');
+  console.log('  - APP_URL:', process.env.APP_URL);
+  console.log('  - NEXTAUTH_URL:', process.env.NEXTAUTH_URL);
+  console.log('  - Request URL:', request.url);
+
   if (!token) {
     return NextResponse.json({ error: 'Token manquant' }, { status: 400 });
   }
@@ -35,7 +41,29 @@ export async function GET(request: Request) {
       });
 
       if (!pending) {
-        const redirectUrl = new URL('/login', requestUrl.origin);
+        console.log('❌ Token invalide ou expiré');
+        
+        // Utiliser APP_URL (variable serveur) en priorité
+        let baseUrl = process.env.APP_URL || process.env.NEXTAUTH_URL || process.env.NEXT_PUBLIC_APP_URL;
+        
+        if (!baseUrl) {
+          const headerXForwardedHost = request.headers.get('x-forwarded-host');
+          const headerXForwardedProto = request.headers.get('x-forwarded-proto') || 'https';
+          const headerHost = request.headers.get('host');
+          
+          if (headerXForwardedHost) {
+            baseUrl = `${headerXForwardedProto}://${headerXForwardedHost}`;
+          } else if (headerHost) {
+            const protocol = headerHost.includes('localhost') || headerHost.includes('127.0.0.1') ? 'http' : 'https';
+            baseUrl = `${protocol}://${headerHost}`;
+          } else {
+            baseUrl = requestUrl.origin;
+          }
+        }
+        
+        baseUrl = baseUrl.replace(/\/$/, '');
+        
+        const redirectUrl = new URL('/login', baseUrl);
         redirectUrl.searchParams.set('error', 'invalid_or_expired');
         redirectUrl.searchParams.set('next', '/profile/complete');
         return NextResponse.redirect(redirectUrl);
@@ -66,7 +94,31 @@ export async function GET(request: Request) {
     }
 
     // Rediriger vers la page de connexion avec redirection vers la complétion du profil
-    const successUrl = new URL('/login', requestUrl.origin);
+    // Utiliser APP_URL (variable serveur) en priorité
+    let baseUrl = process.env.APP_URL || process.env.NEXTAUTH_URL || process.env.NEXT_PUBLIC_APP_URL;
+    
+    // Si aucune variable d'environnement, construire depuis les headers
+    if (!baseUrl) {
+      const headerXForwardedHost = request.headers.get('x-forwarded-host');
+      const headerXForwardedProto = request.headers.get('x-forwarded-proto') || 'https';
+      const headerHost = request.headers.get('host');
+      
+      if (headerXForwardedHost) {
+        baseUrl = `${headerXForwardedProto}://${headerXForwardedHost}`;
+      } else if (headerHost) {
+        const protocol = headerHost.includes('localhost') || headerHost.includes('127.0.0.1') ? 'http' : 'https';
+        baseUrl = `${protocol}://${headerHost}`;
+      } else {
+        baseUrl = requestUrl.origin;
+      }
+    }
+    
+    // Nettoyer l'URL: retirer le slash final
+    baseUrl = baseUrl.replace(/\/$/, '');
+    
+    console.log('✅ Vérification réussie, redirection vers:', `${baseUrl}/login?verified=1`);
+    
+    const successUrl = new URL('/login', baseUrl);
     successUrl.searchParams.set('verified', '1');
     successUrl.searchParams.set('next', '/profile/complete');
     return NextResponse.redirect(successUrl);

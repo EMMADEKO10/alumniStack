@@ -155,8 +155,58 @@ export async function POST(request: Request) {
       }
 
       // Construire le lien de vérification
-      const origin = request.headers.get('origin') || process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000';
+      // Utiliser APP_URL (variable serveur) en priorité, sinon NEXTAUTH_URL
+      let origin = process.env.APP_URL || process.env.NEXTAUTH_URL || process.env.NEXT_PUBLIC_APP_URL;
+      
+      console.log('📧 Construction URL de vérification:');
+      console.log('  - APP_URL:', process.env.APP_URL);
+      console.log('  - NEXTAUTH_URL:', process.env.NEXTAUTH_URL);
+      console.log('  - NEXT_PUBLIC_APP_URL:', process.env.NEXT_PUBLIC_APP_URL);
+      console.log('  - NODE_ENV:', process.env.NODE_ENV);
+      
+      // Si aucune variable d'environnement n'est définie, utiliser les headers
+      if (!origin) {
+        const headerOrigin = request.headers.get('origin');
+        const headerHost = request.headers.get('host');
+        const headerXForwardedHost = request.headers.get('x-forwarded-host');
+        const headerXForwardedProto = request.headers.get('x-forwarded-proto') || 'https';
+        
+        console.log('  - Header origin:', headerOrigin);
+        console.log('  - Header host:', headerHost);
+        console.log('  - Header x-forwarded-host:', headerXForwardedHost);
+        console.log('  - Header x-forwarded-proto:', headerXForwardedProto);
+        
+        // Prioriser x-forwarded-host pour les reverse proxies
+        if (headerXForwardedHost) {
+          origin = `${headerXForwardedProto}://${headerXForwardedHost}`;
+        } else if (headerOrigin) {
+          origin = headerOrigin;
+        } else if (headerHost) {
+          // Si host commence par localhost ou 127.0.0.1, utiliser http, sinon https
+          const protocol = headerHost.includes('localhost') || headerHost.includes('127.0.0.1') || headerHost.includes('0.0.0.0') ? 'http' : 'https';
+          origin = `${protocol}://${headerHost}`;
+        } else {
+          origin = 'http://localhost:3000';
+        }
+      }
+      
+      // Nettoyer l'URL: remplacer 0.0.0.0 par localhost en développement
+      if (origin.includes('0.0.0.0')) {
+        console.log('⚠️  URL contient 0.0.0.0, remplacement par localhost');
+        origin = origin.replace('0.0.0.0', 'localhost');
+      }
+      
+      // S'assurer que l'URL commence par http:// ou https://
+      if (!origin.startsWith('http://') && !origin.startsWith('https://')) {
+        const protocol = process.env.NODE_ENV === 'production' ? 'https' : 'http';
+        origin = `${protocol}://${origin}`;
+      }
+      
+      // Retirer le slash final s'il existe
+      origin = origin.replace(/\/$/, '');
+      
       const verifyUrl = `${origin}/api/auth/verify?token=${verificationToken}`;
+      console.log('✅ URL finale de vérification:', verifyUrl);
 
       try {
         // Import dynamique pour compatibilité CJS

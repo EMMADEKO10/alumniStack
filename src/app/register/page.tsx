@@ -2,7 +2,6 @@
 
 import RegisterForm from '../../components/auth/RegisterForm';
 import Image from 'next/image';
-import { motion } from 'framer-motion';
 
 export default function RegisterPage() {
   return (
@@ -19,12 +18,7 @@ export default function RegisterPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             
             {/* Colonne gauche - Image et informations */}
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
-              className="hidden lg:block"
-            >
+            <div className="hidden lg:block">
               {/* Image de félicitations */}
               <div className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-white mt-8">
                 <Image
@@ -84,16 +78,12 @@ export default function RegisterPage() {
                   </div>
                 </div>
               </div>
-            </motion.div>
+            </div>
 
             {/* Colonne droite - Formulaire */}
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-            >
+            <div>
               <RegisterForm />
-            </motion.div>
+            </div>
           </div>
         </div>
       </div>
