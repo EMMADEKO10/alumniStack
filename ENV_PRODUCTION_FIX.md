@@ -42,9 +42,14 @@ MONGODB_DB_NAME=alumniprod
 # ========================================
 # CONFIGURATION NEXTAUTH & URL
 # ========================================
-# ⚠️ IMPORTANT : Remplacez par votre URL de production réelle
-NEXT_PUBLIC_APP_URL=https://votre-domaine.com
-NEXTAUTH_URL=https://votre-domaine.com
+# ⚠️ CRITIQUE : Variable pour les routes API côté serveur
+APP_URL=https://alumni-launiversity.cd
+
+# ⚠️ IMPORTANT : URL NextAuth (même valeur que APP_URL)
+NEXTAUTH_URL=https://alumni-launiversity.cd
+
+# ⚠️ IMPORTANT : URL publique (intégrée au build)
+NEXT_PUBLIC_APP_URL=https://alumni-launiversity.cd
 
 # Secrets de sécurité (à générer avec: openssl rand -base64 32)
 NEXTAUTH_SECRET=a5d9f7c2e1b3a8f6d4c7e9b2a5f8c1d3
