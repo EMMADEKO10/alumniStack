@@ -2,6 +2,7 @@
 
 import RegisterForm from '../../components/auth/RegisterForm';
 import Image from 'next/image';
+import { FaUsers, FaBriefcase, FaGraduationCap } from 'react-icons/fa';
 
 export default function RegisterPage() {
   return (
@@ -12,10 +13,57 @@ export default function RegisterPage() {
         <div className="absolute top-1/2 -right-24 w-96 h-96 bg-cyan-100/20 rounded-full blur-3xl"></div>
       </div>
 
-      <div className="pt-20 sm:pt-24 pb-12 relative z-10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="pt-24 sm:pt-28 pb-8 sm:pb-12 relative z-10">
+        <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8">
           
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          {/* En-tête mobile uniquement */}
+          <div className="lg:hidden text-center mb-6">
+            <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">
+              Rejoignez <span className="text-red-600">LAU Alumni</span>
+            </h1>
+            <p className="text-sm sm:text-base text-gray-600">
+              Créez votre compte pour accéder à la communauté
+            </p>
+          </div>
+
+          {/* Avantages mobiles - version compacte */}
+          <div className="lg:hidden grid grid-cols-1 gap-2 sm:gap-3 mb-6">
+            <div className="bg-white/80 backdrop-blur-sm rounded-lg p-3 sm:p-4 shadow-sm border border-red-100">
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-8 sm:w-10 sm:h-10 bg-red-100 rounded-lg flex items-center justify-center shrink-0">
+                  <FaUsers className="w-4 h-4 sm:w-5 sm:h-5 text-red-600" />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <p className="font-semibold text-gray-900 text-sm sm:text-base truncate">Réseau professionnel</p>
+                  <p className="text-xs sm:text-sm text-gray-600">Connectez avec des alumni</p>
+                </div>
+              </div>
+            </div>
+            <div className="bg-white/80 backdrop-blur-sm rounded-lg p-3 sm:p-4 shadow-sm border border-cyan-100">
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-8 sm:w-10 sm:h-10 bg-cyan-100 rounded-lg flex items-center justify-center shrink-0">
+                  <FaBriefcase className="w-4 h-4 sm:w-5 sm:h-5 text-cyan-600" />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <p className="font-semibold text-gray-900 text-sm sm:text-base truncate">Opportunités exclusives</p>
+                  <p className="text-xs sm:text-sm text-gray-600">Emploi et événements</p>
+                </div>
+              </div>
+            </div>
+            <div className="bg-white/80 backdrop-blur-sm rounded-lg p-3 sm:p-4 shadow-sm border border-blue-100">
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-8 sm:w-10 sm:h-10 bg-blue-100 rounded-lg flex items-center justify-center shrink-0">
+                  <FaGraduationCap className="w-4 h-4 sm:w-5 sm:h-5 text-blue-900" />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <p className="font-semibold text-gray-900 text-sm sm:text-base truncate">Formation continue</p>
+                  <p className="text-xs sm:text-sm text-gray-600">Développez vos compétences</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             
             {/* Colonne gauche - Image et informations */}
             <div className="hidden lg:block">

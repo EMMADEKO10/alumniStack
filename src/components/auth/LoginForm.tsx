@@ -75,7 +75,7 @@ export default function LoginForm({ onSuccess }: LoginFormProps) {
         </div>
       )}
       
-      <form onSubmit={handleSubmit} className="space-y-6">
+      <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
         <div>
           <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
             Adresse email
@@ -89,7 +89,7 @@ export default function LoginForm({ onSuccess }: LoginFormProps) {
               id="email"
               value={email}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
-              className="pl-10 w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-red-600 transition-all"
+              className="pl-10 w-full px-4 py-2.5 sm:py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-red-600 transition-all text-base"
               placeholder="exemple@email.com"
               required
             />
@@ -101,7 +101,7 @@ export default function LoginForm({ onSuccess }: LoginFormProps) {
             <label htmlFor="password" className="block text-sm font-medium text-gray-700">
               Mot de passe
             </label>
-            <Link href="/forgot-password" title="Réinitialiser mon mot de passe" className="text-sm text-cyan-600 hover:text-cyan-700 font-medium">
+            <Link href="/forgot-password" title="Réinitialiser mon mot de passe" className="text-xs sm:text-sm text-cyan-600 hover:text-cyan-700 font-medium">
               Mot de passe oublié?
             </Link>
           </div>
@@ -114,7 +114,7 @@ export default function LoginForm({ onSuccess }: LoginFormProps) {
               id="password"
               value={password}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
-              className="pl-10 w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-red-600 transition-all"
+              className="pl-10 w-full px-4 py-2.5 sm:py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-red-600 transition-all text-base"
               placeholder="••••••••"
               required
             />
@@ -124,7 +124,7 @@ export default function LoginForm({ onSuccess }: LoginFormProps) {
         <button
           type="submit"
           disabled={loading}
-          className="w-full flex justify-center items-center bg-red-600 text-white py-3 px-4 rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-600 focus:ring-offset-2 transition-all disabled:opacity-50 disabled:cursor-not-allowed font-medium"
+          className="w-full flex justify-center items-center bg-red-600 text-white py-2.5 sm:py-3 px-4 rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-600 focus:ring-offset-2 transition-all disabled:opacity-50 disabled:cursor-not-allowed font-medium text-base"
         >
           {loading ? (
             <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -140,8 +140,8 @@ export default function LoginForm({ onSuccess }: LoginFormProps) {
         </button>
       </form>
       
-      <div className="mt-8 text-center">
-        <p className="text-gray-600">
+      <div className="mt-6 text-center">
+        <p className="text-sm sm:text-base text-gray-600">
           Pas encore de compte?{' '}
           <Link href="/register" className="text-red-600 hover:text-red-700 font-semibold">
             Créer un compte
