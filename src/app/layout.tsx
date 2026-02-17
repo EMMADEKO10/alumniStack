@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import { Inter, Fira_Code } from "next/font/google";
-import "./globals.css";
+import "./globals .css";
 import { NextAuthProvider } from "./providers";
 import Header from "../ui/navigation/Header";
 import Footer from "../ui/navigation/Footer";
-import CompleteProfileBanner from "../components/ui/CompleteProfileBanner";
-import CompleteProfileModal from "../components/ui/CompleteProfileModal";
+// import CompleteProfileBanner from "../components/ui/CompleteProfileBanner";
+// import CompleteProfileModal from "../components/ui/CompleteProfileModal";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -143,8 +143,8 @@ export default function RootLayout({
       >
         <NextAuthProvider>
           <Header />
-          <CompleteProfileBanner />
-          <CompleteProfileModal />
+          {/* <CompleteProfileBanner />
+          <CompleteProfileModal /> */}
           <main className="min-h-screen">
             {children}
           </main>
